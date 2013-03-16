@@ -1,0 +1,12 @@
+The data for the project contains a minimum of 5 fields: cid, image, name, price, and a description. 
+ These are the appliances that your store will sell.  
+ The cid is a 6 digit number starting at 1 with a "c" in front.  
+ The name, price, and description are attributes specific to that appliance.
+
+{
+    "cid": "c000001", 
+    "image": "c000001.jpg", 
+    "name": "LG Tall Tub Built-In Dishwasher", 
+    "price": "1099.99", 
+    "desc": "The LG LDF7551 is a quiet dishwasher, packed with cutting-edge features that make it convenient and easy to clean your dishes. The low noise level means you can easily talk on the phone while the dishwasher is operating, and the EasyRack Plus system is flexible enough to accommodate just about any combination of dishes, pots, and cups. "
+}
