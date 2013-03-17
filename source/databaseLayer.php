@@ -2,9 +2,9 @@
 include_once 'user.php';
 class DatabaseLayer {
 	const HOSTNAME = 'localhost';
-	const USERNAME = 'hcngo';
-	const PASSWORD = '63yNKopU';
-	const DATABASE = 'hcngo';
+	const USERNAME = 'login';
+	const PASSWORD = 'password';
+	const DATABASE = 'db_password';
 
 	public static function updateQuestionsTable($questionObj) {
 		$mysqli = self::connectDatabase();
