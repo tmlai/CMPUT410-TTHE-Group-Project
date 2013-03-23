@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TTHE Enterprise - Home</title>
+    <title>TTHE Enterprise - Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
@@ -10,34 +10,7 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <script language="JavaScript" type="text/javascript">
-		<!--
-        function checkLogin() {
-            if(!checkEmail()) {
-                alert("Please enter a valid E-mail Address.");
-                
-                // DEBUG --> does not change the class or focus on the element
-                var div = document.getElementByID("email_div");
-                div.className = "control-group error";
-                document.loginform.email.focus();
-                
-                return(false);
-            } 
-            return(true);
-        }
-        function checkEmail() {
-            if(document.loginform.email.value != "") {
-                var posAt = document.loginform.email.value.indexOf("@");
-                var posDot = document.loginform.email.value.lastIndexOf(".");
-                var eLen = document.loginform.email.value.length;
-                if(posAt < 1 || posDot < posAt + 2 || posDot + 2 > eLen)
-                    return(false);
-                return(true);
-            } 
-            return(false);
-        }
-        -->
-    </script>
+    <script src="elements/loginvalidation.js"></script>
     <style>
         body {
             padding-top: 50px;
