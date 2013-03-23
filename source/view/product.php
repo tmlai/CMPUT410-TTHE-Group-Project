@@ -48,40 +48,50 @@
     <?php
         // Navigation Bar
         require($DOCUMENT_ROOT . "./elements/navbar.php");
-        // Carousel element
-        require($DOCUMENT_ROOT . "./elements/carousel.php");
     ?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10">
+                <h1>Product Name</h1>
+                <p>Product information</p>
+            </div>
+            <div class="span2">
+                <ul class="thumbnails">
+                  <li class="span10">
+                    <div class="thumbnail">
+                      <!--<img data-src="holder.js/300x200" alt="">-->
+                      <p class="muted">an image will go here...</p><br>
+                      <h4>Availability</h4>
+                      <p>Stores: </p>
+                      <h4>Rating: </h4>
+                      <button type="submit" class="btn btn-success">
+                        Order Product</button>
+                    </div>                    
+                  </li>
+                </ul>
+                <!--
+                <div class="well">
+                    <p>Sidebar</p>
+                </div>-->
+            </div>
+        </div>
+    </div> <!-- /container -->
+    <hr>
     <div class="container">
+        <h3>Related Products:</h3>
         <div class="row-fluid">
             <div class="span4">
-              <h2>Heading</h2>
+              <h4>Heading</h4>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn" href="#">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="span4">
-              <h2>Heading</h2>
+              <h4>Heading</h4>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn" href="#">View details &raquo;</a></p>
             </div><!--/span-->
             <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            </div><!--/row-->
-            <div class="row-fluid">
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
+              <h4>Heading</h4>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn" href="#">View details &raquo;</a></p>
             </div><!--/span-->
