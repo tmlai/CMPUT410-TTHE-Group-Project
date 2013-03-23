@@ -9,13 +9,90 @@
     <!-- Le styles -->
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <style>
-      body {
+        .body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
+        }
+        /* CUSTOMIZE THE CAROUSEL
+        -------------------------------------------------- */
+
+        /* Carousel base class */
+        .carousel {
+          margin-bottom: 10px;
+        }
+
+        .carousel .container {
+          position: relative;
+          z-index: 9;
+        }
+
+        .carousel-control {
+          height: 80px;
+          margin-top: 0;
+          font-size: 120px;
+          text-shadow: 0 1px 1px rgba(0,0,0,.4);
+          background-color: transparent;
+          border: 0;
+          z-index: 10;
+        }
+
+        .carousel .item {
+          height: 225px;
+        }
+        .carousel img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          min-width: 100%;
+          height: 225px;
+        }
+
+        .carousel-caption {
+          background-color: transparent;
+          position: static;
+          max-width: 550px;
+          padding: 0 60px;
+          margin-top: 60px;
+        }
+        .carousel-caption h1,
+        .carousel-caption .lead {
+          margin: 0;
+          line-height: 1;
+          color: #fff;
+          text-shadow: 0 1px 1px rgba(0,0,0,.4);
+        }
+        .carousel-caption .btn {
+          margin-top: 10px;
+        }
     </style>
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <script language="JavaScript" type="text/javascript">
+		<!--
+        function checkLogin() {
+            if(!checkEmail()) {
+                alert("Please enter a valid E-mail Address.");
+                var div = document.getElementByID("email_div");
+                div.className = "control-group error";
+                document.loginform.email.focus();
+                return(false);
+            } 
+            return(true);
+        }
+        function checkEmail() {
+            if(document.loginform.email.value != "") {
+                var posAt = document.loginform.email.value.indexOf("@");
+                var posDot = document.loginform.email.value.lastIndexOf(".");
+                var eLen = document.loginform.email.value.length;
+                if(posAt < 1 || posDot < posAt + 2 || posDot + 2 > eLen)
+                    return(false);
+                return(true);
+            } 
+            return(false);
+        }
+        -->
+    </script>
   </head>
   <body>
+    <!-- NavBar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
@@ -28,23 +105,156 @@
         <div class="nav-collapse collapse">
             <ul class="nav pull-left">
             <li class="active pull-left"><a href="#">Home</a></li>
-            <li class="pull-left"><a href="#about">Search    <i class="icon-search icon-white"></i></a></li>
-            
+            <li class="dropdown">
+                <a class="dropdown-toggle" 
+                    data-toggle="dropdown" href="#">Search
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <form class="form-search">
+                            <div class="input-append">
+                                <input type="text" class="span2 search-query" 
+                                    placeholder="Search">
+                                <button type="submit" class="btn">
+                                <i class="icon-search"></i></button>
+                            </div>
+                        </form>
+                    </li>
+                    <li><a href="#">Advanced Search</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="-1" href="#">Categories</a>
+                        <ul class="dropdown-menu">
+                        <li><a href="#">Appliance Categories...</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+            </li>
             </ul><ul class="nav pull-right">
-            <li class="pull-right"><a href="#about">View Cart    
+            <li class="pull-right"><a href="#cart">View Cart    
                 <i class="icon-shopping-cart icon-white"></i></a></li>
-            <li class="pull-right"><a href="#contact">Sign In/Out</a></li>
+            <li class="pull-right dropdown">
+                <a class="dropdown-toggle" 
+                        data-toggle="dropdown" href="#">Sign In/Out
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form name="loginform" class="form-horizontal" 
+                                enctype="text/plain" action="#" 
+                                onSubmit="return checkLogin();">
+                                <div id="email_div" class="control-group">
+                                    <label class="control-label" 
+                                        for="inputEmail">Email</label>
+                                    <div class="controls">
+                                        <input type="text" id="email" 
+                                            placeholder="Email">
+                                    </div>
+                                </div>
+                                <div id="password_div" style="visibility:visible" 
+                                    class="control-group">
+                                    <label class="control-label" 
+                                        for="inputPassword">Password</label>
+                                    <div class="controls">
+                                        <input type="password" id="password" 
+                                            placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                      <!--<label class="checkbox">
+                                        <input type="checkbox"> Remember me
+                                      </label>-->
+                                      <button type="submit" 
+                                        class="btn btn-primary">Sign in</button>
+                                      <button class="btn">Register</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+            </li>
             </ul>
         </div><!--/.nav-collapse -->
         </div>
         </div>
     </div>
-
+    <!-- /NavBar -->
+    
     <div class="container">
+        <!-- Carousel
+        ================================================== -->
+        <div id="myCarousel" class="carousel slide">
+          <div class="carousel-inner">
+            <div class="item active">
+              <img src="../assets/img/examples/slide-02.jpg" alt="">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Welcome</h1>
+                  <p class="lead">Browse through our many products.</p>
+                  <p>The Appliance name goes here...</p>
+                  <a class="btn btn-large btn-primary" href="#">See Product Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <img src="../assets/img/examples/slide-03.jpg" alt="">
+              <div class="container">
+                <div class="carousel-caption">
+                  <h1>Welcome</h1>
+                  <p class="lead">Browse through our many products.</p>
+                  <p>The 2nd Appliance name goes here...</p>
+                  <a class="btn btn-large btn-primary" href="#">See Product Details</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div><!-- /.carousel -->
+    
+    
+        <!--<div class="span10">-->
+          <div class="row-fluid">
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+          <div class="row-fluid">
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+        <!--</div><!--/span-->
 
-      <h1>Bootstrap starter template</h1>
-      <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
-
+      
+      
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
