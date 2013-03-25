@@ -1,69 +1,101 @@
 <?php
 namespace model;
-include_once "Customer.php";
-include_once "Product.php";
-include_once "Store.php";
-interface DbInterface {
+include_once "DbInterface.php";
+class DbLayer implements DbInterface {
 
+	const HOST_NAME = 'localhost';
+	const DB_NAME = 'cmput410';
+	const USER_NAME = 'root';
+	const PASSWORD = 'admin04';
+
+	private static function getPdo() {
+		$dsn = 'mysql:host=' . self::HOST_NAME . ';dbname=' . self::DB_NAME;
+		try{
+		$dbh = new PDO($dsn, self::USER_NAME, self::PASSWORD,
+				array(PDO::ATTR_PERSISTENT => true));
+		return $dbh;
+		}catch(Exception $exception){
+			die("Uable to connect: ".$exception->getMessage());
+		}
+	}
 	// Customer + admin section
 	/*
 	 * Add the customer to the database
 	 * Parameters: $customer: the customer object to be added
 	 * Return type: true if successfully, false if fails
 	 */
-	public function addCustomer(Customer $customer);
+	public function addCustomer(Customer $customer) {
+
+	}
 
 	/*
 	 *
 	 */
-	public function deleteCustomer(Customer $customer);
+	public function deleteCustomer(Customer $customer) {
 
-	public function updateCustomer(Customer $customer);
+	}
 
-	/*
-	 * Add the admin to the database
-	 * Parameters: $admin: the admin object to be added
-	 * Return type: true if successfully, false if fails
-	 */
-	// public function addAdmin(Admin $admin);
-	//
-	// public function deleteAdmin(Admin $admin);
-	//
-	//
-	// public function updateAdmin(Admin $admin);
+	public function updateCustomer(Customer $customer) {
 
-	// ------------------------------------------------------------------------
-
-	// Categories section
-	// public function addCategory(Category $cate);
-	//
-	// public function updateCategory(Category $cate);
-	//
-	// public function deleteCategory(Category $cate);
-	//
-
-	// ------------------------------------------------------------------------
+	}
 
 	// Products section
-	public function addProduct(Product $prod);
+	public function addProduct(Product $prod) {
+		
+		$pdo = self::getPdo();
+		
+// 		/* Begin a transaction, turning off autocommit */
+// 		$pdo->beginTransaction();
+		
+		$preState = "INSERT INTO Products values(:cid, :name, :description, 
+		:image, :price, :weight, :dimensions, :stock)";
+		
+		$stmt = $pdo->prepare($preState);
+		
+		$array = array(':cid' => $prod->getCid(), ':name' => $prod->getName(),
+				':desciption' => $prod->getDescription(), ':image' => $prod->getImage(),
+				':price' => $prod->getPrice(), ':weight' => $prod->getWeight(), 
+				':dimensions' => $prod->getDimensions(), ':stock' => $prod->getStock());
+		
+		$result = $stmt->execute($array);
+		
+		$status = ($result == true && $stmt->rowCount() > 0);
+		
+// 		if($status == true){
+// 			$pdo->commit();
+// 		}else{
+// 			$pdo->rollback();
+// 		}
+		
+		$pdo = null;
+		
+		return $status;
+		
+	}
 	//
 	// public function updateProduct(Product $prod);
 	//
 	// public function deleteProduct(Product $prod);
 
-	public function updateStock($productId, $itemsDrawn);
+	public function updateStock($productId, $itemsDrawn) {
+
+	}
 	/*
 	 * Return a list of categories
 	 * Return type: array of category objects
 	 */
-	public function getCategoriesList();
+	public function getCategoriesList() {
+
+	}
 
 	/*
 	 * Return a list of products belonging to some category
 	 * Parameters: $categoryId 	the id of the category
 	 * Return type: array of product objects
 	 */
-	public function getProducts($categoryId);
+	public function getProducts($categoryId) {
+
+	}
 
 	/*
 	 * Given the search name for the product, return the product object
@@ -71,16 +103,22 @@ interface DbInterface {
 	 * Return type:	the product object returned or null if can't find any
 	 * matching product
 	 */
-	public function searchProduct($initialName);
+	public function searchProduct($initialName) {
+
+	}
 
 	// -------------------------------------------------------------------------
 
-	public function addStore(Store $store);
+	public function addStore(Store $store) {
+
+	}
 
 	/*
 	 * Get the store Object given the url of the store.
 	 */
-	public function searchStore($url);
+	public function searchStore($url) {
+
+	}
 
 	/*
 	 * order products from other stores
@@ -89,7 +127,9 @@ interface DbInterface {
 	 * 				$url:		url of the store
 	 * Return type:	true if the order is placed successfully, false otherwise.
 	 */
-	public function orderOthersStore($productId, $quantity, $url);
+	public function orderOthersStore($productId, $quantity, $url) {
+
+	}
 
 	/*
 	 * Check if some store(including our store) has enough stock to accomodate the
@@ -100,7 +140,9 @@ interface DbInterface {
 	 * 				$url:		url of the store. url = '' if the store is ours.
 	 * Return type:	true if the there is enough stock. False otherwise.
 	 */
-	public function checkIfCanOrder($productId, $quantity, $url);
+	public function checkIfCanOrder($productId, $quantity, $url) {
+
+	}
 
 	/*
 	 * Add just one product ordered to the database.
@@ -113,7 +155,9 @@ interface DbInterface {
 	 * NOTE: 		pass the pdo connection so that this database action can be rollbacked
 	 * 				since this action is a small step in a transaction.
 	 */
-	public function orderOneProduct($pdo, $oneItemArray);
+	public function orderOneProduct($pdo, $oneItemArray) {
+
+	}
 
 	// order section
 	/*
@@ -126,7 +170,8 @@ interface DbInterface {
 	 * Return type:	the list of positions of products that CANNOT be added!
 	 *
 	 */
-	public function addOrder($itemsArray);
+	public function addOrder($itemsArray) {
+
+	}
 
 }
-?>
