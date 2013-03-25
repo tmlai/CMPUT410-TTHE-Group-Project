@@ -1,4 +1,5 @@
 <?php
+include_once "../source/model/DbLayer.php";
 # http://www.w3schools.com/php/php_file_upload.asp
 
 #allowed file types (our file extension support)
@@ -21,8 +22,23 @@ else {
 	echo "<br>";
 	#parse the json file
 	$productList = decodeData($_FILES["file"]["tmp_name"]);
-	$product = $productList[0];
-	var_dump($product);
+	for($i = 0; $i < count($productList); $i++){
+		$product = convertIntoProduct($productList[$i]);
+		$dbLayer = new \model\DbLayer();
+		$result = $dbLayer->addProduct($product);
+		if($result){
+			echo "add product ".($i + 1)."successfully. <br>";
+		}else{
+			echo "cannot add product ".($i + 1)."<br>";
+		}
+	}
+  }
+  
+  function convertIntoProduct($productArray){
+  	$product = new \model\Product($productArray['cid'], $productArray['name'],
+  			 $productArray['desc'], $productArray['image'], 
+  			$productArray['price'], '', '', 20);
+  	return $product;
   }
   
 function decodeData($fileName) {
@@ -31,7 +47,7 @@ function decodeData($fileName) {
 	$file = fopen($fileName, "r") or exit("Unable to open file!");
 	//Output a line of the file until the end is reached
 	while (!feof($file)) {
-		$jsonProduct = fgets($file);
+		$jsonProduct = utf8_encode(fgets($file));
 		if (trim($jsonProduct) != '') {
 			$product = json_decode($jsonProduct, TRUE);
 			array_push($productList, $product);

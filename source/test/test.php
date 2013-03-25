@@ -1,7 +1,10 @@
 <?php 
 namespace test;
-include_once "DbLayer.php";
+include_once "../model/DbLayer.php";
 class TestDb{
+	/*
+	 * PASS
+	 */
 	public static function testAddProduct(){
 		$dbLayer = new \model\DbLayer();
 		
@@ -19,7 +22,7 @@ class TestDb{
 		
 		$result = $dbLayer->addProduct($prod);
 		
-		assert($result,"can't add this new product");
+// 		assert($result,"can't add this new product");
 		
 		if($result){
 			echo "true";
@@ -28,5 +31,5 @@ class TestDb{
 		}
 	}
 }
-TestDb::testAddProduct();
+// \test\TestDb::testAddProduct();
 ?>

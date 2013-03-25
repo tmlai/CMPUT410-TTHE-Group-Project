@@ -1,3 +1,6 @@
+DROP DATABASE cmput410;
+CREATE DATABASE cmput410 default character set utf8;
+use cmput410;
 
 DROP TABLE IF EXISTS OrdersProducts ;
 DROP TABLE IF EXISTS ProductsMapCategories ;
@@ -9,6 +12,8 @@ DROP TABLE IF EXISTS Categories ;
 DROP TABLE IF EXISTS Status ;
 DROP TABLE IF EXISTS Stores ;
 
+
+
 CREATE TABLE Admins(name varchar(30) not null, password varchar(20) not null,
 PRIMARY KEY(name));
 
@@ -17,12 +22,12 @@ address varchar(30), city varchar(20), postalCode varchar(6), email varchar(30) 
 PRIMARY KEY(username), UNIQUE(email))ENGINE=INNODB;
 
 CREATE TABLE Products(cid varchar(20) not null,
-name varchar(100) not null, description varchar(500), image varchar(100), price DECIMAL(10,2) not null, 
+name varchar(200) not null, description varchar(500), image varchar(100), price DECIMAL(10,2) not null, 
 weight DECIMAL(10,2), dimensions varchar(20), stock int not null,
 PRIMARY KEY(cid))ENGINE=INNODB;
 
 CREATE TABLE Categories(cateId int not null AUTO_INCREMENT,
-name varchar(100) not null, description varchar(500),
+name varchar(200) not null, description varchar(500),
 PRIMARY KEY(cateId))ENGINE=INNODB;
 
 CREATE TABLE ProductsMapCategories(cid varchar(20) not null, cateId int not null, 
@@ -31,7 +36,7 @@ FOREIGN KEY(cid) REFERENCES Products(cid),
 FOREIGN KEY(cateId) REFERENCES Categories(cateId))ENGINE=INNODB;
 
 CREATE TABLE Status(statusId int not null AUTO_INCREMENT, 
-name varchar(30) not null, description varchar(500),
+name varchar(200) not null, description varchar(500),
 PRIMARY KEY(statusId))ENGINE=INNODB;
 
 CREATE TABLE CustomersOrders(orderId int not null AUTO_INCREMENT, description varchar(500),
@@ -41,7 +46,7 @@ FOREIGN KEY(statusId) REFERENCES Status(statusId),
 FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
 
 CREATE TABLE Stores(storeId int not null AUTO_INCREMENT, description varchar(500), 
-name varchar(100) not null, url varchar(50) not null,
+name varchar(200) not null, url varchar(50) not null,
 PRIMARY KEY(storeId))ENGINE=INNODB;
 
 CREATE TABLE OrdersProducts(orderId int not null, cid varchar(20) not null, 

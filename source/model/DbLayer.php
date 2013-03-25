@@ -8,14 +8,13 @@ class DbLayer implements DbInterface {
 	const USER_NAME = 'root';
 	const PASSWORD = 'admin04';
 
-	private static function getPdo() {
-		$dsn = 'mysql:host=' . self::HOST_NAME . ';dbname=' . self::DB_NAME;
-		try{
-		$dbh = new PDO($dsn, self::USER_NAME, self::PASSWORD,
-				array(PDO::ATTR_PERSISTENT => true));
-		return $dbh;
-		}catch(Exception $exception){
-			die("Uable to connect: ".$exception->getMessage());
+	public static function getPdo() {
+		$dsn = 'mysql:dbname=' . self::DB_NAME . ';host=' . self::HOST_NAME. ';charset=utf8';
+		try {
+			$dbh = new \PDO($dsn, self::USER_NAME, self::PASSWORD);
+			return $dbh;
+		} catch (Exception $exception) {
+			die("Uable to connect: " . $exception->getMessage());
 		}
 	}
 	// Customer + admin section
@@ -41,36 +40,38 @@ class DbLayer implements DbInterface {
 
 	// Products section
 	public function addProduct(Product $prod) {
-		
+
 		$pdo = self::getPdo();
-		
-// 		/* Begin a transaction, turning off autocommit */
-// 		$pdo->beginTransaction();
-		
+
+		// 		/* Begin a transaction, turning off autocommit */
+		// 		$pdo->beginTransaction();
+
 		$preState = "INSERT INTO Products values(:cid, :name, :description, 
 		:image, :price, :weight, :dimensions, :stock)";
-		
+
 		$stmt = $pdo->prepare($preState);
-		
+
 		$array = array(':cid' => $prod->getCid(), ':name' => $prod->getName(),
-				':desciption' => $prod->getDescription(), ':image' => $prod->getImage(),
-				':price' => $prod->getPrice(), ':weight' => $prod->getWeight(), 
-				':dimensions' => $prod->getDimensions(), ':stock' => $prod->getStock());
-		
+				':description' => $prod->getDescription(),
+				':image' => $prod->getImage(), ':price' => $prod->getPrice(),
+				':weight' => $prod->getWeight(),
+				':dimensions' => $prod->getDimensions(),
+				':stock' => $prod->getStock());
+
 		$result = $stmt->execute($array);
-		
+
 		$status = ($result == true && $stmt->rowCount() > 0);
-		
-// 		if($status == true){
-// 			$pdo->commit();
-// 		}else{
-// 			$pdo->rollback();
-// 		}
-		
+
+		// 		if($status == true){
+		// 			$pdo->commit();
+		// 		}else{
+		// 			$pdo->rollback();
+		// 		}
+
 		$pdo = null;
-		
+
 		return $status;
-		
+
 	}
 	//
 	// public function updateProduct(Product $prod);
@@ -175,3 +176,4 @@ class DbLayer implements DbInterface {
 	}
 
 }
+?>
