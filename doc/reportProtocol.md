@@ -2,6 +2,12 @@
 # Overview
 
 # Implementation
+
+0.	Note
+
+	Apache Version: 2.2.20
+	Mysql version: 	5.1.66
+	Php version: 	5.3.6 support PDO database interface
 1.	Protocol
 	
 	Our project is implemented using *plain* PHP without a specific PHP framework.
@@ -30,3 +36,8 @@
 			/view			-- 
 	
 2.	SQL schema and queries
+
+	The database schema is defined in setup.sql file. The list of relevant queries
+	are defined in queries.sql file.  
+	NOTE: 
+	+	no need for create sequence for order id since get_last_id() methods can help

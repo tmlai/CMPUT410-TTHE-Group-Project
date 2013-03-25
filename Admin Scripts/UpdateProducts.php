@@ -18,6 +18,7 @@ else {
 	echo "Size: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
 	echo "Stored in: " . $_FILES["file"]["tmp_name"];
 	var_dump($_FILES["file"]);
+	echo "<br>";
 	#parse the json file
 	$productList = decodeData($_FILES["file"]["tmp_name"]);
 	$product = $productList[0];

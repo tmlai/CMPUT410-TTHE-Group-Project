@@ -41,7 +41,7 @@ interface DbInterface {
 	// ------------------------------------------------------------------------
 
 	// Products section
-	// public function addProduct(Product $prod);
+	public function addProduct(Product $prod);
 	//
 	// public function updateProduct(Product $prod);
 	//
