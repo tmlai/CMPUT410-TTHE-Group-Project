@@ -3,6 +3,8 @@ namespace model;
 include_once "Customer.php";
 include_once "Product.php";
 include_once "Store.php";
+include_once "Category.php";
+
 interface DbInterface {
 
 	// Customer + admin section
@@ -19,6 +21,15 @@ interface DbInterface {
 	public function deleteCustomer(Customer $customer);
 
 	public function updateCustomer(Customer $customer);
+	
+	/*
+	 * Given the username and password, authenticate the identity of
+	 * the customer.
+	 * Return	0	:	username is not recognized.
+	 * 			1	:	username is recognized but password doesn't match
+	 * 			2	:	username and password match
+	 */
+	public function authenticateCustomer($username, $password);
 
 	/*
 	 * Add the admin to the database
@@ -50,6 +61,8 @@ interface DbInterface {
 	// public function updateProduct(Product $prod);
 	//
 	// public function deleteProduct(Product $prod);
+	
+	public function matchProductCategory($cid,$cateId);
 
 	public function updateStock($productId, $itemsDrawn);
 	/*
@@ -66,12 +79,11 @@ interface DbInterface {
 	public function getProducts($categoryId);
 
 	/*
-	 * Given the search name for the product, return the product object
-	 * Parameters: $initialName	the name for the product to be searched
-	 * Return type:	the product object returned or null if can't find any
-	 * matching product
+	 * Given the search name for the product, return the list of product objects
+	 * Parameters: $partial	the name for the product to be searched
+	 * Return type:	the list of product objects returned.
 	 */
-	public function searchProduct($initialName);
+	public function searchProduct($partial);
 
 	// -------------------------------------------------------------------------
 
