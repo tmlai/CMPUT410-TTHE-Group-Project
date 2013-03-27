@@ -11,10 +11,15 @@
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <script src="elements/loginvalidation.js"></script>
-    <style>
+    <style type="text/css">
+    body {
+        padding-top: 60px;
+    }
+    @media (max-width: 979px) {
         body {
-            padding-top: 50px;
+            padding-top: 0;
         }
+    } 
     </style>
   </head>
   <body>   
