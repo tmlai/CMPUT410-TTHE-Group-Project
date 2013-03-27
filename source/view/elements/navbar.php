@@ -51,16 +51,15 @@
                             <form name="loginform" class="form-horizontal" 
                                 enctype="text/plain" action="#" 
                                 onSubmit="return checkLogin();">
-                                <div id="email_div" class="control-group">
+                                <div id="username_div" class="control-group">
                                     <label class="control-label" 
-                                        for="inputEmail">Email</label>
+                                        for="inputUsername">Username</label>
                                     <div class="controls">
-                                        <input type="text" id="email" 
-                                            placeholder="Email">
+                                        <input type="text" id="username" 
+                                            placeholder="Username">
                                     </div>
                                 </div>
-                                <div id="password_div" style="visibility:visible" 
-                                    class="control-group">
+                                <div id="password_div" class="control-group">
                                     <label class="control-label" 
                                         for="inputPassword">Password</label>
                                     <div class="controls">

@@ -3,22 +3,10 @@
   <head>
     <title>TTHE Enterprise - Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="bootstrap/css/carousel.css" rel="stylesheet">
-    <script src="elements/loginvalidation.js"></script>
-    <style type="text/css">
-    body {
-        padding-top: 60px;
-    }
-    @media (max-width: 979px) {
-        body {
-            padding-top: 0;
-        }
-    } 
-    </style>
+    <?php
+        // Default Style links
+        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+    ?>
   </head>
   <body>   
     <?php
