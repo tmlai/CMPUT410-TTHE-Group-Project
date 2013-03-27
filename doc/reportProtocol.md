@@ -39,5 +39,10 @@
 
 	The database schema is defined in setup.sql file. The list of relevant queries
 	are defined in queries.sql file.  
-	NOTE: 
-	+	no need for create sequence for order id since get_last_id() methods can help
+	NOTE:
+	+	Customers' orders and stores' orders are tracked separately.
+	+	no need for create sequence for order id since lastInsertId() method can help
+	+	However, with transactions REMEMBER to call lastInsertId before committing to get the correct  
+		last insert ID.
+	+	To simplify delivery and payment processes, an immediate whole payment  
+		is required upon any order from customers or stores.???

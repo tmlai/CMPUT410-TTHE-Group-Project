@@ -35,26 +35,57 @@ PRIMARY KEY(cid,cateId),
 FOREIGN KEY(cid) REFERENCES Products(cid),
 FOREIGN KEY(cateId) REFERENCES Categories(cateId))ENGINE=INNODB;
 
-CREATE TABLE Status(statusId int not null AUTO_INCREMENT, 
+CREATE TABLE Status(statusId int not null, 
 name varchar(200) not null, description varchar(1000),
 PRIMARY KEY(statusId))ENGINE=INNODB;
 
+/*
 CREATE TABLE CustomersOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
 orderDate DATETIME not null ,username varchar(20) not null, statusId int not null,
 PRIMARY KEY(orderId),
 FOREIGN KEY(statusId) REFERENCES Status(statusId),
 FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
+*/
+
+CREATE TABLE CustomersOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
+orderDate DATETIME not null ,username varchar(20) not null, statusId int not null, deliveryDate DATE not null,
+PRIMARY KEY(orderId),
+FOREIGN KEY(statusId) REFERENCES Status(statusId),
+FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
+
 
 CREATE TABLE Stores(storeId int not null AUTO_INCREMENT, description varchar(1000), 
 name varchar(200) not null, url varchar(50) not null,
-PRIMARY KEY(storeId))ENGINE=INNODB;
+PRIMARY KEY(storeId),
+UNIQUE(url))ENGINE=INNODB;
 
+/*
 CREATE TABLE OrdersProducts(orderId int not null, cid varchar(20) not null, 
 storeId int not null, quantity int not null,
 PRIMARY KEY(orderId,cid,storeId),
 FOREIGN KEY(orderId) REFERENCES CustomersOrders(orderId),
 FOREIGN KEY(cid) REFERENCES Products(cid),
 FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
+*/
+
+CREATE TABLE OrdersProducts(orderId int not null, cid varchar(20) not null, 
+storeId int not null, quantity int not null, auxiliaryOrderId varchar(36), deliveryDate DATE,
+PRIMARY KEY(orderId,cid,storeId),
+FOREIGN KEY(orderId) REFERENCES CustomersOrders(orderId),
+FOREIGN KEY(cid) REFERENCES Products(cid),
+FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
+
+CREATE TABLE StoresOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
+orderDate DATETIME not null, storeId int not null, statusId int not null, deliveryDate DATE not null,
+PRIMARY KEY(orderId),
+FOREIGN KEY(storeId) REFERENCES Stores(storeId),
+FOREIGN KEY(statusId) REFERENCES Status(statusId))ENGINE=INNODB;
+
+CREATE TABLE StoresOrdersProducts(orderId int not null, cid varchar(20) not null,
+quantity int not null,
+PRIMARY KEY(orderId, cid),
+FOREIGN KEY(orderId) REFERENCES StoresOrders(orderId),
+FOREIGN KEY(cid) REFERENCES Products(cid))ENGINE=INNODB;
 
 -- OLAP SECTION
 CREATE OR REPLACE VIEW OlapView AS 
@@ -67,9 +98,12 @@ GROUP BY co.username, op.cid, op.storeId, co.orderDate;
 -- Insert data section
 
 INSERT INTO Admins values('root','admin04');
+
 INSERT INTO Customers values('hcngo','hcngo','15731 95st','Edmonton','T5Z0G1','hcngo@ualberta.ca');
 INSERT INTO Customers values('trilai','trilai','ozerna st','Edmonton','no','tmlai@ualberta.ca');
 INSERT INTO Customers values('edwin','edwin','southside','Edmonton','no','edwin@ualberta.ca');
+
+INSERT INTO Stores(description,name,url) values('this is our store', 'store#0','http://cs410.cs.ualberta.ca:41041');
 
 INSERT INTO Categories(name,description) values('washer','');
 INSERT INTO Categories(name,description) values('dryer','');
@@ -88,5 +122,11 @@ INSERT INTO Categories(name,description) values('air purifier','');
 INSERT INTO Categories(name,description) values('heater','');
 INSERT INTO Categories(name,description) values('coffee accessories','');
 
+INSERT INTO Status
+values(1, 'not paid','this status is accepted for orders from another store');
+INSERT INTO Status
+values(2, 'paid not delivered','this status is for orders from customers');
+INSERT INTO Status
+values(3, 'paid and delivered','this status is for both orders from customers and stores');
 
 

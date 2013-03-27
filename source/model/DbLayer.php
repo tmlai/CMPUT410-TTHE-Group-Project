@@ -7,6 +7,8 @@ class DbLayer implements DbInterface {
 	const DB_NAME = 'cmput410';
 	const USER_NAME = 'root';
 	const PASSWORD = 'admin04';
+	
+	const PAID_NOT_DELIVERED = 2;
 
 	public static function getPdo() {
 		$dsn = 'mysql:dbname=' . self::DB_NAME . ';host=' . self::HOST_NAME
@@ -154,10 +156,10 @@ class DbLayer implements DbInterface {
 		return $value;
 	}
 
-	public function updateStock($productId, $itemsDrawn) {
-		$pdo = self::getPdo();
+	public function updateStock(&$pdo, $productId, $itemsDrawn) {
 
-		$preState = "UPDATE Products SET stock = stock - {$itemsDrawn} WHERE cid = ?";
+		$preState = "UPDATE Products SET stock = stock - {$itemsDrawn} 
+		WHERE cid = ? AND stock >= {$itemsDrawn}";
 
 		$stmt = $pdo->prepare($preState);
 
@@ -167,10 +169,29 @@ class DbLayer implements DbInterface {
 
 		$value = ($result == true && $stmt->rowCount() > 0);
 
-		$pdo = null;
-
 		return $value;
 	}
+
+	/*
+	 * Get the stock of some product.
+	 */
+	public function getStock($productId) {
+		$pdo = self::getPdo();
+		$statement = "SELECT stock FROM Products WHERE cid = ?";
+		$stmt = $pdo->prepare($statement);
+		$stmt->bindParam(1, $productId);
+
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+		$stock = 0;
+		foreach ($temp as &$row) {
+			$stock = $row[0];
+		}
+		$pdo = null;
+		return $stock;
+	}
+
 	/*
 	 * Return a list of categories
 	 * Return type: array of category objects
@@ -197,16 +218,16 @@ class DbLayer implements DbInterface {
 
 		$pdo = null;
 
-// 		function compare($c1, $c2){
-// 			return strcasecmp($c1->getName(), $c2->getName());
-// 		}
-		
-// 		$sort = usort($list, compare);
-// 		if ($sort) {
-// 			echo "true";
-// 		} else {
-// 			echo "false";
-// 		}
+		// 		function compare($c1, $c2){
+		// 			return strcasecmp($c1->getName(), $c2->getName());
+		// 		}
+
+		// 		$sort = usort($list, compare);
+		// 		if ($sort) {
+		// 			echo "true";
+		// 		} else {
+		// 			echo "false";
+		// 		}
 
 		return $list;
 	}
@@ -218,25 +239,26 @@ class DbLayer implements DbInterface {
 	 */
 	public function getProducts($categoryId) {
 		$pdo = self::getPdo();
-		
+
 		$preState = "SELECT * FROM Products p, ProductsMapCategories pc 
 		WHERE p.cid = pc.cid AND pc.cateId = {$categoryId}";
-		
+
 		$stmt = $pdo->prepare($preState);
-		
+
 		$stmt->execute();
-		
+
 		$tempProds = $stmt->fetchAll();
-		
+
 		$pdo = null;
-		
+
 		$prodArray = array();
-		
-		foreach ($tempProds as &$row){
-			$prod = new Product($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
+
+		foreach ($tempProds as &$row) {
+			$prod = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
 			$prodArray[] = $prod;
 		}
-		
+
 		return $prodArray;
 	}
 
@@ -247,45 +269,66 @@ class DbLayer implements DbInterface {
 	 */
 	public function searchProduct($partial) {
 		$partial = strtolower($partial);
-		
-		$first = substr($partial, 0,1);
+
+		$first = substr($partial, 0, 1);
 		$capFirst = strtoupper($first);
-		$rest = substr($partial,1);
-		
+		$rest = substr($partial, 1);
+
 		$pdo = self::getPdo();
-		
-		$preState = "SELECT * from Products WHERE name RLIKE '*[{$first}{$capFirst}]{$rest}' ";
-		echo $preState;
-		
+
+		$preState = "SELECT * from Products WHERE name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+
 		$stmt = $pdo->prepare($preState);
-		
+
 		$stmt->execute();
-		
+
 		$temp = $stmt->fetchAll();
-		
+
 		$pdo = null;
-		
+
 		$list = array();
-		
-		foreach($temp as &$row){
-			$prod = new Product($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
+
+		foreach ($temp as &$row) {
+			$prod = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
 			$list[] = $prod;
 		}
-		
+
 		return $list;
 	}
 
 	// -------------------------------------------------------------------------
 
 	public function addStore(Store $store) {
-
+		$pdo = self::getPdo();
+		$statement = "INSERT INTO Stores(description,name,url) values(?,?,?)";
+		$stmt = $pdo->prepare($statement);
+		$array = array($store->getDescription(), $store->getName(),
+				$store->getUrl());
+		$result = $stmt->execute($array);
+		$value = ($result == true && $stmt->rowCount() > 0);
+		$pdo = null;
+		return $value;
 	}
 
 	/*
 	 * Get the store Object given the url of the store.
+	 * Return the store object in case of matching. Null otherwise.
 	 */
 	public function searchStore($url) {
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Stores WHERE url='{$url}'";
 
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+		$store = null;
+		foreach ($temp as &$row) {
+			$store = new Store($row[0], $row[1], $row[2], $row[3]);
+		}
+		$pdo = null;
+		return $store;
 	}
 
 	/*
@@ -342,5 +385,168 @@ class DbLayer implements DbInterface {
 
 	}
 
+	// 	------------------------------------------------------------------------
+
+	// 	WEB SERVICES SECTION
+	/*
+	 * Get the list of product IDs of products still in stock
+	 * Return the associative array: array['products'] of which element is
+	 * another associative array in the following form: array['id']=id
+	 */
+	public function getProductsInStock() {
+		$pdo = self::getPdo();
+		$statement = "SELECT cid FROM Products WHERE stock > 0";
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+		$pdo = null;
+		$list = array();
+		foreach ($temp as &$row) {
+			$item = array();
+			$item['id'] = $row[0];
+			$list[] = $item;
+		}
+		$retArray = array();
+		$retArray['products'] = $list;
+		return $retArray;
+	}
+
+	/*
+	 * Get the whole description about some product given its product ID.
+	 * Return the product as JSON(including category) in case of matching. Null otherwise.
+	 */
+	public function getOneProduct($cid) {
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Products WHERE cid = ?";
+
+		$stmt = $pdo->prepare($statement);
+		$stmt->bindParam(1, $cid);
+
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+
+		$statement = "SELECT name 
+		FROM Categories c, ProductsMapCategories pc 
+		WHERE c.cateId = pc.cateId AND pc.cid = ?";
+
+		$stmt = $pdo->prepare($statement);
+		$stmt->bindParam(1, $cid);
+		$stmt->execute();
+		$cateList = $stmt->fetchAll();
+
+		$prodJson = array();
+		if (count($temp) > 0 && count($cateList) > 0) {
+			$prodJson['id'] = $temp[0][0];
+			$prodJson['name'] = $temp[0][1];
+			$prodJson['desc'] = $temp[0][2];
+			$prodJson['img'] = $temp[0][3];
+			$prodJson['price'] = $temp[0][4];
+			$prodJson['weight'] = $temp[0][5] . "kg";
+			$prodJson['dim'] = $temp[0][6];
+			$prodJson['quantity'] = $temp[0][7];
+			$prodJson['category'] = $cateList[0][0];
+		}
+		$pdo = null;
+		return json_encode($prodJson);
+	}
+
+	/*
+	 * Take the order from another store. Based on the current protocol,
+	 * Each order can involve with one product only.
+	 * Parameters:	$storeId	the store id of the store making order
+	 * 				$cid		the product id of the product requested.
+	 * 				$quantity	the quantity demanded.
+	 * Return type:	JSON string in the following form:
+	 * 				{"order_id":"order id", "delivery_date":"some date"}
+	 * ASSUMPTION:	if the quantity demanded is more than the stock, reject the
+	 * 				order and return an empty JSON string.
+	 * 				if $quantity <= 0, reject the order.
+	 */
+	public function receiveOrderFromStore($storeId, $cid, $quantity) {
+		$result = array();
+		if ($quantity <= 0) {
+			return json_encode($result);
+		}
+		
+		$dbLayer = new DbLayer();
+		$stock = $dbLayer->getStock($cid);
+		
+		if ($quantity > $stock) {
+			return json_encode($result);
+		}
+		$pdo = self::getPdo();
+		$pdo->beginTransaction();
+		
+		
+		$date = new \DateTime();
+		$orderDate = $date->format('Y-m-d H:i:s');
+		
+		$date->add(new \DateInterval('P2D'));
+		$deliveryDate = $date->format('Y-m-d');
+		
+		$statement = "INSERT INTO StoresOrders(description,orderDate,storeId,statusId,deliveryDate)
+		values(?,?,?,?,?)";
+		$stmt = $pdo->prepare($statement);
+		
+		$array = array("",$orderDate,$storeId,self::PAID_NOT_DELIVERED,$deliveryDate);
+		$value = $stmt->execute($array);
+		$value = ($value == true && $stmt->rowCount() > 0);
+		if($value == false){
+			$pdo->rollBack();
+			$pdo = null;
+			return json_encode($result);
+		}
+		
+		$orderId = $pdo->lastInsertId();
+		$statement = "INSERT INTO StoresOrdersProducts values(?,?,?)";
+		$stmt = $pdo->prepare($statement);
+		
+		$array = array($orderId,$cid,$quantity);
+		$value = $stmt->execute($array);
+		$value = ($value == true && $stmt->rowCount() > 0);
+		if($value == false){
+			$pdo->rollBack();
+			$pdo = null;
+			return json_encode($result);
+		}
+		
+		$value = $dbLayer->updateStock($pdo, $cid, $quantity);
+		if($value == false){
+			$pdo->rollBack();
+			$pdo = null;
+			return json_encode($result);
+		}
+		
+		// The transaction is executed successfully!
+		$pdo->commit();
+		$pdo = null;
+		$result['order_id'] = $orderId;
+		$result['delivery_date'] = $deliveryDate;
+		return json_encode($result);
+	}
+
+	/*
+	 * Given the order id, check the delivery date to see if there is a delay
+	 * in delivery.
+	 * RETURN: JSON in the following format: {"delivery_date":"some date"}.
+	 * If $orderId is invalid, return an empty JSON.
+	 */
+	public function checkDeliveryDate($orderId){
+		$pdo = self::getPdo();
+		$statement = "SELECT deliveryDate FROM StoresOrders WHERE orderId = ? ";
+		$stmt = $pdo->prepare($statement);
+		$stmt->bindParam(1, $orderId);
+		
+		$stmt->execute();
+		$temp = $stmt->fetchAll();
+		$result = array();
+		foreach($temp as &$row){
+			$result['delivery_date'] = $row[0];
+		}
+		$pdo = null;
+		return json_encode($result);
+	}
 }
 ?>

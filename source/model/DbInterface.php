@@ -21,7 +21,7 @@ interface DbInterface {
 	public function deleteCustomer(Customer $customer);
 
 	public function updateCustomer(Customer $customer);
-	
+
 	/*
 	 * Given the username and password, authenticate the identity of
 	 * the customer.
@@ -61,10 +61,21 @@ interface DbInterface {
 	// public function updateProduct(Product $prod);
 	//
 	// public function deleteProduct(Product $prod);
-	
-	public function matchProductCategory($cid,$cateId);
 
-	public function updateStock($productId, $itemsDrawn);
+	public function matchProductCategory($cid, $cateId);
+	
+	
+	/*
+	 * Update the stock of some product. 
+	 * NOTE: $pdo is the connection object. This is passed into the 
+	 * method so that the update stock operation can be rollbacked.
+	 */
+	public function updateStock(&$pdo, $productId, $itemsDrawn);
+	
+	/*
+	 * Get the stock of some product.
+	 */
+	public function getStock($productId);
 	/*
 	 * Return a list of categories
 	 * Return type: array of category objects
@@ -91,6 +102,7 @@ interface DbInterface {
 
 	/*
 	 * Get the store Object given the url of the store.
+	 * Return the store object in case of matching. Null otherwise.
 	 */
 	public function searchStore($url);
 
@@ -140,5 +152,41 @@ interface DbInterface {
 	 */
 	public function addOrder($itemsArray);
 
+	// 	------------------------------------------------------------------------
+
+	// 	WEB SERVICES SECTION
+	/*
+	 * Get the list of product IDs of products still in stock
+	 * Return the associative array: array['products'] of which element is
+	 * another associative array in the following form: array['id']=id
+	 */
+	public function getProductsInStock();
+	
+	/*
+	 * Get the whole description about some product given its product ID.
+	 * Return the product object in case of matching. Null otherwise.
+	 */
+	public function getOneProduct($cid);
+	
+	/*
+	 * Take the order from another store. Based on the current protocol,
+	 * Each order can involve with one product only. 
+	 * Parameters:	$storeId	the store id of the store making order
+	 * 				$cid		the product id of the product requested.
+	 * 				$quantity	the quantity demanded.
+	 * Return type:	JSON string in the following form: 
+	 * 				{"order_id":"order id", "delivery_date":"some date"}
+	 * ASSUMPTION:	if the quantity demanded is more than the stock, reject the 
+	 * 				order and return an empty JSON string.
+	 */
+	public function receiveOrderFromStore($storeId, $cid, $quantity);
+	
+	/*
+	 * Given the order id, check the delivery date to see if there is a delay
+	 * in delivery.
+	 * RETURN: JSON in the following format: {"delivery_date":"some date"}.
+	 * If $orderId is invalid, return an empty JSON.
+	 */
+	public function checkDeliveryDate($orderId);
 }
 ?>
