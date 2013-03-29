@@ -53,17 +53,17 @@
                                 onSubmit="return checkLogin();">
                                 <div id="username_div" class="control-group">
                                     <label class="control-label" 
-                                        for="inputUsername">Username</label>
+                                        for="usernameField">Username</label>
                                     <div class="controls">
-                                        <input type="text" id="username" 
+                                        <input type="text" id="usernameField" 
                                             placeholder="Username">
                                     </div>
                                 </div>
                                 <div id="password_div" class="control-group">
                                     <label class="control-label" 
-                                        for="inputPassword">Password</label>
+                                        for="passwordField">Password</label>
                                     <div class="controls">
-                                        <input type="password" id="password" 
+                                        <input type="password" id="passwordField" 
                                             placeholder="Password">
                                     </div>
                                 </div>
