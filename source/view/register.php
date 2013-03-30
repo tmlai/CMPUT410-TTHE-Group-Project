@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TTHE Enterprise - Category</title>
+    <title>TTHE Enterprise - Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
         // Default Style links

@@ -10,18 +10,29 @@
         <a class="brand" href="#">TTHE Enterprises</a>
         <div class="nav-collapse collapse">
             <ul class="nav pull-left">
-            <li class="active pull-left"><a href="#">Home</a></li>
+            <li class="active pull-left"><a href="index.php">Home</a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" 
-                    data-toggle="dropdown" href="#">Search
-                    <span class="caret"></span>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Search<span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <form class="form-search">
+                        <script type="text/javascript" language="JavaScript">
+                        <!--
+                        function searchCheck() {
+                            if(document.searchForm.searchField.value != "") {
+                                return true;
+                            }
+                            return false;
+                        }
+                        -->
+                        </script>
+                        <form  name="searchForm" class="form-search" method="get" 
+                        action="./elements/entersearch.php? + document.searchForm.searchField.value"  
+                        enctype="text/plain" onSubmit="return searchCheck();">
                             <div class="input-append">
-                                <input type="text" class="span2 search-query" 
-                                    placeholder="Search">
+                                <input name="searchField" type="text" 
+                                class="span2 search-query" placeholder="Search">
                                 <button type="submit" class="btn">
                                 <i class="icon-search"></i></button>
                             </div>
@@ -30,9 +41,9 @@
                     <li><a href="#">Advanced Search</a></li>
                     <li class="divider"></li>
                     <li class="dropdown-submenu">
-                        <a tabindex="-1" href="#">Categories</a>
+                        <a tabindex="-1" href="index.php">Categories</a>
                         <ul class="dropdown-menu">
-                        <li><a href="#">Appliance Categories...</a></li>
+                        <li><a href="category.php">Appliance Categories...</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -74,7 +85,10 @@
                                       </label>-->
                                       <button type="submit" 
                                         class="btn btn-primary">Sign in</button>
-                                      <button class="btn">Register</button>
+                                      <button class="btn" 
+                                      onclick="location.href='register.php';return false;">
+                                        Register
+                                      </button>
                                     </div>
                                 </div>
                             </form>
