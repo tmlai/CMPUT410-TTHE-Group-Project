@@ -111,6 +111,70 @@ FROM 	CustomersOrders co, OrdersProducts op, Products p
 WHERE	co.orderId = op.orderId AND op.cid = p.cid 
 GROUP BY co.username, op.cid, op.storeId, co.orderDate;
 
+CREATE OR REPLACE VIEW OlapReport AS
+SELECT username, cid, storeId, orderDate, aggregatedCount, amounts
+FROM OlapView
+UNION
+SELECT username, cid, storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username, cid, storeId
+UNION
+SELECT username, cid, NULL as storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username, cid, orderDate
+UNION 
+SELECT username, cid, NULL as storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username, cid
+UNION
+SELECT username, NULL as cid, storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username, storeId, orderDate
+UNION
+SELECT username, NULL as cid, storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username, storeId
+UNION
+SELECT username, NULL as cid, NULL as storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username, orderDate
+UNION 
+SELECT username, NULL as cid, NULL as storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY username
+UNION
+SELECT NULL as username, cid, storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY cid, storeId, orderDate
+UNION
+SELECT NULL as username, cid, storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY cid, storeId
+UNION
+SELECT NULL as username, cid, NULL as storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY cid, orderDate
+UNION 
+SELECT NULL as username, cid, NULL as storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY cid
+UNION
+SELECT NULL as username, NULL as cid, storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY storeId, orderDate
+UNION
+SELECT NULL as username, NULL as cid, storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY storeId
+UNION
+SELECT NULL as username, NULL as cid, NULL as storeId, orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView
+GROUP BY orderDate
+UNION 
+SELECT NULL as username, NULL as cid, NULL as storeId, NULL as orderDate, SUM(aggregatedCount) as aggregatedCount, SUM(amounts) as amounts
+FROM OlapView;
+
+
 -- Insert data section
 
 INSERT INTO Admins values('root','admin04');
