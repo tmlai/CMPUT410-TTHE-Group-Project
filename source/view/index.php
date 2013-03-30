@@ -1,21 +1,14 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
   <head>
     <title>TTHE Enterprise - Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
-    
-    <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <?php
+        // Default Style links
+        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+    ?>
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
-    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <script src="elements/loginvalidation.js"></script>
-    <style>
-        body {
-            padding-top: 50px;
-        }
-    </style>
   </head>
   <body>   
     <?php
