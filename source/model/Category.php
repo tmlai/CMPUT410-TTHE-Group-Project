@@ -5,6 +5,9 @@ class Category {
 	private $name;
 	private $description;
 
+	/*
+	 * $cateId can be random number for inserting the object into table.
+	 */
 	public function __construct($cateId, $name, $desc) {
 		$this->cateId = $cateId;
 		$this->name = $name;

@@ -45,4 +45,17 @@
 	+	However, with transactions REMEMBER to call lastInsertId before committing to get the correct  
 		last insert ID.
 	+	To simplify delivery and payment processes, an immediate whole payment  
-		is required upon any order from customers or stores.???
+		is required upon any order from customers!
+	
+	NOTE HOW TO USE DATABASE LAYER:  
+	+	OrderProduct Class:  
+		
+	  		$date = new \DateTime();
+			$deliveryDate should be created by the following way:
+			$date->add(new \DateInterval('P2D'));
+			$deliveryDate = $date->format('Y-m-d');
+
+			$auxiliaryOrderId = 0 && $deliveryDate = '' if products come from
+			our own store  
+	+	*amount* is the total value of quantity of products
+

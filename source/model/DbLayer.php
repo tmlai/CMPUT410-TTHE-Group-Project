@@ -7,8 +7,9 @@ class DbLayer implements DbInterface {
 	const DB_NAME = 'cmput410';
 	const USER_NAME = 'root';
 	const PASSWORD = 'admin04';
-	
-	const PAID_NOT_DELIVERED = 2;
+
+	const LOWER_BOUND = 'lowerBound';
+	const UPPER_BOUND = 'upperBound';
 
 	public static function getPdo() {
 		$dsn = 'mysql:dbname=' . self::DB_NAME . ';host=' . self::HOST_NAME
@@ -193,6 +194,27 @@ class DbLayer implements DbInterface {
 	}
 
 	/*
+	 * Get the price of the product given its product ID.
+	 */
+	public function getPrice($productId) {
+		$pdo = self::getPdo();
+		$statement = "SELECT price FROM Products WHERE cid = ?";
+		$stmt = $pdo->prepare($statement);
+		$stmt->bindParam(1, $productId);
+
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+		$price = 0;
+		foreach ($temp as &$row) {
+			$price = $row[0];
+		}
+		$pdo = null;
+		return $price;
+
+	}
+
+	/*
 	 * Return a list of categories
 	 * Return type: array of category objects
 	 */
@@ -262,41 +284,6 @@ class DbLayer implements DbInterface {
 		return $prodArray;
 	}
 
-	/*
-	 * Given the search name for the product, return the list of product objects
-	 * Parameters: $partial	the name for the product to be searched
-	 * Return type:	the list of product objects returned
-	 */
-	public function searchProduct($partial) {
-		$partial = strtolower($partial);
-
-		$first = substr($partial, 0, 1);
-		$capFirst = strtoupper($first);
-		$rest = substr($partial, 1);
-
-		$pdo = self::getPdo();
-
-		$preState = "SELECT * from Products WHERE name REGEXP '[{$first}{$capFirst}]{$rest}' ";
-
-		$stmt = $pdo->prepare($preState);
-
-		$stmt->execute();
-
-		$temp = $stmt->fetchAll();
-
-		$pdo = null;
-
-		$list = array();
-
-		foreach ($temp as &$row) {
-			$prod = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
-					$row[5], $row[6], $row[7]);
-			$list[] = $prod;
-		}
-
-		return $list;
-	}
-
 	// -------------------------------------------------------------------------
 
 	public function addStore(Store $store) {
@@ -343,46 +330,135 @@ class DbLayer implements DbInterface {
 	}
 
 	/*
-	 * Check if some store(including our store) has enough stock to accomodate the
-	 * requested number
-	 * of products
-	 * Parameters:	$productId:	the product to be ordered from other stores
-	 * 				$quantity:	number of products requested
-	 * 				$url:		url of the store. url = '' if the store is ours.
-	 * Return type:	true if the there is enough stock. False otherwise.
-	 */
-	public function checkIfCanOrder($productId, $quantity, $url) {
-
-	}
-
-	/*
 	 * Add just one product ordered to the database.
 	 * Parameters:	$pdo:			the pdo connection
-	 * 				$oneItemArray:	the array containing info for the item ordered
-	 * 				Specifically, must be in this form:
-	 * 				["orderId" => orderId, "cid" => cid, "storeId" => storeId, "quantity" =>
-	 * quantity];
+	 * 				$orderProduct	OrderProduct object to be inserted.
 	 * Return type:	true if insert successfully, false otherwise.
 	 * NOTE: 		pass the pdo connection so that this database action can be rollbacked
 	 * 				since this action is a small step in a transaction.
 	 */
-	public function orderOneProduct($pdo, $oneItemArray) {
+	public function orderOneProduct(\PDO $pdo, OrderProduct $orderProduct) {
+		$statement = "INSERT INTO OrdersProducts values(?,?,?,?,?,?,?)";
+		$stmt = $pdo->prepare($statement);
 
+		$array = array($orderProduct->getOrderId(), $orderProduct->getCid(),
+				$orderProduct->getStoreId(), $orderProduct->getQuantity(),
+				$orderProduct->getAuxiliaryOrderId(),
+				$orderProduct->getDeliveryDate(), $orderProduct->getAmount());
+		$value = $stmt->execute($array);
+		return $value;
 	}
 
 	// order section
 	/*
 	 * Add a list of products ordered to the database.
-	 * Parameters:	$itemsArray:	the array containing the list of associative
-	 * 				arrays, each corresponding to a product ordered
-	 * 				Specifically, each sub array must be in this form
-	 * 				["orderId" => orderId, "cid" => cid, "storeId" => storeId, "quantity" =>
-	 * quantity];
-	 * Return type:	the list of positions of products that CANNOT be added!
-	 *
+	 * Parameters:	$customerOrder	CustomerOrder object representing a new tuple
+	 * 								to be inserted into CustomersOrders table.
+	 * 				$orderProductsArray	array of OrderProduct objects to be inserted
+	 * 								into OrdersProducts table.
+	 * Return type:	true if successfully adding all tuples into tables. False
+	 * otherwise.
 	 */
-	public function addOrder($itemsArray) {
+	public function addOrder(CustomerOrder $customerOrder,
+			array $orderProductsArray) {
+		$pdo = self::getPdo();
+		$pdo->beginTransaction();
 
+		$statement = "INSERT INTO CustomersOrders(description,orderDate,username,payment,deliveryDate)
+		 values(?,?,?,?,?)";
+		$stmt = $pdo->prepare($statement);
+
+		$date = new \DateTime();
+		$orderDate = $date->format('Y-m-d H:i:s');
+
+		$date->add(new \DateInterval('P2D'));
+		$deliveryDate = $date->format('Y-m-d');
+
+		$array = array($customerOrder->getDescription(), $orderDate,
+				$customerOrder->getUsername(), $customerOrder->getPayment(),
+				$deliveryDate);
+
+		$value = $stmt->execute($array);
+		$value = ($value == true && $stmt->rowCount() > 0);
+		if ($value == false) {
+			$pdo->rollBack();
+			// TODO
+			echo "CustomersOrders insert";
+			$pdo = null;
+			return false;
+		}
+
+		$orderId = $pdo->lastInsertId();
+
+		/* @var $row OrderProduct */
+		$latestDate = $date;
+		$format = 'Y-m-d';
+		foreach ($orderProductsArray as &$row) {
+			$row->setOrderId($orderId);
+
+			$deliveryDate = $row->getDeliveryDate();
+			$auxiliaryOrderId = $row->getAuxiliaryOrderId();
+
+			if ($deliveryDate != '' && $auxiliaryOrderId != 0) {
+				$dateTemp = \DateTime::createFromFormat($format,
+						$row->getDeliveryDate());
+				if ($latestDate < $dateTemp) {
+					$latestDate = $dateTemp;
+				}
+			}
+		}
+
+		// 		Insert each tuple into OrderProducts table.
+		$dbLayer = new DbLayer();
+		foreach ($orderProductsArray as &$op) {
+			$value = $dbLayer->orderOneProduct($pdo, $op);
+			if ($value == false) {
+				$pdo->rollBack();
+				// TODO
+				echo "OrderProduct insert";
+				$pdo = null;
+				return false;
+			}
+		}
+
+		// 		Decrease the stock of each product
+		/* @var $sc OrderProduct */
+		foreach ($orderProductsArray as &$sc) {
+			// Assume our store has store id of 1.
+			if ($sc->getStoreId() == 1) {
+				$value = $dbLayer
+						->updateStock($pdo, $sc->getCid(), $sc->getQuantity());
+
+				if ($value == false) {
+					$pdo->rollBack();
+					// TODO
+					echo "Update Stock";
+					$pdo = null;
+					return false;
+				}
+			}
+		}
+
+		// 		Update the deliveryDate to be the latest delivery date from another
+		// 		store if the delivery date has been changed.
+		if ($latestDate != $date) {
+			$statement = "UPDATE CustomersOrders SET deliveryDate = ? WHERE orderId = ?";
+			$stmt = $pdo->prepare($statement);
+			$array = array($latestDate->format('Y-m-d'), $orderId);
+			$value = $stmt->execute($array);
+			$value = ($value == true && $stmt->rowCount() > 0);
+			if ($value == false) {
+				$pdo->rollBack();
+				// TODO
+				echo "Update CustomersOrders";
+				$pdo = null;
+				return false;
+			}
+		}
+
+		$pdo->commit();
+		$pdo = null;
+		return true;
 	}
 
 	// 	------------------------------------------------------------------------
@@ -469,56 +545,55 @@ class DbLayer implements DbInterface {
 		if ($quantity <= 0) {
 			return json_encode($result);
 		}
-		
+
 		$dbLayer = new DbLayer();
 		$stock = $dbLayer->getStock($cid);
-		
 		if ($quantity > $stock) {
 			return json_encode($result);
 		}
 		$pdo = self::getPdo();
 		$pdo->beginTransaction();
-		
-		
+
 		$date = new \DateTime();
 		$orderDate = $date->format('Y-m-d H:i:s');
-		
+
 		$date->add(new \DateInterval('P2D'));
 		$deliveryDate = $date->format('Y-m-d');
-		
-		$statement = "INSERT INTO StoresOrders(description,orderDate,storeId,statusId,deliveryDate)
+
+		$statement = "INSERT INTO StoresOrders(description,orderDate,storeId,payment,deliveryDate)
 		values(?,?,?,?,?)";
 		$stmt = $pdo->prepare($statement);
-		
-		$array = array("",$orderDate,$storeId,self::PAID_NOT_DELIVERED,$deliveryDate);
+
+		$array = array("", $orderDate, $storeId, 0, $deliveryDate);
 		$value = $stmt->execute($array);
 		$value = ($value == true && $stmt->rowCount() > 0);
-		if($value == false){
+		if ($value == false) {
 			$pdo->rollBack();
 			$pdo = null;
 			return json_encode($result);
 		}
-		
+
 		$orderId = $pdo->lastInsertId();
-		$statement = "INSERT INTO StoresOrdersProducts values(?,?,?)";
+		$statement = "INSERT INTO StoresOrdersProducts values(?,?,?,?)";
 		$stmt = $pdo->prepare($statement);
-		
-		$array = array($orderId,$cid,$quantity);
+
+		$array = array($orderId, $cid, $quantity,
+				$dbLayer->getPrice($cid) * $quantity);
 		$value = $stmt->execute($array);
 		$value = ($value == true && $stmt->rowCount() > 0);
-		if($value == false){
+		if ($value == false) {
 			$pdo->rollBack();
 			$pdo = null;
 			return json_encode($result);
 		}
-		
+
 		$value = $dbLayer->updateStock($pdo, $cid, $quantity);
-		if($value == false){
+		if ($value == false) {
 			$pdo->rollBack();
 			$pdo = null;
 			return json_encode($result);
 		}
-		
+
 		// The transaction is executed successfully!
 		$pdo->commit();
 		$pdo = null;
@@ -533,20 +608,236 @@ class DbLayer implements DbInterface {
 	 * RETURN: JSON in the following format: {"delivery_date":"some date"}.
 	 * If $orderId is invalid, return an empty JSON.
 	 */
-	public function checkDeliveryDate($orderId){
+	public function checkDeliveryDate($orderId) {
 		$pdo = self::getPdo();
 		$statement = "SELECT deliveryDate FROM StoresOrders WHERE orderId = ? ";
 		$stmt = $pdo->prepare($statement);
 		$stmt->bindParam(1, $orderId);
-		
+
 		$stmt->execute();
 		$temp = $stmt->fetchAll();
 		$result = array();
-		foreach($temp as &$row){
+		foreach ($temp as &$row) {
 			$result['delivery_date'] = $row[0];
 		}
 		$pdo = null;
 		return json_encode($result);
+	}
+
+	/*
+	 * Given the search name for the product, return the list of product objects
+	 * Parameters: $partial	the name for the product to be searched
+	 * Return type:	the list of product objects returned
+	 * @param string $partial
+	 * @return array 
+	 */
+	public function searchProductByName($partial) {
+		$partial = strtolower($partial);
+
+		$first = substr($partial, 0, 1);
+		$capFirst = strtoupper($first);
+		$rest = substr($partial, 1);
+
+		$pdo = self::getPdo();
+
+		$preState = "SELECT * from Products WHERE name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+
+		$stmt = $pdo->prepare($preState);
+
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+
+		$pdo = null;
+
+		$list = array();
+
+		foreach ($temp as &$row) {
+			$prod = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
+			$list[] = $prod;
+		}
+
+		return $list;
+	}
+
+	/*
+	 * @param string $code
+	 * @return array
+	 * Given the $code, product id, of the product, return
+	 * a list of products having this code. For compatibility with other
+	 * search methods, an array is returned. In fact, this array should contain
+	 * at most one product only.
+	 */
+	public function searchProductByCode($code) {
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Products WHERE cid = ?";
+		$stmt = $pdo->prepare($statement);
+
+		$array = array($code);
+		$stmt->execute($array);
+
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach ($temp as &$row) {
+			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
+			$list[] = $product;
+		}
+		$pdo = null;
+		return $list;
+	}
+
+	/*
+	 * @param string $category
+	 * @return array
+	 * Given the $category, name of category, of the product, return
+	 * list of category IDs.
+	 */
+	public function searchProductByCategory($category) {
+		$category = strtolower($category);
+
+		$first = substr($category, 0, 1);
+		$capFirst = strtoupper($first);
+		$rest = substr($category, 1);
+
+		$pdo = self::getPdo();
+
+		$preState = "SELECT cateId FROM Categories WHERE name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+
+		$stmt = $pdo->prepare($preState);
+
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach ($temp as &$row) {
+			$list[] = $row[0];
+		}
+		$pdo = null;
+		return $list;
+	}
+
+	/*
+	 * @param	$cateId			category Id
+	 * @param	$priceRange		the price range {lowerBound, upperBound}.
+	 * 							null to indicate no constraint on lower/upper.
+	 * @param	$availRange		the availability range {lowerBound, upperBound}
+	 * @param	$weightRange	the weight Range {lowerBound, upperBound}
+	 */
+	public function searchProductByConstraints($cateId, $priceRange,
+			$availRange, $weightRange) {
+		$pdo = self::getPdo();
+
+		$statement = "SELECT * FROM Products p, ProductsMapCategories pmc WHERE p.cid = pmc.cid AND pmc.cateId = ? ";
+
+		$lowerBound = $priceRange[self::LOWER_BOUND];
+		if (isset($lowerBound)) {
+			$statement .= " AND p.price >= {$lowerBound}";
+		}
+
+		$upperBound = $priceRange[self::UPPER_BOUND];
+		if (isset($upperBound)) {
+			$statement .= " AND p.price <= {$upperBound} ";
+		}
+
+		$lowerBound = $availRange[self::LOWER_BOUND];
+		if (isset($lowerBound)) {
+			$statement .= " AND p.stock >= {$lowerBound} ";
+		}
+
+		$upperBound = $availRange[self::UPPER_BOUND];
+		if (isset($upperBound)) {
+			$statement .= " AND p.stock <= {$upperBound} ";
+		}
+
+		$lowerBound = $weightRange[self::LOWER_BOUND];
+		if (isset($lowerBound)) {
+			$statement .= " AND p.weight >= {$lowerBound} ";
+		}
+
+		$upperBound = $weightRange[self::UPPER_BOUND];
+		if (isset($upperBound)) {
+			$statement .= " AND p.weight <= {$upperBound} ";
+		}
+
+		$stmt = $pdo->prepare($statement);
+		$array = array($cateId);
+
+		$stmt->execute($array);
+		$temp = $stmt->fetchAll();
+		$list = array();
+
+		foreach ($temp as &$row) {
+			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
+			$list[] = $product;
+		}
+
+		$pdo = null;
+		return $list;
+	}
+
+	// 	-----------------------------------------------------------------------
+	// 	Outstanding orders section
+	/*
+	 * Given the username of the user return a list of CustomerOrder objects
+	 * corresponding to orders. If $outStanding is indicated(true), only outstanding
+	 * orders - ones of which deliveryDate has not passed yet - are returned.
+	 */
+	public function getCustomersOrders($username, $outstanding) {
+		$pdo = self::getPdo();
+		if ($outstanding) {
+			$date = new \DateTime();
+			$date = $date->format('Y-m-d');
+
+			$statement = "SELECT * FROM OutstandingOrders WHERE username = ? AND deliveryDate >= ?";
+			$stmt = $pdo->prepare($statement);
+
+			$array = array($username, $date);
+			$stmt->execute($array);
+
+		} else {
+			$statement = "SELECT * FROM OutstandingOrders WHERE username = ?";
+			$stmt = $pdo->prepare($statement);
+			
+			$array = array($username);
+			$stmt->execute($array);
+		}
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach ($temp as &$row) {
+			$cusOrd = new CustomerOrder($row[0], $row[1], $row[2], $row[3],
+					$row[4], $row[5]);
+			$cusOrd->setOrderCost($row[6]);
+			$list[] = $cusOrd;
+		}
+		
+		$pdo = null;
+		return $list;
+	}
+
+	/*
+	 * Given the order ID, retrieve the list of Products belonging to this
+	 * order.
+	 */
+	public function getListProductsInOrder($orderId) {
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM OrdersProducts WHERE orderId = ?";
+		
+		$stmt = $pdo->prepare($statement);
+		$array = array($orderId);
+		
+		$stmt->execute($array);
+		$temp = $stmt->fetchAll();
+		
+		$list = array();
+		foreach($temp as &$row){
+			$orPro = new OrderProduct($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
+			$list[] = $orPro;
+		}
+		$pdo = null;
+		return $list;
 	}
 }
 ?>

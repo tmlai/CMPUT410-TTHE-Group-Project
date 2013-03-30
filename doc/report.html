@@ -4,6 +4,16 @@
 <ol>
 	<li>
 		<p>
+			Note
+		</p>
+		<p>
+			Apache Version: 2.2.20
+			Mysql version:  5.1.66
+			Php version:    5.3.6 support PDO database interface
+		</p>
+	</li>
+	<li>
+		<p>
 			Protocol
 		</p>
 		<p>
@@ -60,5 +70,47 @@
 		<p>
 			SQL schema and queries
 		</p>
+		<p>
+			The database schema is defined in setup.sql file. The list of relevant queries
+			are defined in queries.sql file.
+			<br />
+			NOTE:
+		</p>
+		<ul>
+			<li>
+				Customers' orders and stores' orders are tracked separately.
+			</li>
+			<li>
+				no need for create sequence for order id since lastInsertId() method can help
+			</li>
+			<li>
+				However, with transactions REMEMBER to call lastInsertId before committing to get the correct
+				<br />
+				last insert ID.
+			</li>
+			<li>
+				To simplify delivery and payment processes, an immediate whole payment
+				<br />
+				is required upon any order from customers!
+			</li>
+		</ul>
+		<p>
+			NOTE HOW TO USE DATABASE LAYER:
+		</p>
+		<ul>
+			<li>
+				<p>
+					OrderProduct Class:
+				</p>
+				<pre><code>$date = new \DateTime();
+$deliveryDate should be created by the following way:
+$date-&gt;add(new \DateInterval('P2D'));
+$deliveryDate = $date-&gt;format('Y-m-d');
+
+
+$auxiliaryOrderId = 0 &amp;&amp; $deliveryDate = '' if products come from
+our own store
+</code></pre>
+</li>		</ul>
 	</li>
 </ol>
