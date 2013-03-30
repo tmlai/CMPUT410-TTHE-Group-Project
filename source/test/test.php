@@ -1,5 +1,7 @@
 <?php
 namespace test;
+use model\Olap;
+
 use model\OrderProduct;
 
 use model\CustomerOrder;
@@ -324,7 +326,70 @@ class TestDb {
 		var_dump($list);
 	}
 	
-	
+	/*
+	 * PASS
+	 */
+	public static function testGetOlapReport(){
+		$dbLayer = new DbLayer();
+		
+		$username = 'hcngo';
+		$cid = 'c000001';
+		$storeId = 1;
+		$format = 'Y-m-d H:i:s';
+		$from = \DateTime::createFromFormat($format, '2013-03-28 00:00:00');
+		$from = $from->format($format);
+		
+		$to = \DateTime::createFromFormat($format, '2013-03-28 23:59:59');
+		$to = $to->format($format);
+		
+		$olap = new Olap($username, $cid, $storeId, $from, $to, 0,0);
+		
+		$list = $dbLayer->getOlapReport($olap);
+		var_dump($list);
+		
+		echo "<br> list 2 ... <br>";
+		
+		$username = null;
+		$olap->setUsername($username);
+		var_dump($dbLayer->getOlapReport($olap));
+		
+		echo "<br> list 3 ... <br>";
+		
+		$username = 'hcngo';
+		$cid = null;
+		$olap->setUsername($username);
+		$olap->setCid($cid);
+		var_dump($dbLayer->getOlapReport($olap));
+		
+		echo "<br><br> list 4 ... <br><br>";
+		
+		$username = '';
+		$cid = '';
+		$storeId = 3;
+		$from = '';
+		$to = '';
+		$olap->setUsername($username);
+		$olap->setCid($cid);
+		$olap->setStoreId($storeId);
+		$olap->setFrom($from);
+		$olap->setTo($to);
+		var_dump($dbLayer->getOlapReport($olap));
+	}
+
+	/*
+	 * PASS
+	 */
+	public static function testSetPayment(){
+		$dbLayer = new DbLayer();
+		$orderId = 6;
+		$howMuch = 1000;
+		$value = $dbLayer->setPayment($orderId, $howMuch);
+		if($value){
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
 }
 // \test\TestDb::testAddProduct();
 // \test\TestDb::testAddCustomer();
@@ -347,4 +412,6 @@ class TestDb {
 // \test\TestDb::testSearchProductByConstraints();
 // \test\TestDb::testGetCustomersOrders();
 // \test\TestDb::testGetListProductsInOrder();
+// \test\TestDb::testGetOlapReport();
+// \test\TestDb::testSetPayment();
 ?>

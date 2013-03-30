@@ -6,6 +6,7 @@ include_once "Store.php";
 include_once "Category.php";
 include_once "CustomerOrder.php";
 include_once "OrderProduct.php";
+include_once "Olap.php";
 
 interface DbInterface {
 
@@ -229,5 +230,33 @@ interface DbInterface {
 	 * order.
 	 */
 	public function getListProductsInOrder($orderId);
+	
+	/*
+	 * Given the $olapObj which amounts to search query, return a list of
+	 * Olap objects satisfying the constraints.
+	 * More specifically, 
+	 * $username of $olapObj = 0 -> each username,
+	 * $username of $olapObj = null -> aggregate on all usernames,
+	 * $username of $olapObj = specific username -> specific username.
+	 * 
+	 * $storeId of $olapObj = 0 -> each store,
+	 * $storeId of $olapObj = null -> aggregate on all stores,
+	 * $storeId of $olapObj = specific store id -> specific store.
+	 * 
+	 * $cid of $olapObj = 0 -> each product,
+	 * $cid of $olapObj = null -> aggregate on all products,
+	 * $cid of $olapObj = specific cid -> specific cid.
+	 * 
+	 * $from and $to of $olapObj = 0 -> each orderDate,
+	 * $from = null and $to = null -> aggregate on all products,
+	 * $from = specific and $to = specific -> a range.
+	 */
+	public function getOlapReport(Olap $olapObj);
+	
+	/*
+	 * Given the order ID, and amount of money paying, $howmuch
+	 * Update the CustomersOrders table
+	 */
+	public function setPayment($orderId, $howMuch);
 }
 ?>

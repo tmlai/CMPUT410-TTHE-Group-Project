@@ -800,7 +800,7 @@ class DbLayer implements DbInterface {
 		} else {
 			$statement = "SELECT * FROM OutstandingOrders WHERE username = ?";
 			$stmt = $pdo->prepare($statement);
-			
+
 			$array = array($username);
 			$stmt->execute($array);
 		}
@@ -812,7 +812,7 @@ class DbLayer implements DbInterface {
 			$cusOrd->setOrderCost($row[6]);
 			$list[] = $cusOrd;
 		}
-		
+
 		$pdo = null;
 		return $list;
 	}
@@ -824,20 +824,115 @@ class DbLayer implements DbInterface {
 	public function getListProductsInOrder($orderId) {
 		$pdo = self::getPdo();
 		$statement = "SELECT * FROM OrdersProducts WHERE orderId = ?";
-		
+
 		$stmt = $pdo->prepare($statement);
 		$array = array($orderId);
-		
+
 		$stmt->execute($array);
 		$temp = $stmt->fetchAll();
-		
+
 		$list = array();
-		foreach($temp as &$row){
-			$orPro = new OrderProduct($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6]);
+		foreach ($temp as &$row) {
+			$orPro = new OrderProduct($row[0], $row[1], $row[2], $row[3],
+					$row[4], $row[5], $row[6]);
 			$list[] = $orPro;
 		}
 		$pdo = null;
 		return $list;
+	}
+
+	/*
+	 * Given the $olapObj which amounts to search query, return a list of
+	 * Olap objects satisfying the constraints.
+	 * More specifically,
+	 * $username of $olapObj = '' -> each username,
+	 * $username of $olapObj = null -> aggregate on all usernames,
+	 * $username of $olapObj = specific username -> specific username.
+	 *
+	 * $storeId of $olapObj = 0 -> each store,
+	 * $storeId of $olapObj = null -> aggregate on all stores,
+	 * $storeId of $olapObj = specific store id -> specific store.
+	 *
+	 * $cid of $olapObj = '' -> each product,
+	 * $cid of $olapObj = null -> aggregate on all products,
+	 * $cid of $olapObj = specific cid -> specific cid.
+	 *
+	 * $from and $to of $olapObj = '' -> each orderDate,
+	 * $from = null and $to = null -> aggregate on all products,
+	 * $from = specific and $to = specific -> a range.
+	 */
+	public function getOlapReport(Olap $olapObj) {
+		$pdo = self::getPdo();
+
+		$statement = "SELECT * FROM OlapReport WHERE ";
+
+		$username = $olapObj->getUsername();
+		if (isset($username) == false) {
+			$statement .= " username is NULL ";
+
+		} elseif ($username == '') {
+			$statement .= " 1 ";
+		} else {
+			$statement .= " username = '{$username}' ";
+		}
+
+		$cid = $olapObj->getCid();
+		if (isset($cid) == false) {
+			$statement .= " AND cid is NULL ";
+		} elseif ($cid == '') {
+		} else {
+			$statement .= " AND cid = '{$cid}' ";
+		}
+
+		$storeId = $olapObj->getStoreId();
+		if (isset($storeId) == false) {
+			$statement .= " AND storeId is NULL ";
+		} elseif ($storeId == 0) {
+		} else {
+			$statement .= " AND storeId = {$storeId} ";
+		}
+
+		$from = $olapObj->getFrom();
+		$to = $olapObj->getTo();
+		if (isset($from) == false && isset($to) == false) {
+			$statement .= " AND orderDate is NULL ";
+		} elseif ($from == '' && $to == '') {
+		} else {
+			$statement .= " AND orderDate >= '{$from}' ";
+			$statement .= " AND orderDate <= '{$to}' ";
+		}
+
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute();
+
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach ($temp as &$row) {
+			$olap = new Olap($row[0], $row[1], $row[2], $row[3], $row[3],
+					$row[4], $row[5]);
+			$list[] = $olap;
+		}
+
+		$pdo = null;
+		return $list;
+	}
+
+	/*
+	 * Given the order ID, and amount of money paying, $howmuch
+	 * Update the CustomersOrders table
+	 */
+	public function setPayment($orderId, $howMuch) {
+		$pdo = self::getPdo();
+		$statement = "UPDATE CustomersOrders SET payment = ? WHERE orderId = ?";
+		$stmt = $pdo->prepare($statement);
+		$array = array($howMuch, $orderId);
+		
+		$value = $stmt->execute($array);
+		$value = ($value == true && $stmt->rowCount() > 0);
+		
+		$pdo = null;
+		return $value;
+		
 	}
 }
 ?>
