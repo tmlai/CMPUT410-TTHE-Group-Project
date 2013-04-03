@@ -254,6 +254,12 @@ interface DbInterface {
 	public function getOlapReport(Olap $olapObj);
 	
 	/*
+	 * Get the top n sellings products within a period.
+	 * $from or $to can be null to indicate no constraint.
+	 */
+	public function getTopNSellings($n, $from, $to);
+	
+	/*
 	 * Given the order ID, and amount of money paying, $howmuch
 	 * Update the CustomersOrders table
 	 */

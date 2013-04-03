@@ -916,6 +916,42 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 		return $list;
 	}
+	
+	
+	/*
+	 * Get the top n sellings products within a period.
+	* $from or $to can be null to indicate no constraint.
+	*/
+	public function getTopNSellings($n, $from, $to){
+		$pdo = self::getPdo();
+		
+		if(isset($from) && isset($to)){
+			$inject = " co.orderDate >= '{$from}' AND co.orderDate <= '{$to}' ";
+		}elseif(isset($from) && isset($to) == false){
+			$inject = " co.orderDate >= '{$from}' ";
+		}elseif(isset($from) == false && isset($to)){
+			$inject = " co.orderDate <= '{$to}' ";
+		}elseif(isset($from) == false && isset($to) == false){
+			$inject = " 1 ";
+		}
+		
+		$statement = "SELECT * FROM Products p, 
+		(SELECT op.cid, SUM(op.quantity) as total FROM OrdersProducts op, CustomersOrders co WHERE co.orderId = op.orderId AND " .$inject."
+		 GROUP BY op.cid ORDER BY total DESC LIMIT 0,{$n}) top WHERE top.cid = p.cid";
+		$stmt = $pdo->prepare($statement);
+		
+		
+		$stmt->execute();
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach($temp as &$row){
+			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
+			$list[] = $product;
+		}
+		$pdo = null;
+		return $list;
+		
+	}
 
 	/*
 	 * Given the order ID, and amount of money paying, $howmuch
@@ -934,5 +970,6 @@ class DbLayer implements DbInterface {
 		return $value;
 		
 	}
+
 }
 ?>

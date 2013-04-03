@@ -58,4 +58,29 @@
 			$auxiliaryOrderId = 0 && $deliveryDate = '' if products come from
 			our own store  
 	+	*amount* is the total value of quantity of products
+3.	List of php scripts probably needed
+	
+	+	Management module
+		
+		Scripts suppporting sending request: 
+		
+		1.	Script returns a list of customers + NULL + blank (to facilitate
+			drop down selection - look at example of AJAX in class).
+		2.	Script returns a list of products + NULL + blank (to facilitate
+			drop down selection)
+		3.	Script returns a list of external stores + NULL + blank(to facilitate
+			drop down selection)
+		
+		NOTICE: date is always in the following format YYYY-MM-DD
+		JSON format of data sent to server:
+		
+		1.	To get OLAP analysis, send this JSON {"customer":"customerId|NULL|empty", "product":"ProductID|NULL|EMPTY",
+		 "store":"StoreID|NULL|EMPTY", "from":"some date", "to":"some date"} to the server
+		2.	To get top n selling products, send this JSON {"n":"# of products", "from":"some date", "to":"some date"}
+		
+		PHP SCRIPTS HANDLING THE REQUEST:
+		1.	Handle OLAP analysis. Receive the Olap Request JSON string, process it and return the list of statistics for each  
+			customer/product/store in a table format like this
+				Customer	Product		Store	Purchases	Money Spent
+		2.	Handle get-top-n-selling products request, send back output in a table format like the list of products page
 

@@ -390,6 +390,26 @@ class TestDb {
 			echo "false";
 		}
 	}
+
+	
+	/*
+	 * PASS
+	 */
+	public static function testGetTopNSellings(){
+		$dbLayer = new DbLayer();
+		$n = 3;
+		
+		$format = 'Y-m-d H:i:s';
+		
+		$from = \DateTime::createFromFormat($format, '2013-03-29 00:00:00');
+		$from = $from->format($format);
+		
+		$to = \DateTime::createFromFormat($format, '2013-03-29 23:59:59');
+		$to = $to->format($format);
+		
+		$list = $dbLayer->getTopNSellings($n, $from, $to);
+		var_dump($list);
+	}
 }
 // \test\TestDb::testAddProduct();
 // \test\TestDb::testAddCustomer();
@@ -414,4 +434,5 @@ class TestDb {
 // \test\TestDb::testGetListProductsInOrder();
 // \test\TestDb::testGetOlapReport();
 // \test\TestDb::testSetPayment();
+// \test\TestDb::testGetTopNSellings();
 ?>
