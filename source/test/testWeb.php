@@ -6,7 +6,7 @@
 			function testGetAll() {
 				var xmlhttp=new XMLHttpRequest();
 				//send ajax request
-				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/webservices.php', 'true');
+				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php', 'true');
 				xmlhttp.send();
 			}
 			
@@ -14,14 +14,24 @@
 			function testGetOne() {
 				var id = document.getElementById("idNum").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/webservices.php?id='+id, 'true');
+				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php?id='+id, 'true');
 				xmlhttp.send();
+			}
+			
+			//another store doing a post to us to buy one
+			function testSellOne() {
+				var id = document.getElementById("idNum2").value;
+				var xmlhttp=new XMLHttpRequest();
+				xmlhttp.open('POST', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php, 'true');
+				xmlhttp.send(id);
 			}
 		</script>
 	</header>
 	<body>
 		<input type="button" onClick="testGetAll()" value="Get All ID's"> <br>
 		<input type="button" onClick="testGetOne()" value="Get One">
-		Id: <input type="text" id="idNum">
+		Id: <input type="text" id="idNum"><br>
+		<input type="button" onClick="testSellOne()" value="Someone Buying From Us">
+		Id2: <input type="text" id="idNum2"><br>
 	</body>
 </html>

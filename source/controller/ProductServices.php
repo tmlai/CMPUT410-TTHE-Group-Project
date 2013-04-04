@@ -1,17 +1,24 @@
 <?php
 namespace controller;
 
-use model\OrderProduct;
-
-use model\CustomerOrder;
-
-use model\Store;
-
-use model\Customer;
-
 use model\DbLayer;
 
 include_once '../model/DbLayer.php';
+
+function getIP() {
+$ip;
+if (getenv("HTTP_CLIENT_IP"))
+$ip = getenv("HTTP_CLIENT_IP");
+else if(getenv("HTTP_X_FORWARDED_FOR"))
+$ip = getenv("HTTP_X_FORWARDED_FOR");
+else if(getenv("REMOTE_ADDR"))
+$ip = getenv("REMOTE_ADDR");
+else
+$ip = "UNKNOWN";
+return $ip;
+
+} 
+
 
 try {
 	$dbLayer = new DbLayer();
@@ -29,7 +36,11 @@ try {
 				$prodArray = $dbLayer->getProductsInStock();
 				echo \json_encode($prodArray);
 			}
+			break;
 		case 'post':
+			$id = file_get_contents("php://input");
+			$clientIp = getIp();
+			echo $clientIp;
 	}
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
