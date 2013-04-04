@@ -1,8 +1,20 @@
 <?php
 namespace controller;
+
+use model\OrderProduct;
+
+use model\CustomerOrder;
+
+use model\Store;
+
+use model\Customer;
+
+use model\DbLayer;
+
 include_once '../model/DbLayer.php';
 
 try {
+	$dbLayer = new DbLayer();
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 	switch($requestMethod) {
 		case 'get':
@@ -11,7 +23,7 @@ try {
 			if(!empty($_GET)) {
 				$id = $_GET['id'];
 			} else {
-				$prodArray = getProductsInStock();
+				$prodArray = $dbLayer->getProductsInStock();
 				echo \json_encode($prodArray);
 			}
 		case 'post':
