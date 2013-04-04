@@ -38,8 +38,9 @@ try {
 			break;
 		case 'post':
 			$id = file_get_contents("php://input");
-			$clientIp = getIp();
-			echo $clientIp;
+			echo $_SERVER['REMOTE_PORT'];
+			//$clientIp = getIp();
+			//echo $clientIp;
 	}
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
