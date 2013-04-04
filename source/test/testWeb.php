@@ -6,7 +6,7 @@
 			function testGetAll() {
 				var xmlhttp=new XMLHttpRequest();
 				//send ajax request
-				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php', 'true');
+				xmlhttp.open('GET', '/products', 'true');
 				xmlhttp.send();
 			}
 			
@@ -14,7 +14,7 @@
 			function testGetOne() {
 				var id = document.getElementById("idNum").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php?id='+id, 'true');
+				xmlhttp.open('GET', '/products/?id='+id, 'true');
 				xmlhttp.send();
 			}
 			
