@@ -39,6 +39,9 @@ try {
 		case 'post':
 			$id = file_get_contents("php://input");
 			$ch = \curl_init();
+			if (!$ch) {
+				die("Couldn't initialize a cURL handle");
+			}
 			$info = \curl_getinfo($ch);
 			var_dump($info);
 			echo $info['url'];
