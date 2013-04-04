@@ -4,7 +4,7 @@
  *
  */
 namespace model;
-class Product {
+class Product implements JsonSerializable {
 	private $cid;
 	private $name;
 	private $description;
@@ -13,6 +13,19 @@ class Product {
 	private $weight;
 	private $dimensions;
 	private $stock;
+	
+	public function jsonSerialize() {
+		$array = array();
+		$array['cid'] = $this->cid;
+		$array['name'] = $this->name;
+		$array['description'] = $this->description;
+		$array['image'] = $this->image;
+		$array['price'] = $this->price;
+		$array['weight'] = $this->weight;
+		$array['dimensions'] = $this->dimensions;
+		$array['stock'] = $this->stock;
+		return $array;
+	}
 	
 	public function __construct($cid, $name, $description, $image,
 			$price, $weight, $dimensions, $stock){

@@ -1,9 +1,17 @@
 <?php
 namespace model;
-class Category {
+class Category implements JsonSerializable {
 	private $cateId;
 	private $name;
 	private $description;
+	
+	public function jsonSerialize() {
+		$array = array();
+		$array['cateId'] = $this->cateId;
+		$array['name'] = $this->name;
+		$array['description'] = $this->description;
+		return $array;
+	}
 
 	/*
 	 * $cateId can be random number for inserting the object into table.
