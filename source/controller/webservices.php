@@ -1,8 +1,9 @@
 <?php
-namespace model;
+namespace controller;
 include_once '../model/DbLayer.php';
 
 $request_method = strtolower($_SERVER['REQUEST_METHOD']);
+echo $request_method;
 switch($request_method) {
 	case 'get':
 		//if id is passed (GET /products/:id)
@@ -19,9 +20,9 @@ switch($request_method) {
 <html>
 <body>
 <?
-$prodArray = getProductsInStock();
-echo json_encode($prodArray);
-var_dump($prodArray);
+// $prodArray = getProductsInStock();
+// echo json_encode($prodArray);
+// var_dump($prodArray);
 ?>
 </body>
 </html>
