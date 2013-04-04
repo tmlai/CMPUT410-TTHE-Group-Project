@@ -238,7 +238,8 @@ a {
 a:hover,
 a:focus {
   color: #005580;
-  text-decoration: underline;
+  /* originally was text-decoration: underline;*/
+  text-decoration: none;
 }
 
 .img-rounded {
@@ -6098,6 +6099,7 @@ a.badge:focus {
 .carousel-caption p {
   line-height: 20px;
   color: #ffffff;
+  text-shadow: 1px 1px #666666;
 }
 
 .carousel-caption h4 {

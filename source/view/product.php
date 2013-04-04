@@ -1,3 +1,9 @@
+<?php 
+session_start();
+$_SESSION['productID'] = $_GET['id'];
+// get the product name given the product id
+
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -28,6 +34,12 @@
                       <h4>Availability</h4>
                       <p>Stores: </p>
                       <h4>Rating: </h4>
+                      <div id="specDiv" class="well">
+                        <p><strong>Weight:</strong> 1kg</p>
+                        <p><strong>Code:</strong> 
+                          <?php echo $_SESSION['productID']?>
+                        </p>
+                      </div>
                       <button type="submit" class="btn btn-success">
                         Order Product</button>
                     </div>                    

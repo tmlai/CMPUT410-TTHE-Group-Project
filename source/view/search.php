@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+$_SESSION['search'] = $_GET['searchField'];
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +11,6 @@
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
-    <link href="bootstrap/css/carousel.css" rel="stylesheet">
   </head>
   <body>   
     <?php
@@ -24,6 +26,7 @@
             <table class="table table-hover">
             <thead>
                 <tr>
+                    <th><!-- placeholder --></th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>Availability</th>
@@ -34,7 +37,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="location.href='#'">
+                <!-- product code javascript function will return the product code
+                for the query of the database for creating product.php-->
+                <tr onclick="location.href='./product.php?id=1'">
+                    <td>
+                      <img src="" alt="" width="50" height="50">
+                    </td>
                     <td>$1</td>
                     <td>1</td>
                     <td>1</td>
@@ -49,7 +57,10 @@
                         </button>
                     </td>
                 </tr>
-                <tr onclick="location.href='#'">
+                <tr onclick="location.href='./product.php?id=2'">
+                    <td>
+                      <img src="" alt="" width="50" height="50">
+                    </td>
                     <td>$2</td>
                     <td>2</td>
                     <td>2</td>
@@ -64,7 +75,10 @@
                         </button>
                     </td>
                 </tr>
-                <tr onclick="location.href='#'">
+                <tr onclick="location.href='./product.php?id=3'">
+                    <td>
+                      <img src="" alt="" width="50" height="50">
+                    </td>
                     <td>$3</td>
                     <td>3</td>
                     <td>3</td>
@@ -79,7 +93,10 @@
                         </button>
                     </td>
                 </tr>
-                <tr onclick="location.href='#'">
+                <tr onclick="location.href='./product.php?id=4'">
+                    <td>
+                      <img src="" alt="" width="50" height="50">
+                    </td>
                     <td>$4</td>
                     <td>4</td>
                     <td>4</td>

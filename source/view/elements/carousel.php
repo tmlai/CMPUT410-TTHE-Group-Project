@@ -2,6 +2,7 @@
 <div id="myCarousel" class="carousel slide">
     <div class="carousel-inner">
     <div class="item active">
+      <a href="#1">
       <img src="../assets/img/examples/slide-02.jpg" alt="">
       <div class="container">
         <div class="carousel-caption">
@@ -11,8 +12,10 @@
           <a class="btn btn-large btn-primary" href="#">See Product Details</a>
         </div>
       </div>
+      </a>
     </div>
     <div class="item">
+      <a href="#1">
       <img src="../assets/img/examples/slide-03.jpg" alt="">
       <div class="container">
         <div class="carousel-caption">
@@ -22,6 +25,7 @@
           <a class="btn btn-large btn-primary" href="#">See Product Details</a>
         </div>
       </div>
+      </a>
     </div>
     </div>
     <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
