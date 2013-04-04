@@ -15,8 +15,13 @@ switch($request_method) {
 		}
 	case 'post':
 }
-
+?>
+<html>
+<body>
+<?
 $prodArray = getProductsInStock();
 echo json_encode($prodArray);
 var_dump($prodArray);
 ?>
+</body>
+</html>
