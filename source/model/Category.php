@@ -1,16 +1,16 @@
 <?php
 namespace model;
-class Category implements JsonSerializable {
+class Category {
 	private $cateId;
 	private $name;
 	private $description;
 	
-	public function jsonSerialize() {
+	public function json_encode() {
 		$array = array();
 		$array['cateId'] = $this->cateId;
 		$array['name'] = $this->name;
 		$array['description'] = $this->description;
-		return $array;
+		return \json_encode($array);
 	}
 
 	/*
@@ -46,3 +46,4 @@ class Category implements JsonSerializable {
 		$this->description = $description;
 	}
 }
+?>

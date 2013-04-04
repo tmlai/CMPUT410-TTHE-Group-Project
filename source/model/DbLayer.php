@@ -920,9 +920,10 @@ class DbLayer implements DbInterface {
 	
 	/*
 	 * Get the top n sellings products within a period.
-	* $from or $to can be null to indicate no constraint.
-	*/
-	public function getTopNSellings($n, $from, $to){
+	 * $from or $to can be null to indicate no constraint.
+	 * $cateId is the category Id products belong to. Default is null
+	 */
+		public function getTopNSellings($n, $from, $to, $cateId = null){
 		$pdo = self::getPdo();
 		
 		if(isset($from) && isset($to)){
@@ -935,9 +936,15 @@ class DbLayer implements DbInterface {
 			$inject = " 1 ";
 		}
 		
-		$statement = "SELECT * FROM Products p, 
+		if(is_null($cateId)){
+			$cateIndicated = "";
+		}else{
+			$cateIndicated = " AND top.cid in (SELECT cid FROM ProductsMapCategories WHERE cateId = {$cateId})";
+		}
+		
+		$statement = "SELECT * FROM Products p,
 		(SELECT op.cid, SUM(op.quantity) as total FROM OrdersProducts op, CustomersOrders co WHERE co.orderId = op.orderId AND " .$inject."
-		 GROUP BY op.cid ORDER BY total DESC LIMIT 0,{$n}) top WHERE top.cid = p.cid";
+		 GROUP BY op.cid ORDER BY total DESC LIMIT 0,{$n}) top WHERE top.cid = p.cid ".$cateIndicated;
 		$stmt = $pdo->prepare($statement);
 		
 		

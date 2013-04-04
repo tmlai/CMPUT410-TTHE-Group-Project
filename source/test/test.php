@@ -1,5 +1,7 @@
 <?php
 namespace test;
+use model\Category;
+
 use model\Olap;
 
 use model\OrderProduct;
@@ -397,7 +399,7 @@ class TestDb {
 	 */
 	public static function testGetTopNSellings(){
 		$dbLayer = new DbLayer();
-		$n = 3;
+		$n = 10;
 		
 		$format = 'Y-m-d H:i:s';
 		
@@ -407,7 +409,12 @@ class TestDb {
 		$to = \DateTime::createFromFormat($format, '2013-03-29 23:59:59');
 		$to = $to->format($format);
 		
-		$list = $dbLayer->getTopNSellings($n, $from, $to);
+		$list = $dbLayer->getTopNSellings($n, null, null);
+		
+		var_dump($list);
+		echo "<br> second test <br>";
+		
+		$list = $dbLayer->getTopNSellings($n, null,null,1);
 		var_dump($list);
 	}
 }

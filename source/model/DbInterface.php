@@ -256,8 +256,9 @@ interface DbInterface {
 	/*
 	 * Get the top n sellings products within a period.
 	 * $from or $to can be null to indicate no constraint.
+	 * $cateId is the category Id products belong to. Default is null
 	 */
-	public function getTopNSellings($n, $from, $to);
+	public function getTopNSellings($n, $from, $to, $cateId = null);
 	
 	/*
 	 * Given the order ID, and amount of money paying, $howmuch
