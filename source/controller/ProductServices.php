@@ -38,7 +38,10 @@ try {
 			break;
 		case 'post':
 			$id = file_get_contents("php://input");
-			echo $_SERVER['REMOTE_PORT'];
+			$ch = curl_init();
+			$info = curl_getinfo($ch);
+			var_dump($info);
+			echo $info['url'];
 			//$clientIp = getIp();
 			//echo $clientIp;
 	}
