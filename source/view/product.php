@@ -13,8 +13,41 @@ $_SESSION['productID'] = $_GET['id'];
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
+    <script type="text/javascript" language="JavaScript">
+    <!--
+    function getProductInfo() {
+      // Add entry to Catalog.
+      var xmlhttp = new XMLHttpRequest();
+      if (window.XMLHttpRequest)
+      {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+      }
+      else
+      {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      
+      // Load/Reload catalog after adding entry
+      xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+          var jsonObj = JSON.parse(xmlhttp.responseText);
+          // Reset catalogBool for reloading catalog
+          document.getElementById("prodInfoDiv").innerHTML=jsonObj;
+          
+        }
+      }
+      
+      xmlhttp.open("GET","/api/items.php?id=" + 
+        <?php echo $_SESSION['productID']; ?>, 
+        true);
+      //xmlhttp.setRequestHeader("Content-type", "/api/items");
+      //xmlhttp.setRequestHeader("Content-length", entry.length);
+      xmlhttp.send(entry);
+    }
+  -->
+  </script>
   </head>
-  <body>   
+  <body onLoad="getProductInfo();">   
     <?php
         // Navigation Bar
         require($DOCUMENT_ROOT . "./elements/navbar.php");
@@ -23,7 +56,9 @@ $_SESSION['productID'] = $_GET['id'];
         <div class="row-fluid">
             <div class="span10">
                 <h1>Product Name</h1>
-                <p>Product information</p>
+                <div id="prodInfoDiv">
+                  <p>Product information</p>
+                </div>
             </div>
             <div class="span2">
                 <ul class="thumbnails">

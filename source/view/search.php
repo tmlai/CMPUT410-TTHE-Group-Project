@@ -11,16 +11,63 @@ $_SESSION['search'] = $_GET['searchField'];
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
+    <script type="text/javascript" language="JavaScript">
+    <!--
+    <?php 
+          if($_SESSION['search'] != "")
+            echo "dropBool = false;\n";
+          else
+            echo "dropBool = true;\n";
+    ?>
+    function setToggle() {
+      if(dropBool) {
+        document.getElementById("adSearch").className="collapse in";
+      }
+      dropIconToggle();
+    }
+    function dropIconToggle() {
+      if(dropBool) {
+        dropBool = false;
+        document.getElementById("dropDiv").innerHTML=
+          "Advanced Search  <i class=\"icon-chevron-up\"></i>";
+      } else {
+        dropBool = true;
+        document.getElementById("dropDiv").innerHTML=
+          "Advanced Search  <i class=\"icon-chevron-down\"></i>";
+      }
+    }
+    -->
+    </script>
   </head>
-  <body>   
+  <body onLoad="setToggle();">   
     <?php
         // Navigation Bar
         require($DOCUMENT_ROOT . "./elements/navbar.php");
     ?>
     <div class="container">
-        <h3>Search results for 
-        <?php echo $_SESSION['search']; ?>
+        <h3>
+        <?php 
+          if($_SESSION['search'] != "")
+            echo "Search Results for " . $_SESSION['search'];
+          else
+            echo "Advanced Search";
+        ?>
         </h3>
+        <label class="clabel" id="dropbutton" data-toggle="collapse" 
+          data-target="#adSearch" onclick="dropIconToggle();">
+          <div id="dropDiv"></div>
+        </label>
+        <div id="adSearch" class="collapse">
+                <div id="store_div" class="control-group">
+                    <label class="control-label" for="storeField">Access Code
+                    </label>
+                    <div class="controls">
+                        <input type="password" id="storeField" 
+                        placeholder="Access Code">
+                    </div>
+                </div>
+                <!-- and more fields for admin...-->
+        </div>
         <div class="container" style="width:100%; height:300px; position:relative; 
         bottom:0px; overflow:auto;">
             <table class="table table-hover">
@@ -37,6 +84,7 @@ $_SESSION['search'] = $_GET['searchField'];
                 </tr>
             </thead>
             <tbody>
+              <div id="resultsDiv">
                 <!-- product code javascript function will return the product code
                 for the query of the database for creating product.php-->
                 <tr onclick="location.href='./product.php?id=1'">
@@ -111,6 +159,7 @@ $_SESSION['search'] = $_GET['searchField'];
                         </button>
                     </td>
                 </tr>
+              </div>
             </tbody>
             </table>
         </div>

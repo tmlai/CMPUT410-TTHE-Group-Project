@@ -8,12 +8,6 @@
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
-      }
-
       .form-horizontal {
         max-width: 500px;
         padding: 19px 29px 29px;
@@ -50,7 +44,7 @@
     <form name="loginform" class="form-horizontal" 
         enctype="text/plain" action="#" 
         onSubmit="return checkRegistration();">
-        <h2 class="form-horizontal-heading text-center" >Please Register</h2>
+        <h2 class="form-horizontal-heading text-center">Please Register</h2>
         <div id="user_div" class="control-group">
             <label class="control-label" for="userField">Username</label>
             <div class="controls">
@@ -78,11 +72,11 @@
         </div>
         <div id="adminOp" class="collapse">
                 <div id="store_div" class="control-group">
-                    <label class="control-label" for="storeField">Store Name
+                    <label class="control-label" for="storeField">Access Code
                     </label>
                     <div class="controls">
-                        <input type="text" id="storeField" 
-                        placeholder="Store Name">
+                        <input type="password" id="storeField" 
+                        placeholder="Access Code">
                     </div>
                 </div>
                 <!-- and more fields for admin...-->
