@@ -11,8 +11,8 @@ try {
 			if(!empty($_GET)) {
 				$id = $_GET['id'];
 			} else {
-				// $prodArray = getProductsInStock();
-				// echo json_encode($prodArray);
+				$prodArray = getProductsInStock();
+				echo json_encode($prodArray);
 			}
 		case 'post':
 	}
