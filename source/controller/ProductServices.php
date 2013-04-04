@@ -6,16 +6,16 @@ use model\DbLayer;
 include_once '../model/DbLayer.php';
 
 function getIP() {
-$ip;
-if (getenv("HTTP_CLIENT_IP"))
-$ip = getenv("HTTP_CLIENT_IP");
-else if(getenv("HTTP_X_FORWARDED_FOR"))
-$ip = getenv("HTTP_X_FORWARDED_FOR");
-else if(getenv("REMOTE_ADDR"))
-$ip = getenv("REMOTE_ADDR");
-else
-$ip = "UNKNOWN";
-return $ip;
+	$ip;
+	if (getenv("HTTP_CLIENT_IP"))
+	$ip = getenv("HTTP_CLIENT_IP");
+	else if(getenv("HTTP_X_FORWARDED_FOR"))
+	$ip = getenv("HTTP_X_FORWARDED_FOR");
+	else if(getenv("REMOTE_ADDR"))
+	$ip = getenv("REMOTE_ADDR");
+	else
+	$ip = "UNKNOWN";
+	return $ip;
 
 } 
 
@@ -31,7 +31,6 @@ try {
 				$id = $_GET['id'];
 				$product = $dbLayer->getOneProduct($id);
 				echo $product;
-				//echo \json_encode($product);
 			} else {
 				$prodArray = $dbLayer->getProductsInStock();
 				echo \json_encode($prodArray);

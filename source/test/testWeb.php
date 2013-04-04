@@ -22,7 +22,7 @@
 			function testSellOne() {
 				var id = document.getElementById("idNum2").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('POST', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php, 'true');
+				xmlhttp.open('POST', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php', 'true');
 				xmlhttp.send(id);
 			}
 		</script>
