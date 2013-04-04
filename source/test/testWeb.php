@@ -8,6 +8,6 @@
 		</script>
 	</header>
 	<body>
-		<input type="button" onClick="testGetAll()">Get All</input>
+		<input type="button" onClick="testGetAll()" value="Get All">
 	</body>
 </html>
