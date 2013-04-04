@@ -38,8 +38,8 @@ try {
 			break;
 		case 'post':
 			$id = file_get_contents("php://input");
-			$ch = curl_init();
-			$info = curl_getinfo($ch);
+			$ch = \curl_init();
+			$info = \curl_getinfo($ch);
 			var_dump($info);
 			echo $info['url'];
 			//$clientIp = getIp();
