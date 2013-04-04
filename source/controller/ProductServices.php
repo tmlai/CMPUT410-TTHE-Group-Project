@@ -37,16 +37,9 @@ try {
 			}
 			break;
 		case 'post':
-			$id = file_get_contents("php://input");
-			$ch = \curl_init();
-			if (!$ch) {
-				die("Couldn't initialize a cURL handle");
-			}
-			$info = \curl_getinfo($ch);
-			var_dump($info);
-			echo $info['url'];
-			//$clientIp = getIp();
-			//echo $clientIp;
+			//$id = file_get_contents("php://input");
+			echo $_SERVER['REQUEST_URI'];
+			
 	}
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
