@@ -23,7 +23,8 @@ try {
 			if(!empty($_GET)) {
 				$id = $_GET['id'];
 				$product = $dbLayer->getOneProduct($id);
-				echo \json_encode($product);
+				echo $product;
+				//echo \json_encode($product);
 			} else {
 				$prodArray = $dbLayer->getProductsInStock();
 				echo \json_encode($prodArray);
