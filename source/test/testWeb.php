@@ -13,6 +13,7 @@
 			//gets info with the given id number_format
 			function testGetOne() {
 				var id = document.getElementById("idNum").value;
+				var xmlhttp=new XMLHttpRequest();
 				xmlhttp.open('GET', '/CMPUT410-TTHE-Group-Project/source/controller/webservices.php?id='+id, 'true');
 				xmlhttp.send();
 			}
