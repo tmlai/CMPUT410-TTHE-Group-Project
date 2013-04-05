@@ -14,6 +14,8 @@ use model\Customer;
 
 use model\DbLayer;
 
+use model\UserRatingProduct;
+
 include_once "../model/DbLayer.php";
 class TestDb {
 	/*
@@ -85,6 +87,25 @@ class TestDb {
 	public static function testUpdateStock($productId, $itemsDrawn) {
 		$dbLayer = new DbLayer();
 		echo (strval($dbLayer->updateStock($productId, $itemsDrawn)));
+	}
+	
+	/*
+	 * PASS
+	 */
+	public static function testRateProduct(){
+		$dbLayer = new DbLayer();
+		
+		$username = 'hcngo';
+		$cid = 'c000001';
+		$rating = 4;
+		
+		$urp = new UserRatingProduct($username, $cid, $rating);
+		$val = $dbLayer->rateProduct($urp);
+		if($val){
+			echo "true";
+		}else{
+			echo "false";
+		}
 	}
 
 	/*
@@ -187,7 +208,7 @@ class TestDb {
 	 * PASS
 	 */
 	public static function testReceiveOrderFromStore() {
-		$storeId = 2;
+		$storeId = 1;
 		$cid = 'c000001';
 
 		$dbLayer = new DbLayer();
@@ -442,13 +463,5 @@ class TestDb {
 // \test\TestDb::testGetOlapReport();
 // \test\TestDb::testSetPayment();
 // \test\TestDb::testGetTopNSellings();
-$ip = $_SERVER[REMOTE_ADDR];
-$ip = gethostbyname("facebook.com");
-$ip = "142.244.127.234";
-echo $ip;
-echo "<br>...<br>";
-$host = gethostbyaddr($ip);
-echo $host;
-echo "<br>...<br>";
-echo $_SERVER[SERVER_NAME];
+// \test\TestDb::testRateProduct();
 ?>

@@ -7,6 +7,7 @@ include_once "Category.php";
 include_once "CustomerOrder.php";
 include_once "OrderProduct.php";
 include_once "Olap.php";
+include_once "UserRatingProduct.php";
 
 interface DbInterface {
 
@@ -73,6 +74,11 @@ interface DbInterface {
 	 * method so that the update stock operation can be rollbacked.
 	 */
 	public function updateStock(&$pdo, $productId, $itemsDrawn);
+	
+	/*
+	 * Allow user to rate the product
+	 */
+	public function rateProduct(UserRatingProduct $urp);
 
 	/*
 	 * Get the stock of some product.
@@ -83,6 +89,8 @@ interface DbInterface {
 	 * Get the price of the product given its product ID.
 	 */
 	public function getPrice($productId);
+	
+	
 	/*
 	 * Return a list of categories
 	 * Return type: array of category objects

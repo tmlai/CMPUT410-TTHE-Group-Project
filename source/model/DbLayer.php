@@ -172,6 +172,39 @@ class DbLayer implements DbInterface {
 
 		return $value;
 	}
+	
+	/*
+	 * Allow user to rate the product
+	*/
+	public function rateProduct(UserRatingProduct $urp){
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM UsersRatingProducts WHERE username = ? AND cid = ? ";
+		$array = array($urp->getUsername(), $urp->getCid());
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute($array);
+		
+		$temp = $stmt->fetchAll();
+		if(count($temp) == 0){
+			// No rating exists
+			$statement = "INSERT INTO UsersRatingProducts values(?,?,?)";
+			$array = array($urp->getUsername(), $urp->getCid(), $urp->getRating());
+			$stmt = $pdo->prepare($statement);
+			$val = $stmt->execute($array);
+			$val = ($val == true && $stmt->rowCount() > 0);
+			$pdo = null;
+			return $val;
+		}else{
+			// Overwrite rating
+			$statement = "UPDATE UsersRatingProducts SET rating = ? WHERE username = ? AND cid = ?";
+			$array = array($urp->getRating(), $urp->getUsername(), $urp->getCid());
+			$stmt = $pdo->prepare($statement);
+			$val = $stmt->execute($array);
+			$val = ($val == true && $stmt->rowCount() > 0);
+			$pdo = null;
+			return $val;
+		}
+		
+	}
 
 	/*
 	 * Get the stock of some product.
@@ -511,6 +544,12 @@ class DbLayer implements DbInterface {
 		$stmt->bindParam(1, $cid);
 		$stmt->execute();
 		$cateList = $stmt->fetchAll();
+		
+		$statement = "SELECT rating FROM ProductsRating WHERE cid = ?";
+		$stmt = $pdo->prepare($statement);
+		$stmt->bindParam(1, $cid);
+		$stmt->execute();
+		$ratingList = $stmt->fetchAll();
 
 		$prodJson = array();
 		if (count($temp) > 0 && count($cateList) > 0) {
@@ -523,6 +562,7 @@ class DbLayer implements DbInterface {
 			$prodJson['dim'] = $temp[0][6];
 			$prodJson['quantity'] = $temp[0][7];
 			$prodJson['category'] = $cateList[0][0];
+			$prodJson['rating'] = $ratingList[0][0];
 		}
 		$pdo = null;
 		return json_encode($prodJson);

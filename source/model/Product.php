@@ -13,7 +13,8 @@ class Product {
 	private $weight;
 	private $dimensions;
 	private $stock;
-	
+	private $rating;
+
 	public function json_encode() {
 		$array = array();
 		$array['cid'] = $this->cid;
@@ -24,11 +25,12 @@ class Product {
 		$array['weight'] = $this->weight;
 		$array['dimensions'] = $this->dimensions;
 		$array['stock'] = $this->stock;
+		$array['rating'] = $this->rating;
 		return \json_encode($array);
 	}
-	
-	public function __construct($cid, $name, $description, $image,
-			$price, $weight, $dimensions, $stock){
+
+	public function __construct($cid, $name, $description, $image, $price,
+			$weight, $dimensions, $stock) {
 		$this->cid = $cid;
 		$this->name = $name;
 		$this->description = $description;
@@ -101,6 +103,14 @@ class Product {
 
 	public function setStock($stock) {
 		$this->stock = $stock;
+	}
+
+	public function getRating() {
+		return $this->rating;
+	}
+
+	public function setRating($rating) {
+		$this->rating = $rating;
 	}
 
 }

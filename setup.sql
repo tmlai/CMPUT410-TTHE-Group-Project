@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS Status ;
 DROP TABLE IF EXISTS Stores ;
 
 
-
 CREATE TABLE Admins(name varchar(30) not null, password varchar(20) not null,
 PRIMARY KEY(name));
 
@@ -89,9 +88,21 @@ PRIMARY KEY(orderId, cid),
 FOREIGN KEY(orderId) REFERENCES StoresOrders(orderId),
 FOREIGN KEY(cid) REFERENCES Products(cid))ENGINE=INNODB;
 
+CREATE TABLE UsersRatingProducts(username varchar(20) not null, 
+cid varchar(20) not null, 
+rating DECIMAL(5,1),
+PRIMARY KEY(username,cid),
+FOREIGN KEY(username) REFERENCES Customers(username),
+FOREIGN KEY(cid) REFERENCES	Products(cid))ENGINE=INNODB;
+
 /*
  * VIEW SECTION
  */
+
+CREATE OR REPLACE VIEW ProductsRating AS
+SELECT cid, AVG(rating) as rating
+FROM UsersRatingProducts
+GROUP BY cid;
 
 /*
  * orderId, description, orderDate, username, payment, deliveryDate, orderCost
