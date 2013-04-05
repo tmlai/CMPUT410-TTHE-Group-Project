@@ -9,6 +9,7 @@ include_once '../model/DbLayer.php';
 $id = $_GET['id'];
 $dbLayer = new DbLayer();
 $product = $product = $dbLayer->getOneProduct($id);
+$product = json_decode($product, true);
 ?>
 <!DOCTYPE html>
 <html>
