@@ -442,4 +442,13 @@ class TestDb {
 // \test\TestDb::testGetOlapReport();
 // \test\TestDb::testSetPayment();
 // \test\TestDb::testGetTopNSellings();
+$ip = $_SERVER[REMOTE_ADDR];
+$ip = gethostbyname("facebook.com");
+$ip = "142.244.127.234";
+echo $ip;
+echo "<br>...<br>";
+$host = gethostbyaddr($ip);
+echo $host;
+echo "<br>...<br>";
+echo $_SERVER[SERVER_NAME];
 ?>
