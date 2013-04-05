@@ -66,6 +66,7 @@ $product = $product = $dbLayer->getOneProduct($id);
                   <p id="productDescription">Product information</p>
 				  <?php
 					echo "<img href='/images/$id' alt='$id is missing'>";
+					var_dump($product);
 					echo $product['desc'];
 				  ?>
                 </div>
