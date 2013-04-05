@@ -20,9 +20,7 @@ $product = json_decode($product, true);
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
-    <!-- Rating plugin includes -->
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
-    <script src="elements/rateit/src/jquery.rateit.js"></script>
   </head>
   <body>
     <?php
@@ -100,5 +98,7 @@ $product = json_decode($product, true);
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.min.js"></script>
   </body>
 </html>
