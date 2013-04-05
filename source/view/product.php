@@ -67,7 +67,6 @@ $product = json_decode($product, true);
                 <div id="prodInfoDiv">
                   <p id="productDescription">Product information</p>
 				  <?php
-					echo "<img href='/images/$id.jpg' alt='$id is missing'>";
 					echo $product['desc'];
 				  ?>
                 </div>
@@ -76,8 +75,11 @@ $product = json_decode($product, true);
                 <ul class="thumbnails">
                   <li class="span10">
                     <div class="thumbnail">
+					<?php
+					  echo "<img src='/img/products/$id.jpg' alt='$id is missing'>";
+					?>
                       <!--<img data-src="holder.js/300x200" alt="">-->
-                      <p class="muted">an image will go here...</p><br>
+                      <!--<p class="muted">an image will go here...</p><br>-->
                       <h4>Availability</h4>
                       <p>Stores: </p>
                       <h4>Rating: </h4>
