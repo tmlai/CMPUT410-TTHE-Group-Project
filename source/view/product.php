@@ -50,11 +50,13 @@ $product = json_decode($product, true);
                       <h4>Availability</h4>
                       <p>Stores: </p>
                       <h4>Rating: </h4>
-                      <input type="range" min="0" max="5" step="0.25" id="backing2"
-                        value="<?php $product['rating']?>">
+                      <input type="range" step="0.25" id="backing4"
+                        value="4"
+                        <!--value="<?php echo $product['rating']?>"-->>
                       <div class="rateit" data-rateit-ispreset="true" 
+                        data-rateit-backingfld="#backing4"
                         data-rateit-resetable="false"
-                        data-rateit-readonly="true">
+                        data-rateit-min="0" data-rateit-max="5">
                       </div>
                       <div id="specDiv" class="well">
                         <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
