@@ -6,7 +6,7 @@
 			function testGetAll() {
 				var xmlhttp=new XMLHttpRequest();
 				//send ajax request
-				xmlhttp.open('GET', '/prod', 'true');
+				xmlhttp.open('GET', '/products', 'true');
 				xmlhttp.send();
 			}
 			
