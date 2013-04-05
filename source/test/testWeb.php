@@ -6,7 +6,7 @@
 			function testGetAll() {
 				var xmlhttp=new XMLHttpRequest();
 				//send ajax request
-				xmlhttp.open('GET', 'source/controller/ProductServices.php', 'true');
+				xmlhttp.open('GET', '/source/controller/ProductServices.php', 'true');
 				xmlhttp.send();
 			}
 			
@@ -14,7 +14,7 @@
 			function testGetOne() {
 				var id = document.getElementById("idNum").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('GET', 'source/controller/ProductServices.php?id='+id, 'true');
+				xmlhttp.open('GET', '/source/controller/ProductServices.php?id='+id, 'true');
 				xmlhttp.send();
 			}
 			
@@ -22,7 +22,7 @@
 			function testSellOne() {
 				var id = document.getElementById("idNum2").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('POST', 'source/controller/ProductServices.php', 'true');
+				xmlhttp.open('POST', '/source/controller/ProductServices.php', 'true');
 				xmlhttp.send(id);
 			}
 		</script>
