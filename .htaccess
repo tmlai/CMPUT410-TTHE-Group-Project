@@ -4,10 +4,8 @@
 Options +FollowSymLinks
 RewriteEngine on
 
-RewriteRule /products$ /CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php
-#RewriteRule ^products/([c][0-9]+)/?$ /CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php?id=$1
+RewriteRule ^api/items/([0-9]+)/?$ api/items.php?id=$1
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L]
-
