@@ -20,10 +20,11 @@
 			
 			//another store doing a post to us to buy one
 			function testSellOne() {
-				var id = document.getElementById("idNum2").value;
+				//var id = document.getElementById("idNum2").value;
+				var amt = document.getElementById("amt").value;
 				var xmlhttp=new XMLHttpRequest();
 				xmlhttp.open('POST', '/source/controller/ProductServices.php', 'true');
-				xmlhttp.send(id);
+				xmlhttp.send(amt);
 			}
 		</script>
 	</header>
@@ -32,6 +33,6 @@
 		<input type="button" onClick="testGetOne()" value="Get One">
 		Id: <input type="text" id="idNum"><br>
 		<input type="button" onClick="testSellOne()" value="Someone Buying From Us">
-		Id2: <input type="text" id="idNum2"><br>
+		Id2: <input type="text" id="idNum2">Amount: <input type="text" id="amt"><br>
 	</body>
 </html>
