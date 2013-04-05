@@ -60,6 +60,24 @@
                 <input type="password" id="passField" placeholder="Password">
             </div>
         </div>
+        <div id="addr_div" class="control-group">
+            <label class="control-label" for="addrField">Address</label>
+            <div class="controls">
+                <input type="text" id="addrField" placeholder="Address">
+            </div>
+        </div>
+        <div id="city_div" class="control-group">
+            <label class="control-label" for="cityField">City</label>
+            <div class="controls">
+                <input type="text" id="cityField" placeholder="City">
+            </div>
+        </div>
+        <div id="postal_div" class="control-group">
+            <label class="control-label" for="postalField">Postal Code</label>
+            <div class="controls">
+                <input type="text" id="postalField" placeholder="Postal Code">
+            </div>
+        </div>
         <div id="email_div" class="control-group">
             <label class="control-label" for="emailField">Email</label>
             <div class="controls">
