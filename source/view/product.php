@@ -22,7 +22,7 @@ $product = json_decode($product, true);
     ?>
     <!-- Rating plugin includes -->
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
-    <script src="elements/loginvalidation.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.js"></script>
   </head>
   <body>
     <?php
