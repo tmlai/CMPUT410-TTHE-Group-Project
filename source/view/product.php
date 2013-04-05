@@ -3,6 +3,11 @@ session_start();
 $_SESSION['productID'] = $_GET['id'];
 // get the product name given the product id
 
+use model\DbLayer;
+
+include_once '../model/DbLayer.php';
+
+$product = getOneProduct($_GET['id']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,37 +19,37 @@ $_SESSION['productID'] = $_GET['id'];
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <script type="text/javascript" language="JavaScript">
-    <!--
-    function getProductInfo() {
-      // Add entry to Catalog.
-      var xmlhttp = new XMLHttpRequest();
-      if (window.XMLHttpRequest)
-      {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-      }
-      else
-      {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
+    // <!--
+    // function getProductInfo() {
+      // // Add entry to Catalog.
+      // var xmlhttp = new XMLHttpRequest();
+      // if (window.XMLHttpRequest)
+      // {// code for IE7+, Firefox, Chrome, Opera, Safari
+        // xmlhttp=new XMLHttpRequest();
+      // }
+      // else
+      // {// code for IE6, IE5
+        // xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      // }
       
-      // Load/Reload catalog after adding entry
-      xmlhttp.onreadystatechange=function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-          var jsonObj = JSON.parse(xmlhttp.responseText);
-          // Reset catalogBool for reloading catalog
-          document.getElementById("prodInfoDiv").innerHTML=jsonObj;
+      // // Load/Reload catalog after adding entry
+      // xmlhttp.onreadystatechange=function() {
+        // if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+          // var jsonObj = JSON.parse(xmlhttp.responseText);
+          // // Reset catalogBool for reloading catalog
+          // document.getElementById("prodInfoDiv").innerHTML=jsonObj;
           
-        }
-      }
+        // }
+      // }
       
-      xmlhttp.open("GET","/api/items.php?id=" + 
-        <?php echo $_SESSION['productID']; ?>, 
-        true);
-      //xmlhttp.setRequestHeader("Content-type", "/api/items");
-      //xmlhttp.setRequestHeader("Content-length", entry.length);
-      xmlhttp.send(entry);
-    }
-  -->
+      // xmlhttp.open("GET","/api/items.php?id=" + 
+        // <?php echo $_SESSION['productID']; ?>, 
+        // true);
+      // //xmlhttp.setRequestHeader("Content-type", "/api/items");
+      // //xmlhttp.setRequestHeader("Content-length", entry.length);
+      // xmlhttp.send(entry);
+    // }
+  // -->
   </script>
   </head>
   <body onLoad="getProductInfo();">   
@@ -55,9 +60,13 @@ $_SESSION['productID'] = $_GET['id'];
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span10">
-                <h1>Product Name</h1>
+                <h1 id="productName">Product Name</h1>
                 <div id="prodInfoDiv">
-                  <p>Product information</p>
+                  <p id="productDescription">Product information</p>
+				  <?php
+					//getDescription();
+					var_dump($product);
+				  ?>
                 </div>
             </div>
             <div class="span2">
