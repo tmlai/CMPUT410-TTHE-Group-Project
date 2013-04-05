@@ -6,24 +6,24 @@
 			function testGetAll() {
 				var xmlhttp=new XMLHttpRequest();
 				//send ajax request
-				xmlhttp.open('GET', '/products', 'true');
+				xmlhttp.open('GET', 'source/controller/ProductServices.php', 'true');
 				xmlhttp.send();
 			}
 			
 			//gets info with the given id number_format
 			function testGetOne() {
-				// var id = document.getElementById("idNum").value;
-				// var xmlhttp=new XMLHttpRequest();
-				// xmlhttp.open('GET', '/products/?id='+id, 'true');
-				// xmlhttp.send();
+				var id = document.getElementById("idNum").value;
+				var xmlhttp=new XMLHttpRequest();
+				xmlhttp.open('GET', 'source/controller/ProductServices.php?id='+id, 'true');
+				xmlhttp.send();
 			}
 			
 			//another store doing a post to us to buy one
 			function testSellOne() {
-				// var id = document.getElementById("idNum2").value;
-				// var xmlhttp=new XMLHttpRequest();
-				// xmlhttp.open('POST', '/CMPUT410-TTHE-Group-Project/source/controller/ProductServices.php', 'true');
-				// xmlhttp.send(id);
+				var id = document.getElementById("idNum2").value;
+				var xmlhttp=new XMLHttpRequest();
+				xmlhttp.open('POST', 'source/controller/ProductServices.php', 'true');
+				xmlhttp.send(id);
 			}
 		</script>
 	</header>
