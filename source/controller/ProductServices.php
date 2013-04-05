@@ -38,7 +38,12 @@ try {
 			break;
 		case 'post':
 			//$id = file_get_contents("php://input");
-			echo $_SERVER['REQUEST_URI'];
+			//echo $_SERVER['REQUEST_URI'];
+			$quantity = $_POST['amount'];
+			$storeId = 1;
+			$cid = "c000014"; //hardcoded at the moment should retrieve it somehow
+			$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
+			echo $orderInfo;
 			
 	}
 } catch (Exception $e) {
