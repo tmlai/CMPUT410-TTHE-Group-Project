@@ -20,41 +20,7 @@ $product = json_decode($product, true);
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
-    <script type="text/javascript" language="JavaScript">
-    // <!--
-    // function getProductInfo() {
-      // // Add entry to Catalog.
-      // var xmlhttp = new XMLHttpRequest();
-      // if (window.XMLHttpRequest)
-      // {// code for IE7+, Firefox, Chrome, Opera, Safari
-        // xmlhttp=new XMLHttpRequest();
-      // }
-      // else
-      // {// code for IE6, IE5
-        // xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      // }
-      
-      // // Load/Reload catalog after adding entry
-      // xmlhttp.onreadystatechange=function() {
-        // if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-          // var jsonObj = JSON.parse(xmlhttp.responseText);
-          // // Reset catalogBool for reloading catalog
-          // document.getElementById("prodInfoDiv").innerHTML=jsonObj;
-          
-        // }
-      // }
-      
-      // xmlhttp.open("GET","/api/items.php?id=" + 
-        // <?php echo $_SESSION['productID']; ?>, 
-        // true);
-      // //xmlhttp.setRequestHeader("Content-type", "/api/items");
-      // //xmlhttp.setRequestHeader("Content-length", entry.length);
-      // xmlhttp.send(entry);
-    // }
-  // -->
-  </script>
   </head>
-  <!-- <body onLoad="getProductInfo();">   -->
   <body>
     <?php
         // Navigation Bar
@@ -76,7 +42,7 @@ $product = json_decode($product, true);
                   <li class="span10">
                     <div class="thumbnail">
 					<?php
-					  echo "<img src='/img/products/$id.jpg' alt='$id is missing'>";
+					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
 					?>
                       <!--<img data-src="holder.js/300x200" alt="">-->
                       <!--<p class="muted">an image will go here...</p><br>-->
