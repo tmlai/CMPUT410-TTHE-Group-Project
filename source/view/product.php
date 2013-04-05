@@ -65,7 +65,7 @@ $product = $product = $dbLayer->getOneProduct($id);
                 <div id="prodInfoDiv">
                   <p id="productDescription">Product information</p>
 				  <?php
-					echo "<img href='/source/images/$id' alt='$id'>"
+					echo "<img href='/source/images/$id' alt='$id'>";
 					echo $product['desc'];
 				  ?>
                 </div>
