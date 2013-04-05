@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<?php
+
+?>
 <html>
   <head>
     <title>TTHE Enterprise - Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/source/view/elements/register.js"></script>
     <?php
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
