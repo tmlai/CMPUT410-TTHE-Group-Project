@@ -1,8 +1,15 @@
 <?php 
+namespace view;
 session_start();
 $_SESSION['productID'] = $_GET['id'];
 // get the product name given the product id
+use model\DbLayer;
 
+include_once '../model/DbLayer.php';
+$id = $_GET['id'];
+$dbLayer = new DbLayer();
+$product = $product = $dbLayer->getOneProduct($id);
+$product = json_decode($product, true);
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,41 +20,9 @@ $_SESSION['productID'] = $_GET['id'];
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
-    <script type="text/javascript" language="JavaScript">
-    <!--
-    function getProductInfo() {
-      // Add entry to Catalog.
-      var xmlhttp = new XMLHttpRequest();
-      if (window.XMLHttpRequest)
-      {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-      }
-      else
-      {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      
-      // Load/Reload catalog after adding entry
-      xmlhttp.onreadystatechange=function() {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-          var jsonObj = JSON.parse(xmlhttp.responseText);
-          // Reset catalogBool for reloading catalog
-          document.getElementById("prodInfoDiv").innerHTML=jsonObj;
-          
-        }
-      }
-      
-      xmlhttp.open("GET","/api/items.php?id=" + 
-        <?php echo $_SESSION['productID']; ?>, 
-        true);
-      //xmlhttp.setRequestHeader("Content-type", "/api/items");
-      //xmlhttp.setRequestHeader("Content-length", entry.length);
-      xmlhttp.send(entry);
-    }
-  -->
-  </script>
+    <link href="elements/rateit/src/rateit.css" rel="stylesheet">
   </head>
-  <body onLoad="getProductInfo();">   
+  <body>
     <?php
         // Navigation Bar
         require($DOCUMENT_ROOT . "./elements/navbar.php");
@@ -55,24 +30,37 @@ $_SESSION['productID'] = $_GET['id'];
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span10">
-                <h1>Product Name</h1>
+                <h1 id="productName">Product Name</h1>
                 <div id="prodInfoDiv">
-                  <p>Product information</p>
+                  <p id="productDescription">Product information</p>
+				  <?php
+					echo $product['desc'];
+				  ?>
                 </div>
             </div>
             <div class="span2">
                 <ul class="thumbnails">
                   <li class="span10">
                     <div class="thumbnail">
+					<?php
+					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
+					?>
                       <!--<img data-src="holder.js/300x200" alt="">-->
-                      <p class="muted">an image will go here...</p><br>
+                      <!--<p class="muted">an image will go here...</p><br>-->
                       <h4>Availability</h4>
                       <p>Stores: </p>
                       <h4>Rating: </h4>
+                      <input type="range" step="0.25" id="backing4"
+                        value="4">
+                      <div class="rateit" data-rateit-ispreset="true" 
+                        data-rateit-backingfld="#backing4"
+                        data-rateit-resetable="false"
+                        data-rateit-min="0" data-rateit-max="5">
+                      </div>
                       <div id="specDiv" class="well">
-                        <p><strong>Weight:</strong> 1kg</p>
+                        <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
                         <p><strong>Code:</strong> 
-                          <?php echo $_SESSION['productID']?>
+                          <?php echo $id?>
                         </p>
                       </div>
                       <button type="submit" class="btn btn-success">
@@ -110,5 +98,7 @@ $_SESSION['productID'] = $_GET['id'];
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.min.js"></script>
   </body>
 </html>
