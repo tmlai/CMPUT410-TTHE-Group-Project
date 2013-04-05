@@ -28,7 +28,7 @@ try {
 			$storeId = 1;
 			$cid = "c000014"; //hardcoded at the moment should retrieve it somehow
 			$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
-			echo $quantity . $orderInfo;
+			echo $orderInfo;
 			//NOTE: returns empty atm...
 			
 	}

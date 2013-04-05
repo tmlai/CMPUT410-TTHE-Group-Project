@@ -26,6 +26,13 @@
 				xmlhttp.open('POST', '/source/controller/ProductServices.php', 'true');
 				xmlhttp.send(amt);
 			}
+			
+			function testGetDeliveryDate() {
+				var oid = document.getElementById("oid").value;
+				var xmlhttp=new XMLHttpRequest();
+				xmlhttp.open('POST', '/source/controller/OrderServices.php', 'true');
+				xmlhttp.send(oid);
+			}
 		</script>
 	</header>
 	<body>
@@ -34,5 +41,7 @@
 		Id: <input type="text" id="idNum"><br>
 		<input type="button" onClick="testSellOne()" value="Someone Buying From Us">
 		Id2: <input type="text" id="idNum2">Amount: <input type="text" id="amt"><br>
+		<input type="button" onClick="testGetDeliveryDate()">
+		Order Id: <input type="text" id="oid">
 	</body>
 </html>
