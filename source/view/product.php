@@ -65,9 +65,8 @@ $product = $product = $dbLayer->getOneProduct($id);
                 <div id="prodInfoDiv">
                   <p id="productDescription">Product information</p>
 				  <?php
-					//getDescription();
-					echo $product;
-					var_dump($product);
+					echo "<img href='/source/images/$id' alt='$id'>"
+					echo $product['desc'];
 				  ?>
                 </div>
             </div>
@@ -81,9 +80,9 @@ $product = $product = $dbLayer->getOneProduct($id);
                       <p>Stores: </p>
                       <h4>Rating: </h4>
                       <div id="specDiv" class="well">
-                        <p><strong>Weight:</strong> 1kg</p>
+                        <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
                         <p><strong>Code:</strong> 
-                          <?php echo $_SESSION['productID']?>
+                          <?php echo $id?>
                         </p>
                       </div>
                       <button type="submit" class="btn btn-success">
