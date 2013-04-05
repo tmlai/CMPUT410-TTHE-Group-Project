@@ -9,18 +9,6 @@ try {
 	$dbLayer = new DbLayer();
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 	switch($requestMethod) {
-		case 'get':
-			//if id is passed (GET /products/:id)
-			//else (GET /products)
-			if(!empty($_GET)) {
-				$id = $_GET['id'];
-				$product = $dbLayer->getOneProduct($id);
-				echo $product;
-			} else {
-				$prodArray = $dbLayer->getProductsInStock();
-				echo \json_encode($prodArray);
-			}
-			break;
 		case 'post':
 			//$id = file_get_contents("php://input");
 			//echo $_SERVER['REQUEST_URI'];
@@ -28,9 +16,10 @@ try {
 			$storeId = 1;
 			$cid = "c000014"; //hardcoded at the moment should retrieve it somehow
 			$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
-			echo $quantity . $orderInfo;
+			echo $orderInfo;
 			//NOTE: returns empty atm...
-			
+		case 'get':
+			break;
 	}
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "\n";
