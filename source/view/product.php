@@ -6,8 +6,9 @@ $_SESSION['productID'] = $_GET['id'];
 use model\DbLayer;
 
 include_once '../model/DbLayer.php';
-
-$product = \getOneProduct($_GET['id']);
+$id = $_GET['id'];
+$dbLayer = new DbLayer();
+$product = $product = $dbLayer->getOneProduct($id);
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,6 +66,7 @@ $product = \getOneProduct($_GET['id']);
                   <p id="productDescription">Product information</p>
 				  <?php
 					//getDescription();
+					echo $product;
 					var_dump($product);
 				  ?>
                 </div>
