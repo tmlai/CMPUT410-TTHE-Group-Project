@@ -20,7 +20,9 @@ $product = json_decode($product, true);
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
+    <!-- Rating plugin includes -->
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
+    <script src="elements/loginvalidation.js"></script>
   </head>
   <body>
     <?php
@@ -51,8 +53,7 @@ $product = json_decode($product, true);
                       <p>Stores: </p>
                       <h4>Rating: </h4>
                       <input type="range" step="0.25" id="backing4"
-                        value="4"
-                        <!--value="<?php echo $product['rating']?>"-->>
+                        value="4">
                       <div class="rateit" data-rateit-ispreset="true" 
                         data-rateit-backingfld="#backing4"
                         data-rateit-resetable="false"
