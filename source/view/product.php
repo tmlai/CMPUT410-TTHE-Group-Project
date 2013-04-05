@@ -54,7 +54,8 @@ $product = json_decode($product, true);
   // -->
   </script>
   </head>
-  <body onLoad="getProductInfo();">   
+  <!-- <body onLoad="getProductInfo();">   -->
+  <body>
     <?php
         // Navigation Bar
         require($DOCUMENT_ROOT . "./elements/navbar.php");
@@ -66,8 +67,7 @@ $product = json_decode($product, true);
                 <div id="prodInfoDiv">
                   <p id="productDescription">Product information</p>
 				  <?php
-					echo "<img href='/images/$id' alt='$id is missing'>";
-					var_dump($product);
+					echo "<img href='/images/$id.jpg' alt='$id is missing'>";
 					echo $product['desc'];
 				  ?>
                 </div>
