@@ -24,8 +24,7 @@ try {
 		case 'post':
 			//$id = file_get_contents("php://input");
 			//echo $_SERVER['REQUEST_URI'];
-			$quantity = $_POST['amount'];
-			echo $quantity;
+			$quantity = 1;
 			$storeId = 1;
 			$cid = "c000014"; //hardcoded at the moment should retrieve it somehow
 			$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
