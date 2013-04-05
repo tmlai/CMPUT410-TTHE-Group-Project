@@ -20,6 +20,7 @@ $product = json_decode($product, true);
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
+    <link href="elements/rateit/src/rateit.css" rel="stylesheet">
   </head>
   <body>
     <?php
@@ -49,6 +50,12 @@ $product = json_decode($product, true);
                       <h4>Availability</h4>
                       <p>Stores: </p>
                       <h4>Rating: </h4>
+                      <input type="range" min="0" max="5" step="0.25" id="backing2"
+                        value="<?php $product['rating']?>">
+                      <div class="rateit" data-rateit-ispreset="true" 
+                        data-rateit-resetable="false"
+                        data-rateit-readonly="true">
+                      </div>
                       <div id="specDiv" class="well">
                         <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
                         <p><strong>Code:</strong> 
