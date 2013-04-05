@@ -1,9 +1,8 @@
 <?php 
+namespace view;
 session_start();
 $_SESSION['productID'] = $_GET['id'];
 // get the product name given the product id
-namespace view;
-
 use model\DbLayer;
 
 include_once '../model/DbLayer.php';
