@@ -35,7 +35,7 @@ include_once '../model/DbLayer.php';
 		$postalCode = $_POST['postalField'];
 		$email = $_POST['emailField'];
 		$adminCode = $_POST['adminCode'];
-		var_dump($regInfo);
+		var_dump($_POST);
 		echo "<br><hr><br>";
 		
 		?>
