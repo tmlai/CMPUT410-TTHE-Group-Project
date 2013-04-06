@@ -25,7 +25,7 @@ function checkRegistration() {
 
 function isEmpty(input) {
 	var input = String.trim(input);
-	if(input == "" || input = null) {
+	if(input == "" || input == null) {
 		return true;
 	}
 	return false;
