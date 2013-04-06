@@ -2,6 +2,7 @@
 namespace view;
 session_start();
 $_SESSION['productID'] = $_GET['id'];
+$_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 // get the product name given the product id
 use model\DbLayer;
 

@@ -1,6 +1,7 @@
 <?php 
 namespace view;
 session_start(); 
+$_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
 <html>
