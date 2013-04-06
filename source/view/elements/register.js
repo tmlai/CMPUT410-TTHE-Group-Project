@@ -19,7 +19,7 @@ function checkRegistration() {
 		alert("Please enter a valid postal code.");
 		return false;
 	} else if(admin == "on" && isEmpty(adminCode)) {
-		alert("Please enter an admin code.");
+		alert("Please enter an access code.");
 		//return false;
 	}
 	
