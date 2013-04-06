@@ -12,7 +12,7 @@ function checkRegistration() {
 	if(isEmpty(username) || isEmpty(password) || isEmpty(email)) {
 		alert("Please make sure all required fields are filled in.");
 		return false;
-	} else if(validEmail(email)) {
+	} else if(!validEmail(email)) {
 		alert("Please enter a valid email address.");
 		return false;
 	} else if(!validPC(postalCode) && !isEmpty(postalCode)) {
