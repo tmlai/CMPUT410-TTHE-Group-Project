@@ -2,7 +2,7 @@
 namespace view;
 session_start(); 
 $_SESSION['search'] = $_GET['searchField'];
-$_SESSION['prevPage'] = $_SERVER['PATH_INFO'];
+setcookie('prevPage', $_SERVER['PATH_INFO']);
 ?>
 <!DOCTYPE html>
 <html>
