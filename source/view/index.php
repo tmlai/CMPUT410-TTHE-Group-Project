@@ -16,7 +16,7 @@
       if($_SESSION['user'] != "") {
         // user dropdown
         require($DOCUMENT_ROOT . "./elements/navbar_user.php");
-      } else
+      } else {
         // sign in dropdown
         require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
       }
