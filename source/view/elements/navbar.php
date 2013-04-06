@@ -57,7 +57,7 @@
               <?php
                 if($_SESSION['user'] != "") {
                   // user dropdown
-                  require($DOCUMENT_ROOT . "./elements/user_dropdown.php");
+                  //require($DOCUMENT_ROOT . "./elements/user_dropdown.php");
                 } else
                   // sign in dropdown
                   require($DOCUMENT_ROOT . "./elements/signin_dropdown.php");
