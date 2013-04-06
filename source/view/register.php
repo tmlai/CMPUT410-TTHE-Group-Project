@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ?>
 <html>
   <head>
@@ -40,13 +40,19 @@
   </head>
   <body>   
     <?php
-        // Navigation Bar
-        require($DOCUMENT_ROOT . "./elements/navbar.php");
+      // Navigation Bar
+      if($_SESSION['user'] != "") {
+        // user dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+      } else {
+        // sign in dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+      }
     ?>
     <div class="container">
     <form name="loginform" class="form-horizontal" 
-        enctype="text/plain" action="#" 
-        onSubmit="return checkRegistration();">
+        enctype="text/plain" action="../controller/UserRegistration.php" 
+        onSubmit="return checkRegistration();" method="post">
         <h2 class="form-horizontal-heading text-center">Please Register</h2>
         <div id="user_div" class="control-group">
             <label class="control-label" for="userField">Username</label>
@@ -93,10 +99,10 @@
         </div>
         <div id="adminOp" class="collapse">
                 <div id="store_div" class="control-group">
-                    <label class="control-label" for="storeField">Access Code
+                    <label class="control-label" for="adminCode">Access Code
                     </label>
                     <div class="controls">
-                        <input type="password" id="storeField" 
+                        <input type="password" id="adminCode" 
                         placeholder="Access Code">
                     </div>
                 </div>

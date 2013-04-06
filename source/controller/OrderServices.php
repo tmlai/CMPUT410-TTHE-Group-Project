@@ -13,8 +13,9 @@ try {
 			$oid = file_get_contents("php://input");
 			$info = $dbLayer->checkDeliveryDate($oid);
 			echo $info;
-			//no data for testing yet
+			break;
 		case 'get':
+			echo "Incorrect Request Method. Please use 'POST'.";
 			break;
 	}
 } catch (Exception $e) {
