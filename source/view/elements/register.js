@@ -20,7 +20,7 @@ function checkRegistration() {
 		return false;
 	} else if(admin == "on" && isEmpty(adminCode)) {
 		alert("Please enter an admin code.");
-		return false;
+		//return false;
 	}
 	
 	return true;

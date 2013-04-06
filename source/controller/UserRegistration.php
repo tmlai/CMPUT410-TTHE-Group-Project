@@ -35,6 +35,8 @@ include_once '../model/DbLayer.php';
 		$postalCode = $_POST['postalField'];
 		$email = $_POST['emailField'];
 		
+		echo $_POST['adminCheck'];
+		
 		//create a customer object
 		$customer = new Customer();
 		$customer->setUsername($username);
@@ -56,8 +58,8 @@ include_once '../model/DbLayer.php';
 			}
 		} else if($_POST['adminCheck'] == "off") {
 			//add user to Customer table
-			$dbLayer = new DbLayer();
-			$dbLayer->addCustomer($customer);
+			// $dbLayer = new DbLayer();
+			// $dbLayer->addCustomer($customer);
 		}
 		
 		?>
