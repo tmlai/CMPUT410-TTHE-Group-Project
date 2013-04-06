@@ -5,9 +5,9 @@ function checkRegistration() {
 	var city = document.getElementById("cityField").value;
 	var postalCode = document.getElementById("postalField").value;
 	var email = document.getElementById("emailField").value;
-	var admin = document.getElementById("adminCheck").value;
+	var admin = document.getElementById("adminCheck").checked;
 	var adminCode = document.getElementById("adminCode").value;
-	
+	alert(admin);
 	//check if input is valid
 	if(isEmpty(username) || isEmpty(password) || isEmpty(email)) {
 		alert("Please make sure all required fields are filled in.");
@@ -19,7 +19,7 @@ function checkRegistration() {
 		alert("Please enter a valid postal code.");
 		return false;
 	} else if(admin == "true" && isEmpty(adminCode)) {
-		alert(admin);
+		//alert(admin);
 		//return false;
 	}
 	
