@@ -2,6 +2,7 @@
 namespace view;
 session_start(); 
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+$_SESSION['user'] = "Bobdole";
 ?>
 <!DOCTYPE html>
 <html>
