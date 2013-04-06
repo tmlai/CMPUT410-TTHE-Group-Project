@@ -41,7 +41,9 @@ $product = json_decode($product, true);
                 <div id="prodInfoDiv">
                   <p id="productDescription">Product information</p>
 				  <?php
-          echo var_dump($product) . "<br>";
+          echo "<br>";
+          var_dump($product);
+          echo "<br>";
 					echo $product['desc'];
 				  ?>
                 </div>
