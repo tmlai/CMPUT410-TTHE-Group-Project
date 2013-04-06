@@ -60,8 +60,8 @@
                <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="./OutstandingOrders.php">View Outsanding Orders</a></li>
-                <li><a href="./sign_out.php">Sign Out</a></li>
+                <li><a href="./outstandingorders.php">View Outsanding Orders</a></li>
+                <li><a href="./elements/signout.php">Sign Out</a></li>
               </ul>
             </li>
             </ul>
