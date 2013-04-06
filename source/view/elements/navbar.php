@@ -19,6 +19,7 @@
                     <li>
                         <script type="text/javascript" language="JavaScript">
                         <!--
+                        // Return false when searchField is empty
                         function searchCheck() {
                             if(document.searchForm.searchField.value != "") {
                                 return true;
@@ -53,35 +54,15 @@
             <li class="pull-right"><a href="#cart">View Cart    
                 <i class="icon-shopping-cart icon-white"></i></a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" 
-                        data-toggle="dropdown" href="#">Sign In/Out
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <form name="loginform" class="form" 
-                                enctype="text/plain" action="#" 
-                                onSubmit="return checkLogin();">
-                        <li>
-                            <br>
-                            <input type="text" id="usernameField" 
-                                placeholder="Username">
-                            <input type="password" id="passwordField" 
-                                placeholder="Password">
-                        </li>
-                        <li class="text-center">
-                          <!--<label class="checkbox">
-                            <input type="checkbox"> Remember me
-                          </label>-->
-                          <button type="submit" 
-                            class="btn btn-primary">Sign in</button>
-                          <button class="btn" 
-                          onclick="location.href='register.php';return false;">
-                            Register
-                          </button>
-                            
-                        </li>
-                        </form>
-                    </ul>
+              <?php
+                if($_SESSION['user'] != null) {
+                  // user dropdown
+                  require($DOCUMENT_ROOT . "./user_dropdown.php");
+                } else
+                  // sign in dropdown
+                  require($DOCUMENT_ROOT . "./signin_dropdown.php");
+                }
+              ?>
             </li>
             </ul>
         </div><!--/.nav-collapse -->

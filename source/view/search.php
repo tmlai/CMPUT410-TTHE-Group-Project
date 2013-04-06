@@ -1,4 +1,5 @@
 <?php 
+namespace view;
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
 ?>
