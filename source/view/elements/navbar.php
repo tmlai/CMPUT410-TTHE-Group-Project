@@ -55,7 +55,7 @@
                 <i class="icon-shopping-cart icon-white"></i></a></li>
             <li class="dropdown">
               <?php
-                if($_SESSION['user'] != null) {
+                if($_SESSION['user'] != "") {
                   // user dropdown
                   require($DOCUMENT_ROOT . "./user_dropdown.php");
                 } else
