@@ -11,6 +11,12 @@ $_SESSION['prevPage'] = $_SERVER['PATH_INFO'];
     <title>TTHE Enterprise - Category</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
+        // Default Style links
+        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+    ?>
+  </head>
+  <body>   
+    <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
         // user dropdown
@@ -19,12 +25,6 @@ $_SESSION['prevPage'] = $_SERVER['PATH_INFO'];
         // sign in dropdown
         require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
       }
-    ?>
-  </head>
-  <body>   
-    <?php
-        // Navigation Bar
-        require($DOCUMENT_ROOT . "./elements/navbar.php");
     ?>
     <div class="container">
         <div class="hero-unit">
