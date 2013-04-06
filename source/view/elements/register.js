@@ -8,6 +8,7 @@ function checkRegistration() {
 	var admin = document.getElementById("adminCheck").checked;
 	var adminCode = document.getElementById("adminCode").value;
 	alert("admin code is empty:" + isEmpty(adminCode));
+	alert("DEBUG: " + admin==true);
 	//check if input is valid
 	if(isEmpty(username) || isEmpty(password) || isEmpty(email)) {
 		alert("Please make sure all required fields are filled in.");
@@ -18,7 +19,7 @@ function checkRegistration() {
 	} else if(!validPC(postalCode) && !isEmpty(postalCode)) {
 		alert("Please enter a valid postal code.");
 		return false;
-	} else if(admin == "true" && isEmpty(adminCode)) {
+	} else if(admin == true && isEmpty(adminCode)) {
 		alert("Please enter an access code.");
 		return false;
 	}
