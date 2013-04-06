@@ -36,7 +36,7 @@ $product = json_decode($product, true);
     ?>
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span10">
+            <div class="span8">
                 <h1 id="productName">
                   <?php 
                     echo $product['name']
@@ -48,7 +48,9 @@ $product = json_decode($product, true);
                   ?>
                 </div>
                 <hr>
-            <div id="ratedProdDiv">
+          <div class="row-fluid">
+            <div id="ratedProdDiv" class="span8">
+              <h3>Top Ranked Related Products:</h3>
               <table class="table table-hover">
                 <thead>
                     <tr>
@@ -141,9 +143,10 @@ $product = json_decode($product, true);
                   </div>
                 </tbody>
                 </table>
+              </div>
+              </div>
             </div>
-            </div>
-            <div class="span2">
+            <div class="span4">
                 <ul class="thumbnails">
                   <li class="span10">
                     <div class="thumbnail">
