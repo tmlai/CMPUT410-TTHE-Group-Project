@@ -5,7 +5,7 @@ function checkRegistration() {
 	var city = document.getElementById("cityField").value;
 	var postalCode = document.getElementById("postalField").value;
 	var email = document.getElementById("emailField").value;
-	var admin = document.getElementById("adminCheck").checked;
+	var admin = document.getElementById("adminCheck").checked.value;
 	var adminCode = document.getElementById("adminCode").value;
 	alert("admin code is empty:" + isEmpty(adminCode));
 	alert("DEBUG1: checked marked? " + admin);
