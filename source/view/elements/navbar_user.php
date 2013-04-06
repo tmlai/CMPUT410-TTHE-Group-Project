@@ -55,9 +55,9 @@
                 <i class="icon-shopping-cart icon-white"></i></a></li>
             <li class="dropdown" id="userdropdown">
               <a class="dropdown-toggle" 
-                 data-toggle="dropdown" href="#">
-                  <?php echo $_SESSION['user']?>
-                 <span class="caret"></span>
+               data-toggle="dropdown" href="#">
+                <?php echo $_SESSION['user']?>
+               <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li><a href="./profile.php">Profile Options</a></li>

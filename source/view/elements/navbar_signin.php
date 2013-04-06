@@ -53,15 +53,31 @@
             </ul><ul class="nav pull-right">
             <li class="pull-right"><a href="#cart">View Cart    
                 <i class="icon-shopping-cart icon-white"></i></a></li>
-            <li class="dropdown" id="userdropdown">
+            <li class="dropdown" id="signindropdown">
               <a class="dropdown-toggle" 
-                 data-toggle="dropdown" href="#">
-                  <?php echo $_SESSION['user']?>
+                 data-toggle="dropdown" href="#">Sign In
                  <span class="caret"></span>
-              </a>
+               </a>
               <ul class="dropdown-menu">
-                <li><a href="./profile.php">Profile Options</a></li>
-                <li><a href="./sign_out.php">Sign Out</a></li>
+                <form name="loginform" class="form" 
+                  enctype="text/plain" action="#" 
+                  onSubmit="return checkLogin();">
+                <li>
+                  <br>
+                  <input type="text" id="usernameField" 
+                 placeholder="Username">
+                  <input type="password" id="passwordField" 
+                 placeholder="Password">
+                </li>
+                <li class="text-center">
+                  <button type="submit" 
+                 class="btn btn-primary">Sign in</button>
+                  <button class="btn" 
+                  onclick="location.href='register.php';return false;">
+                 Register
+                  </button>
+                </li>
+                </form>
               </ul>
             </li>
             </ul>
