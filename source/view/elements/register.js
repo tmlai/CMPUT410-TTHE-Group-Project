@@ -7,10 +7,7 @@ function checkRegistration() {
 	var email = document.getElementById("emailField").value;
 	var admin = document.getElementById("adminCheck").checked;
 	var adminCode = document.getElementById("adminCode").value;
-	alert("admin code is empty:" + isEmpty(adminCode));
-	alert("DEBUG1: checked marked? " + admin);
-	alert(admin==true);
-	alert(admin=="true");
+
 	//check if input is valid
 	if(isEmpty(username) || isEmpty(password) || isEmpty(email)) {
 		alert("Please make sure all required fields are filled in.");

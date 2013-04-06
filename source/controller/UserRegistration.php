@@ -34,9 +34,10 @@ include_once '../model/DbLayer.php';
 		$city = $_POST['cityField'];
 		$postalCode = $_POST['postalField'];
 		$email = $_POST['emailField'];
-		
+		$adminChecked = $_POST['adminCheck'];
 		var_dump($_POST);
-		
+		echo "<br><hr><br>";
+		echo $adminChecked;
 		// //create a customer object
 		// $customer = new Customer();
 		// $customer->setUsername($username);
