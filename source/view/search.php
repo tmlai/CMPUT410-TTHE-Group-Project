@@ -54,11 +54,12 @@ $_SESSION['search'] = $_GET['searchField'];
     <div class="container">
         <h3>
         <?php 
-          if($_SESSION['search'] != "")
+          if($_SESSION['search'] != "") {
             echo "Search Results for " . $_SESSION['search'];
             echo "<br>" . $_SESSION['prevPage'];
-          else
+          } else {
             echo "Advanced Search";
+          }
         ?>
         </h3>
         <label class="clabel" id="dropbutton" data-toggle="collapse" 
