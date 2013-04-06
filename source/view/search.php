@@ -56,6 +56,7 @@ $_SESSION['search'] = $_GET['searchField'];
         <?php 
           if($_SESSION['search'] != "")
             echo "Search Results for " . $_SESSION['search'];
+            echo "<br>" . $_SESSION['prevPage'];
           else
             echo "Advanced Search";
         ?>

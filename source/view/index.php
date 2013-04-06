@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+namespace view;
+session_start(); 
+?>
 <!DOCTYPE html>
 <html>
   <head>
