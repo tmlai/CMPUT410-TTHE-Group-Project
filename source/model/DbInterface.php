@@ -269,6 +269,29 @@ interface DbInterface {
 	public function getTopNSellings($n, $from, $to, $cateId = null);
 	
 	/*
+	 * Get the top n highest rated products 
+	 * $cateId is the category Id products belong to. Default is null, which
+	 * means category is not taken into account;
+	 */
+	public function getTopNRatedProducts($n, $cateId = null);
+	
+	/*
+	 * Mix top products by sellings and ratings to product a list of 
+	 * recommendations for users.
+	 * The algorithm to rank top products by rating and sellings is sort them
+	 * by their score. The higher the score is, the lower its position in the 
+	 * recommendations list. "score" of a product is defined as the sum of
+	 * their positions in the rating and selling lists. If one product exists in
+	 * one list but not in the other, then the position in the other list is
+	 * the size of that list which is the lowest position.
+	 * 
+	 * We take into account the sellings within 30 days only.
+	 * 
+	 * Given the algorithm, the list produced has at most 2 * $n products.
+	 */
+	public function recommendRelatedProducts($n, $cateId = null);
+	
+	/*
 	 * Given the order ID, and amount of money paying, $howmuch
 	 * Update the CustomersOrders table
 	 */

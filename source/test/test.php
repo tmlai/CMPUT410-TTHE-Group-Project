@@ -96,8 +96,8 @@ class TestDb {
 		$dbLayer = new DbLayer();
 		
 		$username = 'hcngo';
-		$cid = 'c000001';
-		$rating = 4;
+		$cid = 'c000008';
+		$rating = 8;
 		
 		$urp = new UserRatingProduct($username, $cid, $rating);
 		$val = $dbLayer->rateProduct($urp);
@@ -420,11 +420,11 @@ class TestDb {
 	 */
 	public static function testGetTopNSellings(){
 		$dbLayer = new DbLayer();
-		$n = 10;
+		$n = 3;
 		
 		$format = 'Y-m-d H:i:s';
 		
-		$from = \DateTime::createFromFormat($format, '2013-03-29 00:00:00');
+		$from = \DateTime::createFromFormat($format, '2013-03-28 00:00:00');
 		$from = $from->format($format);
 		
 		$to = \DateTime::createFromFormat($format, '2013-03-29 23:59:59');
@@ -436,6 +436,31 @@ class TestDb {
 		echo "<br> second test <br>";
 		
 		$list = $dbLayer->getTopNSellings($n, null,null,1);
+		var_dump($list);
+	}
+	
+	/*
+	 * PASS
+	 */
+	public static function testGetTopNRatedProducts(){
+		$dbLayer = new DbLayer();
+		$n = 3;
+		
+		$list = $dbLayer->getTopNRatedProducts($n);
+		var_dump($list);
+		echo "<br> second test <br>";
+		$list = $dbLayer->getTopNRatedProducts($n, 5);
+		var_dump($list);
+	}
+	
+	/*
+	 * PASS
+	 */
+	public static function testRecommendRelatedProducts(){
+		$n = 2;
+		$cateId = 1;
+		$dbLayer = new DbLayer();
+		$list = $dbLayer->recommendRelatedProducts($n, $cateId);
 		var_dump($list);
 	}
 }
@@ -464,4 +489,6 @@ class TestDb {
 // \test\TestDb::testSetPayment();
 // \test\TestDb::testGetTopNSellings();
 // \test\TestDb::testRateProduct();
+// \test\TestDb::testGetTopNRatedProducts();
+// \test\TestDb::testRecommendRelatedProducts();
 ?>

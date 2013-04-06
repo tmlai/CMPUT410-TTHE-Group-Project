@@ -1,5 +1,7 @@
 <?php
 namespace model;
+use model\Product;
+
 include_once "DbInterface.php";
 class DbLayer implements DbInterface {
 
@@ -172,38 +174,40 @@ class DbLayer implements DbInterface {
 
 		return $value;
 	}
-	
+
 	/*
 	 * Allow user to rate the product
-	*/
-	public function rateProduct(UserRatingProduct $urp){
+	 */
+	public function rateProduct(UserRatingProduct $urp) {
 		$pdo = self::getPdo();
 		$statement = "SELECT * FROM UsersRatingProducts WHERE username = ? AND cid = ? ";
 		$array = array($urp->getUsername(), $urp->getCid());
 		$stmt = $pdo->prepare($statement);
 		$stmt->execute($array);
-		
+
 		$temp = $stmt->fetchAll();
-		if(count($temp) == 0){
+		if (count($temp) == 0) {
 			// No rating exists
 			$statement = "INSERT INTO UsersRatingProducts values(?,?,?)";
-			$array = array($urp->getUsername(), $urp->getCid(), $urp->getRating());
+			$array = array($urp->getUsername(), $urp->getCid(),
+					$urp->getRating());
 			$stmt = $pdo->prepare($statement);
 			$val = $stmt->execute($array);
 			$val = ($val == true && $stmt->rowCount() > 0);
 			$pdo = null;
 			return $val;
-		}else{
+		} else {
 			// Overwrite rating
 			$statement = "UPDATE UsersRatingProducts SET rating = ? WHERE username = ? AND cid = ?";
-			$array = array($urp->getRating(), $urp->getUsername(), $urp->getCid());
+			$array = array($urp->getRating(), $urp->getUsername(),
+					$urp->getCid());
 			$stmt = $pdo->prepare($statement);
 			$val = $stmt->execute($array);
 			$val = ($val == true && $stmt->rowCount() > 0);
 			$pdo = null;
 			return $val;
 		}
-		
+
 	}
 
 	/*
@@ -544,7 +548,7 @@ class DbLayer implements DbInterface {
 		$stmt->bindParam(1, $cid);
 		$stmt->execute();
 		$cateList = $stmt->fetchAll();
-		
+
 		$statement = "SELECT rating FROM ProductsRating WHERE cid = ?";
 		$stmt = $pdo->prepare($statement);
 		$stmt->bindParam(1, $cid);
@@ -956,48 +960,151 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 		return $list;
 	}
-	
-	
+
 	/*
 	 * Get the top n sellings products within a period.
 	 * $from or $to can be null to indicate no constraint.
 	 * $cateId is the category Id products belong to. Default is null
 	 */
-		public function getTopNSellings($n, $from, $to, $cateId = null){
+	public function getTopNSellings($n, $from, $to, $cateId = null) {
 		$pdo = self::getPdo();
-		
-		if(isset($from) && isset($to)){
+
+		if (isset($from) && isset($to)) {
 			$inject = " co.orderDate >= '{$from}' AND co.orderDate <= '{$to}' ";
-		}elseif(isset($from) && isset($to) == false){
+		} elseif (isset($from) && isset($to) == false) {
 			$inject = " co.orderDate >= '{$from}' ";
-		}elseif(isset($from) == false && isset($to)){
+		} elseif (isset($from) == false && isset($to)) {
 			$inject = " co.orderDate <= '{$to}' ";
-		}elseif(isset($from) == false && isset($to) == false){
+		} elseif (isset($from) == false && isset($to) == false) {
 			$inject = " 1 ";
 		}
-		
-		if(is_null($cateId)){
+
+		if (is_null($cateId)) {
 			$cateIndicated = "";
-		}else{
-			$cateIndicated = " AND top.cid in (SELECT cid FROM ProductsMapCategories WHERE cateId = {$cateId})";
+		} else {
+			$cateIndicated = " AND op.cid in (SELECT cid FROM ProductsMapCategories WHERE cateId = {$cateId})";
 		}
-		
+
 		$statement = "SELECT * FROM Products p,
-		(SELECT op.cid, SUM(op.quantity) as total FROM OrdersProducts op, CustomersOrders co WHERE co.orderId = op.orderId AND " .$inject."
-		 GROUP BY op.cid ORDER BY total DESC LIMIT 0,{$n}) top WHERE top.cid = p.cid ".$cateIndicated;
+		(SELECT op.cid as cid, SUM(op.quantity) as total FROM OrdersProducts op, CustomersOrders co WHERE co.orderId = op.orderId AND "
+				. $inject . $cateIndicated
+				. "
+		 GROUP BY op.cid ORDER BY total DESC LIMIT 0,{$n}) top WHERE top.cid = p.cid ";
 		$stmt = $pdo->prepare($statement);
-		
-		
+
 		$stmt->execute();
 		$temp = $stmt->fetchAll();
 		$list = array();
-		foreach($temp as &$row){
-			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7]);
+		foreach ($temp as &$row) {
+			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
 			$list[] = $product;
 		}
 		$pdo = null;
 		return $list;
-		
+
+	}
+
+	/*
+	 * Get the top n highest rated products
+	 * $cateId is the category Id products belong to. Default is null, which
+	 * means category is not taken into account;
+	 */
+	public function getTopNRatedProducts($n, $cateId = null) {
+		$pdo = self::getPdo();
+
+		if (is_null($cateId)) {
+			$cateIndicated = " 1 ";
+		} else {
+			$cateIndicated = " p.cid in (SELECT cid FROM ProductsMapCategories WHERE cateId = {$cateId})";
+		}
+
+		$statement = "SELECT * FROM Products p, ProductsRating proRat
+		 WHERE p.cid = proRat.cid AND " . $cateIndicated
+				. " ORDER BY proRat.rating DESC
+		 LIMIT 0,{$n} ";
+		$stmt = $pdo->prepare($statement);
+
+		$stmt->execute();
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach ($temp as &$row) {
+			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5], $row[6], $row[7]);
+			$list[] = $product;
+		}
+		$pdo = null;
+		return $list;
+
+	}
+	
+	private static function cmp(Product $p1, Product $p2) {
+		return $p1->getRating() - $p2->getRating(); 
+	}
+
+	/*
+	 * Mix top products by sellings and ratings to product a list of
+	 * recommendations for users.
+	 * The algorithm to rank top products by rating and sellings is sort them
+	 * by their score. The higher the score is, the lower its position in the
+	 * recommendations list. "score" of a product is defined as the sum of
+	 * their positions in the rating and selling lists. If one product exists in
+	 * one list but not in the other, then the position in the other list is
+	 * the size of that list which is the lowest position.
+	 *
+	 * Given the algorithm, the list produced has at most 2 * $n products.
+	 */
+	public function recommendRelatedProducts($n, $cateId = null) {
+		$format = 'Y-m-d H:i:s';
+
+		$from = new \DateTime();
+		$from->sub(new \DateInterval('P30D'));
+		$to = new \DateTime();
+
+		$from = $from->format($format);
+		$to = $to->format($format);
+
+		$sellingList = $this->getTopNSellings($n, $from, $to, $cateId);
+		$ratingList = $this->getTopNRatedProducts($n, $cateId);
+
+		function lookup(Product &$prod, array &$list) {
+			$size = count($list);
+			for ($i = 0; $i < $size; $i++) {
+				if ($prod->getCid() == $list[$i]->getCid()) {
+					break;
+				}
+			}
+			return $i;
+		}
+
+		$newList = array();
+		$seSize = count($sellingList);
+		$raSize = count($ratingList);
+		for ($i = 0; $i < $seSize; $i++) {
+			// look if product is in the final list already
+			if (lookup($sellingList[$i], $newList) == count($newList)) {
+				$ratingScore = lookup($sellingList[$i], $ratingList);
+				$sellingList[$i]->setRating($ratingScore + $i);
+				$newList[] = $sellingList[$i];
+			}
+		}
+
+		for ($j = 0; $j < $raSize; $j++) {
+			// look if product is in the final list already
+			if (lookup($ratingList[$j], $newList) == count($newList)) {
+				$sellingScore = lookup($ratingList[$j], $sellingList);
+				$ratingList[$j]->setRating($sellingScore + $j);
+				$newList[] = $ratingList[$j];
+			}
+		}
+
+		var_dump($newList);
+		echo "<br><br> ... <br><br>";
+
+		// Sore the final list based on final score
+		usort($newList, 'self::cmp');
+		return $newList;
+
 	}
 
 	/*
@@ -1009,13 +1116,13 @@ class DbLayer implements DbInterface {
 		$statement = "UPDATE CustomersOrders SET payment = ? WHERE orderId = ?";
 		$stmt = $pdo->prepare($statement);
 		$array = array($howMuch, $orderId);
-		
+
 		$value = $stmt->execute($array);
 		$value = ($value == true && $stmt->rowCount() > 0);
-		
+
 		$pdo = null;
 		return $value;
-		
+
 	}
 
 }
