@@ -37,15 +37,15 @@ $product = json_decode($product, true);
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span10">
-                <h1 id="productName">Product Name</h1>
+                <h1 id="productName">
+                  <?php 
+                    echo $product['name']
+                  ?>
+                </h1>
                 <div id="prodInfoDiv">
-                  <p id="productDescription">Product information</p>
-				  <?php
-          echo "<br>";
-          var_dump($product);
-          echo "<br>";
-					echo $product['desc'];
-				  ?>
+                  <?php
+                    echo $product['desc'];
+                  ?>
                 </div>
             </div>
             <div class="span2">
@@ -55,11 +55,16 @@ $product = json_decode($product, true);
 					<?php
 					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
 					?>
-                      <h4>Availability</h4>
-                      <p>Stores: </p>
+                      <h4>Price: </h4>
+                      <h3>$<?php echo $product['price']?></h3>
                       <h4>Rating: </h4>
                       <input type="range" step="0.25" id="backing4"
-                        value="4">
+                        value="
+                          <?php 
+                            // Get the current rating for default value.
+                            if($product['rating'] == null) echo 0;
+                            else echo $product['rating'];
+                          ?>">
                       <div class="rateit" data-rateit-ispreset="true" 
                         data-rateit-backingfld="#backing4"
                         data-rateit-resetable="false"
