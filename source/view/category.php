@@ -2,7 +2,8 @@
 namespace view;
 session_start(); 
 $_SESSION['search'] = $_GET['searchField'];
-setcookie('prevPage', $_SERVER['REQUEST_URI']);
+setcookie('prevPage_' . $_SESSION['user'], $_SERVER['REQUEST_URI']);
+$_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
 <html>

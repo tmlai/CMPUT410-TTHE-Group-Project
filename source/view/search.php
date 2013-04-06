@@ -2,6 +2,7 @@
 namespace view;
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
+setcookie('prevPage', $_SERVER['REQUEST_URI']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,8 +56,8 @@ $_SESSION['search'] = $_GET['searchField'];
         <h3>
         <?php 
           if($_SESSION['search'] != "") {
-            echo "Search Results for " . $_SESSION['search'];
-            echo "<br>" . $_COOKIE['prevPage'];
+            echo "Search Results for " . $_SESSION['search']; 
+            echo "<br>" . $_SESSION['prevPage'];
           } else {
             echo "Advanced Search";
           }
