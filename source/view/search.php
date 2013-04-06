@@ -57,7 +57,7 @@ setcookie('prevPage', $_SERVER['REQUEST_URI']);
         <?php 
           if($_SESSION['search'] != "") {
             echo "Search Results for " . $_SESSION['search']; 
-            echo "<br>" . $_SESSION['prevPage'];
+            echo "<br>session" . $_SESSION['prevPage'];
           } else {
             echo "Advanced Search";
           }
