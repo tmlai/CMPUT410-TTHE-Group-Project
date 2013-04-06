@@ -1,7 +1,6 @@
-
 <?php 
 namespace view;
-session_start();
+session_start(); 
 $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['PATH_INFO'];
 ?>
@@ -11,8 +10,8 @@ $_SESSION['prevPage'] = $_SERVER['PATH_INFO'];
     <title>TTHE Enterprise - Category</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-        // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+      // Default Style links
+      require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
   </head>
   <body>   
