@@ -18,7 +18,7 @@ function checkRegistration() {
 	} else if(!validPC(postalCode) && !isEmpty(postalCode)) {
 		alert("Please enter a valid postal code.");
 		return false;
-	} else if(admin == "on" && isEmpty(adminCode)) {
+	} else if(admin == "true" && isEmpty(adminCode)) {
 		alert(admin);
 		//return false;
 	}
