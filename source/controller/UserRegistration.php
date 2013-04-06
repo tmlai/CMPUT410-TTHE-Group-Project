@@ -27,13 +27,17 @@ include_once '../model/DbLayer.php';
 	
 	<body>
 		<?php 
-		$input = file_get_contents("php://input");
-		var_dump($input);
+		//grab associative array from post
+		$username = $_POST['userField'];
+		$password = $_POST['passField'];
+		$address = $_POST['addrField'];
+		$city = $_POST['cityField'];
+		$postalCode = $_POST['postalField'];
+		$email = $_POST['emailField'];
+		$adminCode = $_POST['adminCode'];
+		var_dump($regInfo);
 		echo "<br><hr><br>";
-		var_dump($_POST);
 		
-		echo "<br><hr><br>";
-		echo "echo input: ".$input;
 		?>
 	</body>
 </html>

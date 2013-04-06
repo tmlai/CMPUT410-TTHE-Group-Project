@@ -93,7 +93,7 @@ session_start();
         <div id="admin_div" class="control-group">
             <label class="control-label" for="adminCheck">Admin User</label>
             <div class="controls">
-                <input type="checkbox" id="adminCheck" data-toggle="collapse" data-target="#adminOp"> 
+                <input type="checkbox" name="adminCheck" id="adminCheck" data-toggle="collapse" data-target="#adminOp"> 
             </div>
             
         </div>
