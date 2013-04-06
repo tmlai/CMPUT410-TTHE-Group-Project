@@ -35,17 +35,22 @@ include_once '../model/DbLayer.php';
 		$postalCode = $_POST['postalField'];
 		$email = $_POST['emailField'];
 		$adminChecked = $_POST['adminCheck'];
-		var_dump($_POST);
-		echo "<br><hr><br>";
-		echo $adminChecked;
-		// //create a customer object
-		// $customer = new Customer();
-		// $customer->setUsername($username);
-		// $customer->setPassword($password);
-		// $customer->setAddress($address);
-		// $customer->setCity($city);
-		// $customer->setPostalCode($postalCode);
-		// $customer->setEmail($email);
+		
+		// var_dump($_POST);
+		// echo "<br><hr><br>";
+		// echo $adminChecked;
+		
+		//create a customer object
+		$customer = new Customer();
+		$customer->setUsername($username);
+		$customer->setPassword($password);
+		$customer->setAddress($address);
+		$customer->setCity($city);
+		$customer->setPostalCode($postalCode);
+		$customer->setEmail($email);
+		
+		//debug $customer, is it setting?
+		var_dump($customer);
 		
 		// //does the user want admin access?
 		// if($_POST['adminCheck'] == "on") {
