@@ -42,8 +42,14 @@ $_SESSION['search'] = $_GET['searchField'];
   </head>
   <body onLoad="setToggle();">   
     <?php
-        // Navigation Bar
-        require($DOCUMENT_ROOT . "./elements/navbar.php");
+      // Navigation Bar
+      if($_SESSION['user'] != "") {
+        // user dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+      } else
+        // sign in dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+      }
     ?>
     <div class="container">
         <h3>
