@@ -59,8 +59,7 @@ $product = json_decode($product, true);
                       <h3>$<?php echo $product['price']?></h3>
                       <h4>Rating: </h4>
                       <input type="range" step="0.25" id="backing4"
-                        value="
-                          <?php 
+                        value="<?php 
                             // Get the current rating for default value.
                             if($product['rating'] == null) echo 0;
                             else echo $product['rating'];
