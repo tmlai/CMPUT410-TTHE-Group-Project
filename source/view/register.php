@@ -51,7 +51,7 @@ session_start();
     ?>
     <div class="container">
     <form name="loginform" class="form-horizontal" 
-        enctype="text/plain" action="../controller/UserRegistration.php" 
+        enctype="application/json" action="../controller/UserRegistration.php" 
         onSubmit="return checkRegistration();" method="post">
         <h2 class="form-horizontal-heading text-center">Please Register</h2>
         <div id="user_div" class="control-group">

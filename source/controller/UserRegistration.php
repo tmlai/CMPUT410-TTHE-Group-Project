@@ -28,9 +28,10 @@ include_once '../model/DbLayer.php';
 	<body>
 		<?php 
 		$input = file_get_contents("php://input");
-		//var_dump($input);
-		//var_dump($_POST);
-		echo $input['userField'];
+		var_dump($input);
+		echo "<br><hr><br>";
+		var_dump($_POST);
+		
 		echo "<br><hr><br>";
 		echo "echo input: ".$input;
 		?>
