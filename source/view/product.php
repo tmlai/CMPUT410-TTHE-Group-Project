@@ -35,19 +35,19 @@ $product = json_decode($product, true);
       }
     ?>
     <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span8">
-                <h1 id="productName">
-                  <?php 
-                    echo $product['name']
-                  ?>
-                </h1>
-                <div id="prodInfoDiv">
-                  <?php
-                    echo $product['desc'];
-                  ?>
-                </div>
-                <hr>
+      <div class="row-fluid">
+        <div class="span8">
+          <h1 id="productName">
+            <?php 
+              echo $product['name']
+            ?>
+          </h1>
+          <div id="prodInfoDiv">
+            <?php
+              echo $product['desc'];
+            ?>
+          </div>
+          <hr>
           <div class="row-fluid">
             <div id="ratedProdDiv" class="span8">
               <h3>Top Ranked Related Products:</h3>
@@ -143,47 +143,49 @@ $product = json_decode($product, true);
                   </div>
                 </tbody>
                 </table>
-              </div>
-              </div>
-            </div>
-            <div class="span4">
-                <ul class="thumbnails">
-                  <li class="span10">
-                    <div class="thumbnail">
-					<?php
-					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
-					?>
-                      <h4>Price: </h4>
-                      <h3>$<?php echo $product['price']?></h3>
-                      <h4>Rating: </h4>
-                      <input type="range" step="0.25" id="backing4"
-                        value="<?php 
-                            // Get the current rating for default value.
-                            if($product['rating'] == null) echo 0;
-                            else echo $product['rating'];
-                          ?>">
-                      <div class="rateit" data-rateit-ispreset="true" 
-                        data-rateit-backingfld="#backing4"
-                        data-rateit-resetable="false"
-                        data-rateit-min="0" data-rateit-max="5">
-                      </div>
-                      <div id="specDiv" class="well">
-                        <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
-                        <p><strong>Code:</strong> 
-                          <?php echo $id?>
-                        </p>
-                      </div>
-                      <button type="submit" class="btn btn-success">
-                        Order Product</button>
-                    </div>                    
-                  </li>
-                </ul>
+              <div class="rowfluid">
+                <div class="span4">
+                  <ul class="thumbnails">
+                    <li class="span10">
+                      <div class="thumbnail">
+                <?php
+                  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
+                ?>
+                        <h4>Price: </h4>
+                        <h3>$<?php echo $product['price']?></h3>
+                        <h4>Rating: </h4>
+                        <input type="range" step="0.25" id="backing4"
+                          value="<?php 
+                              // Get the current rating for default value.
+                              if($product['rating'] == null) echo 0;
+                              else echo $product['rating'];
+                            ?>">
+                        <div class="rateit" data-rateit-ispreset="true" 
+                          data-rateit-backingfld="#backing4"
+                          data-rateit-resetable="false"
+                          data-rateit-min="0" data-rateit-max="5">
+                        </div>
+                        <div id="specDiv" class="well">
+                          <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
+                          <p><strong>Code:</strong> 
+                            <?php echo $id?>
+                          </p>
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                          Order Product</button>
+                      </div>                    
+                    </li>
+                  </ul>
                 <!--
                 <div class="well">
                     <p>Sidebar</p>
                 </div>-->
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
