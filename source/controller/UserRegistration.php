@@ -34,9 +34,31 @@ include_once '../model/DbLayer.php';
 		$city = $_POST['cityField'];
 		$postalCode = $_POST['postalField'];
 		$email = $_POST['emailField'];
-		$adminCode = $_POST['adminCode'];
-		var_dump($_POST);
-		echo "<br><hr><br>";
+		
+		//create a customer object
+		$customer = new Customer();
+		$customer->setUsername($username);
+		$customer->setPassword($password);
+		$customer->setAddress($address);
+		$customer->setCity($city);
+		$customer->setPostalCode($postalCode);
+		$customer->setEmail($email);
+		
+		//does the user want admin access?
+		if($_POST['adminCheck'] == "on") {
+			$adminCode = $_POST['adminCode'];
+			$realCode = "admin04";
+			//does the user entered the right password?
+			if($adminCode == $realCode) {
+				//add user to both Customer and Admin
+			} else {
+				echo "Failed to register as administrator.";
+			}
+		} else if($_POST['adminCheck'] == "off") {
+			//add user to Customer table
+			$dbLayer = new DbLayer();
+			$dbLayer->addCustomer($customer);
+		}
 		
 		?>
 	</body>
