@@ -29,6 +29,10 @@ setcookie('prevPage', $_SERVER['PATH_INFO']);
         <div class="hero-unit">
             <h1>Category Name</h1>
             <p>This is a category description.</p>
+            <p><?php echo "path_info: " . $_SERVER['PATH_INFO']?></p>
+            <p><?php echo "request_uri: " . $_SERVER["REQUEST_URI"]?></p>
+            <p><?php echo "php_self: " . $_SERVER["PHP_SELF"]?></p>
+            <p><?php echo "request_uri: " . $_SERVER["REQUEST_URI"]?></p>
         </div>
         <div class="container" style="width:100%; height:300px; position:relative; 
         bottom:0px; overflow:auto;">
