@@ -22,8 +22,6 @@ $product = json_decode($product, true);
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
-    <script type="text/javascript" language="JavaScript" 
-      src="elements/cartFunction.js"></script>
   </head>
   <body>
     <?php
@@ -51,7 +49,7 @@ $product = json_decode($product, true);
                 </div>
                 <hr>
           <div class="row-fluid">
-            <div id="ratedProdDiv" class="span12" 
+            <div id="ratedProdDiv" class="span8" 
                 style="position:absolute; buttom:0;">
               <h3>Top Ranked Related Products:</h3>
               <table class="table table-hover">
@@ -195,5 +193,7 @@ $product = json_decode($product, true);
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+      src="elements/cartFunction.js"></script>
   </body>
 </html>
