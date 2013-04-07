@@ -29,7 +29,8 @@ include_once '../model/Customer.php';
 		$adminChecked = $_POST['adminCheck'];
 		
 		//debugging statements
-		// echo "<br><hr><br>";
+		var_dump($adminChecked);
+		echo "<br><hr><br>";
 		// echo $adminChecked;
 		
 		//create a customer object
@@ -41,7 +42,7 @@ include_once '../model/Customer.php';
 		echo "<br><hr><br>";
 		echo $customer->getUsername();
 		
-		// //does the user want admin access?
+		//does the user want admin access?
 		if($_POST['adminCheck'] == "on") {
 			$adminCode = $_POST['adminCode'];
 			$realCode = "admin04";
@@ -52,7 +53,7 @@ include_once '../model/Customer.php';
 			} else {
 				echo "Failed to register as administrator.";
 			}
-		} else if($_POST['adminCheck'] == "off") {
+		} else if($_POST['adminCheck'] == "" || $_POST['adminCheck'] == null) {
 			//add user to Customer table
 			echo "Add user to Customer table";
 			// $dbLayer = new DbLayer();
