@@ -1,5 +1,9 @@
 <!-- NavBar -->
 <div class="navbar navbar-inverse navbar-fixed-top">
+    <script type="text/javascript" language="JavaScript" 
+                          src="/loginValidation.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+                          src="elements/loginValidation.js"></script>
     <div class="navbar-inner">
         <div class="container">
         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -25,7 +29,7 @@
                                 return true;
                             }
                             return false;
-                        }
+                        }/*
                         function checkLogin() {
                           if(document.loginform.usernameField.value == "" && 
                               document.loginform.usernameField.value == "") {
@@ -39,11 +43,10 @@
                             return false;
                           }
                           return true;
-                        }
+                        }*/
                         -->
                         </script>
-                        <!-- <script type="text/javascript" language="JavaScript" 
-                          src="./elements/loginValidation.js"></script> -->
+                        
                         <form  name="searchForm" class="form-search" method="get" 
                         action="./search.php? + document.searchForm.searchField.value"  
                         enctype="text/plain" onSubmit="return searchCheck();">
