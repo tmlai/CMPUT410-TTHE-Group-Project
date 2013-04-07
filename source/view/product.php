@@ -22,6 +22,8 @@ $product = json_decode($product, true);
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/cartFunctions.js"></script>
   </head>
   <body>
     <?php
@@ -193,7 +195,5 @@ $product = json_decode($product, true);
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
-    <script type="text/javascript" language="JavaScript" 
-      src="./elements/cartFunction.js"></script>
   </body>
 </html>
