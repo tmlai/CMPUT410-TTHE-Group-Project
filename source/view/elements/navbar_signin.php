@@ -28,7 +28,7 @@
                         }
                         -->
                         </script>
-                        <script src="elements/loginValidation.js"></script>
+                        
                         <form  name="searchForm" class="form-search" method="get" 
                         action="./search.php? + document.searchForm.searchField.value"  
                         enctype="text/plain" onSubmit="return searchCheck();">
