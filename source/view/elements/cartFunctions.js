@@ -15,7 +15,7 @@ function addProdToCart(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      updateProductQty(pid);
+      updateCartProductQty(pid);
     }
   };
   
