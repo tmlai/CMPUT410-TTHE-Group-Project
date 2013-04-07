@@ -2,7 +2,7 @@
  * Add a product to the user's cart.
  */
 function addProdToCart(pid) {
-  alert("adding product to cart...");
+  alert("updating product to cart...");
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -17,11 +17,12 @@ function addProdToCart(pid) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       updateProductQty(pid);
     }
-  }
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, 'true');
+  };
+  
+  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
-}
+};
 
 /*
  * Add quantity of a product.
@@ -86,5 +87,26 @@ function updateCartProductQty(pid, qty = 1) {
 function getExternalAvail(pid, qty = 1) {
   // DEBUG: to be implemented
   alert("debug: Checking other stores...");
+  // AJAX call for external stores
+  var xmlhttp = new XMLHttpRequest();
+	if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}	else {
+    // code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+  
+  // Return if product is in stock
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      updateProductQty(pid);
+    }
+  };
+  
+  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send();
+  
   return 1;
 }

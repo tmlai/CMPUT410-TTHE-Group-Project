@@ -13,9 +13,15 @@ try {
 			//if id is passed (GET /products/:id)
 			//else (GET /products)
 			if(!empty($_GET)) {
-				$id = $_GET['id'];
-				$product = $dbLayer->getOneProduct($id);
-				echo $product;
+        // id param for one product, ranknum for ranked products
+        if($_GET['id']) {
+          $id = $_GET['id'];
+          $product = $dbLayer->getOneProduct($id);
+          echo $product;
+        } else if($_GET['ranknum']) {
+          $prodArray = $dbLayer->recommendRelatedProducts($_GET['rankcat']);
+          echo $prodArray;
+        }
 			} else {
 				$prodArray = $dbLayer->getProductsInStock();
 				echo \json_encode($prodArray);

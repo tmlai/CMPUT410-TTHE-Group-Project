@@ -84,8 +84,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                 <tr>
                     <th><!-- placeholder --></th>
                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Availability</th>
                     <th>Weight</th>
                     <th>Name</th>
                     <th>Code</th>
@@ -101,8 +99,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$1</td>
-                    <td>1</td>
-                    <td>1</td>
                     <td>1 kg</td>
                     <td>1name</td>
                     <td>c1</td>
@@ -119,8 +115,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$2</td>
-                    <td>2</td>
-                    <td>2</td>
                     <td>2 kg</td>
                     <td>2name</td>
                     <td>c2</td>
@@ -137,8 +131,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$3</td>
-                    <td>3</td>
-                    <td>3</td>
                     <td>3 kg</td>
                     <td>3name</td>
                     <td>c3</td>
@@ -155,8 +147,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$4</td>
-                    <td>4</td>
-                    <td>4</td>
                     <td>4 kg</td>
                     <td>4name</td>
                     <td>c4</td>

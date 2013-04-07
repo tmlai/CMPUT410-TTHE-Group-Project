@@ -27,7 +27,10 @@ $product = json_decode($product, true);
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
   </head>
-  <body onLoad="checkInStock(<?php echo "'" . $_SESSION['productID'] . "'";?>);">
+  <body onLoad="loadProductAJAX(<?php 
+      echo "'" . $_SESSION['productID'] . "', ";
+      echo "'" . $product['category'] . "'";
+    ?>);">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -51,6 +54,8 @@ $product = json_decode($product, true);
                     echo $product['desc'];
                   ?>
                 </div>
+                <!-- two break lines for extra spacing -->
+                <br><br>
                 <hr>
           <div class="row-fluid">
             <div id="ratedProdDiv" class="span9" 
@@ -59,10 +64,9 @@ $product = json_decode($product, true);
               <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th><!-- placeholder --></th>
+                        <th><!-- placeholder for rank --></th>
+                        <th><!-- placeholder for thumbnail --></th>
                         <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Availability</th>
                         <th>Weight</th>
                         <th>Name</th>
                         <th>Code</th>
@@ -72,14 +76,13 @@ $product = json_decode($product, true);
                 <tbody>
                   <div id="resultsDiv">
                     <tr onclick="location.href='./product.php?id=1'">
+                        <td>1</td>
                         <td>
                           <img src="" alt="" width="50" height="50">
                         </td>
                         <td>$1</td>
-                        <td>1</td>
-                        <td>1</td>
                         <td>1 kg</td>
-                        <td>1name</td>
+                        <td>1name</td>                        
                         <td>c1</td>
                         <td>This is a description...</td>
                         <td>
@@ -90,12 +93,11 @@ $product = json_decode($product, true);
                         </td>
                     </tr>
                     <tr onclick="location.href='./product.php?id=2'">
+                        <td>2</td>
                         <td>
                           <img src="" alt="" width="50" height="50">
                         </td>
                         <td>$2</td>
-                        <td>2</td>
-                        <td>2</td>
                         <td>2 kg</td>
                         <td>2name</td>
                         <td>c2</td>
@@ -108,12 +110,11 @@ $product = json_decode($product, true);
                         </td>
                     </tr>
                     <tr onclick="location.href='./product.php?id=3'">
+                        <td>3</td>
                         <td>
                           <img src="" alt="" width="50" height="50">
                         </td>
                         <td>$3</td>
-                        <td>3</td>
-                        <td>3</td>
                         <td>3 kg</td>
                         <td>3name</td>
                         <td>c3</td>
@@ -126,12 +127,11 @@ $product = json_decode($product, true);
                         </td>
                     </tr>
                     <tr onclick="location.href='./product.php?id=4'">
+                        <td>4</td>
                         <td>
                           <img src="" alt="" width="50" height="50">
                         </td>
                         <td>$4</td>
-                        <td>4</td>
-                        <td>4</td>
                         <td>4 kg</td>
                         <td>4name</td>
                         <td>c4</td>
@@ -146,7 +146,6 @@ $product = json_decode($product, true);
                   </div>
                 </tbody>
                 </table>
-              </div>
               </div>
             </div>
             <div class="span3">
@@ -193,6 +192,7 @@ $product = json_decode($product, true);
                 </ul>
             </div>
         </div>
+      </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
