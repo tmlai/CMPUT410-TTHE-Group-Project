@@ -70,9 +70,9 @@ function checkInStock(pid) {
  * Build and write the html for the Top Ranked Related Products.
  * @param products array
  */ 
-function buildRelatedProducts(products)
-var div = document.getElementById("resultsDiv");
-for(i = 0; i < products.length; i++) {
+function buildRelatedProducts(products) {
+  var div = document.getElementById("resultsDiv");
+  for(i = 0; i < products.length; i++) {
     div.write(
       "<tr onclick=\"location.href='./product.php?id='" + products[i]['id']
       + "\">\n"
