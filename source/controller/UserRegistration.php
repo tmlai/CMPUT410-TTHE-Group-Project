@@ -44,13 +44,8 @@ include_once '../model/Customer.php';
 		// echo $adminChecked;
 		
 		//create a customer object
-		$customer = new Customer();
-		$customer->setUsername($username);
-		$customer->setPassword($password);
-		$customer->setAddress($address);
-		$customer->setCity($city);
-		$customer->setPostalCode($postalCode);
-		$customer->setEmail($email);
+		$customer = new Customer($username, $password, $address,
+			$city, $postalCode, $email);
 		
 		//debug $customer, is it setting?
 		var_dump($customer);
