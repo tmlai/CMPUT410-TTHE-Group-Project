@@ -77,7 +77,7 @@ function buildRelatedProducts(products) {
       "<tr onclick=\"location.href='./product.php?id='" + products[i]['id']
       + "\">\n"
       // Rank/index of product
-      + "<td>" (i + 1) "</td>\n"
+      + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
       // Thumbnail of product
       + " <img src='/img/products/" + products[i]['id'] + ".jpg\'" 
