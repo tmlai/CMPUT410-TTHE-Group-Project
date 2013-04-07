@@ -26,10 +26,24 @@
                             }
                             return false;
                         }
+                        function checkLogin() {
+                          if(document.loginform.usernameField.value == "" && 
+                              document.loginform.usernameField.value == "") {
+                            alert("Please enter a Username and Password to sign in.");
+                            return false;
+                          } else if(document.loginform.usernameField.value == "") {
+                            alert("Please enter a Username.");
+                            return false;
+                          } else if(document.loginform.passwordField.value == "") {
+                            alert("Please enter a Password.");
+                            return false;
+                          }
+                          return true;
+                        }
                         -->
                         </script>
-                         <script type="text/javascript" language="JavaScript" 
-                          src="./elements/loginValidation.js"></script>
+                        <!-- <script type="text/javascript" language="JavaScript" 
+                          src="./elements/loginValidation.js"></script> -->
                         <form  name="searchForm" class="form-search" method="get" 
                         action="./search.php? + document.searchForm.searchField.value"  
                         enctype="text/plain" onSubmit="return searchCheck();">
