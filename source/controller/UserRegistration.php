@@ -15,9 +15,9 @@ include_once '../model/Customer.php';
 	<body>
 		<?php 
 		//debug statements
-		var_dump($_POST);
-		echo "<br><hr><br>";
-		
+		// var_dump($_POST);
+		// echo "<br><hr><br>";
+		/* It gives me the right info. */
 		
 		//grab associative array from post
 		$username = $_POST['userField'];
@@ -34,29 +34,31 @@ include_once '../model/Customer.php';
 			$adminChecked = null;
 		}
 		//debugging statements
-		var_dump($adminChecked);
-		echo "<br><hr><br>";
+		// var_dump($adminChecked);
+		// echo "<br><hr><br>";
 		// echo $adminChecked;
+		/* It gives me the right info. */
 		
 		//create a customer object
 		$customer = new Customer($username, $password, $address,
 			$city, $postalCode, $email);
 		
 		//debug $customer, is it setting?
-		var_dump($customer);
-		echo "<br><hr><br>";
-		echo $customer->getUsername();
-		echo "<br>";
-		echo $customer->getPassword();
-		echo "<br>";
-		echo $customer->getAddress();
-		echo "<br>";
-		echo $customer->getCity();
-		echo "<br>";
-		echo $customer->getPostalCode();
-		echo "<br>";
-		echo $customer->getEmail();
-		echo "<br><hr><br>";
+		// var_dump($customer);
+		// echo "<br><hr><br>";
+		// echo $customer->getUsername();
+		// echo "<br>";
+		// echo $customer->getPassword();
+		// echo "<br>";
+		// echo $customer->getAddress();
+		// echo "<br>";
+		// echo $customer->getCity();
+		// echo "<br>";
+		// echo $customer->getPostalCode();
+		// echo "<br>";
+		// echo $customer->getEmail();
+		// echo "<br><hr><br>";
+		/* It gives me the right info. */
 		
 		//does the user want admin access?
 		if($_POST['adminCheck'] == "on") {
@@ -66,14 +68,30 @@ include_once '../model/Customer.php';
 			if($adminCode == $realCode) {
 				echo "Passcode match!!";
 				//add user to both Customer and Admin
+				$dbLayer = new DbLayer();
+				$status = $dbLayer->addCustomer($customer);
+				if($status == true) {
+					$status = $dbLayer->addAdmin($username, $password);
+					if($status = true) {
+						echo "Admin Registration Success.";
+					} else {
+						echo "Admin Registration Failed.";
+					}
+				} else {
+					echo "Failed to Register.";
+				}
 			} else {
 				echo "Failed to register as administrator.";
 			}
 		} else if($_POST['adminCheck'] == "" || $_POST['adminCheck'] == null) {
 			//add user to Customer table
-			echo "Add user to Customer table";
-			// $dbLayer = new DbLayer();
-			// $dbLayer->addCustomer($customer);
+			$dbLayer = new DbLayer();
+			$status = $dbLayer->addCustomer($customer);
+			if($status == false) {
+				echo "Failed to register.";
+			} else {
+				echo "Successfully Registered.";
+			}
 		}
 		
 		?>
