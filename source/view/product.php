@@ -42,7 +42,7 @@ function checkInStock(pid) {
   
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
-    document.getElementById("stockDiv").innerHTML = "readyState = " + xmlhttp.readyState;
+    //document.getElementById("stockDiv").innerHTML = "readyState = " + xmlhttp.readyState;
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       alert("call came back!");
       //var jsonArray = JSON.parse(xmlhttp.responseText);
@@ -59,9 +59,9 @@ function checkInStock(pid) {
         document.getElementById("stockDiv").innerHTML = "";
       }
     }
-  }
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, 'true');
+  };
+  //var xmlhttp=new XMLHttpRequest();
+  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
 }
