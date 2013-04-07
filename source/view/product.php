@@ -182,7 +182,7 @@ $product = json_decode($product, true);
                       <button name="orderBtn" type="submit" class="btn btn-success" 
                           onclick="addProdToCart(<?php 
                             echo "'" . $_SESSION['productID'] . "'";
-                          ?>);">
+                          ?>);" style="visibility:hidden">
                         Order Product</button>
                         <div id="stockDiv">
                           <img src="./elements/img/spinner_small.gif" alt="" 
