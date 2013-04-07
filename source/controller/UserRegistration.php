@@ -87,6 +87,6 @@ if($_POST['adminCheck'] == "on") {
 		echo "Successfully Registered.";
 	}
 }
-header("Location: $_SESSION['prevPage']");
+header("Location: /source/controller/");
 exit;
 ?>
