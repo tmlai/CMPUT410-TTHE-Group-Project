@@ -68,7 +68,6 @@ function updateCartProductQty(pid, qty = 1) {
         // var qtyRem = qty - jsonArray.quantity;
         // checkExternalAvail(pid, qtyRem);
       // }
-    }
   } else {
     // Create cart and store this product id.
     cartJson = '{"' + pid + '":"' + new Array(qty, qtyExternal) + '"}';

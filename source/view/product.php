@@ -186,6 +186,7 @@ $product = json_decode($product, true);
                         <div id="stockDiv">
                           <img src="./elements/spinner_small.gif" alt="" 
                             width="50" height="50">
+                            <p class="muted">Checking Availability..</p>
                         </div>
                     </div>                    
                   </li>
