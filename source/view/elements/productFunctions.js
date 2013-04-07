@@ -20,6 +20,7 @@ function checkInStock(pid) {
         //document.getElementById("stockDiv").innerHTML = "(In Stock)";
       //} else {
         //document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
+        alert("call came back!");
         var orderBtn = document.getElementsByName("orderBtn");
         orderBtn.className="btn btn-danger";
         orderBtn.innerHTML="Out of Stock";
