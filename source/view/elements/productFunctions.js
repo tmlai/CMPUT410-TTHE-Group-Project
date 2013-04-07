@@ -29,5 +29,4 @@ function checkInStock(pid) {
   var xmlhttp=new XMLHttpRequest();
   xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, 'true');
   xmlhttp.send();
-  */
 }

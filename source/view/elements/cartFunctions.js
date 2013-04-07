@@ -53,7 +53,7 @@ function updateCartProductQty(pid, qty = 1) {
           } else {
             alert("Sorry we did not have the quantity you requested, please take"
               + " a look at our Top Ranked Related Products for other options.");
-            return(false;)
+            return false;
           }
         }
       }
