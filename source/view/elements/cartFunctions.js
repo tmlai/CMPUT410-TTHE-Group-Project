@@ -14,22 +14,21 @@ function addProdToCart(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      alert("debug: checking stock");
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      if(jsonArray.quantity == 0) {
-        //checkExternalAvail(pid);
-        alert("No Stock Available");
-      } else {
-        var qty = readCookie('cart_' + pid);
-        var cartJson = JSON.parse(readCookie('cart'));
+      var cartJson = JSON.parse(readCookie('cart'));
+      //if(jsonArray.quantity == 0 ||  <) {
+      //  //checkExternalAvail(pid);
+      //  alert("debug: No Stock Available");
+      //} else {
+        
         // Check if cart cookie exists
         if(cartJson != null){
-          var cartPIDs = cartJson.pids;
-          // Add new pid to cart if necessary
-          if(cartPIDs.indexOf(pid) < 0) {
-            cartPIDs.push(pid);
-            cartJson.pids = cartPIDs;
+          // add product to cart, else update qty in cart.
+          if(jsonArray[0][pid] == null) {
+            cartJson.push(',"pid":"1"')
             createCookie('cart', JSON.stringify(cartJson), 0);
-          }
+          } else
         } else {
           // Create cart cookie storing product ids.
           var cartCookie = '{"pid":"' + new Array(pid) + '"}';
@@ -38,7 +37,7 @@ function addProdToCart(pid) {
         }
         if(num == null) num = 0;
         createCookie('cart_' + pid, num + 1, 0);
-      }
+      //}
     }
   }
   var xmlhttp=new XMLHttpRequest();

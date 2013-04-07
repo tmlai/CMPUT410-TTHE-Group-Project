@@ -7,17 +7,18 @@ include_once '../model/DbLayer.php';
 include_once '../model/Customer.php';
 
 session_start();
-$_SESSION['prevPage'] = $_SESSION['prevPage'];
+//$_SESSION['prevPage'] = $_SESSION['prevPage'];
 
 //header("Location: $_SESSION['prevPage']");
 ?>
 <html>
 	<head>
 		<title> UserRegistration </title>
-		<META HTTP-EQUIV="refresh" CONTENT="2;URL=/source/view/">
+		<!--<META HTTP-EQUIV="refresh" CONTENT="2;URL=/source/view/">-->
 	</head>
 	<body>
 		<?php 
+    echo $_SESSION['prevPage'];
 		//grab associative array from post
 		$username = $_POST['userField'];
 		$password = $_POST['passField'];
