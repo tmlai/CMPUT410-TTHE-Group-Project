@@ -2,7 +2,7 @@
  * Add a product to the user's cart.
  */
 function addProdToCart(pid) {
-  alert("checking stock...");
+  alert("adding product to cart...");
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari

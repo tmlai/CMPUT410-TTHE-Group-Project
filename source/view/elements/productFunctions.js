@@ -14,12 +14,12 @@ function checkInStock(pid) {
   
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+    if (xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
       //if((jsonArray.quantity + getExternalAvail(pid)) == 0) {
         //document.getElementById("stockDiv").innerHTML = "(In Stock)";
       //} else {
-        //document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
+        document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
         alert("call came back!");
         var orderBtn = document.getElementsByName("orderBtn");
         orderBtn.className="btn btn-danger";
