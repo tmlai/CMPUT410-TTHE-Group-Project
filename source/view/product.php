@@ -53,10 +53,10 @@ $product = json_decode($product, true);
                   <?php
                     echo $product['desc'];
                   ?>
-                </div>
                 <!-- two break lines for extra spacing -->
                 <br><br>
                 <hr>
+                </div>
                 <div class="row-fluid">
                   <div id="ratedProdDiv" class="span9" 
                       style="position:absolute; buttom:0;">

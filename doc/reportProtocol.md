@@ -93,11 +93,18 @@
 		1.	Search for external store availability of a product for a 
 			quantity, but need store url back as well as quantity at store.
 			- sending parameters: getStoresQuantities(cid, quantity)
-			return: 
+			- return: 
 				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
 		2.	To purchase sending the json of purchase invoice.
-			- sending: 
+			-sending: 
 				JSON format: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
 			Note: "storeurl":"" (empty value) will be local (internal) store 
 				purchasing.
-
+		
+		RECOMMENDATION MODEL:
+		1.	Calling for top ranked products.
+			- sending parameters to: recommendRelatedProducts(quantity, category)
+			- return:
+				JSON format (ie: [{getOneProduct($cid)}, {getOneProduct($cid)}]
+				of array of products in getOneProduct($cid) json format.
+		
