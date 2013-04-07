@@ -83,4 +83,21 @@
 			customer/product/store in a table format like this
 				Customer	Product		Store	Purchases	Money Spent
 		2.	Handle get-top-n-selling products request, send back output in a table format like the list of products page
+		
+		CART MODEL:
+		1.	Search for external store availability of a product for a quantity
+		    - return type: true/false
+		    - sending parameters: scanStoreQuantities(cid, quantity)
+		
+		PURCHASE MODEL
+		1.	Search for external store availability of a product for a 
+			quantity, but need store url back as well as quantity at store.
+			- sending parameters: getStoresQuantities(cid, quantity)
+			return: 
+				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
+		2.	To purchase sending the json of purchase invoice.
+			- sending: 
+				JSON format: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
+			Note: "storeurl":"" (empty value) will be local (internal) store 
+				purchasing.
 

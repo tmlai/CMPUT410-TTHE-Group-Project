@@ -57,30 +57,30 @@ $product = json_decode($product, true);
                 <!-- two break lines for extra spacing -->
                 <br><br>
                 <hr>
-          <div class="row-fluid">
-            <div id="ratedProdDiv" class="span9" 
-                style="position:absolute; buttom:0;">
-              <h3>Top Ranked Related Products:</h3>
-              <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th><!-- placeholder for rank --></th>
-                        <th><!-- placeholder for thumbnail --></th>
-                        <th>Price</th>
-                        <th>Weight</th>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <div id="resultsDiv">
-                    
+                <div class="row-fluid">
+                  <div id="ratedProdDiv" class="span9" 
+                      style="position:absolute; buttom:0;">
+                    <h3>Top Ranked Related Products:</h3>
+                    <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th><!-- placeholder for rank --></th>
+                              <th><!-- placeholder for thumbnail --></th>
+                              <th>Price</th>
+                              <th>Weight</th>
+                              <th>Name</th>
+                              <th>Code</th>
+                              <th>Description</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <div id="resultsDiv">
+                          
+                        </div>
+                      </tbody>
+                      </table>
+                    </div>
                   </div>
-                </tbody>
-                </table>
-              </div>
-            </div>
             </div>
             <div class="span3">
                 <ul class="thumbnails">
@@ -89,10 +89,8 @@ $product = json_decode($product, true);
 					<?php
 					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
 					?>
-                      <nobr>
-                        <h4>Price: </h4>
-                        <h3>$<?php echo $product['price']?></h3>
-                      </nobr>
+                      <h4>Price: </h4>
+                      <h3>$<?php echo $product['price']?></h3>
                       <h4>Rating: </h4>
                       <input type="range" step="0.25" id="backing4"
                         value="<?php 

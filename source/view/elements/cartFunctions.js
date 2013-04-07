@@ -15,7 +15,7 @@ function addProdToCart(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      updateCartProductQty(pid);
+      updateCartProductQty(pid, xmlhttp.responseText);
     }
   };
   
@@ -31,9 +31,9 @@ function addProdToCart(pid) {
  * to increment quantity.
  * @return  true/false on availability of quantity of a product.
  */
-function updateCartProductQty(pid, qty = 1) {
+function updateCartProductQty(pid, jsonArray, qty = 1) {
   alert("debug: checking stock");
-  var jsonArray = JSON.parse(xmlhttp.responseText);
+  var jsonArray = JSON.parse(jsonArray);
   var cartJson = JSON.parse(readCookie('cart'));
   // For quantity used from other stores.
   var qtyExternal = 0;
