@@ -79,6 +79,7 @@ $product = json_decode($product, true);
                       </table>
                     <!--</div>-->
                   </div>
+                </div>
               </div>
             </div>
             <div class="span3">
@@ -123,7 +124,7 @@ $product = json_decode($product, true);
               <!--</div>-->
             <!--</div>-->
           <!--</div>-->
-        </div>
+        <!-- </div>-->
       </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>

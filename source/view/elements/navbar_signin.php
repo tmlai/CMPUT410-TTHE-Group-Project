@@ -75,7 +75,7 @@
                </a>
               <ul class="dropdown-menu">
                 <script type="text/javascript" language="JavaScript" 
-                          src="./elements/loginValidation.js"></script>
+                          src="/elements/loginValidation.js"></script>
                 <form name="loginform" class="form" 
                   enctype="text/plain" action="#" 
                   onSubmit="return checkLogin();">
