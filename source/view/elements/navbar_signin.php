@@ -25,7 +25,7 @@
                                 return true;
                             }
                             return false;
-                        }
+                        }/*
                         function checkLogin() {
                           if(document.loginform.usernameField.value == "" && 
                               document.loginform.usernameField.value == "") {
@@ -39,7 +39,7 @@
                             return false;
                           }
                           return true;
-                        }
+                        }*/
                         -->
                         </script>
                         
