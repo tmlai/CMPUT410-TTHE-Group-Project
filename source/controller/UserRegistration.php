@@ -26,8 +26,13 @@ include_once '../model/Customer.php';
 		$city = $_POST['cityField'];
 		$postalCode = $_POST['postalField'];
 		$email = $_POST['emailField'];
-		$adminChecked = $_POST['adminCheck'];
 		
+		//try to get the admin check box value (was it checked)
+		try {
+			$adminChecked = $_POST['adminCheck'];
+		} catch (Exception $e) {
+			$adminChecked = null;
+		}
 		//debugging statements
 		var_dump($adminChecked);
 		echo "<br><hr><br>";
@@ -41,6 +46,17 @@ include_once '../model/Customer.php';
 		var_dump($customer);
 		echo "<br><hr><br>";
 		echo $customer->getUsername();
+		echo "<br>"
+		echo $customer->getPassword();
+		echo "<br>"
+		echo $customer->getAddress();
+		echo "<br>"
+		echo $customer->getCity();
+		echo "<br>"
+		echo $customer->getPostalCode();
+		echo "<br>"
+		echo $customer->getEmail();
+		echo "<br><hr><br>";
 		
 		//does the user want admin access?
 		if($_POST['adminCheck'] == "on") {
