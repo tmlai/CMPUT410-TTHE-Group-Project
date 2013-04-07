@@ -8,7 +8,7 @@ session_start();
 	<script src="/source/view/elements/register.js"></script>
     <?php
         // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+        require("/elements/head_includes.php");
     ?>
     <style type="text/css">
       .form-horizontal {
