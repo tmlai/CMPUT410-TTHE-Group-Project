@@ -88,6 +88,9 @@ if($_POST['adminCheck'] == "on") {
 	}
 }
 //header("Location: $_SESSION['prevPage']");
+
+//delay page (3 seconds)
+sleep(3);
 header("Location: /source/view/index.php");
 exit;
 ?>
