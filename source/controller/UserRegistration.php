@@ -14,7 +14,11 @@ include_once '../model/Customer.php';
 	
 	<body>
 		<?php 
+		//debug statements
 		var_dump($_POST);
+		echo "<br><hr><br>";
+		
+		
 		//grab associative array from post
 		$username = $_POST['userField'];
 		$password = $_POST['passField'];
@@ -24,7 +28,7 @@ include_once '../model/Customer.php';
 		$email = $_POST['emailField'];
 		$adminChecked = $_POST['adminCheck'];
 		
-		
+		//debugging statements
 		// echo "<br><hr><br>";
 		// echo $adminChecked;
 		
@@ -34,7 +38,8 @@ include_once '../model/Customer.php';
 		
 		//debug $customer, is it setting?
 		var_dump($customer);
-		
+		echo "<br><hr><br>";
+		echo $customer->username;
 		// //does the user want admin access?
 		// if($_POST['adminCheck'] == "on") {
 			// $adminCode = $_POST['adminCode'];
