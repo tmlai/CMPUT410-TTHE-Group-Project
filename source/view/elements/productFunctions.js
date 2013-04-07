@@ -60,7 +60,7 @@ function checkInStock(pid) {
       // DEBUG: need to be json to use buildRelatedProducts
       //buildRelatedProducts(jsonArray);
       // DEBUG: temporary, see two lines above
-      document.getElementById("resultsDiv") = jsonArray;
+      document.getElementById("resultsDiv").innerHTML = jsonArray;
     }
   };
   xmlhttp.open('GET', '/source/controller/ProductServices.php?ranknum=5&rankcat=' 
