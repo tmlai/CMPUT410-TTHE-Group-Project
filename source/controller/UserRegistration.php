@@ -39,7 +39,7 @@ include_once '../model/Customer.php';
 		//debug $customer, is it setting?
 		var_dump($customer);
 		echo "<br><hr><br>";
-		echo $customer->username;
+		echo $customer->getUsername();
 		// //does the user want admin access?
 		// if($_POST['adminCheck'] == "on") {
 			// $adminCode = $_POST['adminCode'];
