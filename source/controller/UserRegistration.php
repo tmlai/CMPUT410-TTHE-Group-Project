@@ -3,7 +3,7 @@
 use model\DbLayer;
 
 include_once '../model/DbLayer.php';
-include_once '../model/Customer.php';
+include('../model/Customer.php');
 
 ?>
 <html>
