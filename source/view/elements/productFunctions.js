@@ -17,14 +17,14 @@ function checkInStock(pid) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       alert("call came back!");
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      //var orderBtn = document.orderBtn;
-      document.orderBtn.style.visibility= "visible";
+      var orderBtn = document.getElementById("orderBtn");
+      orderBtn.style.visibility= "visible";
       if((jsonArray.quantity + getExternalAvail(pid)) == 0) {
         //document.getElementById("stockDiv").innerHTML = "(In Stock)";
       //} else {
         document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
-        document.orderBtn.className = "btn btn-danger";
-        document.orderBtn.innerHTML ="Out of Stock";
+        orderBtn.className = "btn btn-danger";
+        orderBtn.innerHTML ="Out of Stock";
       } else {
         document.getElementById("stockDiv").innerHTML = "";
       }
