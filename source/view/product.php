@@ -7,7 +7,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 use model\DbLayer;
 
 include_once '../model/DbLayer.php';
-$id = $_GET['id'];
+$id = $_SESSION['productID'];
 $dbLayer = new DbLayer();
 $product = $product = $dbLayer->getOneProduct($id);
 $product = json_decode($product, true);
@@ -22,6 +22,8 @@ $product = json_decode($product, true);
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
+    <script type="text/javascript" language="JavaScript" 
+      src="elements/cartFunction.js"></script>
   </head>
   <body>
     <?php
@@ -49,7 +51,8 @@ $product = json_decode($product, true);
                 </div>
                 <hr>
           <div class="row-fluid">
-            <div id="ratedProdDiv" class="span12">
+            <div id="ratedProdDiv" class="span12" 
+                style="position:absolute; buttom:0;">
               <h3>Top Ranked Related Products:</h3>
               <table class="table table-hover">
                 <thead>
@@ -173,7 +176,10 @@ $product = json_decode($product, true);
                           <?php echo $id?>
                         </p>
                       </div>
-                      <button type="submit" class="btn btn-success">
+                      <button type="submit" class="btn btn-success" 
+                          onclick="addProdToCart(<?php 
+                            echo $_SESSION['productID']
+                          ?>);">
                         Order Product</button>
                     </div>                    
                   </li>
