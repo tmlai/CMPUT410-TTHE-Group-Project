@@ -61,7 +61,7 @@ function checkInStock(pid) {
 }
     </script>
   </head>
-  <body onLoad="checkInStock(<?php echo "'" . $_SESSION['productID'] . "'";?>);">
+  <body>
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -213,7 +213,7 @@ function checkInStock(pid) {
                         </p>
                       </div>
                       <button name="orderBtn" type="submit" class="btn btn-success" 
-                          onclick="addProdToCart(<?php 
+                          onclick="checkInStock(<?php 
                             echo "'" . $_SESSION['productID'] . "'";
                           ?>);">
                         Order Product</button>
