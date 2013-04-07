@@ -46,15 +46,15 @@ include_once '../model/Customer.php';
 		var_dump($customer);
 		echo "<br><hr><br>";
 		echo $customer->getUsername();
-		echo "<br>"
+		echo "<br>";
 		echo $customer->getPassword();
-		echo "<br>"
+		echo "<br>";
 		echo $customer->getAddress();
-		echo "<br>"
+		echo "<br>";
 		echo $customer->getCity();
-		echo "<br>"
+		echo "<br>";
 		echo $customer->getPostalCode();
-		echo "<br>"
+		echo "<br>";
 		echo $customer->getEmail();
 		echo "<br><hr><br>";
 		
