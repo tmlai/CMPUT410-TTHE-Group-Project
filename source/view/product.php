@@ -115,8 +115,7 @@ $product = json_decode($product, true);
                           ?>);" style="visibility:hidden">
                         Order Product</button>
                         <div id="stockDiv">
-                          <img src="./elements/img/spinner_small.gif" alt="" 
-                            width="50" height="50">
+                          <img src="./elements/img/spinner_small.gif" alt="">
                             <p class="muted">Checking Availability..</p>
                         </div>
                     </div>                    
@@ -132,6 +131,6 @@ $product = json_decode($product, true);
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
     <script type="text/javascript" language="JavaScript" 
-                          src="elements/loginValidation.js"></script>
+                          src="/elements/loginValidation.js"></script>
   </body>
 </html>
