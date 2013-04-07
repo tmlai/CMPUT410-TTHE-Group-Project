@@ -66,7 +66,6 @@ include_once '../model/Customer.php';
 			$realCode = "admin04";
 			//does the user entered the right password?
 			if($adminCode == $realCode) {
-				echo "Passcode match!!";
 				//add user to both Customer and Admin
 				$dbLayer = new DbLayer();
 				$status = $dbLayer->addCustomer($customer);
