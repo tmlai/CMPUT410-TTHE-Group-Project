@@ -15,7 +15,7 @@ function addProdToCart(pid) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      if(jsonArray.stock == 0) {
+      if(jsonArray.quantity == 0) {
         //checkExternalAvail(pid);
         alert("No Stock Available");
       } else {
