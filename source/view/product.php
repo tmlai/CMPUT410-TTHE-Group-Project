@@ -131,5 +131,7 @@ $product = json_decode($product, true);
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+                          src="elements/loginValidation.js"></script>
   </body>
 </html>

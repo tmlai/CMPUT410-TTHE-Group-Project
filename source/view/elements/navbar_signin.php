@@ -1,9 +1,5 @@
 <!-- NavBar -->
 <div class="navbar navbar-inverse navbar-fixed-top">
-    <script type="text/javascript" language="JavaScript" 
-                          src="/loginValidation.js"></script>
-    <script type="text/javascript" language="JavaScript" 
-                          src="elements/loginValidation.js"></script>
     <div class="navbar-inner">
         <div class="container">
         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
