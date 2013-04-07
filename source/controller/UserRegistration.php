@@ -40,21 +40,24 @@ include_once '../model/Customer.php';
 		var_dump($customer);
 		echo "<br><hr><br>";
 		echo $customer->getUsername();
+		
 		// //does the user want admin access?
-		// if($_POST['adminCheck'] == "on") {
-			// $adminCode = $_POST['adminCode'];
-			// $realCode = "admin04";
-			// //does the user entered the right password?
-			// if($adminCode == $realCode) {
-				// //add user to both Customer and Admin
-			// } else {
-				// echo "Failed to register as administrator.";
-			// }
-		// } else if($_POST['adminCheck'] == "off") {
-			// //add user to Customer table
-			// // $dbLayer = new DbLayer();
-			// // $dbLayer->addCustomer($customer);
-		// }
+		if($_POST['adminCheck'] == "on") {
+			$adminCode = $_POST['adminCode'];
+			$realCode = "admin04";
+			//does the user entered the right password?
+			if($adminCode == $realCode) {
+				echo "Passcode match!!";
+				//add user to both Customer and Admin
+			} else {
+				echo "Failed to register as administrator.";
+			}
+		} else if($_POST['adminCheck'] == "off") {
+			//add user to Customer table
+			echo "Add user to Customer table";
+			// $dbLayer = new DbLayer();
+			// $dbLayer->addCustomer($customer);
+		}
 		
 		?>
 	</body>
