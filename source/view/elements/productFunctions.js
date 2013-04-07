@@ -14,6 +14,7 @@ function checkInStock(pid) {
   
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
+    alert("readyState = " + xmlhttp.readyState);
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       alert("call came back!");
       var jsonArray = JSON.parse(xmlhttp.responseText);
