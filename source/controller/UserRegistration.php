@@ -29,6 +29,7 @@ include_once '../model/Customer.php';
 	
 	<body>
 		<?php 
+		var_dump($_POST);
 		//grab associative array from post
 		$username = $_POST['userField'];
 		$password = $_POST['passField'];
@@ -38,7 +39,7 @@ include_once '../model/Customer.php';
 		$email = $_POST['emailField'];
 		$adminChecked = $_POST['adminCheck'];
 		
-		// var_dump($_POST);
+		
 		// echo "<br><hr><br>";
 		// echo $adminChecked;
 		
