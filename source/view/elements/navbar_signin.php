@@ -25,7 +25,7 @@
                                 return true;
                             }
                             return false;
-                        }/*
+                        }
                         function checkLogin() {
                           if(document.loginform.usernameField.value == "" && 
                               document.loginform.usernameField.value == "") {
@@ -39,7 +39,7 @@
                             return false;
                           }
                           return true;
-                        }*/
+                        }
                         -->
                         </script>
                         
@@ -74,6 +74,8 @@
                  <span class="caret"></span>
                </a>
               <ul class="dropdown-menu">
+                <script type="text/javascript" language="JavaScript" 
+                          src="./elements/loginValidation.js"></script>
                 <form name="loginform" class="form" 
                   enctype="text/plain" action="#" 
                   onSubmit="return checkLogin();">

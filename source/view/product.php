@@ -49,17 +49,15 @@ $product = json_decode($product, true);
                     echo $product['name']
                   ?>
                 </h1>
-                <div id="prodInfoDiv">
+                <!--<div id="prodInfoDiv">-->
                   <?php
                     echo $product['desc'];
                   ?>
                 <!-- two break lines for extra spacing -->
                 <br><br>
                 <hr>
-                </div>
                 <div class="row-fluid">
-                  <div id="ratedProdDiv" class="span9" 
-                      style="position:absolute; buttom:0;">
+                  <div class="span9" style="position:absolute; buttom:0;">
                     <h3>Top Ranked Related Products:</h3>
                     <table class="table table-hover">
                       <thead>
@@ -79,9 +77,9 @@ $product = json_decode($product, true);
                         </div>
                       </tbody>
                       </table>
-                    </div>
-                  </div>
-            </div>
+                    <!--</div>-->
+                  <!--</div>-->
+            <!--</div>-->
             <div class="span3">
                 <ul class="thumbnails">
                   <li class="span10">
@@ -121,7 +119,8 @@ $product = json_decode($product, true);
                     </div>                    
                   </li>
                 </ul>
-                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -130,7 +129,5 @@ $product = json_decode($product, true);
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
-    <script type="text/javascript" language="JavaScript" 
-                          src="/elements/loginValidation.js"></script>
   </body>
 </html>
