@@ -194,6 +194,6 @@ $product = json_decode($product, true);
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
     <script type="text/javascript" language="JavaScript" 
-      src="elements/cartFunction.js"></script>
+      src="./elements/cartFunction.js"></script>
   </body>
 </html>
