@@ -58,7 +58,7 @@ class DbLayer implements DbInterface {
 		public function addAdmin($username, $password) {
 		$pdo = self::getPdo();
 
-		$preState = "INSERT INTO Admin values(?,?)";
+		$preState = "INSERT INTO Admins values(?,?)";
 
 		$stmt = $pdo->prepare($preState);
 
