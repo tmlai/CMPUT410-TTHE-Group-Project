@@ -19,21 +19,23 @@ $product = json_decode($product, true);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
         // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+        require("./elements/head_includes.php");
     ?>
     <link href="elements/rateit/src/rateit.css" rel="stylesheet">
     <script type="text/javascript" language="JavaScript" 
       src="./elements/cartFunctions.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/productFunctions.js"></script>
   </head>
-  <body>
+  <body onLoad="checkInStock(<?php echo "'" . $_SESSION['productID'] . "'";?>);">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
         // user dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+        require("./elements/navbar_user.php");
       } else {
         // sign in dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+        require("./elements/navbar_signin.php");
       }
     ?>
     <div class="container-fluid">
@@ -69,8 +71,6 @@ $product = json_decode($product, true);
                 </thead>
                 <tbody>
                   <div id="resultsDiv">
-                    <!-- product code javascript function will return the product code
-                    for the query of the database for creating product.php-->
                     <tr onclick="location.href='./product.php?id=1'">
                         <td>
                           <img src="" alt="" width="50" height="50">
@@ -156,8 +156,10 @@ $product = json_decode($product, true);
 					<?php
 					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
 					?>
-                      <h4>Price: </h4>
-                      <h3>$<?php echo $product['price']?></h3>
+                      <nobr>
+                        <h4>Price: </h4>
+                        <h3>$<?php echo $product['price']?></h3>
+                      </nobr>
                       <h4>Rating: </h4>
                       <input type="range" step="0.25" id="backing4"
                         value="<?php 
@@ -176,18 +178,18 @@ $product = json_decode($product, true);
                           <?php echo $id?>
                         </p>
                       </div>
-                      <button type="submit" class="btn btn-success" 
+                      <button name="orderBtn" type="submit" class="btn btn-success" 
                           onclick="addProdToCart(<?php 
                             echo "'" . $_SESSION['productID'] . "'";
                           ?>);">
                         Order Product</button>
+                        <div id="stockDiv">
+                          <img src="./elements/spinner_small.gif" alt="" 
+                            width="50" height="50">
+                        </div>
                     </div>                    
                   </li>
                 </ul>
-                <!--
-                <div class="well">
-                    <p>Sidebar</p>
-                </div>-->
             </div>
         </div>
     </div> <!-- /container -->

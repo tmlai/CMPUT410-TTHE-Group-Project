@@ -45,7 +45,9 @@ function updateCartProductQty(pid, qty = 1) {
         var qtyAvail = qtyExternal + jsonArray.quantity;
         if(qytAvail < qty) {
           var qtyBool = confirm("Only " + qtyAvail + " of this product(" + pid 
-            + ") is available, would you like to purchase this amount?");
+            + ") is available, " + (qty - qtyAvail) + " are on backorder, "
+            + "would you like to purchase the " + qtyAvail + " available at this"
+            + " time?");
           if(qtyBool) {
             qty = qtyAvail;
           } else {

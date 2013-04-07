@@ -2,8 +2,7 @@
  * Check if product is available (quantity > 0).
  * @return  true/false if available
  */
-function checkAvailability(pid) {
-  /*alert("checking stock...");
+function checkInStock(pid) {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -16,7 +15,15 @@ function checkAvailability(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      updateProductQty(pid);
+      var jsonArray = JSON.parse(xmlhttp.responseText);
+      //if((jsonArray.quantity + getExternalAvail(pid)) == 0) {
+        //document.getElementById("stockDiv").innerHTML = "(In Stock)";
+      //} else {
+        //document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
+        var orderBtn = document.getElementsByName("orderBtn");
+        orderBtn.className="btn btn-danger";
+        orderBtn.innerHTML="Out of Stock";
+      //}
     }
   }
   var xmlhttp=new XMLHttpRequest();
