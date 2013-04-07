@@ -14,10 +14,10 @@ function checkInStock(pid) {
   
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
-    alert("readyState = " + xmlhttp.readyState);
+    //alert("readyState = " + xmlhttp.readyState);
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       alert("call came back!");
-      var jsonArray = JSON.parse(xmlhttp.responseText);
+      //var jsonArray = JSON.parse(xmlhttp.responseText);
       var orderBtn = document.getElementsByName("orderBtn");
       orderBtn.style.visibility="visible";
       if((jsonArray.quantity + getExternalAvail(pid)) == 0) {
