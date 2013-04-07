@@ -178,7 +178,7 @@ $product = json_decode($product, true);
                       </div>
                       <button type="submit" class="btn btn-success" 
                           onclick="addProdToCart(<?php 
-                            echo '\"' . $_SESSION['productID'] . '\"';
+                            echo "'" . $_SESSION['productID'] . "'";
                           ?>);">
                         Order Product</button>
                     </div>                    
