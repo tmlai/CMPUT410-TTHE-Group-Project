@@ -14,7 +14,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
 <html>
 	<head>
 		<title> UserRegistration </title>
-		<META HTTP-EQUIV="refresh" CONTENT="3;URL=/source/view/">
+		<META HTTP-EQUIV="refresh" CONTENT="2;URL=/source/view/">
 	</head>
 	<body>
 		<?php 
