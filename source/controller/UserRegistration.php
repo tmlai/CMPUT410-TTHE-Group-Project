@@ -1,9 +1,10 @@
 <?php 
 //namespace controller;
 use model\DbLayer;
+use model\Customer;
 
 include_once '../model/DbLayer.php';
-include('../model/Customer.php');
+include_once '../model/Customer.php';
 
 ?>
 <html>
