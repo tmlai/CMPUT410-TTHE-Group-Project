@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['prevPage'] = $_SESSION['prevPage'];
 ?>
 <html>
   <head>
