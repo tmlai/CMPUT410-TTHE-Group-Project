@@ -100,7 +100,7 @@ function getExternalAvail(pid, qty = 1) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      updateProductQty(pid);
+      //DEBUG: TODO when dblayer has necessary function
     }
   };
   
