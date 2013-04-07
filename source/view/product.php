@@ -47,11 +47,11 @@ function checkInStock(pid) {
       //if((jsonArray.quantity + getExternalAvail(pid)) == 0) {
         //document.getElementById("stockDiv").innerHTML = "(In Stock)";
       //} else {
-        //document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
-        alert("call came back!");
-        //var orderBtn = document.getElementsByName("orderBtn");
-        //orderBtn.className="btn btn-danger";
-        //orderBtn.innerHTML="Out of Stock";
+        document.getElementById("stockDiv").innerHTML = "(Out of Stock)";
+        //alert("call came back!");
+        var orderBtn = document.getElementsByName("orderBtn");
+        orderBtn.className="btn btn-danger";
+        orderBtn.innerHTML="Out of Stock";
       //}
     }
   }
@@ -61,7 +61,7 @@ function checkInStock(pid) {
 }
     </script>
   </head>
-  <body>
+  <body onLoad="checkInStock(<?php echo "'" . $_SESSION['productID'] . "'";?>);">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -213,7 +213,7 @@ function checkInStock(pid) {
                         </p>
                       </div>
                       <button name="orderBtn" type="submit" class="btn btn-success" 
-                          onclick="checkInStock(<?php 
+                          onclick="addProdToCart(<?php 
                             echo "'" . $_SESSION['productID'] . "'";
                           ?>);">
                         Order Product</button>
