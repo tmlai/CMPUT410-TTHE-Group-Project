@@ -1,7 +1,8 @@
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <link href="bootstrap/css/custom.css" rel="stylesheet">
-<script src="elements/loginvalidation.js"></script>
+<script type="text/javascript" language="JavaScript" 
+  src="elements/cookieFunctions.js"></script>
 <style type="text/css">
 body {
    padding-top: 60px;

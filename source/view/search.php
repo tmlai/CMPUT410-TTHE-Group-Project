@@ -1,6 +1,8 @@
 <?php 
+namespace view;
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
+$_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,16 +43,23 @@ $_SESSION['search'] = $_GET['searchField'];
   </head>
   <body onLoad="setToggle();">   
     <?php
-        // Navigation Bar
-        require($DOCUMENT_ROOT . "./elements/navbar.php");
+      // Navigation Bar
+      if($_SESSION['user'] != "") {
+        // user dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+      } else {
+        // sign in dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+      }
     ?>
     <div class="container">
         <h3>
         <?php 
-          if($_SESSION['search'] != "")
-            echo "Search Results for " . $_SESSION['search'];
-          else
+          if($_SESSION['search'] != "") {
+            echo "Search Results for " . $_SESSION['search']; 
+          } else {
             echo "Advanced Search";
+          }
         ?>
         </h3>
         <label class="clabel" id="dropbutton" data-toggle="collapse" 
@@ -75,8 +84,6 @@ $_SESSION['search'] = $_GET['searchField'];
                 <tr>
                     <th><!-- placeholder --></th>
                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Availability</th>
                     <th>Weight</th>
                     <th>Name</th>
                     <th>Code</th>
@@ -92,8 +99,6 @@ $_SESSION['search'] = $_GET['searchField'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$1</td>
-                    <td>1</td>
-                    <td>1</td>
                     <td>1 kg</td>
                     <td>1name</td>
                     <td>c1</td>
@@ -110,8 +115,6 @@ $_SESSION['search'] = $_GET['searchField'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$2</td>
-                    <td>2</td>
-                    <td>2</td>
                     <td>2 kg</td>
                     <td>2name</td>
                     <td>c2</td>
@@ -128,8 +131,6 @@ $_SESSION['search'] = $_GET['searchField'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$3</td>
-                    <td>3</td>
-                    <td>3</td>
                     <td>3 kg</td>
                     <td>3name</td>
                     <td>c3</td>
@@ -146,8 +147,6 @@ $_SESSION['search'] = $_GET['searchField'];
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$4</td>
-                    <td>4</td>
-                    <td>4</td>
                     <td>4 kg</td>
                     <td>4name</td>
                     <td>c4</td>

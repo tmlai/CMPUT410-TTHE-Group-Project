@@ -1,17 +1,28 @@
+<?php 
+namespace view;
+session_start(); 
+$_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+?>
 <!DOCTYPE html>
 <html>
   <head>
     <title>TTHE Enterprise - Category</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
-        // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+      // Default Style links
+      require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
   </head>
   <body>   
     <?php
-        // Navigation Bar
-        require($DOCUMENT_ROOT . "./elements/navbar.php");
+      // Navigation Bar
+      if($_SESSION['user'] != "") {
+        // user dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+      } else {
+        // sign in dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+      }
     ?>
     <div class="container">
         <div class="hero-unit">
@@ -25,8 +36,6 @@
                 <tr>
                     <th><!-- placeholder --></th>
                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Availability</th>
                     <th>Weight</th>
                     <th>Name</th>
                     <th>Code</th>
@@ -42,8 +51,6 @@
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$1</td>
-                    <td>1</td>
-                    <td>1</td>
                     <td>1 kg</td>
                     <td>1name</td>
                     <td>c1</td>
@@ -60,8 +67,6 @@
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$2</td>
-                    <td>2</td>
-                    <td>2</td>
                     <td>2 kg</td>
                     <td>2name</td>
                     <td>c2</td>
@@ -78,8 +83,6 @@
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$3</td>
-                    <td>3</td>
-                    <td>3</td>
                     <td>3 kg</td>
                     <td>3name</td>
                     <td>c3</td>
@@ -96,8 +99,6 @@
                       <img src="" alt="" width="50" height="50">
                     </td>
                     <td>$4</td>
-                    <td>4</td>
-                    <td>4</td>
                     <td>4 kg</td>
                     <td>4name</td>
                     <td>c4</td>

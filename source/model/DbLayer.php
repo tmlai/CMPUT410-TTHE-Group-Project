@@ -71,6 +71,30 @@ class DbLayer implements DbInterface {
 		return $status;
 
 	}
+	/*
+	 * Add the user to the admin table in the database (temporary?)
+	 * Parameters: $customer: the customer object to be added
+	 *             $password: the admin password
+	 * Return type: true if successfully, false if fails
+	 */
+		public function addAdmin($username, $password) {
+		$pdo = self::getPdo();
+
+		$preState = "INSERT INTO Admins values(?,?)";
+
+		$stmt = $pdo->prepare($preState);
+
+		$array = array($username, $password);
+
+		$result = $stmt->execute($array);
+
+		$status = ($result == true && $stmt->rowCount() > 0);
+
+		$pdo = null;
+
+		return $status;
+
+	}
 
 	/*
 	 *

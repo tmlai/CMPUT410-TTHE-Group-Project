@@ -34,7 +34,20 @@
 		baseUri
 			/				-- homepage
 			/view			-- 
-	
+			/model/Recommender/RateProduct.php	-- GET request with n & category parameter get n top related products in that category
+								-- By default, returns 5 top related products
+								-- Return data format: JSON [ {"id":"","name":"","price":"","image":"","description":""}, {}, ...]
+								-- POST request with productId and rating parameter
+								-- Update the rating of the product by the current user (username is retrieved from session)
+								-- Return data format: JSON {"status":"ok", "message":""} (returns status 'failed' otherwise)
+			/model/Recommender/TopProduct.php	-- Accepts both POST and GET request
+								-- Params: date, days, category, numProduct
+								-- Default: current date time, 30 days, all categories, 1 product
+								-- Return top (numProduct) products in (category) in (days) unitil (date)
+								-- says return top 1 product in all categories that is purschased most in the previous 30 days from now
+								-- Return data format: JSON [ {"id":"","name":"","price":"","image":"","description":""}, {}, ...]
+
+
 2.	SQL schema and queries
 
 	The database schema is defined in setup.sql file. The list of relevant queries
@@ -84,4 +97,41 @@
 			customer/product/store in a table format like this
 				Customer	Product		Store	Purchases	Money Spent
 		2.	Handle get-top-n-selling products request, send back output in a table format like the list of products page
-
+		
+		---WEB SERVICES----
+		+ 	PHP file to handle the following ajax requests
+		
+		CART MODEL:
+		1.	Search for external store availability of a product for a quantity
+		    - return type: true/false
+		    - sending parameters: scanStoreQuantities(cid, quantity)
+		
+		
+		PURCHASE MODEL
+		1.	Search for external store availability of a product for a 
+			quantity, but need store url back as well as quantity at store.
+			- sending parameters: getStoresQuantities(cid, quantity)
+			- return: 
+				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
+		2.	To purchase sending the json of purchase invoice.
+			-sending: 
+				JSON format: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
+			Note: "storeurl":"" (empty value) will be local (internal) store 
+				purchasing.
+		
+		RECOMMENDATION MODEL:
+		1.	Calling for top ranked products.
+			- sending parameters to: recommendRelatedProducts(quantity, category)
+			- return:
+				JSON format (ie: [{getOneProduct($cid)}, {getOneProduct($cid)}]
+				of array of products in getOneProduct($cid) json format.
+		
+		#LOGIN/REGISTER MODEL:
+		1.	Logging in.
+			- POST request to /controller/login.php with username and password
+			- return:
+				String of status ('success','fail','error')
+		2.	Registering a user
+			- POST requeset to /controller/UserRegistration.php with the user info
+			- return:
+				String status

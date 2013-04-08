@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+namespace view;
+session_start(); 
+$_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,10 +16,16 @@
   </head>
   <body>   
     <?php
-        // Navigation Bar
-        require($DOCUMENT_ROOT . "./elements/navbar.php");
-        // Carousel element
-        require($DOCUMENT_ROOT . "./elements/carousel.php");
+      // Navigation Bar
+      if($_SESSION['user'] != "") {
+        // user dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+      } else {
+        // sign in dropdown
+        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+      }
+      // Carousel element
+      require($DOCUMENT_ROOT . "./elements/carousel.php");
     ?>
     <div class="container">
         <div class="row-fluid">
