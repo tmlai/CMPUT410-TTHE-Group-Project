@@ -121,3 +121,10 @@
 				JSON format (ie: [{getOneProduct($cid)}, {getOneProduct($cid)}]
 				of array of products in getOneProduct($cid) json format.
 		
+		#LOGIN/REGISTER MODEL:
+		1.	Logging in.
+			- POST request to /controller/login.php with username and password
+			- return:
+				String of status ('success','fail','error')
+		2.	Registering a user
+			- send parameters to
