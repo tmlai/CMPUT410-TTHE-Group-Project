@@ -158,6 +158,6 @@ function rateProduct(pid, user, value) {
       return(jsonObj);
     }
   };
-  xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, true);
+  xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
   xmlhttp.send();
 }
