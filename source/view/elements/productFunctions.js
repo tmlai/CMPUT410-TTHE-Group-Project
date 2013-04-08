@@ -55,8 +55,8 @@ function checkInStock(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      jsonArray = JSON.parse(xmlhttp.responseText);
-      //var jsonArray = xmlhttp.responseText;
+      //var jsonArray = JSON.parse(xmlhttp.responseText);
+      var jsonArray = xmlhttp.responseText;
       // DEBUG: need to be json to use buildRelatedProducts
       //buildRelatedProducts(jsonArray);
       // DEBUG: temporary, see two lines above
