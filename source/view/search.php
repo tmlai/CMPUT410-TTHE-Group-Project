@@ -60,6 +60,7 @@ $advanced = $_GET['advanced'];
     <div class="container">
         <h3>
         <?php 
+		var_dump($advanced);
           if($search != "") {
             echo "Search Results for " . $search; 
           } else if($advanced == "true") {
