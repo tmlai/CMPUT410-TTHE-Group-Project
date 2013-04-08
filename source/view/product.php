@@ -56,7 +56,7 @@ $product = json_decode($product, true);
                 <!-- two break lines for extra spacing -->
                 <br><br>
                 <hr>
-                <div class="row-fluid">
+                <!--<div class="row-fluid">-->
                   <div class="span9">
                     <h3>Top Ranked Related Products:</h3>
                     <table class="table table-hover">
@@ -77,8 +77,9 @@ $product = json_decode($product, true);
                         </div>
                       </tbody>
                       </table>
-            <div class="rowfluid">
-            <div class="span3">
+                  </div>
+            <!--<div class="rowfluid">-->
+              <div class="span3">
                 <ul class="thumbnails">
                   <li class="span10">
                     <div class="thumbnail">
@@ -93,12 +94,21 @@ $product = json_decode($product, true);
                             // Get the current rating for default value.
                             if($product['rating'] == null) echo 0;
                             else echo $product['rating'];
-                          ?>">
-                      <div class="rateit" data-rateit-ispreset="true" 
+                          ?>" onclick="rateProduct('<?php $product['id']?>');">
+                      <div class="rateit" id="rateit5"data-rateit-ispreset="true" 
                         data-rateit-backingfld="#backing4"
                         data-rateit-resetable="false"
                         data-rateit-min="0" data-rateit-max="5">
                       </div>
+                      <script type="text/javascript">
+                      <!--
+                        // learned from: http://www.radioactivethinking.com/rateit/example/example.htm
+                        $("#rateit5").bind('rated', function (event, value) { 
+                          var value = ri.rateit('value');
+                          rateProduct('<?php $product['id']?>', value);
+                        });
+                      -->
+                      </script>
                       <div id="specDiv" class="well">
                         <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
                         <p><strong>Code:</strong> 
@@ -118,10 +128,7 @@ $product = json_decode($product, true);
                   </li>
                 </ul>
               </div>
-            </div>
-          </div>
         </div>
-      </div>
       </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>

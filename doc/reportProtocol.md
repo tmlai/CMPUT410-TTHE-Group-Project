@@ -97,10 +97,14 @@
 				Customer	Product		Store	Purchases	Money Spent
 		2.	Handle get-top-n-selling products request, send back output in a table format like the list of products page
 		
+		---WEB SERVICES----
+		+ 	PHP file to handle the following ajax requests
+		
 		CART MODEL:
 		1.	Search for external store availability of a product for a quantity
 		    - return type: true/false
 		    - sending parameters: scanStoreQuantities(cid, quantity)
+		
 		
 		PURCHASE MODEL
 		1.	Search for external store availability of a product for a 
