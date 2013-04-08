@@ -176,7 +176,7 @@ function updateCart() {
  * @param products array
  */ 
 function buildCartProducts() {
-  var div = document.getElementById("resultsDiv");
+  //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
@@ -196,7 +196,7 @@ function buildCartProducts() {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
-        div.innerHTML = (
+        document.getElementById("resultsDiv").innerHTML = (
           "<tr>\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id + 
