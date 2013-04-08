@@ -1,5 +1,5 @@
 <?php 
-namespace view;
+//namespace view;
 session_start();
 $_SESSION['productID'] = $_GET['id'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
@@ -26,10 +26,15 @@ $product = json_decode($product, true);
       src="./elements/cartFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
+    <script src="elements/rateit/src/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body onLoad="loadProductAJAX(<?php 
       echo "'" . $_SESSION['productID'] . "', ";
-      echo "'" . $product['category'] . "'";
+      echo "'" . $product['cateId'] . "'";
     ?>);">
     <?php
       // Navigation Bar
@@ -43,6 +48,7 @@ $product = json_decode($product, true);
     ?>
     <div class="container-fluid">
         <div class="row-fluid">
+        <div class="span12">
             <div class="span9">
                 <h1 id="productName">
                   <?php 
@@ -53,8 +59,6 @@ $product = json_decode($product, true);
                   <?php
                     echo $product['desc'];
                   ?>
-                <!-- two break lines for extra spacing -->
-                <br><br>
                 <hr>
                 <div class="row-fluid">
                   <div class="span9">
@@ -71,19 +75,15 @@ $product = json_decode($product, true);
                               <th>Description</th>
                           </tr>
                       </thead>
-                      <tbody>
-                        <div id="resultsDiv">
-                          
-                        </div>
+                      <tbody id="resultsDiv">
                       </tbody>
                       </table>
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
+                  
+                  </div>
+                  </div>
+                  </div>
             <div class="rowfluid">
-            <div class="span3">
+              <div class="span3">
                 <ul class="thumbnails">
                   <li class="span10">
                     <div class="thumbnail">
@@ -98,12 +98,24 @@ $product = json_decode($product, true);
                             // Get the current rating for default value.
                             if($product['rating'] == null) echo 0;
                             else echo $product['rating'];
-                          ?>">
-                      <div class="rateit" data-rateit-ispreset="true" 
+                          ?>" onclick="rateProduct('<?php echo $product['id']?>');">
+                      <div class="rateit" id="rateit5"data-rateit-ispreset="true" 
                         data-rateit-backingfld="#backing4"
                         data-rateit-resetable="false"
                         data-rateit-min="0" data-rateit-max="5">
                       </div>
+                      <script type="text/javascript">
+                      <!--
+                        // learned from: http://www.radioactivethinking.com/rateit/example/example.htm
+                        $("#rateit5").bind('rated', function (event, value) { 
+                          rateProduct(
+                            <?php echo "'" . $product['id'] . "', '" 
+                              . $_SESSION['user'] . "'"
+                              
+                            ?>, value);
+                        });
+                      -->
+                      </script>
                       <div id="specDiv" class="well">
                         <p><strong>Weight:</strong> <?php echo $product['weight'];?></p>
                         <p><strong>Code:</strong> 
@@ -122,16 +134,12 @@ $product = json_decode($product, true);
                     </div>                    
                   </li>
                 </ul>
-              </div>
-            </div>
+                </div>
+              <!--</div>-->
+            <!--</div>-->
           </div>
         </div>
       </div>
-      </div>
-    </div> <!-- /container -->
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="elements/rateit/src/jquery.rateit.js"></script>
-    <script src="elements/rateit/src/jquery.rateit.min.js"></script>
+    </div> <!-- /container -->    
   </body>
 </html>

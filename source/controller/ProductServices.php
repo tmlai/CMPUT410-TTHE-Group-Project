@@ -14,14 +14,9 @@ try {
 			//else (GET /products)
 			if(!empty($_GET)) {
         // id param for one product, ranknum for ranked products
-        if($_GET['id']) {
-          $id = $_GET['id'];
-          $product = $dbLayer->getOneProduct($id);
-          echo $product;
-        } else if($_GET['ranknum']) {
-          $prodArray = $dbLayer->recommendRelatedProducts($_GET['rankcat']);
-          echo $prodArray;
-        }
+        $id = $_GET['id'];
+        $product = $dbLayer->getOneProduct($id);
+        echo $product;
 			} else {
 				$prodArray = $dbLayer->getProductsInStock();
 				echo \json_encode($prodArray);

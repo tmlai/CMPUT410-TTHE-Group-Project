@@ -72,6 +72,7 @@
 			our own store  
 	+	*amount* is the total value of quantity of products
 3.	List of php scripts probably needed
+
 	
 	+	Management module
 		
@@ -97,15 +98,19 @@
 				Customer	Product		Store	Purchases	Money Spent
 		2.	Handle get-top-n-selling products request, send back output in a table format like the list of products page
 		
+		---WEB SERVICES----
+		+ 	PHP file to handle the following ajax requests
+		
 		CART MODEL:
 		1.	Search for external store availability of a product for a quantity
 		    - return type: true/false
-		    - sending parameters: scanStoreQuantities(cid, quantity)
+		    - sending parameters: cid, quantity
+		
 		
 		PURCHASE MODEL
 		1.	Search for external store availability of a product for a 
 			quantity, but need store url back as well as quantity at store.
-			- sending parameters: getStoresQuantities(cid, quantity)
+			- sending parameters: cid, quantity
 			- return: 
 				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
 		2.	To purchase sending the json of purchase invoice.
@@ -116,8 +121,17 @@
 		
 		RECOMMENDATION MODEL:
 		1.	Calling for top ranked products.
-			- sending parameters to: recommendRelatedProducts(quantity, category)
+			- sending parameters: quantity, category
 			- return:
 				JSON format (ie: [{getOneProduct($cid)}, {getOneProduct($cid)}]
 				of array of products in getOneProduct($cid) json format.
 		
+		#LOGIN/REGISTER MODEL:
+		1.	Logging in.
+			- POST request to /controller/login.php with username and password
+			- return:
+				String of status ('success','fail','error')
+		2.	Registering a user
+			- POST requeset to /controller/UserRegistration.php with the user info
+			- return:
+				String status

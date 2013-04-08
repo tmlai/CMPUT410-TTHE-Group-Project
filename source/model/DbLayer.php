@@ -23,7 +23,29 @@ class DbLayer implements DbInterface {
 			die("Uable to connect: " . $exception->getMessage());
 		}
 	}
+
 	// Customer + admin section
+
+	/*
+	 * Return a list of customer objects
+	 */
+	public function getListCustomers() {
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Customers";
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute();
+
+		$list = array();
+		$temp = $stmt->fetchAll();
+		foreach ($temp as &$row) {
+			$cus = new Customer($row[0], $row[1], $row[2], $row[3], $row[4],
+					$row[5]);
+			$list[] = $cus;
+		}
+		$pdo = null;
+		return $list;
+	}
+
 	/*
 	 * Add the customer to the database
 	 * Parameters: $customer: the customer object to be added
@@ -320,11 +342,15 @@ class DbLayer implements DbInterface {
 	 * Parameters: $categoryId 	the id of the category
 	 * Return type: array of product objects
 	 */
-	public function getProducts($categoryId) {
+	public function getProducts($categoryId = null) {
 		$pdo = self::getPdo();
 
-		$preState = "SELECT * FROM Products p, ProductsMapCategories pc 
+		if (isset($categoryId)) {
+			$preState = "SELECT * FROM Products p, ProductsMapCategories pc 
 		WHERE p.cid = pc.cid AND pc.cateId = {$categoryId}";
+		} else {
+			$preState = "SELECT * FROM Products";
+		}
 
 		$stmt = $pdo->prepare($preState);
 
@@ -346,6 +372,25 @@ class DbLayer implements DbInterface {
 	}
 
 	// -------------------------------------------------------------------------
+	
+	/*
+	 * Get the list of external stores which we do business with
+	*/
+	public function getListExternalStores(){
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Stores WHERE storeId <> 1";
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute();
+		
+		$list = array();
+		$temp = $stmt->fetchAll();
+		foreach($temp as &$row){
+			$store = new Store($row[0], $row[1], $row[2], $row[3]);
+			$list[] = $store;
+		}
+		$pdo = null;
+		return $list;
+	}
 
 	public function addStore(Store $store) {
 		$pdo = self::getPdo();
@@ -564,7 +609,7 @@ class DbLayer implements DbInterface {
 
 		$temp = $stmt->fetchAll();
 
-		$statement = "SELECT name 
+		$statement = "SELECT name, pc.cateId 
 		FROM Categories c, ProductsMapCategories pc 
 		WHERE c.cateId = pc.cateId AND pc.cid = ?";
 
@@ -590,6 +635,7 @@ class DbLayer implements DbInterface {
 			$prodJson['dim'] = $temp[0][6];
 			$prodJson['quantity'] = $temp[0][7];
 			$prodJson['category'] = $cateList[0][0];
+			$prodJson['cateId'] = $cateList[0][1];
 			$prodJson['rating'] = $ratingList[0][0];
 		}
 		$pdo = null;
@@ -1061,9 +1107,9 @@ class DbLayer implements DbInterface {
 		return $list;
 
 	}
-	
+
 	private static function cmp(Product $p1, Product $p2) {
-		return $p1->getRating() - $p2->getRating(); 
+		return $p1->getRating() - $p2->getRating();
 	}
 
 	/*

@@ -18,6 +18,16 @@ use model\UserRatingProduct;
 
 include_once "../model/DbLayer.php";
 class TestDb {
+	
+	/*
+	 * PASS
+	 */
+	public static function testGetListCustomers(){
+		$dbLayer = new DbLayer();
+		$list = $dbLayer->getListCustomers();
+		var_dump($list);
+	}
+	
 	/*
 	 * PASS
 	 */
@@ -181,6 +191,15 @@ class TestDb {
 		$url = "http://cs410.cs.ualberta.ca:41051";
 		$store = $dbLayer->searchStore($url);
 		var_dump($store);
+	}
+	
+	/*
+	 * PASS
+	 */
+	public static function testGetListExternalStores(){
+		$dbLayer = new DbLayer();
+		$list = $dbLayer->getListExternalStores();
+		var_dump($list);
 	}
 
 	/*
@@ -470,7 +489,7 @@ class TestDb {
 // \test\TestDb::testUpdateStock('c000001', 5);
 // \test\TestDb::testMapProductCategory();
 // \test\TestDb::testGetCategories();
-// \test\TestDb::testGetProducts(1);
+// \test\TestDb::testGetProducts();
 // \test\TestDb::testSearchProductByName('beam');
 // \test\TestDb::testAddStore();
 // \test\TestDb::testSearchStore();
@@ -491,4 +510,6 @@ class TestDb {
 // \test\TestDb::testRateProduct();
 // \test\TestDb::testGetTopNRatedProducts();
 // \test\TestDb::testRecommendRelatedProducts();
+// \test\TestDb::testGetListCustomers();
+// \test\TestDb::testGetListExternalStores();
 ?>

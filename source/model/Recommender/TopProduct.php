@@ -1,7 +1,7 @@
 <?php
 namespace model;
 
-include_once ('DbLayer.php');
+include_once ('../DbLayer.php');
 
 function checkStock($productId){
 	$stock = DbLayer::getStock($productId);
@@ -62,8 +62,9 @@ else{
 	exit();
 }
 
-$topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
-$topProductJSONList = [];
+// $topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
+$topProductList = DbLayer::getTopNSellings(5,null,null);
+$topProductJSONList = array();
 foreach ($topProductList as $topProduct){
 	//todo: modify to just pass id, name, price
 	//do we want to recommend products out of stock?
@@ -78,6 +79,5 @@ foreach ($topProductList as $topProduct){
 	$topProductJSONList[] =$topProductJSON;
 	//return a list of json data
 }
-return json_encode($topProductJSONList);
-
-		
+echo json_encode($topProductJSONList);	
+?>
