@@ -17,10 +17,10 @@ function getJsonFromUrl($url){
 }
 
 
-$url = "http://cs410.cs.ualberta.ca:42001/registration/markets";
+$url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
 $message = "False";
 
-$marketInfo = getJsonFromUrl($url);
+$marketInfo = file_get_contents($url);
 
 if (!isset($marketInfo) || trim($marketInfo) === ""){
 	$message = "Cannot access market data";
@@ -30,23 +30,24 @@ else{
 	$productId = $_GET["cid"];
 	$quantity = $_GET["quantity"];
 	try {
-		$marketsJson = json_decode($marketInfo);
+		$marketsJson = json_decode($marketInfo, true);
 		$markets = $marketsJson["markets"];
 		foreach ($markets as $store){
 			$url = $store["url"];
-			$instockProducts = getJsonFromUrl($url."/products");
+			$instockProducts = file_get_contents($url."/products");
 			$instockProductsJson = json_decode($instockProducts);
 			$instockProductIds = $instockProductsJson["products"];
 			foreach ($instockProductIds as $instockProductId){
-				if ($instockProductId == $productId){
+				$instockId = $instockProductId["id"];
+				if ($instockId == $productId){
 					if ($quantity == 1 || $quantity == "1"){
 						$message = "True";
 					}
 					else{
-						$url.="/products/".$instockProductId;
-						$productsInfo = getJsonFromUrl($url."/products");
-						$productsInfoJson = json_decode($productsInfo);
-						if ($productsInfoJson["qunatity"] >= $quantity)
+						$url.="/products/".$instockId;
+						$productsInfo = file_get_contents($url);
+						$productsInfoJson = json_decode($productsInfo, true);
+						if ($productsInfoJson["quantity"] >= $quantity)
 							$message = "True";
 					}
 				}	

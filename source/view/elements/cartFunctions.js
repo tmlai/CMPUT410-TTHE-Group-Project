@@ -64,7 +64,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       //var jsonS = eval('(' + cartJson + ')');
       var length = JSON.stringify(jsonArray).length;
       //for(element in jsonS) length++;
-      cartJson[length][("'" + pid "'")] = new Array(qty, qtyExternal);
+      cartJson[length][("'" + pid + "'")] = new Array(qty, qtyExternal);
       // if(jsonArray.quantity >= qtyNew) {
         // update the quantity.
         // cartJson[0][pid] = new Array(qty, qtyExternal);

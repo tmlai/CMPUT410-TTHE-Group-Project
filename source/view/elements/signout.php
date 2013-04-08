@@ -1,5 +1,4 @@
 <?php
-<
 /* from: http://www.php.net/manual/en/function.session-destroy.php */
 // Unset all of the session variables.
 $_SESSION = array();
@@ -19,8 +18,3 @@ session_destroy();
 //echo "<meta HTTP-EQUIV=\"REFRESH\" content=\"0\"; url=../index.php\">";
 header('Location: ../index.php');
 ?>
-<!DOCTYPE html>
-<html>
-<head></head>
-<body></body>
-</html>
