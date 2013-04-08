@@ -129,7 +129,7 @@ $product = json_decode($product, true);
                   </li>
                 </ul>
               </div>
-            </div>
+            <!--</div>-->
           </div>
         </div>
       </div>
