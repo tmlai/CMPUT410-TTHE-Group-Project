@@ -104,7 +104,7 @@
 		CART MODEL:
 		1.	Search for external store availability of a product for a quantity
 		    - return type: true/false
-		    - sending parameters: scanStoreQuantities(cid, quantity)
+		    - sending parameters: cid, quantity
 		
 		
 		PURCHASE MODEL
