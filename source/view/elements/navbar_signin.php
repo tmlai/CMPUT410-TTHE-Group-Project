@@ -65,7 +65,7 @@
 									xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 								}
 								
-								xmlhttp.open('POST', '../source/controller/Login.php', false);
+								xmlhttp.open('POST', '/source/controller/Login.php', false);
 								xmlhttp.setRequestHeader("Content-type", "application/json");
 								xmlhttp.send(jsonString);
 								
