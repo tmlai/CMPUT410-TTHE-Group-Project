@@ -6,9 +6,10 @@ use model\DbLayer;
 session_start();
 
 $_SESSION['prevPage'] = $_SESSION['prevPage'];
+$requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+
 $username = $_POST['username'];
 $password = $_POST['password'];
-$requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 if($requestMethod == "post") {
 	try {
