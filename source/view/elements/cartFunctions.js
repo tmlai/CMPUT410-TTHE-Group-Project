@@ -84,7 +84,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
  */
 function getCartIndex(pid) {
   var cartJson = JSON.parse(readCookie('cart'));
-  for(var i = o; i < cartJson.length; i++) {
+  for(var i = 0; i < cartJson.length; i++) {
     if(cartJson[i].pid == pid)
       return i;
   }
@@ -126,7 +126,7 @@ function getExternalAvail(pid, qty = 1) {
     }
   };
   
-  xmlhttp.open('GET', '../model/ProductExternalAvailability?cid=' + pid + '&quantity='
+  xmlhttp.open('GET', '../model/ProductExternalAvailability.php?cid=' + pid + '&quantity='
     + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
