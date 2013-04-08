@@ -1,8 +1,3 @@
-<!doctype html>
-<html>
-	<head>
-	</head>
-	<body>
 <?php
 <
 /* from: http://www.php.net/manual/en/function.session-destroy.php */
@@ -23,5 +18,3 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 echo "<meta HTTP-EQUIV=\"REFRESH\" content=\"0; url=../index.php\">\n";
 ?>
-	</body>
-</html>

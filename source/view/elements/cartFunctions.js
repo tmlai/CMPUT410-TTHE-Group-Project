@@ -41,6 +41,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
   // Check if cart cookie exists
   if(cartJson != null){
       if(jsonArray.quantity < qty) {
+        
         // Check external stores for remaining quantity
         qtyExternal = checkExternalAvail(pid, qty - jsonArray.quantity);
         var qtyAvail = qtyExternal + jsonArray.quantity;
@@ -60,7 +61,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       }
       alert("Debug: 0");
       // Add pid entry with quantity to cart.
-        cartJson[0][pid] = new Array(qty, qtyExternal);
+        cartJson[cartJson.length][pid] = new Array(qty, qtyExternal);
       // if(jsonArray.quantity >= qtyNew) {
         // update the quantity.
         // cartJson[0][pid] = new Array(qty, qtyExternal);
