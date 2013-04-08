@@ -35,12 +35,12 @@ if ($requestMethod == "GET"){
 		try {
 			$marketsJson = json_decode($marketInfo, true);
 			$markets = $marketsJson["markets"];
+			$totalAvailable = 0;
 			foreach ($markets as $store){
 				$url = $store["url"];
 				$instockProducts = file_get_contents($url."/products");
 				$instockProductsJson = json_decode($instockProducts, true);
 				$instockProductIds = $instockProductsJson["products"];
-				$totalAvailable = 0;
 				foreach ($instockProductIds as $instockProductId){
 					$instockId = $instockProductId["id"];
 					
