@@ -30,8 +30,8 @@
 			function testGetDeliveryDate() {
 				var oid = document.getElementById("oid").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('POST', '/source/controller/OrderServices.php', 'true');
-				xmlhttp.send(oid);
+				xmlhttp.open('GET', '/source/controller/OrderServices.php?oid='+oid, 'true');
+				xmlhttp.send();
 			}
 		</script>
 	</header>
