@@ -172,30 +172,30 @@ function buildCartProducts() {
   var jsonCart = JSON.parse(readCookie('cart'));
   var product;
   for(var i = 0; i < jsonCart.length; i++) {
-    product = getOneProduct(jsonCart[i].pid);
+    product = getOneProduct(jsonCart[i]);
     div.write(
       "<tr>\n<td>\n"
       // Quantity text field for product
-      + "<input type=\"text\" name=\"qtyField" + product[i].pid + 
-      + "\" id=\"qtyField" + product[i].pid + "\" value=\"" 
-      + product[i].quantity +">"
+      + "<input type=\"text\" name=\"qtyField" + product.pid + 
+      + "\" id=\"qtyField" + product.pid + "\" value=\"" 
+      + product.quantity +">"
       // Rank/index of product
       + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
       // Thumbnail of product
-      + " <img src='/img/products/" + product[i]['id'] + ".jpg\'" 
+      + " <img src='/img/products/" + product['id'] + ".jpg\'" 
       + "\" alt=\"\" width=\"50\" height=\"50\">\n"
       + "</td>\n"
       // Price of product
-      + "<td>$" + product[i]['price'] + "</td>\n"
+      + "<td>$" + product['price'] + "</td>\n"
       // Weight of product
-      + "<td>" + product[i]['weight'] + "</td>\n"
+      + "<td>" + product['weight'] + "</td>\n"
       // Name of product
-      + "<td>" + product[i]['name'] + "</td>\n"
+      + "<td>" + product['name'] + "</td>\n"
       // Code of product
-      + "<td>" + product[i]['id'] + "</td>\n"
+      + "<td>" + product['id'] + "</td>\n"
       // Description of product
-      + "<td>" + product[i]['desc'].substring(0, 35) + "...</td>\n"
+      + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
       + "</tr>\n"
     );
   }
