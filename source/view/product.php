@@ -56,7 +56,7 @@ $product = json_decode($product, true);
                 <!-- two break lines for extra spacing -->
                 <br><br>
                 <hr>
-                <!--<div class="row-fluid">-->
+                <div class="row-fluid">
                   <div class="span9">
                     <h3>Top Ranked Related Products:</h3>
                     <table class="table table-hover">
@@ -128,6 +128,7 @@ $product = json_decode($product, true);
                   </li>
                 </ul>
               </div>
+            </div>
         </div>
       </div>
     </div> <!-- /container -->
