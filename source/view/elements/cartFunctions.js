@@ -92,10 +92,11 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
  * @return  >= 0 value of index, -1 if not found
  */
 function getCartIndex(pid) {
-  var cartJson = JSON.parse(readCookie('cart'));
+  var cartJson = readCookie('cart');
   for(var i = 0; i < cartJson.length; i++) {
-    alert("DEBUG: "+ cartJson[i].pid + " = " + pid);
-    if(cartJson[i].pid == pid)
+    var element = JSON.parse(cartJson[i]);
+    alert("DEBUG: "+ element.pid + " = " + pid);
+    if(element.pid == pid)
       return i;
   }
   return -1;

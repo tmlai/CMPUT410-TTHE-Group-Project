@@ -13,9 +13,9 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <script type="text/javascript" language="JavaScript" 
-      src="./elements/cartFunctions.js"></script>
-    <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/cartFunctions.js"></script>
   </head>
   <body onLoad="buildCartProducts()">   
     <?php

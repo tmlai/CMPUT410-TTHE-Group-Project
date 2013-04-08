@@ -62,6 +62,11 @@
               <ul class="dropdown-menu">
                 <li><a href="./elements/outstandingorders.php">
                   View Outsanding Orders</a></li>
+                 <?php 
+                  if($_SESSION['admin'] == 1)
+                    echo  '<li><a href="../admin.php">
+                          . Admin Module</a></li>';
+                 ?>
                 <li><a href="./elements/signout.php">Sign Out</a></li>
               </ul>
             </li>
