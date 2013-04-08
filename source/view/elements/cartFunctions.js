@@ -229,7 +229,7 @@ function buildCartProducts() {
           + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
           + "</tr>\n"
         );     
-        price += (product['quantity'] * product['price']);
+        price += (jsonCart[i].quantity * product['price']);
      }
     };
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);

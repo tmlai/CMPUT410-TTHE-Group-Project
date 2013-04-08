@@ -47,9 +47,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                 </tr>
             </thead>
             <tbody id="productsBody">
-              <div align="center">
-                <img src="./elements/img/spinner.gif" alt="Loading...">
-              </div>
+              <img align="middle" src="./elements/img/spinner.gif" alt="Loading...">
             </tbody>
           </table>
           
