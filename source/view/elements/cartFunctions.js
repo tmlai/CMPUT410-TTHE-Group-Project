@@ -156,7 +156,7 @@ function sendPurchase(user) {
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
-    var value = jsonCartdocument.getElementById("qtyField" + jsonCart[i].pid).value;
+    var value = jsonCart.(document.getElementById("qtyField" + jsonCart[i].pid)).value;
     // Delete item from cart
     if(value == 0) {
       jsonCart[i] = "";
@@ -181,7 +181,7 @@ function buildCartProducts() {
   document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
-  
+    alert("product:" + i);
     var xmlhttp = new XMLHttpRequest();
     if (window.XMLHttpRequest) {
       // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -203,9 +203,6 @@ function buildCartProducts() {
           + "<input type=\"text\" name=\"qtyField" + product.id + 
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
           + product.quantity +"><td>\n"
-          // Rank/index of product
-          + "<td>" + (i + 1) + "</td>\n"
-          + "<td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
@@ -240,7 +237,7 @@ function getTableHTML(part = "head") {
     element = (
       '<form name="cartForm" onSubmit="updateCart();">\n'
       + '      <div id="resultsDiv">\n'
-      + '      <table class="table table-hover">\n'
+      + '      <table class="table">\n' //<table class="table table-hover">\n'
       + '      <thead>\n'
       + '          <tr>\n'
       + '            <th>Order Quantity</th>\n'
