@@ -95,7 +95,6 @@ function getCartIndex(pid) {
   var cartJson = JSON.parse(readCookie('cart'));
   for(var i = 0; i < cartJson.length; i++) {
     var element = cartJson[i];
-    alert("DEBUG: "+ element.pid + " = " + pid);
     if(element.pid == pid)
       return i;
   }
@@ -156,12 +155,12 @@ function sendPurchase(user) {
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
-    var value = document.getElementById("qtyField" + jsonCart[i].pid).value;
+    var val = document.getElementById(("qtyField" + jsonCart[i].pid)).value;
     // Delete item from cart
-    if(value == 0) {
+    if(val == 0) {
       jsonCart[i] = "";
     } else {
-      jsonCart[i].quantity = value;
+      jsonCart[i].quantity = val;
     }
   }
   // Update the cart cookie
