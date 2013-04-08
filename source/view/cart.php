@@ -8,14 +8,14 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
   <head>
     <title>TTHE Enterprise - Search Results</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php
-        // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
-    ?>
     <script type="text/javascript" language="JavaScript" 
       src="/elements/productFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
       src="/elements/cartFunctions.js"></script>
+    <?php
+        // Default Style links
+        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+    ?>
   </head>
   <body onLoad="buildCartProducts()">
     <?php

@@ -225,7 +225,7 @@ function buildCartProducts() {
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
-  document.getElementById("resultsDiv").innerHTML = getTableHTML("tail");
+  document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
 }
  
 /*
