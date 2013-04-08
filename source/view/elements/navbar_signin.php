@@ -56,12 +56,11 @@
 								xmlhttp.send(jsonString);
 								
 								var response = xmlhttp.responseText;
-								alert(response);
 								if(response != 2) {
 									alert("Login failed: Please check you login information.");
 								} else {
-									alert("Success Now redirect user!!");
 									
+									alert("You are no logged in.");									
 								}
 							}
 						}
