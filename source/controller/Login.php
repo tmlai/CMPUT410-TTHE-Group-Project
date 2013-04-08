@@ -20,7 +20,9 @@ if($requestMethod == "post") {
 	//query for a user with that name
 	$dbLayer = new DbLayer();
 	$status = $dbLayer->authenticateCustomer($username, $password);
-	var_dump($status);
-	//echo strval($status);
+	if($status == 2) {
+		$_SESSION['user'] = $username;
+	}
+	echo strval($status);
 }
 ?>
