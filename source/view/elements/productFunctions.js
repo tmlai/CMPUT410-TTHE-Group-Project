@@ -63,7 +63,7 @@ function checkInStock(pid) {
       document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
     }
   };
-  xmlhttp.open('GET', '../model/Recommender/TopProduct.php?category=' + category 
+  xmlhttp.open('GET', '../model/Recommender/TopProduct.php?category='
     + category, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
