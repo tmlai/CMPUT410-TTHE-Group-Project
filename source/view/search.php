@@ -62,7 +62,7 @@ $advanced = $_GET['advanced'];
           if($search != "") {
             echo "Search Results for " . $_SESSION['search']; 
           } else if($search == "" && $advance == false) {
-		  
+			echo "A blank search is given, please enter a search.";
 		  } else {
             echo "Advanced Search";
           }
