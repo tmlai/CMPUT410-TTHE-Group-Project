@@ -79,7 +79,7 @@ $product = json_decode($product, true);
                       </table>
                   
                   <!--</div>-->
-            <!--<div class="rowfluid">-->
+            <div class="rowfluid">
               <div class="span3">
                 <ul class="thumbnails">
                   <li class="span10">
@@ -128,16 +128,17 @@ $product = json_decode($product, true);
                     </div>                    
                   </li>
                 </ul>
+                </div>
               </div>
-            <!--</div>-->
+            </div>
           </div>
         </div>
       </div>
     </div> <!-- /container -->
-    <script src="elements/rateit/src/jquery.rateit.js"></script>
     <!--<script src="elements/rateit/src/jquery.rateit.min.js"></script>-->
     <script src="elements/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
   </body>
