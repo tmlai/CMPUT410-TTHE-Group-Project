@@ -63,7 +63,7 @@ else{
 }
 
 $topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
-$topProductJSONList = [];
+$topProductJSONList = array();
 foreach ($topProductList as $topProduct){
 	//todo: modify to just pass id, name, price
 	//do we want to recommend products out of stock?
@@ -78,6 +78,5 @@ foreach ($topProductList as $topProduct){
 	$topProductJSONList[] =$topProductJSON;
 	//return a list of json data
 }
-return json_encode($topProductJSONList);
-
-		
+return json_encode($topProductJSONList);	
+?>
