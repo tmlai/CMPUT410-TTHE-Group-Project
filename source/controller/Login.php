@@ -11,7 +11,7 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-var_dump($POST);
+var_dump($_POST);
 // if($requestMethod == "post") {
 	// try {
 		// //query for a user with that name
