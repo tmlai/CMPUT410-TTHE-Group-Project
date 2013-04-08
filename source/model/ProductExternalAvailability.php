@@ -31,6 +31,7 @@ if ($requestMethod == "GET"){
 	else{
 		$productId = $_GET["cid"];
 		$quantity = $_GET["quantity"];
+		echo "<br />Asking for id ".$productId." quantity ".$quantity."<br />";
 		try {
 			$marketsJson = json_decode($marketInfo, true);
 			$markets = $marketsJson["markets"];
@@ -42,22 +43,23 @@ if ($requestMethod == "GET"){
 				$totalAvailable = 0;
 				foreach ($instockProductIds as $instockProductId){
 					$instockId = $instockProductId["id"];
-					echo $instockId;
+					
 					if ($instockId == $productId){
-						if ($quantity == 1 || $quantity == "1"){
-							$message = "True";
-							break;
-						}
-						else{
+						echo "<br />Stock id ".$instockId."<br />";
+// 						if ($quantity == 1 || $quantity == "1"){
+// 							$message = "True";
+// 							break;
+// 						}
+// 						else{
 							$url.="/products/".$instockId;
 							$productsInfo = file_get_contents($url);
 							$productsInfoJson = json_decode($productsInfo, true);
-							echo "<br />".$productsInfoJson["quantity"]."<br/> ";
+							echo "<br />PQuantity ".$productsInfoJson["quantity"]."<br/> ";
 							$totalAvailable += intval($productsInfoJson["quantity"]);
 							if ( $totalAvailable >= intval($quantity)){
 								$message = "True";
 								break;
-							}
+// 							}
 						}
 					}	
 				}
