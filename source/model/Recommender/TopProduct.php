@@ -3,13 +3,13 @@ namespace model;
 
 include_once ('../DbLayer.php');
 
-function checkStock($productId){
-	$stock = DbLayer::getStock($productId);
-	if ($stock == 0){
-		//call webservice to check
-	}
-	return $stock;
-}
+// function checkStock($productId){
+// 	$stock = DbLayer::getStock($productId);
+// 	if ($stock == 0){
+// 		//call webservice to check
+// 	}
+// 	return $stock;
+// }
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
