@@ -96,7 +96,7 @@ function getCartIndex(pid) {
  * @return  {"pid":"value","quantity":"#"}
  */
 function getJsonCartElement(pid, qty) {
-  return('{"' + pid + '":"quantity":"' + qty + '"}');
+  return('{"pid":"' + pid + '":"quantity":"' + qty + '"}');
 
 }
 
@@ -133,35 +133,61 @@ function getExternalAvail(pid, qty = 1) {
 }
 
 function sendPurchase(user) {
-  
+  alert("Debug: open order page, then on that page see order and confirm purchase...");
 }
 
-/* 
- * Search and retrieve data from external stores for pid of a given quantity.
- * default qty is 1.
- * @return  JSON of productId, store url and the quantity from that store as an 
- * array. ie: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
- 
-function getExternalStoreQty(pid, qty = 1) {
-  // AJAX call for external stores
-  var xmlhttp = new XMLHttpRequest();
-	if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}	else {
-    // code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-  
-  // Return if product is in stock
-  xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      return xmlhttp.responseText;
+function updateCart() {
+  var jsonCart = JSON.parse(readCookie('cart'));
+  for(var i = 0; i < jsonCart.length; i++) {
+    var value = jsonCartdocument.getElementById("qtyField" + jsonCart[i].pid).value;
+    // Delete item from cart
+    if(value == 0) {
+      jsonCart[i] = "";
+    } else {
+      jsonCart[i].quantity = value;
     }
-  };
-  
-  xmlhttp.open('POST', '/model/ProductExternalAvailability.php?cid=' + pid + '&quantity'
-    + qty, true);
-  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xmlhttp.send();
-}*/
+  }
+  // Update the cart cookie
+  cartJson = JSON.stringify(cartJson);
+  createCookie('cart', cartJson, 0);
+  // Update the cart viewed on cart.php
+  buildCartProducts();
+}
+
+/*
+ * Build and write the html for the Cart Products.
+ * @param products array
+ */ 
+function buildCartProducts() {
+  var div = document.getElementById("resultsDiv");
+  var jsonCart = JSON.parse(readCookie('cart'));
+  var product;
+  for(var i = 0; i < jsonCart.length; i++) {
+    product = getOneProduct(jsonCart[i].pid);
+    div.write(
+      "<tr>\n<td>\n"
+      // Quantity text field for product
+      + "<input type=\"text\" name=\"qtyField" + Json[i].pid + 
+      + "\" id=\"qtyField" + product[i].pid + "\" value=\"" 
+      + product[i].quantity +">"
+      // Rank/index of product
+      + "<td>" + (i + 1) + "</td>\n"
+      + "<td>\n"
+      // Thumbnail of product
+      + " <img src='/img/products/" + product[i]['id'] + ".jpg\'" 
+      + "\" alt=\"\" width=\"50\" height=\"50\">\n"
+      + "</td>\n"
+      // Price of product
+      + "<td>$" + product[i]['price'] + "</td>\n"
+      // Weight of product
+      + "<td>" + product[i]['weight'] + "</td>\n"
+      // Name of product
+      + "<td>" + product[i]['name'] + "</td>\n"
+      // Code of product
+      + "<td>" + product[i]['id'] + "</td>\n"
+      // Description of product
+      + "<td>" + product[i]['desc'].substring(0, 35) + "...</td>\n"
+      + "</tr>\n"
+    );
+  }
+}

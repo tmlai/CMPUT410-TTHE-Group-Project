@@ -26,7 +26,7 @@ if (!isset($marketInfo) || trim($marketInfo) === ""){
 	$message = "Cannot access market data";
 }
 else{
-	echo "Market info:<br/>".$marketInfo."<br/>";
+	echo $marketInfo;
 	$productId = $_GET["cid"];
 	$quantity = $_GET["quantity"];
 	try {

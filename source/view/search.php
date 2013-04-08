@@ -1,5 +1,5 @@
 <?php 
-namespace view;
+//namespace view;
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
