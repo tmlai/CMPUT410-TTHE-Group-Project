@@ -34,7 +34,20 @@
 		baseUri
 			/				-- homepage
 			/view			-- 
-	
+			/model/Recommender/RateProduct.php	-- GET request with n & category parameter get n top related products in that category
+								-- By default, returns 5 top related products
+								-- Return data format: JSON [ {"id":"","name":"","price":"","image":"","description":""}, {}, ...]
+								-- POST request with productId and rating parameter
+								-- Update the rating of the product by the current user (username is retrieved from session)
+								-- Return data format: JSON {"status":"ok", "message":""} (returns status 'failed' otherwise)
+			/model/Recommender/TopProduct.php	-- Accepts both POST and GET request
+								-- Params: date, days, category, numProduct
+								-- Default: current date time, 30 days, all categories, 1 product
+								-- Return top (numProduct) products in (category) in (days) unitil (date)
+								-- says return top 1 product in all categories that is purschased most in the previous 30 days from now
+								-- Return data format: JSON [ {"id":"","name":"","price":"","image":"","description":""}, {}, ...]
+
+
 2.	SQL schema and queries
 
 	The database schema is defined in setup.sql file. The list of relevant queries
