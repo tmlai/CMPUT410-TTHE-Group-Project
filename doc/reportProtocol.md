@@ -110,7 +110,7 @@
 		PURCHASE MODEL
 		1.	Search for external store availability of a product for a 
 			quantity, but need store url back as well as quantity at store.
-			- sending parameters: getStoresQuantities(cid, quantity)
+			- sending parameters: cid, quantity
 			- return: 
 				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
 		2.	To purchase sending the json of purchase invoice.
@@ -121,7 +121,7 @@
 		
 		RECOMMENDATION MODEL:
 		1.	Calling for top ranked products.
-			- sending parameters to: recommendRelatedProducts(quantity, category)
+			- sending parameters: quantity, category
 			- return:
 				JSON format (ie: [{getOneProduct($cid)}, {getOneProduct($cid)}]
 				of array of products in getOneProduct($cid) json format.
