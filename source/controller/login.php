@@ -1,34 +1,34 @@
 <?php
 //namespace controller;
+echo "return something!!!!!";
+// use model\DbLayer;
 
-use model\DbLayer;
+// session_start();
 
-session_start();
+// $_SESSION['prevPage'] = $_SESSION['prevPage'];
+// $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
-$_SESSION['prevPage'] = $_SESSION['prevPage'];
-$requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+// $username = $_POST['username'];
+// $password = $_POST['password'];
 
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-if($requestMethod == "post") {
-	try {
-		//query for a user with that name
-		$dbLayer = new DbLayer();
-		$status = $$dbLayer->authenticateCustomer($username, $password);
-		if($status == 0) {
-			echo "failed";
-		} else if($status == 1) {
-			echo "failed";
-		} else if($status == 2) {
-			echo "success";
-		} else {
-			echo "error";
-		}
-	} catch (Exception $e) {
-		echo "error";
-	}
-} else {
-	echo "error."
-}
+// if($requestMethod == "post") {
+	// try {
+		// //query for a user with that name
+		// $dbLayer = new DbLayer();
+		// $status = $$dbLayer->authenticateCustomer($username, $password);
+		// if($status == 0) {
+			// echo "failed";
+		// } else if($status == 1) {
+			// echo "failed";
+		// } else if($status == 2) {
+			// echo "success";
+		// } else {
+			// echo "error";
+		// }
+	// } catch (Exception $e) {
+		// echo "error";
+	// }
+// } else {
+	// echo "error."
+// }
 ?>
