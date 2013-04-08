@@ -52,7 +52,7 @@ if ($requestMethod == "GET"){
 							$productsInfo = file_get_contents($url);
 							$productsInfoJson = json_decode($productsInfo, true);
 							$totalAvailable += intval($productsInfoJson["quantity"]);
-							if ( $totalAvailable >= $quantity){
+							if ( $totalAvailable >= intval($quantity){
 								$message = "True";
 								break;
 							}
