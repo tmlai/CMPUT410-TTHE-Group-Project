@@ -156,7 +156,7 @@ function sendPurchase(user) {
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
-    var value = jsonCart.(document.getElementById("qtyField" + jsonCart[i].pid)).value;
+    var value = document.getElementById("qtyField" + jsonCart[i].pid);
     // Delete item from cart
     if(value == 0) {
       jsonCart[i] = "";
