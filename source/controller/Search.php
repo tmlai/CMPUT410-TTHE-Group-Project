@@ -6,8 +6,7 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 // get the product name given the product id
 use model\DbLayer;
-
-$list = new Array();
+$list = "";
 
 if($requestMethod == "get") {
 	$search = $_GET['searchField'];
