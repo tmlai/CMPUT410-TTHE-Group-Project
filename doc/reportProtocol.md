@@ -103,14 +103,14 @@
 		
 		CART MODEL:
 		1.	Search for external store availability of a product for a quantity
-		    - return type: true/false
+		    - return type(GET): true/false
 		    - sending parameters: cid, quantity
 		
 		
 		PURCHASE MODEL
 		1.	Search for external store availability of a product for a 
 			quantity, but need store url back as well as quantity at store.
-			- sending parameters: cid, quantity
+			- sending parameters(POST): cid, quantity
 			- return: 
 				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
 		2.	To purchase sending the json of purchase invoice.

@@ -82,11 +82,9 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
 /* 
  * Search external stores for pid of a given quantity.
  * default qty is 1.
- * Return quantity of availability.
+ * Return bool of condition of quantity available.
  */
 function getExternalAvail(pid, qty = 1) {
-  // DEBUG: to be implemented
-  alert("debug: Checking other stores...");
   // AJAX call for external stores
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
@@ -100,13 +98,49 @@ function getExternalAvail(pid, qty = 1) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      //DEBUG: TODO when dblayer has necessary function
+      if(xmlhttp.responseText == "true") {
+        return true;
+      }
+      return false;
     }
   };
   
-  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
+  xmlhttp.open('GET', '/source/controller/WebServices.php?cid=' + pid + '&quantity'
+    + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
+}
+
+function sendPurchase(user) {
   
-  return 1;
+}
+
+/* 
+ * Search and retrieve data from external stores for pid of a given quantity.
+ * default qty is 1.
+ * @return  JSON of productId, store url and the quantity from that store as an 
+ * array. ie: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
+ */
+function getExternalStoreQty(pid, qty = 1) {
+  // AJAX call for external stores
+  var xmlhttp = new XMLHttpRequest();
+	if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}	else {
+    // code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+  
+  // Return if product is in stock
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      return xmlhttp.responseText;
+    }
+  };
+  
+  xmlhttp.open('POST', '/source/controller/WebServices.php?cid=' + pid + '&quantity'
+    + qty, true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send();
 }
