@@ -134,6 +134,8 @@ function getExternalAvail(pid, qty = 1) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+    var response = xmlhttp.responseText;
+    
       if(xmlhttp.responseText == "true") {
         return true;
       }
@@ -194,7 +196,7 @@ function buildCartProducts() {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
-        div.write(
+        document.write(
           "<tr>\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id + 
