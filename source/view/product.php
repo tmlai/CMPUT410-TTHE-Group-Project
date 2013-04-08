@@ -112,7 +112,7 @@ $product = json_decode($product, true);
                             <?php echo "'" . $product['id'] . "', '" 
                               . $_SESSION['user'] . "'"
                               
-                            ?>, value, );
+                            ?>, value);
                         });
                       -->
                       </script>
