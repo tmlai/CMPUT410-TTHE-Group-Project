@@ -178,6 +178,7 @@ function updateCart() {
 function buildCartProducts() {
   //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
+  document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
   
@@ -196,7 +197,7 @@ function buildCartProducts() {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
-        document.getElementById("resultsDiv").innerHTML = (
+        document.getElementById("resultsDiv").innerHTML += (
           "<tr>\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id + 
@@ -226,6 +227,35 @@ function buildCartProducts() {
     };
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
-    
   }
+  document.getElementById("resultsDiv").innerHTML = getTableHTML("tail");
+}
+ 
+/*
+ * Get HTML string of table head and tail. (Default is head)
+ */
+function getTableHTML(part = "head") {
+  var element = "";
+  if(part == "head") {
+    element = (
+      '<form name="cartForm" onSubmit="updateCart();">\n'
+      + '      <div id="resultsDiv">\n'
+      + '      <table class="table table-hover">\n'
+      + '      <thead>\n'
+      + '          <tr>\n'
+      + '            <th>Order Quantity</th>\n'
+      + '            <th><!-- placeholder --></th>\n'
+      + '            <th>Price</th>\n'
+      + '            <th>Weight</th>\n'
+      + '            <th>Name</th>\n'
+      + '            <th>Code</th>\n'
+      + '            <th>Description</th>\n'
+      + '          </tr>\n'
+      + '      </thead>\n'
+      + '      <tbody>\n'
+    );
+  } else {
+    element = '</tbody>\n</table>';
+  }
+  return element;
 }

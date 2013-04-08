@@ -30,40 +30,29 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       }
     ?>
     <div class="container">
-        <h3>Your Current Cart</h3>
-        <div class="container">
-            <form name="cartForm" onSubmit="updateCart();">
-            <table class="table table-hover">
-            <thead>
-                <tr>
-                  <th>Order Quantity</th>
-                  <th><!-- placeholder --></th>
-                  <th>Price</th>
-                  <th>Weight</th>
-                  <th>Name</th>
-                  <th>Code</th>
-                  <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-              <div id="resultsDiv">
-                <tr><img src="./elements/img/spinner.gif" alt="Loading..."></tr>
-              </div>
-            </tbody>
-            </div>
-            </table>
-            <table border="0">
-              <tr>
-                <td align="left">
-                  <button class="btn btn-primary" type="submit">Update Cart</button>
-                </td>
-                <td align="right">
-                  <button class="btn btn-success" onclick="currorder.php">
-                  Checkout
-                  </button>
-                </td>
-              </tr>
-            </form>
+      <h3>Your Current Cart</h3>
+      <!--<div class="container">-->
+      <form name="cartForm" onSubmit="updateCart();">
+        <div id="resultsDiv">
+          <div align="center">
+            <img src="./elements/img/spinner.gif" alt="Loading...">
+          </div>
+        </div>
+        <table border="0">
+          <col align="left">
+          <col align="right">
+          <tr>
+            <td>
+              <button class="btn btn-primary" type="submit">Update Cart</button>
+            </td>
+            <td>
+              <button class="btn btn-success" onclick="currorder.php">
+              Checkout
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
         
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
