@@ -55,15 +55,15 @@ function checkInStock(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      //var jsonArray = JSON.parse(xmlhttp.responseText);
-      var jsonArray = xmlhttp.responseText;
+      jsonArray = JSON.parse(xmlhttp.responseText);
+      //var jsonArray = xmlhttp.responseText;
       // DEBUG: need to be json to use buildRelatedProducts
-      //buildRelatedProducts(jsonArray);
+      buildRelatedProducts(jsonArray);
       // DEBUG: temporary, see two lines above
-      document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
+      //document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
     }
   };
-  xmlhttp.open('GET', '/source/controller/ProductServices.php?ranknum=5&rankcat=' 
+  xmlhttp.open('GET', '/source/controller/TopProduct.php?category=' + category 
     + category, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
