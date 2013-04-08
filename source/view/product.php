@@ -29,7 +29,7 @@ $product = json_decode($product, true);
   </head>
   <body onLoad="loadProductAJAX(<?php 
       echo "'" . $_SESSION['productID'] . "', ";
-      echo "'" . $product['cateID'] . "'";
+      echo "'" . $product['cateId'] . "'";
     ?>);">
     <?php
       // Navigation Bar
@@ -53,8 +53,6 @@ $product = json_decode($product, true);
                   <?php
                     echo $product['desc'];
                   ?>
-                <!-- two break lines for extra spacing -->
-                <br><br>
                 <hr>
                 <div class="row-fluid">
                   <div class="span9">
@@ -132,10 +130,10 @@ $product = json_decode($product, true);
         </div>
       </div>
     </div> <!-- /container -->
-    <!--<script src="elements/rateit/src/jquery.rateit.min.js"></script>-->
     <script src="elements/rateit/src/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="elements/rateit/src/jquery.rateit.js"></script>
+    <script src="elements/rateit/src/jquery.rateit.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
   </body>
