@@ -58,9 +58,9 @@ function checkInStock(pid) {
       jsonArray = JSON.parse(xmlhttp.responseText);
       //var jsonArray = xmlhttp.responseText;
       // DEBUG: need to be json to use buildRelatedProducts
-      buildRelatedProducts(jsonArray);
+      //buildRelatedProducts(jsonArray);
       // DEBUG: temporary, see two lines above
-      //document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
+      document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
     }
   };
   xmlhttp.open('GET', '/source/controller/TopProduct.php?category=' + category 
