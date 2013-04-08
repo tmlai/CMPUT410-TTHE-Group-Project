@@ -71,9 +71,9 @@
 								
 								var response = xmlhttp.responseText;
 								alert(response);
-								if(response != "2") {
+								if(response != 2) {
 									alert("Login failed: Please check you login information.");
-								} else if(response == "1") {
+								} else {
 									alert("Success Now redirect user!!");
 								}
 							}
