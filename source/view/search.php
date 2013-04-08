@@ -39,7 +39,7 @@ $advanced = $_GET['advanced'];
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		xmlhttp.open('GET', '/source/controller/Search.php?searchField='
-			+<?php echo $search;?>, true);
+			+"'" +<?php echo $search;?>+"'", true);
 		xmlhttp.send();
 		stringList = xmlhttp.responseText;
 		console.log(stringList);
