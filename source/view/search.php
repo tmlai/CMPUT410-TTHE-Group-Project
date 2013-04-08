@@ -3,6 +3,8 @@
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+
+$search = $_GET['searchField'];
 ?>
 <!DOCTYPE html>
 <html>
