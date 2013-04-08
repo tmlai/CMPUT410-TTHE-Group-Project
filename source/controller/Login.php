@@ -10,13 +10,14 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 if($requestMethod == "post") {
 	try {
-		echo "In the try";
-		// $jsonString = file_get_contents("php://input");
-		// $json = json_decode($jsonString, true);
+		$jsonString = file_get_contents("php://input");
+		$json = json_decode($jsonString, true);
 		
-		// //$username = trim($json['username']);
-		// //$password = trim($json['password']);
+		$username = trim($json['username']);
+		$password = trim($json['password']);
 
+		echo "username: $username, password: $password";
+		
 		// //query for a user with that name
 		// //$dbLayer = new DbLayer();
 		// //$status = $$dbLayer->authenticateCustomer($username, $password);
