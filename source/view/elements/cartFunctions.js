@@ -26,7 +26,7 @@ function addProdToCart(pid) {
 
 /*
  * Add quantity of a product.
- * Note: JSON format of cart: [{"pid":"value","quantity":"#", "externalquantity":"#"
+ * Note: JSON format of cart: [{"pid":"value","quantity":"#"},...]
  * Default qty is 1. When greater than 1, the quantity is the total not
  * to increment quantity.
  * @return  true/false on availability of quantity of a product.
@@ -61,23 +61,13 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       }
       alert("Debug: 0");
       // Add pid entry with quantity to cart.
-      //var jsonS = eval('(' + cartJson + ')');
-      var length = JSON.stringify(jsonArray).length;
-      //for(element in jsonS) length++;
-      cartJson[length][("'" + pid + "'")] = new Array(qty, qtyExternal);
-      // if(jsonArray.quantity >= qtyNew) {
-        // update the quantity.
-        // cartJson[0][pid] = new Array(qty, qtyExternal);
-        // jsonArray.quantity -= qtyNew;
-      // } else {
-        // Check other stores for remaining quantity.
-        // var qtyRem = qty - jsonArray.quantity;
-        // checkExternalAvail(pid, qtyRem);
-      // }
+      var index = getCartIndex(pid);
+      if(index == -1) index = cartJson.length;
+      cartJson[index] = getJSONCartElement(pid, qty);
   } else {
     alert("Debug: 1");
     // Create cart and store this product id.
-    cartJson = '{"' + pid + '":"' + new Array(qty, qtyExternal) + '"}';
+    cartJson = new Array(getJSONCartElement(pid, qty));
   }
   // Update the cart
   cartJson = JSON.stringify(cartJson);
@@ -85,6 +75,29 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
   alert("Debug: 2");
   alert("json: " + JSON.parse(readCookie('cart')) + "\nnonjson: " + readCookie('cart'));
   return true;
+}
+
+/*
+ * Return index of json object in cart json array.
+ * @param   pid //productId
+ * @return  >= 0 value of index, -1 if not found
+ */
+function getCartIndex(pid) {
+  var cartJson = JSON.parse(readCookie('cart'));
+  for(var i = o; i < cartJson.length; i++) {
+    if(cartJson[i].pid == pid)
+      return i;
+  }
+  return -1;
+}
+
+/*
+ * Get JSON element of a cart product entry.
+ * @return  {"pid":"value","quantity":"#"}
+ */
+function getJsonCartElement(pid, qty) {
+  return '{"' + pid + '":"quantity":"' + quantity+ '"}';
+
 }
 
 /* 

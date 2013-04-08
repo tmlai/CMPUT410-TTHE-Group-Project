@@ -131,29 +131,7 @@
 					{"cid":"#","quantity":"#"}
 					...
 				]
-		
-		1a.	Search for external store availability of a product for a 
-			quantity, but need store url back as well as quantity at store.
-			- sending parameters(AJAX POST): username, cid, quantity, externalQuantity
-			- return: 
-				JSON format: [
-					{"cid":"#", "storeId":"...", "quantity":"#",
-					"auxiliaryOrderId":"#", "deliverydate":"", "cid":"#", 
-					"price":"#"}
-					{"cid":"#", "storeId":"...", "quantity":"#",
-					"auxiliaryOrderId":"#", "deliverydate":"", "cid":"#", 
-					"price":"#"}
-					...
-					]
-		1b.	To purchase sending the json of purchase invoice.
-			-sending: (Note: amount is calculated on client-side)
-				username cid, storeUrl, quantity, auxiliaryOrderId, deliveryDate, amount
-				JSON format: {"username":"value", "orderLists": "[
-					{"cid", "storeUrl", "quantity", "auxiliaryOrderId", "deliveryDate", "amount"}
-					{"cid", "storeUrl", "quantity", "auxiliaryOrderId", "deliveryDate", "amount"}
-					...
-					]"}
-		
+				
 		RECOMMENDATION MODEL:
 		1.	Calling for top ranked products.
 			- sending parameters: quantity, category
