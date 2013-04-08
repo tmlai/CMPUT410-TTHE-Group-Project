@@ -108,17 +108,30 @@
 		
 		
 		PURCHASE MODEL
-		1.	Search for external store availability of a product for a 
-			quantity, but need store url back as well as quantity at store.
-			- sending parameters(POST): cid, quantity
-			- return: 
-				JSON format: {"cid":"#", "storeurl":"...", "quantity":"#",...}
-		2.	To purchase sending the json of purchase invoice.
-			-sending: 
-				JSON format: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
-			Note: "storeurl":"" (empty value) will be local (internal) store 
-				purchasing.
-		
+		algorithm for purchasing/transaction:
+			i.customer click to purchase cart
+			ii. use cart model to check external availablity
+			iii. confirm customer paybuddy
+			iv. purchase model 1a (Note: quantity is in-store, 
+				externalQuantity is external), which on server-side then calls 1b.
+			
+		{"username":"value", "orderLists": "[
+			{"cid":"#","quantity":"#"}
+			{"cid":"#","quantity":"#"}
+			...
+			]
+			
+		1.	Purchase will send json for the purchase order, and server-side
+			will order from external stores as needed...
+			return format: JSON format{"deliveryDate":"", "status":"true/false"}
+			
+			sending (POST) in JSON format: 
+				{"username":"value", "orderLists": "[
+					{"cid":"#","quantity":"#"}
+					{"cid":"#","quantity":"#"}
+					...
+				]
+				
 		RECOMMENDATION MODEL:
 		1.	Calling for top ranked products.
 			- sending parameters: quantity, category

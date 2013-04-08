@@ -55,12 +55,9 @@ function checkInStock(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      //var jsonArray = JSON.parse(xmlhttp.responseText);
-      var jsonArray = xmlhttp.responseText;
-      // DEBUG: need to be json to use buildRelatedProducts
-      //buildRelatedProducts(jsonArray);
-      // DEBUG: temporary, see two lines above
-      document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
+      var jsonArray = JSON.parse(xmlhttp.responseText);
+      // var jsonArray = xmlhttp.responseText;
+      buildRelatedProducts(jsonArray);
     }
   };
   xmlhttp.open('POST', '../model/Recommender/TopProduct.php?category='
@@ -137,4 +134,31 @@ function rateProduct(pid, user, value) {
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
   }
+}
+
+/*
+ * AJAX call for one product info
+ */
+ function getOneProduct(pid) {
+  var xmlhttp = new XMLHttpRequest();
+	if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}	else {
+    // code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+  
+  // Return if product is in stock
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      var jsonObj = JSON.parse(xmlhttp.responseText);
+      alert("cart DEBUG: getting one product: " + jsonObj);
+      console.log(jsonObj);
+      //var jsonArray = xmlhttp.responseText;
+      return(jsonObj);
+    }
+  };
+  xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
+  xmlhttp.send();
 }

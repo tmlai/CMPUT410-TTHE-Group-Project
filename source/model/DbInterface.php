@@ -273,6 +273,8 @@ interface DbInterface {
 	 */
 	public function getOlapReport(Olap $olapObj);
 	
+	public function getGenOlapReport(Olap $olapObj);
+	
 	/*
 	 * Get the top n sellings products within a period.
 	 * $from or $to can be null to indicate no constraint.

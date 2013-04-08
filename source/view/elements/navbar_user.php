@@ -51,7 +51,7 @@
                 
             </li>
             </ul><ul class="nav pull-right">
-            <li class="pull-right"><a href="#cart">View Cart    
+            <li class="pull-right"><a href="cart.php">View Cart    
                 <i class="icon-shopping-cart icon-white"></i></a></li>
             <li class="dropdown" id="userdropdown">
               <a class="dropdown-toggle" 
@@ -62,6 +62,11 @@
               <ul class="dropdown-menu">
                 <li><a href="./elements/outstandingorders.php">
                   View Outsanding Orders</a></li>
+                 <?php 
+                  if($_SESSION['admin'] == 1)
+                    echo  '<li><a href="../admin.php">
+                          . Admin Module</a></li>';
+                 ?>
                 <li><a href="./elements/signout.php">Sign Out</a></li>
               </ul>
             </li>

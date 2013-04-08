@@ -89,7 +89,7 @@
                 
             </li>
             </ul><ul class="nav pull-right">
-            <li class="pull-right"><a href="#cart">View Cart    
+            <li class="pull-right"><a href="cart.php">View Cart    
                 <i class="icon-shopping-cart icon-white"></i></a></li>
             <li class="dropdown" id="signindropdown">
               <a class="dropdown-toggle" 

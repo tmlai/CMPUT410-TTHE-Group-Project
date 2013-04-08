@@ -13,7 +13,7 @@ try {
 			//if id is passed (GET /products/:id)
 			//else (GET /products)
 			if(!empty($_GET)) {
-        // id param for one product, ranknum for ranked products
+        // id param for one product
         $id = $_GET['id'];
         $product = $dbLayer->getOneProduct($id);
         echo $product;

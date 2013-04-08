@@ -985,7 +985,7 @@ class DbLayer implements DbInterface {
 			$statement .= " username is NULL ";
 
 		} elseif ($username == '') {
-			$statement .= " 1 ";
+			$statement .= " username is not NULL ";
 		} else {
 			$statement .= " username = '{$username}' ";
 		}
@@ -994,6 +994,7 @@ class DbLayer implements DbInterface {
 		if (isset($cid) == false) {
 			$statement .= " AND cid is NULL ";
 		} elseif ($cid == '') {
+			$statement .= " AND cid is not NULL ";
 		} else {
 			$statement .= " AND cid = '{$cid}' ";
 		}
@@ -1001,7 +1002,8 @@ class DbLayer implements DbInterface {
 		$storeId = $olapObj->getStoreId();
 		if (isset($storeId) == false) {
 			$statement .= " AND storeId is NULL ";
-		} elseif ($storeId == 0) {
+		} elseif ($storeId == 0 || $storeId == '') {
+			$statement .= " AND storeId is not NULL ";
 		} else {
 			$statement .= " AND storeId = {$storeId} ";
 		}
@@ -1030,6 +1032,70 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 		return $list;
 	}
+	
+	public function getGenOlapReport(Olap $olapObj) {
+		$pdo = self::getPdo();
+	
+		$statement = "SELECT username, cid, storeId, SUM(aggregatedCount) as aggregatedCount, 
+		SUM(amounts) as amounts
+		 FROM OlapReport WHERE ";
+	
+		$username = $olapObj->getUsername();
+		if (isset($username) == false) {
+			$statement .= " username is NULL ";
+	
+		} elseif ($username == '') {
+			$statement .= " username is not NULL ";
+		} else {
+			$statement .= " username = '{$username}' ";
+		}
+	
+		$cid = $olapObj->getCid();
+		if (isset($cid) == false) {
+			$statement .= " AND cid is NULL ";
+		} elseif ($cid == '') {
+			$statement .= " AND cid is not NULL ";
+		} else {
+			$statement .= " AND cid = '{$cid}' ";
+		}
+	
+		$storeId = $olapObj->getStoreId();
+		if (isset($storeId) == false) {
+			$statement .= " AND storeId is NULL ";
+		} elseif ($storeId == 0 || $storeId == '') {
+			$statement .= " AND storeId is not NULL ";
+		} else {
+			$statement .= " AND storeId = {$storeId} ";
+		}
+	
+		$from = $olapObj->getFrom();
+		$to = $olapObj->getTo();
+		if (isset($from) == false && isset($to) == false) {
+			$statement .= " AND orderDate is NULL ";
+		} elseif ($from == '' && $to == '') {
+		} else {
+			$statement .= " AND orderDate >= '{$from}' ";
+			$statement .= " AND orderDate <= '{$to}' ";
+		}
+		
+		$statement .= " GROUP BY username, cid, storeId ";
+	
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute();
+	
+		$temp = $stmt->fetchAll();
+		$list = array();
+		foreach ($temp as &$row) {
+			$olap = new Olap($row[0], $row[1], $row[2], $from, $to,
+					$row[3], $row[4]);
+			$list[] = $olap;
+		}
+	
+		$pdo = null;
+		return $list;
+	}
+	
+	
 
 	/*
 	 * Get the top n sellings products within a period.
@@ -1068,6 +1134,7 @@ class DbLayer implements DbInterface {
 		foreach ($temp as &$row) {
 			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
 					$row[5], $row[6], $row[7]);
+			$product->setTotalSold($row[9]);
 			$list[] = $product;
 		}
 		$pdo = null;

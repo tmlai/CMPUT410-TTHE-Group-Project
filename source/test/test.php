@@ -504,7 +504,7 @@ class TestDb {
 // \test\TestDb::testSearchProductByConstraints();
 // \test\TestDb::testGetCustomersOrders();
 // \test\TestDb::testGetListProductsInOrder();
-// \test\TestDb::testGetOlapReport();
+\test\TestDb::testGetOlapReport();
 // \test\TestDb::testSetPayment();
 // \test\TestDb::testGetTopNSellings();
 // \test\TestDb::testRateProduct();
