@@ -107,7 +107,11 @@ function getCartIndex(pid) {
  * @return  {"pid":"value","quantity":"#"}
  */
 function getJsonCartElement(pid, qty) {
-  return('{"pid":"' + pid + '":"quantity":"' + qty + '"}');
+  var arr = new Array();
+  arr['pid'] = pid;
+  arr['quantity'] = qty;
+  arr = JSON.stringify(arr);
+  return(arr);
 
 }
 
@@ -178,9 +182,9 @@ function buildCartProducts() {
     div.write(
       "<tr>\n<td>\n"
       // Quantity text field for product
-      + "<input type=\"text\" name=\"qtyField" + product.pid + 
-      + "\" id=\"qtyField" + product.pid + "\" value=\"" 
-      + product.quantity +">"
+      + "<input type=\"text\" name=\"qtyField" + product['id'] + 
+      + "\" id=\"qtyField" + product['id'] + "\" value=\"" 
+      + product['quantity'] +">"
       // Rank/index of product
       + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
