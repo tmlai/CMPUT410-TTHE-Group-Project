@@ -15,6 +15,8 @@ class Product {
 	private $stock;
 	private $rating;
 
+	private $totalSold;
+
 	public function json_encode() {
 		$array = array();
 		$array['cid'] = $this->cid;
@@ -26,6 +28,7 @@ class Product {
 		$array['dimensions'] = $this->dimensions;
 		$array['stock'] = $this->stock;
 		$array['rating'] = $this->rating;
+		$array['totalSold'] = $this->totalSold;
 		return \json_encode($array);
 	}
 
@@ -111,6 +114,14 @@ class Product {
 
 	public function setRating($rating) {
 		$this->rating = $rating;
+	}
+
+	public function getTotalSold() {
+		return $this->totalSold;
+	}
+
+	public function setTotalSold($totalSold) {
+		$this->totalSold = $totalSold;
 	}
 
 }
