@@ -126,7 +126,7 @@ function getExternalAvail(pid, qty = 1) {
     }
   };
   
-  xmlhttp.open('GET', '/model/ProductExternalAvailability?cid=' + pid + '&quantity='
+  xmlhttp.open('GET', '../model/ProductExternalAvailability?cid=' + pid + '&quantity='
     + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
