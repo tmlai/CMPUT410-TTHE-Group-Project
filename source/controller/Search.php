@@ -4,7 +4,7 @@ session_start();
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
-// get the product name given the product id
+include_once '../model/DbLayer.php';
 use model\DbLayer;
 $list = "";
 
