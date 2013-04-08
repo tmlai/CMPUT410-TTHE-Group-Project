@@ -100,7 +100,19 @@
 		
 		---WEB SERVICES----
 		+ 	PHP file to handle the following ajax requests
+		WEB API HANDLERS:
+		1.  GET /products : mapped to "/source/controller/ProductServices.php"
+			- return: all id's in stock
+			
+		2.	GET /products/:id  : mapped to "/source/controller/ProductServices.php?id='+id"
+			- return: details on a product with a given id
 		
+		3.	POST /products/:id/order : mapped to "/source/controller/ProductServices.php"
+			- return: an expected delivery date
+		
+		4.	GET /orders/:id : mapped to "/source/controller/OrderServices.php"
+			- return: the expected delivery date with a given order id
+			
 		CART MODEL:
 		1.	Search for external store availability of a product for a quantity
 		    - return type(GET): true/false

@@ -152,12 +152,13 @@ function rateProduct(pid, user, value) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      var jsonObj = JSON.parse(xmlhttp.responseText);
-      alert("cart DEBUG: getting one product: " + jsonObj);
+      //var jsonObj = JSON.parse(xmlhttp.responseText);
+      //alert("cart DEBUG: getting one product: " + jsonObj[1]);
+      //console.log(jsonObj);
       //var jsonArray = xmlhttp.responseText;
-      return(jsonObj);
+      return(xmlhttp.responseText);
     }
   };
-  xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, true);
+  xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
   xmlhttp.send();
 }
