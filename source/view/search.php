@@ -38,8 +38,9 @@ $advanced = $_GET['advanced'];
 		// code for IE6, IE5
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
-		xmlhttp.open('GET', '/source/controller/Search.php?searchField='
-			+"'" +<?php echo $search;?>+"'", true);
+		xmlhttp.open('GET', 
+			'/source/controller/Search.php?searchField=<?php echo $search;?>',
+			true);
 		xmlhttp.send();
 		stringList = xmlhttp.responseText;
 		console.log(stringList);
