@@ -179,11 +179,15 @@ function buildCartProducts() {
   //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
   var price = 0;
+  // reset div for products
+  document.getElementById("productsBody").innerHTML = "";
+  // If no cart exists
   if(jsonCart == null) {
-    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>"
+    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
     return false;
   }
-    
+  // 
+   
   //document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
@@ -208,7 +212,7 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + product.quantity + "\"><td>\n"
+          + jsonCart[i].quantity + "\" size=\"8\"><td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
