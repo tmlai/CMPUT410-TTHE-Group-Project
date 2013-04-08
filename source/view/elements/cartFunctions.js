@@ -79,6 +79,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
   cartJson = JSON.stringify(cartJson);
   createCookie('cart', cartJson, 0);
   alert("Debug: 2");
+  alert("json: " + JSON.parse(readCookie('cart')) + "\nnonjson: " + readCookie('cart'));
   return true;
 }
 
