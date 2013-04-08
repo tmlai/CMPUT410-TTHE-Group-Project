@@ -59,7 +59,7 @@
                         </script>
                         
                         <form  name="searchForm" class="form-search" method="get" 
-                        action="/source/view/search.php?advanced=false" 
+                        action="/source/view/search.php" 
                         enctype="text/plain">
                             <div class="input-append">
                                 <input name="searchField" type="text" id="searchField" 
