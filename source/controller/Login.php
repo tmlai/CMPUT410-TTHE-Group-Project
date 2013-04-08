@@ -7,10 +7,11 @@ session_start();
 
 $_SESSION['prevPage'] = $_SESSION['prevPage'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-echo $_SESSION['prevPage'];
-// $username = $_POST['username'];
-// $password = $_POST['password'];
 
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+var_dump($POST);
 // if($requestMethod == "post") {
 	// try {
 		// //query for a user with that name
