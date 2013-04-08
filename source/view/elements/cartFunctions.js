@@ -63,11 +63,11 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       // Add pid entry with quantity to cart.
       var index = getCartIndex(pid);
       if(index == -1) index = cartJson.length;
-      cartJson[index] = getJSONCartElement(pid, qty);
+      cartJson[index] = getJsonCartElement(pid, qty);
   } else {
     alert("Debug: 1");
     // Create cart and store this product id.
-    cartJson = new Array(getJSONCartElement(pid, qty));
+    cartJson = new Array(getJsonCartElement(pid, qty));
   }
   // Update the cart
   cartJson = JSON.stringify(cartJson);
@@ -96,7 +96,7 @@ function getCartIndex(pid) {
  * @return  {"pid":"value","quantity":"#"}
  */
 function getJsonCartElement(pid, qty) {
-  return '{"' + pid + '":"quantity":"' + quantity+ '"}';
+  return('{"' + pid + '":"quantity":"' + quantity+ '"}');
 
 }
 
