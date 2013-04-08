@@ -23,15 +23,7 @@ if($requestMethod == "post") {
 		//query for a user with that name
 		$dbLayer = new DbLayer();
 		$status = $dbLayer->authenticateCustomer($username, $password);
-		if($status == 0) {
-			echo "failed";
-		} else if($status == 1) {
-			echo "failed";
-		} else if($status == 2) {
-			echo "success";
-		} else {
-			echo "error";
-		}
+		echo strval($status);
 	} catch (Exception $e) {
 		echo "error";
 	}
