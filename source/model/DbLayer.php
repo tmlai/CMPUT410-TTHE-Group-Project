@@ -77,7 +77,7 @@ class DbLayer implements DbInterface {
 	 *             $password: the admin password
 	 * Return type: true if successfully, false if fails
 	 */
-		public function addAdmin($username, $password) {
+	public function addAdmin($username, $password) {
 		$pdo = self::getPdo();
 
 		$preState = "INSERT INTO Admins values(?,?)";
@@ -145,6 +145,47 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 
 		return $status;
+	}
+
+	public function authenticateAdmin($username, $password) {
+		$status = -1;
+		
+		$pdo = self::getPdo();
+		
+		$preState = "SELECT password FROM Admins  WHERE name=?";
+		
+		$stmt = $pdo->prepare($preState);
+		
+		$stmt->bindParam(1, $username);
+		
+		$stmt->execute();
+		
+		// 		while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+		// 			if($row['password'] == $password){
+		// 				$exist = true;
+		// 				break;
+		// 			}
+		// 		}
+		
+		$list = $stmt->fetchAll();
+		if (count($list) == 0) {
+			// no user with the indicated username exists
+			$status = 0;
+		} else {
+			for ($i = 0; $i < count($list); $i++) {
+				if (strcmp($list[$i][0], $password) == 0) {
+					$status = 1;
+					break;
+				}
+			}
+			if ($status == -1) {
+				$status = 0;
+			}
+		}
+		$pdo = null;
+		
+		return $status;
+		
 	}
 
 	// Products section
@@ -372,19 +413,19 @@ class DbLayer implements DbInterface {
 	}
 
 	// -------------------------------------------------------------------------
-	
+
 	/*
 	 * Get the list of external stores which we do business with
-	*/
-	public function getListExternalStores(){
+	 */
+	public function getListExternalStores() {
 		$pdo = self::getPdo();
 		$statement = "SELECT * FROM Stores WHERE storeId <> 1";
 		$stmt = $pdo->prepare($statement);
 		$stmt->execute();
-		
+
 		$list = array();
 		$temp = $stmt->fetchAll();
-		foreach($temp as &$row){
+		foreach ($temp as &$row) {
 			$store = new Store($row[0], $row[1], $row[2], $row[3]);
 			$list[] = $store;
 		}
@@ -1032,24 +1073,24 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 		return $list;
 	}
-	
+
 	public function getGenOlapReport(Olap $olapObj) {
 		$pdo = self::getPdo();
-	
+
 		$statement = "SELECT username, cid, storeId, SUM(aggregatedCount) as aggregatedCount, 
 		SUM(amounts) as amounts
 		 FROM OlapReport WHERE ";
-	
+
 		$username = $olapObj->getUsername();
 		if (isset($username) == false) {
 			$statement .= " username is NULL ";
-	
+
 		} elseif ($username == '') {
 			$statement .= " username is not NULL ";
 		} else {
 			$statement .= " username = '{$username}' ";
 		}
-	
+
 		$cid = $olapObj->getCid();
 		if (isset($cid) == false) {
 			$statement .= " AND cid is NULL ";
@@ -1058,7 +1099,7 @@ class DbLayer implements DbInterface {
 		} else {
 			$statement .= " AND cid = '{$cid}' ";
 		}
-	
+
 		$storeId = $olapObj->getStoreId();
 		if (isset($storeId) == false) {
 			$statement .= " AND storeId is NULL ";
@@ -1067,7 +1108,7 @@ class DbLayer implements DbInterface {
 		} else {
 			$statement .= " AND storeId = {$storeId} ";
 		}
-	
+
 		$from = $olapObj->getFrom();
 		$to = $olapObj->getTo();
 		if (isset($from) == false && isset($to) == false) {
@@ -1077,25 +1118,23 @@ class DbLayer implements DbInterface {
 			$statement .= " AND orderDate >= '{$from}' ";
 			$statement .= " AND orderDate <= '{$to}' ";
 		}
-		
+
 		$statement .= " GROUP BY username, cid, storeId ";
-	
+
 		$stmt = $pdo->prepare($statement);
 		$stmt->execute();
-	
+
 		$temp = $stmt->fetchAll();
 		$list = array();
 		foreach ($temp as &$row) {
-			$olap = new Olap($row[0], $row[1], $row[2], $from, $to,
-					$row[3], $row[4]);
+			$olap = new Olap($row[0], $row[1], $row[2], $from, $to, $row[3],
+					$row[4]);
 			$list[] = $olap;
 		}
-	
+
 		$pdo = null;
 		return $list;
 	}
-	
-	
 
 	/*
 	 * Get the top n sellings products within a period.

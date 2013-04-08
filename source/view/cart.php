@@ -8,32 +8,33 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
   <head>
     <title>TTHE Enterprise - Search Results</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php
-        // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
-    ?>
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
       src="./elements/cartFunctions.js"></script>
+    <?php
+        // Default Style links
+        require("./elements/head_includes.php");
+    ?>
   </head>
-  <body onLoad="buildCartProducts()">   
+  <body onLoad="buildCartProducts()">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
         // user dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+        require("./elements/navbar_user.php");
       } else {
         // sign in dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+        require("./elements/navbar_signin.php");
       }
     ?>
     <div class="container">
-        <h3>Your Current Cart</h3>
-        <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;">
-            <form name="cartForm" onSubmit="updateCart();">
-            <table class="table table-hover">
+      <h3>Your Current Cart</h3>
+      <!--<div class="container">-->
+      <form name="cartForm" onSubmit="updateCart();">
+        <div id="resultsDiv">
+          <form name="cartForm" onSubmit="updateCart();">
+            <table class="table"> 
             <thead>
                 <tr>
                   <th>Order Quantity</th>
@@ -45,25 +46,31 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                   <th>Description</th>
                 </tr>
             </thead>
-            <tbody>
-              <div id="resultsDiv">
-                
-              </div>
+            <tbody id="productsBody">
             </tbody>
-            </table>
-            <table bornder="0">
-              <tr>
-                <td align="left">
-                  <button class="btn btn-primary" type="submit">Update Cart</button>
-                </td>
-                <td align="right">
-                  <button class="btn btn-success" onclick="currorder.php">
-                  Checkout
-                  </button>
-                </td>
-              </tr>
-            </form>
+          </table>
+          
         </div>
+        <div align="center">
+        <table border="0" width="100%">
+          <col align="left">
+          <col align="center">
+          <col align="right">
+          <tr>
+            <td>
+              <button class="btn btn-primary" type="submit">Update Cart</button>
+            </td>
+            <td id="priceCalc"></td>
+            <td>
+              <button class="btn btn-success" onclick="currorder.php">
+              Checkout
+              </button>
+            </td>
+          </tr>
+        </table>
+        </div>
+      </form>
+        
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

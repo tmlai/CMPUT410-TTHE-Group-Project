@@ -3,6 +3,10 @@
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+
+$search = trim($_GET['searchField']);
+
+$advanced = $_GET['advanced'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,11 +20,31 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script type="text/javascript" language="JavaScript">
     <!--
     <?php 
-          if($_SESSION['search'] != "")
+          if($search != "")
             echo "dropBool = false;\n";
           else
             echo "dropBool = true;\n";
     ?>
+	function initialLoading() {
+		setToggle();
+		//send ajax call to get a list of products
+		var xmlhttp = new XMLHttpRequest();
+		var productList = new Array();
+		var stringList = "";
+		if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}	else {
+		// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open('GET', 
+			'/source/controller/Search.php?searchField=<?php echo $search;?>',
+			true);
+		xmlhttp.send();
+		stringList = xmlhttp.responseText;
+		console.log(stringList);
+	}
     function setToggle() {
       if(dropBool) {
         document.getElementById("adSearch").className="collapse in";
@@ -41,7 +65,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     -->
     </script>
   </head>
-  <body onLoad="setToggle();">   
+  <body onLoad="initialLoading();">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -55,10 +79,12 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <div class="container">
         <h3>
         <?php 
-          if($_SESSION['search'] != "") {
-            echo "Search Results for " . $_SESSION['search']; 
-          } else {
-            echo "Advanced Search";
+          if($search != "") {
+            echo "Search Results for " . $search; 
+          } else if($advanced == null) {
+			echo "Advanced Search";
+		  } else if ($search == ""){
+            echo "A blank search is given, please enter a search.";
           }
         ?>
         </h3>
@@ -66,7 +92,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           data-target="#adSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
-        <div id="adSearch" class="collapse">
+        <div id="advSearch" class="collapse">
                 <div id="store_div" class="control-group">
                     <label class="control-label" for="storeField">Access Code
                     </label>

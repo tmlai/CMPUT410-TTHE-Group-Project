@@ -100,7 +100,19 @@
 		
 		---WEB SERVICES----
 		+ 	PHP file to handle the following ajax requests
+		WEB API HANDLERS:
+		1.  GET /products : mapped to "/source/controller/ProductServices.php"
+			- return: all id's in stock
+			
+		2.	GET /products/:id  : mapped to "/source/controller/ProductServices.php?id"=+id
+			- return: details on a product with a given id
 		
+		3.	POST /products/:id/order : mapped to "/source/controller/ProductServices.php"
+			- return: an expected delivery date
+		
+		4.	GET /orders/:id : "mapped to /source/controller/OrderServices.php?oid"=+oid
+			- return: the expected delivery date with a given order id
+			
 		CART MODEL:
 		1.	Search for external store availability of a product for a quantity
 		    - return type(GET): true/false
@@ -110,27 +122,19 @@
 		PURCHASE MODEL
 		algorithm for purchasing/transaction:
 			i.customer click to purchase cart
-			ii. use cart model to check external availablity
-			iii. confirm customer paybuddy
+			//ii. use cart model to check external availablity
+			//iii. confirm customer paybuddy
 			iv. purchase model 1a (Note: quantity is in-store, 
 				externalQuantity is external), which on server-side then calls 1b.
 			
-		{"username":"value", "orderLists": "[
-			{"cid":"#","quantity":"#"}
-			{"cid":"#","quantity":"#"}
-			...
-			]
+		[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}...]
 			
 		1.	Purchase will send json for the purchase order, and server-side
 			will order from external stores as needed...
 			return format: JSON format{"deliveryDate":"", "status":"true/false"}
 			
-			sending (POST) in JSON format: 
-				{"username":"value", "orderLists": "[
-					{"cid":"#","quantity":"#"}
-					{"cid":"#","quantity":"#"}
-					...
-				]
+			sending (POST) in JSON format (Note: get user from $_SESSION['user']): 
+				orderLists=[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}...]
 				
 		RECOMMENDATION MODEL:
 		1.	Calling for top ranked products.

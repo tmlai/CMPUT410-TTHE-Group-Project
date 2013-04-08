@@ -1,0 +1,10 @@
+# put in web_docs folder
+# make sure MultiViews is off
+# hey
+Options +FollowSymLinks
+RewriteEngine on
+
+RewriteRule ^products/(c?[0-9]+)/order/?$ source/controller/ProductServices.php?id=$1
+RewriteRule ^products/(c?[0-9]+)/?$ source/controller/ProductServices.php?id=$1
+RewriteRule ^products/?$ source/controller/ProductServices.php
+RewriteRule ^orders/([0-9A-Za-z]+)/?$ source/controller/OrderServices.php?oid=$1

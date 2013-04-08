@@ -21,11 +21,11 @@ if($requestMethod == "post") {
 	$dbLayer = new DbLayer();
 	$status = $dbLayer->authenticateCustomer($username, $password);
   
-  // Check if user is admin
-  // if($dbLayer->authenticateAdminAdmin($username, $password))
-  //  $_SEESION['admin'] = 1; // 0 is not admin
-  // else
-  //  $_SEESION['admin'] = 0;
+  // Check if user is admin (1 if admin, 0 not)
+  if($dbLayer->authenticateAdmin($username, $password))
+    $_SEESION['admin'] = 1;
+  else
+    $_SEESION['admin'] = 0;
   
 	if($status == 2) {
 		$_SESSION['user'] = $username;

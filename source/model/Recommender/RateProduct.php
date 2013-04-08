@@ -48,7 +48,7 @@ elseif ($requestMethod == "GET"){
 		$n = 5;
 	}
 	$productList = recommendRelatedProducts($n, $cat);
-	$productJSONList = [];
+	$productJSONList = array();
 	foreach ($productList as $product){
 		$simpleProduct = array (
 			"cid" => $product.getCid(),

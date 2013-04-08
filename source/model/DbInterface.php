@@ -41,6 +41,8 @@ interface DbInterface {
 	 * 			2	:	username and password match
 	 */
 	public function authenticateCustomer($username, $password);
+	
+	public function authenticateAdmin($username, $password);
 
 	/*
 	 * Add the admin to the database

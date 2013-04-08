@@ -18,14 +18,6 @@
                 <ul class="dropdown-menu">
                     <li>
                         <script type="text/javascript" language="JavaScript">
-                        <!--
-                        // Return false when searchField is empty
-                        function searchCheck() {
-                            if(document.searchForm.searchField.value != "") {
-                                return true;
-                            }
-                            return false;
-                        }
 						
 						//validates the user and create cookies
 						function login() {
@@ -67,11 +59,12 @@
                         </script>
                         
                         <form  name="searchForm" class="form-search" method="get" 
-                        action="./search.php? + document.searchForm.searchField.value"  
-                        enctype="text/plain" onSubmit="return searchCheck();">
+                        action="/source/view/search.php" 
+                        enctype="text/plain">
                             <div class="input-append">
-                                <input name="searchField" type="text" 
+                                <input name="searchField" type="text" id="searchField" 
                                 class="span2 search-query" placeholder="Search">
+								<input name="advanced" value="false" type="hidden">
                                 <button type="submit" class="btn">
                                 <i class="icon-search"></i></button>
                             </div>

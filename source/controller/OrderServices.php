@@ -9,13 +9,13 @@ try {
 	$dbLayer = new DbLayer();
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 	switch($requestMethod) {
-		case 'post':
-			$oid = file_get_contents("php://input");
+		case 'get':
+			$oid = $_GET['oid'];
 			$info = $dbLayer->checkDeliveryDate($oid);
 			echo $info;
 			break;
 		case 'get':
-			echo "Incorrect Request Method. Please use 'POST'.";
+			echo "Incorrect Request Method. Please use 'GET'.";
 			break;
 	}
 } catch (Exception $e) {

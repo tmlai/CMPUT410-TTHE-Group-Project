@@ -2,7 +2,6 @@
  * Add a product to the user's cart.
  */
 function addProdToCart(pid) {
-  alert("debug: add prod to cart");
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -40,7 +39,6 @@ function addProdToCart(pid) {
  * @return  true/false on availability of quantity of a product.
  */
 function updateCartProductQty(pid, jsonArray, qty = 1) {
-  alert("debug: updating cart");
   var jsonArray = JSON.parse(jsonArray);
   var cartJson = JSON.parse(readCookie('cart'));
   // For quantity used from other stores.
@@ -67,22 +65,17 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
           }
         }
       }
-      alert("Debug: 0");
       // Add pid entry with quantity to cart.
       var index = getCartIndex(pid);
-      alert("DEBUG: cart index = " + index);
       if(index == -1) index = cartJson.length;
       cartJson[index] = getJsonCartElement(pid, qty);
   } else {
-    alert("Debug: 1");
     // Create cart and store this product id.
     cartJson = new Array(getJsonCartElement(pid, qty));
   }
   // Update the cart
   cartJson = JSON.stringify(cartJson);
   createCookie('cart', cartJson, 0);
-  alert("Debug: 2");
-  alert("json: " + JSON.parse(readCookie('cart')) + "\nnonjson: " + readCookie('cart'));
   return true;
 }
 
@@ -95,7 +88,6 @@ function getCartIndex(pid) {
   var cartJson = JSON.parse(readCookie('cart'));
   for(var i = 0; i < cartJson.length; i++) {
     var element = cartJson[i];
-    alert("DEBUG: "+ element.pid + " = " + pid);
     if(element.pid == pid)
       return i;
   }
@@ -134,6 +126,8 @@ function getExternalAvail(pid, qty = 1) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+    var response = xmlhttp.responseText;
+    
       if(xmlhttp.responseText == "true") {
         return true;
       }
@@ -154,17 +148,18 @@ function sendPurchase(user) {
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
-    var value = jsonCartdocument.getElementById("qtyField" + jsonCart[i].pid).value;
+    var id = "qtyField" + jsonCart[i].pid;
+    var val = document.getElementById(id).value;
     // Delete item from cart
-    if(value == 0) {
+    if(val == 0) {
       jsonCart[i] = "";
     } else {
-      jsonCart[i].quantity = value;
+      jsonCart[i].quantity = val;
     }
   }
   // Update the cart cookie
-  cartJson = JSON.stringify(cartJson);
-  createCookie('cart', cartJson, 0);
+  jsonCart = JSON.stringify(jsonCart);
+  createCookie('cart', jsonCart, 0);
   // Update the cart viewed on cart.php
   buildCartProducts();
 }
@@ -174,35 +169,73 @@ function updateCart() {
  * @param products array
  */ 
 function buildCartProducts() {
-  var div = document.getElementById("resultsDiv");
+  //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
+  var emptyCount = 0;
+  var price = 0;
+  // reset div for products
+  document.getElementById("productsBody").innerHTML = " ";
+  // If no cart exists
+  if(jsonCart == null) {
+    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+    return false;
+  }
+  
+   
+  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
-    var product = getOneProduct(jsonCart[i]['pid']);
-    div.write(
-      "<tr>\n<td>\n"
-      // Quantity text field for product
-      + "<input type=\"text\" name=\"qtyField" + product.id + 
-      + "\" id=\"qtyField" + product.id + "\" value=\"" 
-      + product.quantity +">"
-      // Rank/index of product
-      + "<td>" + (i + 1) + "</td>\n"
-      + "<td>\n"
-      // Thumbnail of product
-      + " <img src='/img/products/" + product['id'] + ".jpg\'" 
-      + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-      + "</td>\n"
-      // Price of product
-      + "<td>$" + product['price'] + "</td>\n"
-      // Weight of product
-      + "<td>" + product['weight'] + "</td>\n"
-      // Name of product
-      + "<td>" + product['name'] + "</td>\n"
-      // Code of product
-      + "<td>" + product['id'] + "</td>\n"
-      // Description of product
-      + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
-      + "</tr>\n"
-    );
+    var xmlhttp = new XMLHttpRequest();
+    if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }	else {
+      // code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    // Return if product is in stock
+    xmlhttp.onreadystatechange=function() {
+      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
+        //console.log(getOneProduct(jsonCart[i]['pid']));
+        var product = JSON.parse(xmlhttp.responseText);
+        try {
+          document.getElementById("productsBody").innerHTML += (
+            "<tr>\n<td>\n"
+            // Quantity text field for product
+            + "<input type=\"text\" name=\"qtyField" + product.id
+            + "\" id=\"qtyField" + product.id + "\" value=\"" 
+            + jsonCart[i].quantity + "\" size=\"8\"><td>\n"
+            // Thumbnail of product
+            + " <img src='/img/products/" + product['id'] + ".jpg\'" 
+            + "\" alt=\"\" width=\"50\" height=\"50\">\n"
+            + "</td>\n"
+            // Price of product
+            + "<td>$" + product['price'] + "</td>\n"
+            // Weight of product
+            + "<td>" + product['weight'] + "</td>\n"
+            // Name of product
+            + "<td>" + product['name'] + "</td>\n"
+            // Code of product
+            + "<td>" + product['id'] + "</td>\n"
+            // Description of product
+            + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
+            + "</tr>\n"
+          );     
+          price += (jsonCart[i].quantity * product['price']);
+        } catch(err) {
+          emptyCount++;
+        }
+     }
+   
+    };
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
+    xmlhttp.send();
   }
+  //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
+  document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
+    + price;
+  if(emptyCount == jsonCount.length)
+    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }

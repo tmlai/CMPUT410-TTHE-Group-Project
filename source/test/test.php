@@ -91,6 +91,26 @@ class TestDb {
 		$result = $dbLayer->authenticateCustomer($username, $pw);
 		echo strval($result);
 	}
+	
+	public static function testAuthenticateAdmin() {
+	
+		$dbLayer = new DbLayer();
+		$username = 'teo';
+		$pw = 'teo';
+		$result = $dbLayer->authenticateAdmin($username, $pw);
+		echo strval($result);
+	
+		$username = 'root';
+		$pw = 'teo';
+		$result = $dbLayer->authenticateAdmin($username, $pw);
+		echo strval($result);
+	
+		$username = 'root';
+		$pw = 'admin04';
+		$result = $dbLayer->authenticateAdmin($username, $pw);
+		echo strval($result);
+	}
+	
 	/*
 	 * PASS
 	 */
@@ -483,33 +503,34 @@ class TestDb {
 		var_dump($list);
 	}
 }
-// \test\TestDb::testAddProduct();
-// \test\TestDb::testAddCustomer();
-// \test\TestDb::testAuthenticateCustomer();
-// \test\TestDb::testUpdateStock('c000001', 5);
-// \test\TestDb::testMapProductCategory();
-// \test\TestDb::testGetCategories();
-// \test\TestDb::testGetProducts();
-// \test\TestDb::testSearchProductByName('beam');
-// \test\TestDb::testAddStore();
-// \test\TestDb::testSearchStore();
-// \test\TestDb::testGetProductsInStock();
-// \test\TestDb::testGetOneProduct();
-// \test\TestDb::testGetStock();
-// \test\TestDb::testReceiveOrderFromStore();
-// \test\TestDb::testCheckDeliveryDate();
-// \test\TestDb::testAddOrder();
-// \test\TestDb::testSearchProductByCode();
-// \test\TestDb::testSearchProductByCategory();
-// \test\TestDb::testSearchProductByConstraints();
-// \test\TestDb::testGetCustomersOrders();
-// \test\TestDb::testGetListProductsInOrder();
+\test\TestDb::testAddProduct();
+\test\TestDb::testAddCustomer();
+\test\TestDb::testAuthenticateCustomer();
+\test\TestDb::testUpdateStock('c000001', 5);
+\test\TestDb::testMapProductCategory();
+\test\TestDb::testGetCategories();
+\test\TestDb::testGetProducts();
+\test\TestDb::testSearchProductByName('beam');
+\test\TestDb::testAddStore();
+\test\TestDb::testSearchStore();
+\test\TestDb::testGetProductsInStock();
+\test\TestDb::testGetOneProduct();
+\test\TestDb::testGetStock();
+\test\TestDb::testReceiveOrderFromStore();
+\test\TestDb::testCheckDeliveryDate();
+\test\TestDb::testAddOrder();
+\test\TestDb::testSearchProductByCode();
+\test\TestDb::testSearchProductByCategory();
+\test\TestDb::testSearchProductByConstraints();
+\test\TestDb::testGetCustomersOrders();
+\test\TestDb::testGetListProductsInOrder();
 \test\TestDb::testGetOlapReport();
-// \test\TestDb::testSetPayment();
-// \test\TestDb::testGetTopNSellings();
-// \test\TestDb::testRateProduct();
-// \test\TestDb::testGetTopNRatedProducts();
-// \test\TestDb::testRecommendRelatedProducts();
-// \test\TestDb::testGetListCustomers();
-// \test\TestDb::testGetListExternalStores();
+\test\TestDb::testSetPayment();
+\test\TestDb::testGetTopNSellings();
+\test\TestDb::testRateProduct();
+\test\TestDb::testGetTopNRatedProducts();
+\test\TestDb::testRecommendRelatedProducts();
+\test\TestDb::testGetListCustomers();
+\test\TestDb::testGetListExternalStores();
+\test\TestDb::testAuthenticateAdmin();
 ?>
