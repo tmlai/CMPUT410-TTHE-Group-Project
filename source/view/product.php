@@ -71,10 +71,7 @@ $product = json_decode($product, true);
                               <th>Description</th>
                           </tr>
                       </thead>
-                      <tbody>
-                        <div id="resultsDiv">
-                          
-                        </div>
+                      <tbody id="resultsDiv">
                       </tbody>
                       </table>
                   
@@ -131,7 +128,7 @@ $product = json_decode($product, true);
                 </div>
               </div>
             </div>
-          </div>
+          <!--</div>-->
         </div>
       </div>
     </div> <!-- /container -->
