@@ -60,7 +60,7 @@ function checkInStock(pid) {
       buildRelatedProducts(jsonArray);
     }
   };
-  xmlhttp.open('POST', '../model/Recommender/TopProduct.php?category='
+  xmlhttp.open('GET', '../model/Recommender/TopProduct.php?category='
     + category, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();

@@ -2,7 +2,6 @@
  * Add a product to the user's cart.
  */
 function addProdToCart(pid) {
-  alert("debug: add prod to cart");
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -40,7 +39,6 @@ function addProdToCart(pid) {
  * @return  true/false on availability of quantity of a product.
  */
 function updateCartProductQty(pid, jsonArray, qty = 1) {
-  alert("debug: updating cart");
   var jsonArray = JSON.parse(jsonArray);
   var cartJson = JSON.parse(readCookie('cart'));
   // For quantity used from other stores.
@@ -67,22 +65,17 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
           }
         }
       }
-      alert("Debug: 0");
       // Add pid entry with quantity to cart.
       var index = getCartIndex(pid);
-      alert("DEBUG: cart index = " + index);
       if(index == -1) index = cartJson.length;
       cartJson[index] = getJsonCartElement(pid, qty);
   } else {
-    alert("Debug: 1");
     // Create cart and store this product id.
     cartJson = new Array(getJsonCartElement(pid, qty));
   }
   // Update the cart
   cartJson = JSON.stringify(cartJson);
   createCookie('cart', cartJson, 0);
-  alert("Debug: 2");
-  alert("json: " + JSON.parse(readCookie('cart')) + "\nnonjson: " + readCookie('cart'));
   return true;
 }
 
@@ -245,32 +238,4 @@ function buildCartProducts() {
     + price;
   if(emptyCount == jsonCount.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
-}
- 
-/*
- * Get HTML string of table head and tail. (Default is head)
- */
-function getTableHTML(part = "head") {
-  var element = "";
-  if(part == "head") {
-    element = (
-      '<form name="cartForm" onSubmit="updateCart();">\n'
-      + '      <table class="table">\n' //<table class="table table-hover">\n'
-      + '      <thead>\n'
-      + '          <tr>\n'
-      + '            <th>Order Quantity</th>\n'
-      + '            <th><!-- placeholder --></th>\n'
-      + '            <th>Price</th>\n'
-      + '            <th>Weight</th>\n'
-      + '            <th>Name</th>\n'
-      + '            <th>Code</th>\n'
-      + '            <th>Description</th>\n'
-      + '          </tr>\n'
-      + '      </thead>\n'
-      + '      <tbody id="productsBody">\n'
-    );
-  } else {
-    element = '</tbody>\n</table>';
-  }
-  return element;
 }
