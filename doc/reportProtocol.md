@@ -131,4 +131,6 @@
 			- return:
 				String of status ('success','fail','error')
 		2.	Registering a user
-			- send parameters to
+			- POST requeset to /controller/UserRegistration.php with the user info
+			- return:
+				String status

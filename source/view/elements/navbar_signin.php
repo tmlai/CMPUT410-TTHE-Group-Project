@@ -41,6 +41,38 @@
                           return true;
                         }*/
                         -->
+						
+						function login() {
+							var username = document.loginform.usernameField.value.trim();
+							var password = document.loginform.passwordField.value.trim();
+							
+							//check the user inputs
+							if(username == "" || password == "") {
+								alert("Please fill in all the fields.");
+							} else {
+								//do the ajax request
+								var xmlhttp = new XMLHttpRequest();
+								if (window.XMLHttpRequest) {
+								// code for IE7+, Firefox, Chrome, Opera, Safari
+									xmlhttp=new XMLHttpRequest();
+								}	else {
+								// code for IE6, IE5
+									xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+								}
+								
+								xmlhttp.open('POST', '/source/controller/Login.php', false);
+								xmlhttp.send()
+								
+								var response = xmlhttp.responseText;
+								if(response == "failed") {
+									alert("Login failed: Please check you login information.");
+								} else if(response == "true") {
+									alert("Success Now redirect user!!");
+								} else {
+									alert("Error? something messed up!!");
+								}
+							}
+						}
                         </script>
                         
                         <form  name="searchForm" class="form-search" method="get" 
@@ -76,8 +108,8 @@
               <ul class="dropdown-menu">
                 <script type="text/javascript" language="JavaScript" 
                           src="/elements/loginValidation.js"></script>
-                <form name="loginform" class="form" 
-                  enctype="text/plain" action="#" 
+                <form name="loginform" class="form" method="POST"
+                  enctype="application/json" action="login()" 
                   onSubmit="return checkLogin();">
                 <li>
                   <br>
