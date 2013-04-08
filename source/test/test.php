@@ -91,6 +91,26 @@ class TestDb {
 		$result = $dbLayer->authenticateCustomer($username, $pw);
 		echo strval($result);
 	}
+	
+	public static function testAuthenticateAdmin() {
+	
+		$dbLayer = new DbLayer();
+		$username = 'teo';
+		$pw = 'teo';
+		$result = $dbLayer->authenticateAdmin($username, $pw);
+		echo strval($result);
+	
+		$username = 'root';
+		$pw = 'teo';
+		$result = $dbLayer->authenticateAdmin($username, $pw);
+		echo strval($result);
+	
+		$username = 'root';
+		$pw = 'admin04';
+		$result = $dbLayer->authenticateAdmin($username, $pw);
+		echo strval($result);
+	}
+	
 	/*
 	 * PASS
 	 */
@@ -504,7 +524,7 @@ class TestDb {
 // \test\TestDb::testSearchProductByConstraints();
 // \test\TestDb::testGetCustomersOrders();
 // \test\TestDb::testGetListProductsInOrder();
-\test\TestDb::testGetOlapReport();
+// \test\TestDb::testGetOlapReport();
 // \test\TestDb::testSetPayment();
 // \test\TestDb::testGetTopNSellings();
 // \test\TestDb::testRateProduct();
@@ -512,4 +532,5 @@ class TestDb {
 // \test\TestDb::testRecommendRelatedProducts();
 // \test\TestDb::testGetListCustomers();
 // \test\TestDb::testGetListExternalStores();
+\test\TestDb::testAuthenticateAdmin();
 ?>
