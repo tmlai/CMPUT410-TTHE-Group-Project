@@ -4,7 +4,7 @@
 Options +FollowSymLinks
 RewriteEngine on
 
-RewriteRule ^products/(c?[0-9]+)/?$ /source/controller/ProductServices.php?id=$1
+RewriteRule ^products/([0-9]+)/?$ /source/controller/ProductServices.php?id=$1
 RewriteRule ^orders/([0-9A-Za-z]+)$ /source/controller/OrderServices.php?id=$1
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
