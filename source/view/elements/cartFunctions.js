@@ -182,9 +182,9 @@ function buildCartProducts() {
     div.write(
       "<tr>\n<td>\n"
       // Quantity text field for product
-      + "<input type=\"text\" name=\"qtyField" + product['id'] + 
-      + "\" id=\"qtyField" + product['id'] + "\" value=\"" 
-      + product['quantity'] +">"
+      + "<input type=\"text\" name=\"qtyField" + product.id + 
+      + "\" id=\"qtyField" + product.id + "\" value=\"" 
+      + product.quantity +">"
       // Rank/index of product
       + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
