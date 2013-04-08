@@ -57,7 +57,7 @@ $product = json_decode($product, true);
                 <br><br>
                 <hr>
                 <div class="row-fluid">
-                  <div class="span9" style="position:absolute; buttom:0;">
+                  <div class="span9">
                     <h3>Top Ranked Related Products:</h3>
                     <table class="table table-hover">
                       <thead>
@@ -78,10 +78,11 @@ $product = json_decode($product, true);
                       </tbody>
                       </table>
                     <!--</div>-->
-                  </div>
+                  <!--</div>-->
                 </div>
               </div>
             </div>
+            <div class="rowfluid">
             <div class="span3">
                 <ul class="thumbnails">
                   <li class="span10">
@@ -121,10 +122,11 @@ $product = json_decode($product, true);
                     </div>                    
                   </li>
                 </ul>
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!-- </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
