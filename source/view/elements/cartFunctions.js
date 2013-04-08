@@ -70,6 +70,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       alert("Debug: 0");
       // Add pid entry with quantity to cart.
       var index = getCartIndex(pid);
+      alert("DEBUG: cart index = " + index);
       if(index == -1) index = cartJson.length;
       cartJson[index] = getJsonCartElement(pid, qty);
   } else {
@@ -175,7 +176,7 @@ function buildCartProducts() {
     div.write(
       "<tr>\n<td>\n"
       // Quantity text field for product
-      + "<input type=\"text\" name=\"qtyField" + Json[i].pid + 
+      + "<input type=\"text\" name=\"qtyField" + product[i].pid + 
       + "\" id=\"qtyField" + product[i].pid + "\" value=\"" 
       + product[i].quantity +">"
       // Rank/index of product
