@@ -13,6 +13,6 @@ if($requestMethod == "get") {
 	// $list = $dbLayer->searchProduct($search);
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProduct($partial);
-	echo $search;
+	echo \json_encode($list);
 }
 ?>
