@@ -155,7 +155,8 @@ function sendPurchase(user) {
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
-    var val = document.getElementById(("qtyField" + jsonCart[i].pid)).value;
+    var id = "qtyField" + jsonCart[i].pid;
+    var val = document.getElementById(id).value;
     // Delete item from cart
     if(val == 0) {
       jsonCart[i] = "";
@@ -177,6 +178,11 @@ function updateCart() {
 function buildCartProducts() {
   //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
+  if(jsonCart == null) {
+    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>"
+    return false;
+  }
+    
   document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
@@ -235,7 +241,6 @@ function getTableHTML(part = "head") {
   if(part == "head") {
     element = (
       '<form name="cartForm" onSubmit="updateCart();">\n'
-      + '      <div id="resultsDiv">\n'
       + '      <table class="table">\n' //<table class="table table-hover">\n'
       + '      <thead>\n'
       + '          <tr>\n'
