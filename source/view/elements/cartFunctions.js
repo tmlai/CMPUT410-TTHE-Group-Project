@@ -201,7 +201,7 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id + 
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + product.quantity +">"
+          + product.quantity +"><td>\n"
           // Rank/index of product
           + "<td>" + (i + 1) + "</td>\n"
           + "<td>\n"
