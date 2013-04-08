@@ -13,7 +13,8 @@ if($requestMethod == "get") {
 	$search = $_GET['searchField'];
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProduct($search);
+	echo $search;
 }
 //echo \json_encode($list);
-echo "return string";
+
 ?>
