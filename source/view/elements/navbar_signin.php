@@ -59,7 +59,7 @@
                         </script>
                         
                         <form  name="searchForm" class="form-search" method="get" 
-                        action="/source/view/search.php" 
+                        action="/source/view/search.php?advanced=false" 
                         enctype="text/plain">
                             <div class="input-append">
                                 <input name="searchField" type="text" id="searchField" 
@@ -69,7 +69,7 @@
                             </div>
                         </form>
                     </li>
-                    <li><a href="./search.php">Advanced Search</a></li>
+                    <li><a href="./search.php?advanced=true">Advanced Search</a></li>
                     <li class="divider"></li>
                     <li class="dropdown-submenu">
                         <a tabindex="-1" href="index.php">Categories</a>

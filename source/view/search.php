@@ -5,6 +5,8 @@ $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 
 $search = $_GET['searchField'];
+
+$advanced = $_GET['advanced'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,7 +20,7 @@ $search = $_GET['searchField'];
     <script type="text/javascript" language="JavaScript">
     <!--
     <?php 
-          if($_SESSION['search'] != "")
+          if($search != "")
             echo "dropBool = false;\n";
           else
             echo "dropBool = true;\n";
@@ -57,9 +59,11 @@ $search = $_GET['searchField'];
     <div class="container">
         <h3>
         <?php 
-          if($_SESSION['search'] != "") {
+          if($search != "") {
             echo "Search Results for " . $_SESSION['search']; 
-          } else {
+          } else if($search == "" && $advance == false) {
+		  
+		  } else {
             echo "Advanced Search";
           }
         ?>
