@@ -28,6 +28,7 @@ $product = json_decode($product, true);
       src="./elements/productFunctions.js"></script>
     <script src="elements/rateit/src/jquery.rateit.js"></script>
     <script src="elements/rateit/src/jquery.rateit.min.js"></script>
+    <script src="elements/jquery-1.9.1.min.js"></script>
   </head>
   <body onLoad="loadProductAJAX(<?php 
       echo "'" . $_SESSION['productID'] . "', ";
