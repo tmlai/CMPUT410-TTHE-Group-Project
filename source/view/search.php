@@ -4,9 +4,12 @@ session_start();
 $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 
-$search = $_GET['searchField'];
+$search = trim($_GET['searchField']);
 
 $advanced = $_GET['advanced'];
+if($advanced == "") {
+	$advanced = "true";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,11 +63,11 @@ $advanced = $_GET['advanced'];
         <h3>
         <?php 
           if($search != "") {
-            echo "Search Results for " . $_SESSION['search']; 
-          } else if($search == "" && $advance == false) {
-			echo "A blank search is given, please enter a search.";
-		  } else {
-            echo "Advanced Search";
+            echo "Search Results for " . $search; 
+          } else if($advance == "true") {
+			echo "Advanced Search";
+		  } else if ($search == ""){
+            echo "A blank search is given, please enter a search.";
           }
         ?>
         </h3>
