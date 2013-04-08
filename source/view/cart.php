@@ -37,6 +37,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <img src="./elements/img/spinner.gif" alt="Loading...">
           </div>
         </div>
+        <div align="center">
         <table border="0" width="100%">
           <col align="left">
           <col align="right">
@@ -51,6 +52,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             </td>
           </tr>
         </table>
+        </div>
       </form>
         
     </div> <!-- /container -->
