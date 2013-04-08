@@ -2,7 +2,7 @@
  * Add a product to the user's cart.
  */
 function addProdToCart(pid) {
-  alert("updating product to cart...");
+  alert("debug: add prod to cart");
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -32,7 +32,7 @@ function addProdToCart(pid) {
  * @return  true/false on availability of quantity of a product.
  */
 function updateCartProductQty(pid, jsonArray, qty = 1) {
-  alert("debug: checking stock");
+  alert("debug: updating cart");
   var jsonArray = JSON.parse(jsonArray);
   var cartJson = JSON.parse(readCookie('cart'));
   // For quantity used from other stores.
@@ -58,6 +58,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
           }
         }
       }
+      alert("Debug: 0");
       // Add pid entry with quantity to cart.
         cartJson[0][pid] = new Array(qty, qtyExternal);
       // if(jsonArray.quantity >= qtyNew) {
@@ -70,12 +71,14 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
         // checkExternalAvail(pid, qtyRem);
       // }
   } else {
+    alert("Debug: 1");
     // Create cart and store this product id.
     cartJson = '{"' + pid + '":"' + new Array(qty, qtyExternal) + '"}';
   }
   // Update the cart
   cartJson = JSON.stringify(cartJson);
   createCookie('cart', cartJson, 0);
+  alert("Debug: 2");
   return true;
 }
 
