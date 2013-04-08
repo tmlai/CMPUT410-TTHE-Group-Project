@@ -1,7 +1,12 @@
 <?php
+use model\DbLayer;
+
 include_once "adminHelper.php";
+include_once "./model/Olap.php";
 use controller\AdminHelper;
+use model\Olap;
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -86,6 +91,10 @@ use controller\AdminHelper;
 		</script>
 	</head>
 	<body>
+	
+	<table width="100%">
+	<tr>
+	<td>
 	<form name="admin" method="GET" action="admin.php" onsubmit="return checkSubmit()">
 			<fieldset>
 				<legend style="font-size: 2em">
@@ -136,8 +145,8 @@ use controller\AdminHelper;
 				<input id="reset" name="reset" type="reset" value="reset" />
 			</fieldset>
 	</form>
-	
-	
+	</td>
+	<td>
 	<form name="topProduct" method="GET" action="admin.php" onsubmit="return checkTop()">
 			<fieldset>
 				<legend style="font-size: 2em">
@@ -161,18 +170,59 @@ use controller\AdminHelper;
 						<input id="toTop" name="toTop" type="text" value = "" />
 						</td>
 					</tr>
+					<tr>
+						<td> Category: </td>
+						<td><select id="category" name="category">
+							<?php
+							AdminHelper::getListCategories();
+							?>
+						</select>
+						</td>
+					</tr>
 				</table>
 				<input id="submitTop" name="submitTop" type="submit" value="submit" />
 				<input id="resetTop" name="resetTop" type="reset" value="reset" />
 			</fieldset>
 	</form>
-	
-	
-	
-	<div>
+	</td>
+	</tr>
+	</table>
 	<?php
 		$submitVal = $_GET['submit'];
+		$submitTop = $_GET['submitTop'];
+		if($submitVal != ''){
+			// get olap analysis
+			$customer = $_GET['customer'];
+			$product = $_GET['product'];
+			$store = $_GET['store'];
+			$from = $_GET['from'];
+			$to = $_GET['to'];
+			
+			
+			if($customer == 'NULL'){
+				$customer = null;
+			}
+			if($product == 'NULL'){
+				$product = null;
+			}
+			if($store == 'NULL'){
+				$store = null;
+			}
+			
+			$olapObj = new Olap($customer, $product, $store, $from, $to, 0,0);
+			AdminHelper::getListOlaps($olapObj);
+		} elseif($submitTop != ''){
+			$n = $_GET['topN'];
+			$fromTop = $_GET['fromTop'];
+			$toTop = $_GET['toTop'];
+			$cateId = $_GET['category'];
+			
+			if($cateId == 'any'){
+				$cateId = null;
+			}
+			
+			AdminHelper::getTopNProducts($n, $fromTop, $toTop, $cateId);
+		}
 	?>
-	</div>
 	</body>
 </html>
