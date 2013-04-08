@@ -71,12 +71,10 @@
 								
 								var response = xmlhttp.responseText;
 								alert(response);
-								if(response == "failed") {
+								if(response != "2") {
 									alert("Login failed: Please check you login information.");
-								} else if(response == "true") {
+								} else if(response == "1") {
 									alert("Success Now redirect user!!");
-								} else {
-									//alert("Error? something messed up!!");
 								}
 							}
 						}
