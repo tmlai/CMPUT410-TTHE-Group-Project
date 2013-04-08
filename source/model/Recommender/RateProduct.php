@@ -13,8 +13,8 @@ if ($requestMethod == "POST"){
 	
 	if (!isset($userName) || $userName === ""){
 		$message = array(
-				"status" => "Ok",
-				"message" => "Your rating is updated."
+				"status" => "Failed",
+				"message" => "You have to login"
 		);
 	}
 	else {
