@@ -51,6 +51,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           </table>
           
         </div>
+        <hr>
         <div align="center">
         <table border="0" width="100%">
           <col align="left">

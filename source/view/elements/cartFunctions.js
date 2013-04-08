@@ -236,6 +236,6 @@ function buildCartProducts() {
   //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + price;
-  if(emptyCount == jsonCount.length)
+  if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
