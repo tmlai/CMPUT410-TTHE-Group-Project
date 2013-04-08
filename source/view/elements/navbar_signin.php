@@ -25,23 +25,9 @@
                                 return true;
                             }
                             return false;
-                        }/*
-                        function checkLogin() {
-                          if(document.loginform.usernameField.value == "" && 
-                              document.loginform.usernameField.value == "") {
-                            alert("Please enter a Username and Password to sign in.");
-                            return false;
-                          } else if(document.loginform.usernameField.value == "") {
-                            alert("Please enter a Username.");
-                            return false;
-                          } else if(document.loginform.passwordField.value == "") {
-                            alert("Please enter a Password.");
-                            return false;
-                          }
-                          return true;
-                        }*/
-                        -->
+                        }
 						
+						//validates the user and create cookies
 						function login() {
 							var username = document.loginform.usernameField.value.trim();
 							var password = document.loginform.passwordField.value.trim();
@@ -75,6 +61,7 @@
 									alert("Login failed: Please check you login information.");
 								} else {
 									alert("Success Now redirect user!!");
+									
 								}
 							}
 						}

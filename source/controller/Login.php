@@ -20,6 +20,7 @@ if($requestMethod == "post") {
 	//query for a user with that name
 	$dbLayer = new DbLayer();
 	$status = $dbLayer->authenticateCustomer($username, $password);
-	echo strval($status);
+	var_dump($status);
+	//echo strval($status);
 }
 ?>
