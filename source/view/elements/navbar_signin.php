@@ -108,9 +108,9 @@
               <ul class="dropdown-menu">
                 <script type="text/javascript" language="JavaScript" 
                           src="/elements/loginValidation.js"></script>
-                <form name="loginform" class="form" method="POST"
-                  enctype="application/json" action="login()" 
-                  onSubmit="return checkLogin();">
+                <form name="loginform" class="form"
+                  enctype="application/json" action="" 
+                  onSubmit="return login();">
                 <li>
                   <br>
                   <input type="text" name="usernameField" 
