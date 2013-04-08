@@ -1,12 +1,11 @@
 <?php
 session_start();
+use model\DbLayer;
+include_once '../model/DbLayer.php';
+
 
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-
-include_once '../model/DbLayer.php';
-use model\DbLayer;
-$list = "";
 
 if($requestMethod == "get") {
 	$search = $_GET['searchField'];
@@ -15,6 +14,5 @@ if($requestMethod == "get") {
 	// var_dump($search);
 	echo "into if statement";
 }
-//echo \json_encode($list);
-
+echo "out of if";
 ?>
