@@ -67,7 +67,7 @@
 								
 								xmlhttp.open('POST', '../source/controller/Login.php', false);
 								xmlhttp.setRequestHeader("Content-type", "application/json");
-								xmlhttp.send(jsonString)
+								xmlhttp.send(jsonString);
 								
 								var response = xmlhttp.responseText;
 								alert(response);
