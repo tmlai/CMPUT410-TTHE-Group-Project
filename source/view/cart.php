@@ -9,12 +9,12 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <title>TTHE Enterprise - Search Results</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" language="JavaScript" 
-      src="/elements/productFunctions.js"></script>
+      src="./elements/productFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
-      src="/elements/cartFunctions.js"></script>
+      src="./elements/cartFunctions.js"></script>
     <?php
         // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+        require("./elements/head_includes.php");
     ?>
   </head>
   <body onLoad="buildCartProducts()">
@@ -22,10 +22,10 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       // Navigation Bar
       if($_SESSION['user'] != "") {
         // user dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+        require("./elements/navbar_user.php");
       } else {
         // sign in dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+        require("./elements/navbar_signin.php");
       }
     ?>
     <div class="container">
