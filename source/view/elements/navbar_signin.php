@@ -64,6 +64,7 @@
                             <div class="input-append">
                                 <input name="searchField" type="text" id="searchField" 
                                 class="span2 search-query" placeholder="Search">
+								<input name="advanced" value="false" style="visibility:hidden;">
                                 <button type="submit" class="btn">
                                 <i class="icon-search"></i></button>
                             </div>
