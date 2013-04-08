@@ -10,7 +10,7 @@ try {
     $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 	switch($requestMethod) {
 		case 'get':
-			$oid = file_get_contents("php://input");
+			$oid = $_GET['oid'];
 			$info = $dbLayer->checkDeliveryDate($oid);
 			echo $info;
 			break;
