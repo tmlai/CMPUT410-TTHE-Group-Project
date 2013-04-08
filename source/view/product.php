@@ -26,9 +26,6 @@ $product = json_decode($product, true);
       src="./elements/cartFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
-    <script src="elements/rateit/src/jquery.rateit.js"></script>
-    <script src="elements/rateit/src/jquery.rateit.min.js"></script>
-    <script src="elements/jquery-1.9.1.min.js"></script>
   </head>
   <body onLoad="loadProductAJAX(<?php 
       echo "'" . $_SESSION['productID'] . "', ";
@@ -81,7 +78,7 @@ $product = json_decode($product, true);
                       </tbody>
                       </table>
                   
-                  </div>
+                  <!--</div>-->
             <!--<div class="rowfluid">-->
               <div class="span3">
                 <ul class="thumbnails">
@@ -131,11 +128,15 @@ $product = json_decode($product, true);
                     </div>                    
                   </li>
                 </ul>
-              <!--</div>-->
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div> <!-- /container -->
+    <script src="elements/rateit/src/jquery.rateit.js"></script>
+    <!--<script src="elements/rateit/src/jquery.rateit.min.js"></script>-->
+    <script src="elements/jquery-1.9.1.min.js"></script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     
