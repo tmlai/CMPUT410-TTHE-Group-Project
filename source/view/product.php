@@ -79,9 +79,9 @@ $product = json_decode($product, true);
                       </table>
                     <!--</div>-->
                   <!--</div>-->
-                </div>
-              </div>
-            </div>
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
             <div class="rowfluid">
             <div class="span3">
                 <ul class="thumbnails">
