@@ -7,7 +7,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $search = trim($_GET['searchField']);
 
 $advanced = $_GET['advanced'];
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,6 +25,26 @@ $advanced = $_GET['advanced'];
           else
             echo "dropBool = true;\n";
     ?>
+	function initialLoading() {
+		setToggle();
+		//send ajax call to get a list of products
+		var xmlhttp = new XMLHttpRequest();
+		var productList = new Array();
+		var stringList = "";
+		if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}	else {
+		// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open('GET', 
+			'/source/controller/Search.php?searchField=<?php echo $search;?>',
+			true);
+		xmlhttp.send();
+		stringList = xmlhttp.responseText;
+		console.log(stringList);
+	}
     function setToggle() {
       if(dropBool) {
         document.getElementById("adSearch").className="collapse in";
@@ -46,7 +65,7 @@ $advanced = $_GET['advanced'];
     -->
     </script>
   </head>
-  <body onLoad="setToggle();">   
+  <body onLoad="initialLoading();">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -62,7 +81,7 @@ $advanced = $_GET['advanced'];
         <?php 
           if($search != "") {
             echo "Search Results for " . $search; 
-          } else if($advance == "true") {
+          } else if($advanced == null) {
 			echo "Advanced Search";
 		  } else if ($search == ""){
             echo "A blank search is given, please enter a search.";
@@ -73,7 +92,7 @@ $advanced = $_GET['advanced'];
           data-target="#adSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
-        <div id="adSearch" class="collapse">
+        <div id="advSearch" class="collapse">
                 <div id="store_div" class="control-group">
                     <label class="control-label" for="storeField">Access Code
                     </label>

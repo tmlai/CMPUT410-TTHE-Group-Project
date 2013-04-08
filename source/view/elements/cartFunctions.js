@@ -155,7 +155,8 @@ function sendPurchase(user) {
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
-    var val = document.getElementById(("qtyField" + jsonCart[i].pid)).value;
+    var id = "qtyField" + jsonCart[i].pid;
+    var val = document.getElementById(id).value;
     // Delete item from cart
     if(val == 0) {
       jsonCart[i] = "";
@@ -177,7 +178,17 @@ function updateCart() {
 function buildCartProducts() {
   //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
-  document.getElementById("resultsDiv").innerHTML = getTableHTML();
+  var price = 0;
+  // reset div for products
+  document.getElementById("productsBody").innerHTML = "";
+  // If no cart exists
+  if(jsonCart == null) {
+    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+    return false;
+  }
+  // 
+   
+  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
     alert("product:" + i);
@@ -196,12 +207,12 @@ function buildCartProducts() {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
-        document.getElementById("resultsDiv").innerHTML += (
+        document.getElementById("productsBody").innerHTML += (
           "<tr>\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + product.quantity +"><td>\n"
+          + jsonCart[i].quantity + "\" size=\"8\"><td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
@@ -218,13 +229,15 @@ function buildCartProducts() {
           + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
           + "</tr>\n"
         );     
-     
+        price += (product['quantity'] * product['price']);
      }
     };
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
-  document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
+  //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
+  document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
+    + price;
 }
  
 /*
@@ -235,7 +248,6 @@ function getTableHTML(part = "head") {
   if(part == "head") {
     element = (
       '<form name="cartForm" onSubmit="updateCart();">\n'
-      + '      <div id="resultsDiv">\n'
       + '      <table class="table">\n' //<table class="table table-hover">\n'
       + '      <thead>\n'
       + '          <tr>\n'
@@ -248,7 +260,7 @@ function getTableHTML(part = "head") {
       + '            <th>Description</th>\n'
       + '          </tr>\n'
       + '      </thead>\n'
-      + '      <tbody>\n'
+      + '      <tbody id="productsBody">\n'
     );
   } else {
     element = '</tbody>\n</table>';
