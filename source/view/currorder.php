@@ -12,6 +12,10 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/cartFunctions.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/productFunctions.js"></script>
   </head>
   <!--<body onLoad="buildOrderProducts()">  --> 
   <body onLoad="buildOrderProducts()">   

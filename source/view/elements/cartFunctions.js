@@ -16,6 +16,14 @@ function addProdToCart(pid) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       updateCartProductQty(pid, xmlhttp.responseText);
+      var cartBool = confirm("Product has been added to cart. Would you like to"
+        + " go to view the cart?");
+      if(cartBool) {
+        var dir = location.href;
+        dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+        dir = dir + "cart.php";
+        window.location.href = dir;
+      } 
     }
   };
   
