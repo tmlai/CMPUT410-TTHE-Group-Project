@@ -18,11 +18,11 @@ if($requestMethod == "post") {
 		$username = trim($json['username']);
 		$password = trim($json['password']);
 
-		echo "username: $username, password: $password";
+		//echo "username: $username, password: $password";
 		
 		//query for a user with that name
 		$dbLayer = new DbLayer();
-		//$status = $dbLayer->authenticateCustomer($username, $password);
+		$status = $dbLayer->authenticateCustomer($username, $password);
 		
 		// echo "before status";
 		// // if($status == 0) {
