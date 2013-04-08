@@ -14,5 +14,6 @@ if($requestMethod == "get") {
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProduct($search);
 }
-echo \json_encode($list);
+//echo \json_encode($list);
+echo "return string";
 ?>
