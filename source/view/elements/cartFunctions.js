@@ -94,6 +94,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
 function getCartIndex(pid) {
   var cartJson = JSON.parse(readCookie('cart'));
   for(var i = 0; i < cartJson.length; i++) {
+    alert("DEBUG: "+ cartJson[i].pid + " = " + pid);
     if(cartJson[i].pid == pid)
       return i;
   }
