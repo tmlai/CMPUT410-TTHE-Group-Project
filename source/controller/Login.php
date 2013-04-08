@@ -1,7 +1,7 @@
 <?php
 //namespace controller;
 
-use model\DbLayer;
+//use model\DbLayer;
 
 session_start();
 
