@@ -45,6 +45,11 @@
 						function login() {
 							var username = document.loginform.usernameField.value.trim();
 							var password = document.loginform.passwordField.value.trim();
+							var obj = new Object();
+							obj.username = username;
+							obj.password = password;
+							
+							var jsonString = JSON.stringify(obj);
 							
 							//check the user inputs
 							if(username == "" || password == "") {
@@ -61,15 +66,17 @@
 								}
 								
 								xmlhttp.open('POST', '/source/controller/Login.php', false);
-								xmlhttp.send()
+								xmlhttp.setRequestHeader("Content-type", "application/json");
+								xmlhttp.send(jsonString)
 								
 								var response = xmlhttp.responseText;
+								alert(response);
 								if(response == "failed") {
 									alert("Login failed: Please check you login information.");
 								} else if(response == "true") {
 									alert("Success Now redirect user!!");
 								} else {
-									alert("Error? something messed up!!");
+									//alert("Error? something messed up!!");
 								}
 							}
 						}
