@@ -13,8 +13,8 @@ if($requestMethod == "post") {
 		$jsonString = file_get_contents("php://input");
 		$json = json_decode($jsonString, true);
 		
-		$username = trim($json['username']);
-		$password = trim($json['password']);
+		//$username = trim($json['username']);
+		//$password = trim($json['password']);
 		
 		$status = 0;
 		//query for a user with that name
