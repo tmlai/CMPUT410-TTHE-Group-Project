@@ -178,7 +178,7 @@ function buildCartProducts() {
   var jsonCart = JSON.parse(readCookie('cart'));
   var product;
   for(var i = 0; i < jsonCart.length; i++) {
-    product = getOneProduct(jsonCart[i]);
+    product = getOneProduct(jsonCart[i]['pid']);
     div.write(
       "<tr>\n<td>\n"
       // Quantity text field for product
