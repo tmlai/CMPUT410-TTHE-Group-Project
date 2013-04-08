@@ -107,10 +107,10 @@ function getCartIndex(pid) {
  * @return  {"pid":"value","quantity":"#"}
  */
 function getJsonCartElement(pid, qty) {
-  var arr = new Array();
+  var arr = {};
   arr['pid'] = pid;
   arr['quantity'] = qty;
-  arr = JSON.stringify(arr);
+  //arr = JSON.stringify(arr);
   return(arr);
 
 }
