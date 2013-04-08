@@ -1,13 +1,13 @@
 <?php
 //namespace controller;
-echo "return something!!!!!";
-// use model\DbLayer;
 
-// session_start();
+use model\DbLayer;
 
-// $_SESSION['prevPage'] = $_SESSION['prevPage'];
-// $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+session_start();
 
+$_SESSION['prevPage'] = $_SESSION['prevPage'];
+$requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
+echo $_SESSION['prevPage'];
 // $username = $_POST['username'];
 // $password = $_POST['password'];
 
