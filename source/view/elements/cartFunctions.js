@@ -200,7 +200,7 @@ function buildCartProducts() {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
-        try {
+        if(typeof product['desc'] == 'undefined') {
           document.getElementById("productsBody").innerHTML += (
             "<tr>\n<td>\n"
             // Quantity text field for product
@@ -224,7 +224,7 @@ function buildCartProducts() {
             + "</tr>\n"
           );     
           price += (jsonCart[i].quantity * product['price']);
-        } catch(err) {
+        } else {
           emptyCount++;
         }
      }
@@ -236,6 +236,6 @@ function buildCartProducts() {
   //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + price;
-  if(emptyCount == jsonCount.length)
+  if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
