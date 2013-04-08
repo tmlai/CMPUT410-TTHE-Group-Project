@@ -17,7 +17,8 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script type="text/javascript" language="JavaScript" 
       src="./elements/cartFunctions.js"></script>
   </head>
-  <body onLoad="buildCartProducts()">   
+  <body>   
+  <!--<body onLoad="buildCartProducts()">--> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
