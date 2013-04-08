@@ -153,10 +153,10 @@ function rateProduct(pid, user, value) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonObj = JSON.parse(xmlhttp.responseText);
-      alert("cart DEBUG: getting one product: " + jsonObj[0]);
-      console.log(jsonObj[0]);
+      alert("cart DEBUG: getting one product: " + jsonObj[1]);
+      console.log(jsonObj);
       //var jsonArray = xmlhttp.responseText;
-      return(jsonObj[0]);
+      return(jsonObj);
     }
   };
   xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
