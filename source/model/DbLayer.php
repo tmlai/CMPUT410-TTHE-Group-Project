@@ -585,7 +585,7 @@ class DbLayer implements DbInterface {
 
 		$temp = $stmt->fetchAll();
 
-		$statement = "SELECT name 
+		$statement = "SELECT name, pc.cateId 
 		FROM Categories c, ProductsMapCategories pc 
 		WHERE c.cateId = pc.cateId AND pc.cid = ?";
 
@@ -611,6 +611,7 @@ class DbLayer implements DbInterface {
 			$prodJson['dim'] = $temp[0][6];
 			$prodJson['quantity'] = $temp[0][7];
 			$prodJson['category'] = $cateList[0][0];
+			$prodJson['cateId'] = $cateList[0][1];
 			$prodJson['rating'] = $ratingList[0][0];
 		}
 		$pdo = null;
