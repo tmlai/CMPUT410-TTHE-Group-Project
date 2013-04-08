@@ -154,6 +154,7 @@ function rateProduct(pid, user, value) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonObj = JSON.parse(xmlhttp.responseText);
       alert("cart DEBUG: getting one product: " + jsonObj);
+      console.log(jsonObj);
       //var jsonArray = xmlhttp.responseText;
       return(jsonObj);
     }
