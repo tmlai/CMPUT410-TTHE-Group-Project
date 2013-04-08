@@ -9,8 +9,8 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 if($requestMethod == "post") {
-	// try {
-		// echo "In the try";
+	try {
+		echo "In the try";
 		// $jsonString = file_get_contents("php://input");
 		// $json = json_decode($jsonString, true);
 		
@@ -31,9 +31,9 @@ if($requestMethod == "post") {
 		// // } else {
 			// // echo "error";
 		// // }
-	// } catch (Exception $e) {
-		// echo "error";
-	// }
+	} catch (Exception $e) {
+		echo "error";
+	}
 // } else {
 	// echo "error."
 }
