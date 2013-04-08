@@ -40,11 +40,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         <div align="center">
         <table border="0" width="100%">
           <col align="left">
+          <col align="center">
           <col align="right">
           <tr>
             <td>
               <button class="btn btn-primary" type="submit">Update Cart</button>
             </td>
+            <td id="priceCalc"></td>
             <td>
               <button class="btn btn-success" onclick="currorder.php">
               Checkout
