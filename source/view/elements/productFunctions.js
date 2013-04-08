@@ -63,7 +63,7 @@ function checkInStock(pid) {
       document.getElementById("resultsDiv").innerHTML = "DEBUG: code returned: <br>\n" + jsonArray;
     }
   };
-  xmlhttp.open('GET', '/model/Recommender/TopProduct.php?category=' + category 
+  xmlhttp.open('GET', '../model/Recommender/TopProduct.php?category=' + category 
     + category, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
@@ -129,7 +129,7 @@ function rateProduct(pid, value) {
       }
      }
   };
-  xmlhttp.open('POST', '/model/Recommender/RateProduct.php?productID=' + pid 
+  xmlhttp.open('POST', '../model/Recommender/RateProduct.php?productID=' + pid 
     + '&rating=' + value, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();

@@ -78,6 +78,7 @@ $product = json_decode($product, true);
                       </tbody>
                       </table>
                   </div>
+                  </div>
             <!--<div class="rowfluid">-->
               <div class="span3">
                 <ul class="thumbnails">
@@ -128,7 +129,7 @@ $product = json_decode($product, true);
                   </li>
                 </ul>
               </div>
-            </div>
+            <!--</div>-->
         </div>
       </div>
     </div> <!-- /container -->
