@@ -3,6 +3,8 @@
 
 use model\DbLayer;
 
+include_once "../model/DbLayer.php";
+
 session_start();
 
 $_SESSION['prevPage'] = $_SESSION['prevPage'];
@@ -20,7 +22,7 @@ if($requestMethod == "post") {
 		
 		//query for a user with that name
 		$dbLayer = new DbLayer();
-		$status = $dbLayer->authenticateCustomer($username, $password);
+		//$status = $dbLayer->authenticateCustomer($username, $password);
 		
 		// echo "before status";
 		// // if($status == 0) {
