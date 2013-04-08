@@ -13,12 +13,11 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
     <script type="text/javascript" language="JavaScript" 
-      src="./elements/cartFunctions.js"></script>
-    <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/cartFunctions.js"></script>
   </head>
-  <!--<body onLoad="buildOrderProducts()">  --> 
-  <body onLoad="buildOrderProducts()">   
+  <body onLoad="buildCartProducts()">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -30,39 +29,30 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       }
     ?>
     <div class="container">
-        <h3>Your Current Cart</h3>
-        <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;">
-            <table class="table table-hover">
-            <thead>
-                <tr>
-                  <th>Order Quantity</th>
-                  <th><!-- placeholder --></th>
-                  <th>Price</th>
-                  <th>Weight</th>
-                  <th>Name</th>
-                  <th>Code</th>
-                  <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-              <div id="resultsDiv">
-                
-              </div>
-            </tbody>
-            </table>
-            <table bornder="0">
-              <tr>
-                <td align="left">
-                  <button class="btn btn-info">Go Back to Cart</button>
-                </td>
-                <td align="right">
-                  <button class="btn btn-success" onclick="sendPurchase()">
-                  Checkout
-                  </button>
-                </td>
-              </tr>
+      <h3>Review Your Order</h3>
+      <!--<div class="container">-->
+      <form name="cartForm" onSubmit="updateCart();">
+        <div id="resultsDiv">
+          <div align="center">
+            <img src="./elements/img/spinner.gif" alt="Loading...">
+          </div>
         </div>
+        <table border="0" width="100%">
+          <col align="left">
+          <col align="right">
+          <tr>
+            <td>
+              <button class="btn btn-primary" type="submit">Update Cart</button>
+            </td>
+            <td>
+              <button class="btn btn-success" onclick="currorder.php">
+              Checkout
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
+        
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

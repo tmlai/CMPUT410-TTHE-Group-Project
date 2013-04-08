@@ -59,11 +59,12 @@
                         </script>
                         
                         <form  name="searchForm" class="form-search" method="get" 
-                        action="/source/controller/Search.php" 
+                        action="/source/view/search.php" 
                         enctype="text/plain">
                             <div class="input-append">
                                 <input name="searchField" type="text" id="searchField" 
                                 class="span2 search-query" placeholder="Search">
+								<input name="advanced" value="false" type="hidden">
                                 <button type="submit" class="btn">
                                 <i class="icon-search"></i></button>
                             </div>

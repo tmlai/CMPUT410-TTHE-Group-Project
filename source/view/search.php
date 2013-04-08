@@ -3,6 +3,11 @@
 session_start();
 $_SESSION['search'] = $_GET['searchField'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+
+$search = trim($_GET['searchField']);
+
+$advanced = $_GET['advanced'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,7 +21,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script type="text/javascript" language="JavaScript">
     <!--
     <?php 
-          if($_SESSION['search'] != "")
+          if($search != "")
             echo "dropBool = false;\n";
           else
             echo "dropBool = true;\n";
@@ -55,10 +60,12 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <div class="container">
         <h3>
         <?php 
-          if($_SESSION['search'] != "") {
-            echo "Search Results for " . $_SESSION['search']; 
-          } else {
-            echo "Advanced Search";
+          if($search != "") {
+            echo "Search Results for " . $search; 
+          } else if($advance == "true") {
+			echo "Advanced Search";
+		  } else if ($search == ""){
+            echo "A blank search is given, please enter a search.";
           }
         ?>
         </h3>
