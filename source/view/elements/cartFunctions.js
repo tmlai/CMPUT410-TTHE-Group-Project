@@ -193,7 +193,7 @@ function buildCartProducts() {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
-        var product = xmlhttp.responseText;
+        var product = JSON.parse(xmlhttp.responseText);
         div.write(
           "<tr>\n<td>\n"
           // Quantity text field for product
