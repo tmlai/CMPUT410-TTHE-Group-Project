@@ -107,30 +107,34 @@ function buildRelatedProducts(products) {
   }
 }
 
-function rateProduct(pid, value) {
-  var xmlhttp = new XMLHttpRequest();
-	if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}	else {
-    // code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-  
-  // Return if product is in stock
-  xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      jsonArray = JSON.parse(xmlhttp.responseText);
-      if(jsonArray.status == "ok") {
-        alert("Thank you for rating our products, we value your support!");
-        document.location.reload(true);
-      } else {
-        alert("Server session timed out, please sign in again to rate a product.");
-      }
-     }
-  };
-  xmlhttp.open('POST', '../model/Recommender/RateProduct.php?productID=' + pid 
-    + '&rating=' + value, true);
-  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xmlhttp.send();
+function rateProduct(pid, user, value) {
+  if(user == null || user == "") {
+    alert("You must be signed in to rate a product.");
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }	else {
+      // code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    
+    // Return if product is in stock
+    xmlhttp.onreadystatechange=function() {
+      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        jsonArray = JSON.parse(xmlhttp.responseText);
+        if(jsonArray.status == "ok") {
+          alert("Thank you for rating our products, we value your support!");
+          document.location.reload(true);
+        } else {
+          alert("Server session timed out, please sign in again to rate a product.");
+        }
+       }
+    };
+    xmlhttp.open('POST', '../model/Recommender/RateProduct.php?productID=' + pid 
+      + '&rating=' + value, true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send();
+  }
 }

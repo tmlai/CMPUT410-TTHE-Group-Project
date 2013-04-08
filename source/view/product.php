@@ -98,7 +98,7 @@ $product = json_decode($product, true);
                             // Get the current rating for default value.
                             if($product['rating'] == null) echo 0;
                             else echo $product['rating'];
-                          ?>" onclick="rateProduct('<?php $product['id']?>');">
+                          ?>" onclick="rateProduct('<?php echo $product['id']?>');">
                       <div class="rateit" id="rateit5"data-rateit-ispreset="true" 
                         data-rateit-backingfld="#backing4"
                         data-rateit-resetable="false"
@@ -108,8 +108,11 @@ $product = json_decode($product, true);
                       <!--
                         // learned from: http://www.radioactivethinking.com/rateit/example/example.htm
                         $("#rateit5").bind('rated', function (event, value) { 
-                          var value = ri.rateit('value');
-                          rateProduct('<?php $product['id']?>', value);
+                          rateProduct(
+                            <?php echo "'" . $product['id'] . "', '" 
+                              . $_SESSION['user'] . "'"
+                              
+                            ?>, value, );
                         });
                       -->
                       </script>
