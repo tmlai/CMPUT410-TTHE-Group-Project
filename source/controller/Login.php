@@ -16,9 +16,10 @@ if($requestMethod == "post") {
 		$username = trim($json['username']);
 		$password = trim($json['password']);
 		
+		$status = 0;
 		//query for a user with that name
-		$dbLayer = new DbLayer();
-		$status = $$dbLayer->authenticateCustomer($username, $password);
+		//$dbLayer = new DbLayer();
+		//$status = $$dbLayer->authenticateCustomer($username, $password);
 		if($status == 0) {
 			echo "failed";
 		} else if($status == 1) {
