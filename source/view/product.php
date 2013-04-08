@@ -1,5 +1,5 @@
 <?php 
-namespace view;
+//namespace view;
 session_start();
 $_SESSION['productID'] = $_GET['id'];
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
@@ -77,11 +77,6 @@ $product = json_decode($product, true);
                         </div>
                       </tbody>
                       </table>
-                    <!--</div>-->
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
             <div class="rowfluid">
             <div class="span3">
                 <ul class="thumbnails">
