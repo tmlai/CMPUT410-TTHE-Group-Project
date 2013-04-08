@@ -33,9 +33,26 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       <!--<div class="container">-->
       <form name="cartForm" onSubmit="updateCart();">
         <div id="resultsDiv">
-          <div align="center">
-            <img src="./elements/img/spinner.gif" alt="Loading...">
-          </div>
+          <form name="cartForm" onSubmit="updateCart();">
+            <table class="table"> 
+            <thead>
+                <tr>
+                  <th>Order Quantity</th>
+                  <th><!-- placeholder --></th>
+                  <th>Price</th>
+                  <th>Weight</th>
+                  <th>Name</th>
+                  <th>Code</th>
+                  <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="productsBody">
+              <div align="center">
+                <img src="./elements/img/spinner.gif" alt="Loading...">
+              </div>
+            </tbody>
+          </table>
+          
         </div>
         <div align="center">
         <table border="0" width="100%">

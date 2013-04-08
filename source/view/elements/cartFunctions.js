@@ -184,7 +184,7 @@ function buildCartProducts() {
     return false;
   }
     
-  document.getElementById("resultsDiv").innerHTML = getTableHTML();
+  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
     alert("product:" + i);
@@ -208,7 +208,7 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + product.quantity +"><td>\n"
+          + product.quantity + "\"><td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
@@ -231,7 +231,7 @@ function buildCartProducts() {
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
-  document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
+  //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + price;
 }
