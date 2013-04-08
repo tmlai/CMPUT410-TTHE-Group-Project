@@ -222,7 +222,7 @@ function buildCartProducts() {
      
      }
     };
-    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
     
   }
