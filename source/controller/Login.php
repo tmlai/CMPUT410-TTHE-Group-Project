@@ -23,6 +23,7 @@ if($requestMethod == "post") {
 	if($status == 2) {
 		$_SESSION['user'] = $username;
 	}
+	//return status code
 	echo strval($status);
 }
 ?>
