@@ -178,6 +178,9 @@ function buildCartProducts() {
   var jsonCart = JSON.parse(readCookie('cart'));
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
+    
+    console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
+    console.log(getOneProduct(jsonCart[i]['pid']));
     var product = getOneProduct(jsonCart[i]['pid']);
     div.write(
       "<tr>\n<td>\n"
