@@ -1,10 +1,4 @@
-<!doctype html>
-<html>
-	<head>
-	</head>
-	<body>
 <?php
-<
 /* from: http://www.php.net/manual/en/function.session-destroy.php */
 // Unset all of the session variables.
 $_SESSION = array();
@@ -21,7 +15,6 @@ if (ini_get("session.use_cookies")) {
 
 // Finally, destroy the session.
 session_destroy();
-echo "<meta HTTP-EQUIV=\"REFRESH\" content=\"0; url=../index.php\">\n";
+//echo "<meta HTTP-EQUIV=\"REFRESH\" content=\"0\"; url=../index.php\">";
+header('Location: /source/view/index.php');
 ?>
-	</body>
-</html>

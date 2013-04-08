@@ -25,26 +25,11 @@
                                 return true;
                             }
                             return false;
-                        }/*
-                        function checkLogin() {
-                          if(document.loginform.usernameField.value == "" && 
-                              document.loginform.usernameField.value == "") {
-                            alert("Please enter a Username and Password to sign in.");
-                            return false;
-                          } else if(document.loginform.usernameField.value == "") {
-                            alert("Please enter a Username.");
-                            return false;
-                          } else if(document.loginform.passwordField.value == "") {
-                            alert("Please enter a Password.");
-                            return false;
-                          }
-                          return true;
-                        }*/
-                        -->
+                        }
 						
+						//validates the user and create cookies
 						function login() {
 							var username = document.loginform.usernameField.value.trim();
-							alert(username);
 							var password = document.loginform.passwordField.value.trim();
 							var obj = new Object();
 							obj.username = username;
@@ -71,13 +56,11 @@
 								xmlhttp.send(jsonString);
 								
 								var response = xmlhttp.responseText;
-								alert(response);
-								if(response == "failed") {
+								if(response != 2) {
 									alert("Login failed: Please check you login information.");
-								} else if(response == "true") {
-									alert("Success Now redirect user!!");
 								} else {
-									//alert("Error? something messed up!!");
+									
+									alert("You are now logged in.");									
 								}
 							}
 						}
@@ -116,7 +99,7 @@
               <ul class="dropdown-menu">
                 <script type="text/javascript" language="JavaScript" 
                           src="/elements/loginValidation.js"></script>
-                <form name="loginform" class="form"
+                <form name="loginform" class="form" method="POST"
                   enctype="application/json" action="" 
                   onSubmit="return login();">
                 <li>

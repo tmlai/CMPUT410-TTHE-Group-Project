@@ -75,7 +75,7 @@ function checkInStock(pid) {
  */ 
 function buildRelatedProducts(products) {
   var div = document.getElementById("resultsDiv");
-  for(i = 0; i < products.length; i++) {
+  for(var i = 0; i < products.length; i++) {
     div.write(
       "<tr onclick=\"location.href='./product.php?id='" + products[i]['id']
       + "\">\n"
