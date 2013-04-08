@@ -17,8 +17,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script type="text/javascript" language="JavaScript" 
       src="./elements/cartFunctions.js"></script>
   </head>
-  <body>   
-  <!--<body onLoad="buildCartProducts()">--> 
+  <body onLoad="buildCartProducts()">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -38,7 +37,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <img src="./elements/img/spinner.gif" alt="Loading...">
           </div>
         </div>
-        <table border="0">
+        <table border="0" width="100%">
           <col align="left">
           <col align="right">
           <tr>
