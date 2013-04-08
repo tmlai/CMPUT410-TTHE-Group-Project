@@ -61,8 +61,9 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       }
       alert("Debug: 0");
       // Add pid entry with quantity to cart.
-      var length = cartJson.length;
-      //for(_obj in obj) objCount++;
+      var jsonS = eval('(' + cartJson + ')');
+      var length = 0;
+      for(element in jsonS) length++;
       cartJson[length][pid] = new Array(qty, qtyExternal);
       // if(jsonArray.quantity >= qtyNew) {
         // update the quantity.
