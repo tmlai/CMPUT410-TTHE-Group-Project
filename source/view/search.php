@@ -42,8 +42,6 @@ $advanced = $_GET['advanced'];
 			'/source/controller/Search.php?searchField=<?php echo $search;?>',
 			true);
 		xmlhttp.send();
-		stringList = xmlhttp.responseText;
-		console.log(stringList);
 	}
     function setToggle() {
       if(dropBool) {
