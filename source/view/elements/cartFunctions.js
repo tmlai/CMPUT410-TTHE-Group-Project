@@ -178,34 +178,52 @@ function buildCartProducts() {
   var jsonCart = JSON.parse(readCookie('cart'));
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
+  
+    var xmlhttp = new XMLHttpRequest();
+    if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }	else {
+      // code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
     
-    //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
-    console.log(getOneProduct(jsonCart[i]['pid']));
-    var product = getOneProduct(jsonCart[i]['pid']);
-    div.write(
-      "<tr>\n<td>\n"
-      // Quantity text field for product
-      + "<input type=\"text\" name=\"qtyField" + product.id + 
-      + "\" id=\"qtyField" + product.id + "\" value=\"" 
-      + product.quantity +">"
-      // Rank/index of product
-      + "<td>" + (i + 1) + "</td>\n"
-      + "<td>\n"
-      // Thumbnail of product
-      + " <img src='/img/products/" + product['id'] + ".jpg\'" 
-      + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-      + "</td>\n"
-      // Price of product
-      + "<td>$" + product['price'] + "</td>\n"
-      // Weight of product
-      + "<td>" + product['weight'] + "</td>\n"
-      // Name of product
-      + "<td>" + product['name'] + "</td>\n"
-      // Code of product
-      + "<td>" + product['id'] + "</td>\n"
-      // Description of product
-      + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
-      + "</tr>\n"
-    );
+    // Return if product is in stock
+    xmlhttp.onreadystatechange=function() {
+      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+        //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
+        //console.log(getOneProduct(jsonCart[i]['pid']));
+        var product = xmlhttp.responseText;
+        div.write(
+          "<tr>\n<td>\n"
+          // Quantity text field for product
+          + "<input type=\"text\" name=\"qtyField" + product.id + 
+          + "\" id=\"qtyField" + product.id + "\" value=\"" 
+          + product.quantity +">"
+          // Rank/index of product
+          + "<td>" + (i + 1) + "</td>\n"
+          + "<td>\n"
+          // Thumbnail of product
+          + " <img src='/img/products/" + product['id'] + ".jpg\'" 
+          + "\" alt=\"\" width=\"50\" height=\"50\">\n"
+          + "</td>\n"
+          // Price of product
+          + "<td>$" + product['price'] + "</td>\n"
+          // Weight of product
+          + "<td>" + product['weight'] + "</td>\n"
+          // Name of product
+          + "<td>" + product['name'] + "</td>\n"
+          // Code of product
+          + "<td>" + product['id'] + "</td>\n"
+          // Description of product
+          + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "</tr>\n"
+        );     
+     
+     }
+    };
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
+    xmlhttp.send();
+    
   }
 }
