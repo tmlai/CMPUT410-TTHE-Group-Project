@@ -47,11 +47,11 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             </thead>
             <tbody>
               <div id="resultsDiv">
-                
+                <img src="./elements/img/spinner.gif" alt="Loading...">
               </div>
             </tbody>
             </table>
-            <table bornder="0">
+            <table border="0">
               <tr>
                 <td align="left">
                   <button class="btn btn-primary" type="submit">Update Cart</button>
