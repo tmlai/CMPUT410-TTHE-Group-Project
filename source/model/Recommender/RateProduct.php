@@ -40,7 +40,9 @@ if ($requestMethod == "POST"){
 }
 elseif ($requestMethod == "GET"){
 	$cat = $_GET["category"];
+	echo "Cat".$cat."<br/>";
 	$n = $_GET["n"];
+	echo "n".$n."<br/>";
 	if (!isset($cat) || trim($cat) === ""){
 		$cat = null;
 	}
@@ -57,8 +59,11 @@ elseif ($requestMethod == "GET"){
 			"image" => $product.getImage(),
 			"description" => $product.getDescription()
 		);
+		echo "before encoding<br/>";
 		$simpleProductJSON = json_encode($simpleProduct	);
+		echo "after encoding<br/>";
 		$productJSONList[] =$simpleProductJSON;
 	}
+	echo "json array".$productJsonList."<br/>";
 	return json_encode($productJSONList);
 }
