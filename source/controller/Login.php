@@ -8,10 +8,13 @@ session_start();
 $_SESSION['prevPage'] = $_SESSION['prevPage'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+if($requestMethod == "post") {
+	$jsonString = file_get_contents("php://input");
+	$json = json_decode($jsonString, true);
+	var_dump($json);
+}
 
-var_dump($POST);
+
 // if($requestMethod == "post") {
 	// try {
 		// //query for a user with that name
