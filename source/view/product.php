@@ -48,6 +48,7 @@ $product = json_decode($product, true);
     ?>
     <div class="container-fluid">
         <div class="row-fluid">
+        <div class="span12">
             <div class="span9">
                 <h1 id="productName">
                   <?php 
@@ -78,6 +79,7 @@ $product = json_decode($product, true);
                       </tbody>
                       </table>
                   
+                  </div>
                   </div>
                   </div>
             <div class="rowfluid">
