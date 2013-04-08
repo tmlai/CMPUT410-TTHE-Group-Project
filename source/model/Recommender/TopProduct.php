@@ -62,7 +62,8 @@ else{
 	exit();
 }
 
-$topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
+// $topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
+$topProductList = DbLayer::getTopNSellings(5,null,null);
 $topProductJSONList = array();
 foreach ($topProductList as $topProduct){
 	//todo: modify to just pass id, name, price
