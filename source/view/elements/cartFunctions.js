@@ -165,8 +165,8 @@ function updateCart() {
     }
   }
   // Update the cart cookie
-  cartJson = JSON.stringify(cartJson);
-  createCookie('cart', cartJson, 0);
+  jsonCart = JSON.stringify(jsonCart);
+  createCookie('cart', jsonCart, 0);
   // Update the cart viewed on cart.php
   buildCartProducts();
 }
@@ -180,7 +180,7 @@ function buildCartProducts() {
   var jsonCart = JSON.parse(readCookie('cart'));
   var price = 0;
   // reset div for products
-  document.getElementById("productsBody").innerHTML = "";
+  document.getElementById("productsBody").innerHTML = " ";
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
