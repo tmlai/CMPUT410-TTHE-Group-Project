@@ -99,7 +99,7 @@
               <ul class="dropdown-menu">
                 <script type="text/javascript" language="JavaScript" 
                           src="/elements/loginValidation.js"></script>
-                <form name="loginform" class="form"
+                <form name="loginform" class="form" method="POST"
                   enctype="application/json" action="" 
                   onSubmit="return login();">
                 <li>
