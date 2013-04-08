@@ -22,7 +22,7 @@ if($requestMethod == "post") {
 	$status = $dbLayer->authenticateCustomer($username, $password);
   
   // Check if user is admin
-  // if($dbLayer->authenticateAdminAdmin($username, $password))
+  // if($dbLayer->authenticateAdmin($username, $password))
   //  $_SEESION['admin'] = 1; // 0 is not admin
   // else
   //  $_SEESION['admin'] = 0;
