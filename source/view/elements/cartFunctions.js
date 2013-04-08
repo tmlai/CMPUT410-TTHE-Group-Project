@@ -200,7 +200,7 @@ function buildCartProducts() {
         document.getElementById("resultsDiv").innerHTML += (
           "<tr>\n<td>\n"
           // Quantity text field for product
-          + "<input type=\"text\" name=\"qtyField" + product.id + 
+          + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
           + product.quantity +"><td>\n"
           // Thumbnail of product
