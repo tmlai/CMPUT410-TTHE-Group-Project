@@ -96,7 +96,7 @@ function getCartIndex(pid) {
  * @return  {"pid":"value","quantity":"#"}
  */
 function getJsonCartElement(pid, qty) {
-  return('{"' + pid + '":"quantity":"' + quantity+ '"}');
+  return('{"' + pid + '":"quantity":"' + qty + '"}');
 
 }
 
@@ -126,7 +126,7 @@ function getExternalAvail(pid, qty = 1) {
     }
   };
   
-  xmlhttp.open('GET', '/model/ExternalAPIHandler?cid=' + pid + '&quantity'
+  xmlhttp.open('GET', '/model/ProductExternalAvailability?cid=' + pid + '&quantity='
     + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
@@ -141,7 +141,7 @@ function sendPurchase(user) {
  * default qty is 1.
  * @return  JSON of productId, store url and the quantity from that store as an 
  * array. ie: {"user":"...", """cid":"#", "storeurl":"...", "quantity":"#",...}
- */
+ 
 function getExternalStoreQty(pid, qty = 1) {
   // AJAX call for external stores
   var xmlhttp = new XMLHttpRequest();
@@ -160,8 +160,8 @@ function getExternalStoreQty(pid, qty = 1) {
     }
   };
   
-  xmlhttp.open('POST', '/model/ExternalAPIHandler.php?cid=' + pid + '&quantity'
+  xmlhttp.open('POST', '/model/ProductExternalAvailability.php?cid=' + pid + '&quantity'
     + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
-}
+}*/

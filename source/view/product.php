@@ -11,7 +11,6 @@ $id = $_SESSION['productID'];
 $dbLayer = new DbLayer();
 $product = $product = $dbLayer->getOneProduct($id);
 $product = json_decode($product, true);
-
 ?>
 <!DOCTYPE html>
 <html>
