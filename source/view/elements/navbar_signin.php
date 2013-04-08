@@ -44,6 +44,7 @@
 						
 						function login() {
 							var username = document.loginform.usernameField.value.trim();
+							alert(username);
 							var password = document.loginform.passwordField.value.trim();
 							var obj = new Object();
 							obj.username = username;
