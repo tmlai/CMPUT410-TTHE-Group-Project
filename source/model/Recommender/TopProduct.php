@@ -1,7 +1,7 @@
 <?php
 namespace model;
 
-include_once ('DbLayer.php');
+include_once ('../DbLayer.php');
 
 function checkStock($productId){
 	$stock = DbLayer::getStock($productId);
