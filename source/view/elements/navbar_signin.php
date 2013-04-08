@@ -60,7 +60,7 @@
 									alert("Login failed: Please check you login information.");
 								} else {
 									
-									alert("You are no logged in.");									
+									alert("You are now logged in.");									
 								}
 							}
 						}
