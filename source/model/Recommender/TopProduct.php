@@ -79,5 +79,5 @@ foreach ($topProductList as $topProduct){
 	$topProductJSONList[] =$topProductJSON;
 	//return a list of json data
 }
-return json_encode($topProductJSONList);	
+echo json_encode($topProductJSONList);	
 ?>
