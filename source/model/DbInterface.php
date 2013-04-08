@@ -12,6 +12,13 @@ include_once "UserRatingProduct.php";
 interface DbInterface {
 
 	// Customer + admin section
+	
+	/*
+	 * Return a list of customer objects
+	 */
+	public function getListCustomers();
+	
+	
 	/*
 	 * Add the customer to the database
 	 * Parameters: $customer: the customer object to be added
@@ -102,7 +109,7 @@ interface DbInterface {
 	 * Parameters: $categoryId 	the id of the category
 	 * Return type: array of product objects
 	 */
-	public function getProducts($categoryId);
+	public function getProducts($categoryId = null);
 
 	// -------------------------------------------------------------------------
 
@@ -113,6 +120,11 @@ interface DbInterface {
 	 * Return the store object in case of matching. Null otherwise.
 	 */
 	public function searchStore($url);
+	
+	/*
+	 * Get the list of external stores which we do business with
+	 */
+	public function getListExternalStores();
 
 	/*
 	 * order products from other stores

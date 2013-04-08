@@ -59,6 +59,7 @@
 			our own store  
 	+	*amount* is the total value of quantity of products
 3.	List of php scripts probably needed
+
 	
 	+	Management module
 		
