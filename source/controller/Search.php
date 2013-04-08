@@ -8,11 +8,11 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 if($requestMethod == "get") {
-	$search = $_GET['searchField'];
+	$partial = $_GET['searchField'];
+	// $dbLayer = new DbLayer();
+	// $list = $dbLayer->searchProduct($search);
 	$dbLayer = new DbLayer();
-	$list = $dbLayer->searchProduct($search);
-	// var_dump($search);
-	echo "into if statement";
+	$list = $dbLayer->searchProduct($partial);
+	echo $search;
 }
-echo "out of if";
 ?>
