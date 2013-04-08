@@ -42,6 +42,7 @@ if ($requestMethod == "GET"){
 				$totalAvailable = 0;
 				foreach ($instockProductIds as $instockProductId){
 					$instockId = $instockProductId["id"];
+					echo $instockId;
 					if ($instockId == $productId){
 						if ($quantity == 1 || $quantity == "1"){
 							$message = "True";
@@ -51,8 +52,9 @@ if ($requestMethod == "GET"){
 							$url.="/products/".$instockId;
 							$productsInfo = file_get_contents($url);
 							$productsInfoJson = json_decode($productsInfo, true);
+							echo "<br />".$productsInfoJson["quantity"]."<br/> ";
 							$totalAvailable += intval($productsInfoJson["quantity"]);
-							if ( $totalAvailable >= intval($quantity){
+							if ( $totalAvailable >= intval($quantity)){
 								$message = "True";
 								break;
 							}
