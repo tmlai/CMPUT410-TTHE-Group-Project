@@ -26,7 +26,7 @@ function addProdToCart(pid) {
 
 /*
  * Add quantity of a product.
- * Note: JSON format of cart: {"pid":["quantity", "from external store quantity"]}
+ * Note: JSON format of cart: [{"pid":"value","quantity":"#", "externalquantity":"#"
  * Default qty is 1. When greater than 1, the quantity is the total not
  * to increment quantity.
  * @return  true/false on availability of quantity of a product.
@@ -61,10 +61,10 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       }
       alert("Debug: 0");
       // Add pid entry with quantity to cart.
-      var jsonS = eval('(' + cartJson + ')');
-      var length = 0;
-      for(element in jsonS) length++;
-      cartJson[length][pid] = new Array(qty, qtyExternal);
+      //var jsonS = eval('(' + cartJson + ')');
+      var length = JSON.stringify(jsonArray).length;
+      //for(element in jsonS) length++;
+      cartJson[length][("'" + pid "'")] = new Array(qty, qtyExternal);
       // if(jsonArray.quantity >= qtyNew) {
         // update the quantity.
         // cartJson[0][pid] = new Array(qty, qtyExternal);
@@ -113,7 +113,7 @@ function getExternalAvail(pid, qty = 1) {
     }
   };
   
-  xmlhttp.open('GET', '/source/controller/WebServices.php?cid=' + pid + '&quantity'
+  xmlhttp.open('GET', '/model/ExternalAPIHandler?cid=' + pid + '&quantity'
     + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
@@ -147,7 +147,7 @@ function getExternalStoreQty(pid, qty = 1) {
     }
   };
   
-  xmlhttp.open('POST', '/source/controller/WebServices.php?cid=' + pid + '&quantity'
+  xmlhttp.open('POST', '/model/ExternalAPIHandler.php?cid=' + pid + '&quantity'
     + qty, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
