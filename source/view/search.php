@@ -122,13 +122,14 @@ $advanced = $_GET['advanced'];
                 </tr>
             </thead>
             <tbody id="resultsTable">
+				<div id="loadingSpinner" align="center" style="visibility:visible">
+				  <img src="./elements/img/spinner.gif" alt="...Loading...">
+				</div>
             </tbody>
             </table>
         </div>
 		<hr>
-        <div id="loadingSpinner" align="center" style="visibility:visible">
-          <img src="./elements/img/spinner.gif" alt="...Loading...">
-        </div>
+        
     </div> <!-- /container -->
 	<script type="text/javascript">
 		window.onload=initialLoading('<?php echo $search;?>');
