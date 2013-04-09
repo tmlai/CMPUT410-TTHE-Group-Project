@@ -40,7 +40,7 @@ $advanced = $_GET['advanced'];
 		}
 		xmlhttp.open('GET', 
 			'/source/controller/Search.php?searchField=<?php echo $search;?>',
-			false);
+			true);
 		xmlhttp.send();
 		//need to populate
 		xmlhttp.onreadystatechange=function() {
@@ -73,7 +73,10 @@ $advanced = $_GET['advanced'];
 				if(listArray.length==0) {
 					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 				}
-				document.getElementById('resultsTable').innerHTML=table;
+				if(document.getElementById('resultsTable') != null) {
+					document.getElementById('resultsTable').innerHTML=table;
+				}
+				
 			}
 		}
 	}
