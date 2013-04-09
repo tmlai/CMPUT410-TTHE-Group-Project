@@ -53,7 +53,9 @@ elseif ($requestMethod == "GET"){
 	echo "Cat".$cat."<br/>";
 	echo "n ".$n."<br/>";
 	$productList = recommendRelatedProducts($n, $cat);
+	echo "productList array".$productList."<br/>";
 	$productJSONList = array();
+	echo "iterate through the array<br/>";
 	foreach ($productList as $product){
 		$simpleProduct = array (
 			"cid" => $product.getCid(),
