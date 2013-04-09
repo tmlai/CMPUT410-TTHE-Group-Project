@@ -235,7 +235,19 @@ interface DbInterface {
 	 * @param	$availRange		the availability range {lowerBound, upperBound}
 	 * @param	$weightRange	the weight Range {lowerBound, upperBound}
 	 */
-	public function searchProductByConstraints($cateId, $priceRange,
+// 	public function searchProductByConstraints($cateId, $priceRange,
+// 			$availRange, $weightRange);
+	
+	/*
+	 * @param	$name			name
+	 * @param 	$code			product id
+	 * @param	$category		category name
+	 * @param	$priceRange		the price range {lowerBound, upperBound}.
+	 * 							null to indicate no constraint on lower/upper.
+	 * @param	$availRange		the availability range {lowerBound, upperBound}
+	 * @param	$weightRange	the weight Range {lowerBound, upperBound}
+	 */
+	public function searchProductByConstraints($name,$code,$category, $priceRange,
 			$availRange, $weightRange);
 
 	// 	-----------------------------------------------------------------------

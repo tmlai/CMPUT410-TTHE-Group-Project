@@ -152,3 +152,10 @@
 			- POST requeset to /controller/UserRegistration.php with the user info
 			- return:
 				String status
+
+		#VIEW OUTSTANDING ORDER  
+		Get Customer name from Session
+		Return {"order":[{"pid":"product id", "quantity":"30"}, 
+						{"pid":"product id", "quantity":"30"}, 
+						{"pid":"product id", "quantity":"30"}],
+				"delivery_date":"somedate"}
