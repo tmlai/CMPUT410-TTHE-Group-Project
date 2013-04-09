@@ -15,9 +15,10 @@ $advanced = $_GET['advanced'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
         // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+        require("./elements/head_includes.php");
     ?>
-	<script type="text/javascript" src="elements/search.js"></script>
+	<script type="text/javascript" language="Javascript"
+		src="elements/search.js"></script>
   </head>
   <body onLoad="setToggle()"> 
     <?php
@@ -121,13 +122,14 @@ $advanced = $_GET['advanced'];
                 </tr>
             </thead>
             <tbody id="resultsTable">
+				FILLER!!
             </tbody>
             </table>
         </div>
 		<hr>
         <div id="loadingSpinner" align="center" style="visibility:visible">
-          <img src="./elements/img/spinner.gif" alt="...Loading...">
-        </div>
+		  <img src="./elements/img/spinner.gif" alt="...Loading...">
+		</div>
     </div> <!-- /container -->
 	<script type="text/javascript">
 		window.onload=initialLoading('<?php echo $search;?>');
