@@ -116,7 +116,7 @@ $advanced = $_GET['advanced'];
         </div>
         <div class="container" id="tableTitles">
             <table class="table table-hover">
-            <thead>
+            <thead id="tableHead">
                 <tr>
                     <th><!-- placeholder --></th>
                     <th>Price</th>
