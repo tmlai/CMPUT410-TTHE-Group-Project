@@ -43,11 +43,12 @@ $advanced = $_GET['advanced'];
           }
         ?>
         </h3>
+	<!--
         <label class="clabel" id="dropbutton" data-toggle="collapse" 
           data-target="#advSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
-		
+	-->
         <div id="advSearch" class="collapse">
 		Putting something in here!
 	<!--
