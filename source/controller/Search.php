@@ -15,12 +15,6 @@ if($requestMethod == "get") {
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
 		$singleProduct = $list[$i];
-		
-		$singleProduct['cid'] = $product['cid'];
-		$singleProduct['name'] = $product['name']; 
-		$singleProduct['price'] = $product['price']; 
-		$singleProduct['weight'] = $product['weight'];
-		$singleProduct['description'] = $product['description'];
 		$allReturned[$i] = $singleProduct;
 		var_dump($allReturned[$i]);
 	}
