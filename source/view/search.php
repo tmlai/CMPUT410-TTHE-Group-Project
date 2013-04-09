@@ -128,7 +128,7 @@ $advanced = $_GET['advanced'];
 			}
 			xmlhttp.setRequestHeader("Content-type","application/json");
 			xmlhttp.open('POST', 
-				'/source/controller/Search.php',
+				'/source/controller/AdvSearch.php',
 				true);
 			xmlhttp.send(jsonSearch);
 			}
