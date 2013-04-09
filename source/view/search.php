@@ -126,8 +126,30 @@ $advanced = $_GET['advanced'];
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 					var list = xmlhttp.responseText;
 					var listArray = JSON.parse(list);
-					console.log(listArray);
-					}
+					//build the table code
+					var table = "";
+					console.log(listArray[0].cid);
+					// for(var i = 0; i<listArray.length; i++) {
+						// table += 
+						// "<tr onclick=\"location.href='./product.php?id="+listArray[i].cid+"'\">
+							// <td>
+							  // <img src="" alt="" width="50" height="50">
+							// </td>
+							// <td>$1</td>
+							// <td>1 kg</td>
+							// <td>1name</td>
+							// <td>c1</td>
+							// <td>This is a description...</td>
+							// <td>
+								// <button id="p1" style="position:relative; right:0px;"
+								// class="btn pull-right">
+									// View Product
+								// </button>
+							// </td>
+						// </tr>
+					// }
+					
+				}
 			}
 	}
     -->
@@ -250,54 +272,6 @@ $advanced = $_GET['advanced'];
                     <td>This is a description...</td>
                     <td>
                         <button id="p1" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=2'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$2</td>
-                    <td>2 kg</td>
-                    <td>2name</td>
-                    <td>c2</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p2" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=3'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$3</td>
-                    <td>3 kg</td>
-                    <td>3name</td>
-                    <td>c3</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p3" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=4'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$4</td>
-                    <td>4 kg</td>
-                    <td>4name</td>
-                    <td>c4</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p4" style="position:relative; right:0px;"
                         class="btn pull-right">
                             View Product
                         </button>
