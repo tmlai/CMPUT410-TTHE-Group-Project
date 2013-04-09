@@ -30,10 +30,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             buttonLeft: $("#left-but"),
             buttonRight: $("#right-but"),
             altBox: $("#alt-text"),
-            titleBox: $("#title-text"),
-            autoRotate: 'left',
-            autoRotateDelay: 1200,
-            speed:0.2
+            titleBox: $("#title-text")
           }
         );
       });
