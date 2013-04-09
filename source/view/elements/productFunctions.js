@@ -74,26 +74,25 @@ function buildRelatedProducts(products) {
   var div = document.getElementById("resultsDiv");
   for(var i = 0; i < products.length; i++) {
     div.write(
-      var product = products[i];
-      "<tr onclick=\"location.href='./product.php?id='" + product['cid']
+      "<tr onclick=\"location.href='./product.php?id='" + products[i]['id']
       + "\">\n"
       // Rank/index of product
       + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
       // Thumbnail of product
-      + " <img src='/img/products/" + product['cid'] + ".jpg\'" 
+      + " <img src='/img/products/" + products[i]['id'] + ".jpg\'" 
       + "\" alt=\"\" width=\"50\" height=\"50\">\n"
       + "</td>\n"
       // Price of product
-      + "<td>$" + product['price'] + "</td>\n"
+      + "<td>$" + products[i]['price'] + "</td>\n"
       // Weight of product
-      + "<td>" + product['weight'] + "</td>\n"
+      + "<td>" + products[i]['weight'] + "</td>\n"
       // Name of product
-      + "<td>" + product['name'] + "</td>\n"
+      + "<td>" + products[i]['name'] + "</td>\n"
       // Code of product
-      + "<td>" + product['cid'] + "</td>\n"
+      + "<td>" + products[i]['id'] + "</td>\n"
       // Description of product
-      + "<td>" + product['description'].substring(0, 35) + "...</td>\n"
+      + "<td>" + products[i]['description'].substring(0, 35) + "...</td>\n"
       + "<td>\n"
       + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
       + "   class=\"btn pull-right\">\n"
