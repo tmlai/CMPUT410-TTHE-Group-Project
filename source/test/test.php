@@ -523,7 +523,7 @@ class TestDb {
 // \test\TestDb::testAddOrder();
 // \test\TestDb::testSearchProductByCode();
 // \test\TestDb::testSearchProductByCategory();
-\test\TestDb::testSearchProductByConstraints();
+// \test\TestDb::testSearchProductByConstraints();
 // \test\TestDb::testGetCustomersOrders();
 // \test\TestDb::testGetListProductsInOrder();
 // \test\TestDb::testGetOlapReport();

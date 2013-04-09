@@ -12,7 +12,7 @@ try {
 			if(!empty($_GET)) {
         // catList param for category list
         if(isset($_GET['catList'])) {
-          $categories = $dbLayer->getCategoryList();
+          $categories = $dbLayer->getCategoriesList();
           $allReturned = array();
           for($i = 0; $i < count($categories); $i++){
             $singleCategory = $categories[i];
