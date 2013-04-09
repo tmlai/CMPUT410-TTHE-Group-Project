@@ -7,10 +7,13 @@ include_once '../model/DbLayer.php';
 include_once '../model/CustomerOrder.php';
 include_once '../model/OrderProduct.php';
 $username = $_SESSION['user'];
-// if($username == ''){
-// 	$username = $_GET['user'];
-// }
+if($username == ''){
+	$username = $_GET['user'];
+}
 $dbLayer = new DbLayer();
+
+$dbLayer->updateOrdersBeforeViewing($username);
+
 $list = $dbLayer->getCustomersOrders($username, true);
 $ordersList = array();
 foreach($list as &$co){

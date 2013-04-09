@@ -73,8 +73,8 @@ if($requestMethod == "post") {
 		//create a new object
 		$singleObj = (object) array(
 			'cid'=>$cid, 'price'=>$price,
-			'weight'=>$weight, 'name'=>$description,
-			'image'=>$image);
+			'weight'=>$weight, 'name'=>$name,
+			'image'=>$image, 'description'=>$description);
 		$allReturned[$i] = $singleObj;
 	}
 	echo json_encode($allReturned);
