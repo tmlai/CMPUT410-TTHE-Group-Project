@@ -103,17 +103,8 @@ function buildCategoryContainer(cats) {
 }
 
 function buildCarouselItems(prods) {
-  var catHTML = '<div id="myCarousel" class="carousel slide">\n'
-    + '<ol class="carousel-indicators">\n';
-  for(var i = 0; i < prods.length; i++) {
-    if(i == 0) {
-      catHTML += 
-        '<li data-target="#myCarousel" data-slide-to="0" class="active"></li>\n';
-    } else {
-      catHTML += '<li data-target="#myCarousel" data-slide-to="1"></li>\n';
-    }
-  }
-  catHTML +=  '</ol><div class="carousel-inner" id="carouselItemDiv">\n';
+  var catHTML = '<div id="myCarousel" class="carousel slide">\n';
+  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
     if(i == 0) {
