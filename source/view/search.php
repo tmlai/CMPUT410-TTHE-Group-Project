@@ -19,7 +19,7 @@ $advanced = $_GET['advanced'];
     ?>
 
   </head>
-  <body onLoad="initialLoading();">   
+  <body onLoad="initialLoading(<?php echo $search);">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
