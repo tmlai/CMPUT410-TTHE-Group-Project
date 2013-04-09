@@ -73,8 +73,8 @@ function checkInStock(pid) {
 function buildRelatedProducts(products) {
   for(var i = 0; i < products.length; i++) {
     document.getElementById("resultsDiv").innerHTML += (
-      "<tr onclick=\"location.href='./product.php?id='" + products[i]['cid']
-      + "\">\n"
+      "<tr onclick=\"location.href='./product.php?id=" + products[i]['cid']
+      + "'\">\n"
       // Rank/index of product
       + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
