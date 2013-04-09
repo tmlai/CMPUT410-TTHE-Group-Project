@@ -14,7 +14,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     ?>
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
   </head>
-  <body = "getCategoies()">   
+  <body onLoad="getCategoies()">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
