@@ -1,5 +1,7 @@
 <?php
 namespace test;
+use model\TransactionOrder;
+
 use model\Category;
 
 use model\Olap;
@@ -16,7 +18,8 @@ use model\DbLayer;
 
 use model\UserRatingProduct;
 
-include_once "../model/DbLayer.php";
+// include_once "../model/DbLayer.php";
+include_once "../model/TransactionLayer.php";
 class TestDb {
 	
 	/*
@@ -539,6 +542,13 @@ class TestDb {
 			echo "false";
 		}
 	}
+	
+	public static function testExtendClass(){
+		$orderId = 10;
+		$trOr = new TransactionOrder($orderId, $description, 
+				$orderDate, $username, $payment, $deliveryDate);
+		echo($trOr->getOrderId());
+	}
 }
 // \test\TestDb::testAddProduct();
 // \test\TestDb::testAddCustomer();
@@ -573,4 +583,5 @@ class TestDb {
 // \test\TestDb::testLookupStore();
 // \test\TestDb::testUpdateDeliveryDateExternal();
 // \test\TestDb::testUpdateDeliveryDate(13);
+// \test\TestDb::testExtendClass();
 ?>
