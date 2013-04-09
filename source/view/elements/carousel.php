@@ -1,6 +1,6 @@
 <!-- Carousel -->
 <div id="myCarousel" class="carousel slide">
-    <div class="carousel-inner">
+    <div class="carousel-inner" id="carouselItemDiv">
     <div class="item active">
       <a href="#1">
       <img src="../assets/img/examples/slide-02.jpg" alt="">
