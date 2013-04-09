@@ -25,7 +25,7 @@
 				function functionToCall() {
 		if (xmlhttp.readyState == 4) {
 			document.write(xmlhttp.responseText);
-			var XmlResult = http.responseXML;
+			var XmlResult = xmlhttp.responseXML;
 		}
 	}
 				var amt = document.getElementById("amt").value;
