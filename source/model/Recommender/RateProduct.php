@@ -1,13 +1,15 @@
 <?php
 namespace model;
+echo "before include";
+include_once ('../DbLayer.php');
+include_once ('../UserRatingProduct');
 
-include_once ('DbLayer.php');
-include_once ('UserRatingProduct');
-
+echo "b4 get request method";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+echo "before get user from session";
 $userName = $_SESSION["user"]; // from session
-
+echo "after get user from session".$userName;
 
 if ($requestMethod == "POST"){
 	
@@ -36,11 +38,13 @@ if ($requestMethod == "POST"){
 			);
 		}
 	}
-	return json_encode($message);
+	echo json_encode($message);
 }
 elseif ($requestMethod == "GET"){
 	$cat = $_GET["category"];
+	echo "Cat".$cat."<br/>";
 	$n = $_GET["n"];
+	echo "n".$n."<br/>";
 	if (!isset($cat) || trim($cat) === ""){
 		$cat = null;
 	}
@@ -57,8 +61,11 @@ elseif ($requestMethod == "GET"){
 			"image" => $product.getImage(),
 			"description" => $product.getDescription()
 		);
+		echo "before encoding<br/>";
 		$simpleProductJSON = json_encode($simpleProduct	);
+		echo "after encoding<br/>";
 		$productJSONList[] =$simpleProductJSON;
 	}
-	return json_encode($productJSONList);
+	echo "json array".$productJsonList."<br/>";
+	echo json_encode($productJSONList);
 }
