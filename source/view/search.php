@@ -61,6 +61,80 @@ $advanced = $_GET['advanced'];
           "Advanced Search  <i class=\"icon-chevron-down\"></i>";
       }
     }
+	
+	function advSearch() {
+		var name = document.getElementById('searchNameField').value.trim;
+		var code = document.getElementById('searchCodeField').value.trim;
+		var category = document.getElementById('searchCategoryField').value.trim;
+		var priceFrom = document.getElementById('priceFromField').value.trim;
+		var priceTo = document.getElementById('priceToField').value.trim;
+		var minQty = document.getElementById('minQtyField').value.trim;
+		var maxQty = document.getElementById('maxQtyField').value.trim;
+		var minWeight = document.getElementById('minWeightField').value.trim;
+		var maxWeight = document.getElementById('maxWeightField').value.trim;
+		var pass = true;
+		
+		//check range values
+		if(priceFrom = "" || !isNaN(priceFrom)) {
+			pass = false;
+		}
+		else if(priceTo != "" || !isNaN(priceTo)) {
+			pass = false;
+		} else if(minQty != "" || !isNaN(minQty)) {
+			pass = false;
+		} else if(maxQty != "" || !isNaN(maxQty)) {
+			pass = false;
+		} else if(minWeight != "" || !isNaN(minWeight)) {
+			pass = false;
+		} else if(maxWeight != "" || !isNaN(maxWeight)) {
+			pass = false;
+		} else if(priceFrom < priceTo) {
+			pass = false;
+		} else if(minQty < maxQty) {
+			pass = false;
+		} else if(minWeight < maxWeight) {
+			pass = false;
+		} else if(priceFrom < 0) {
+			pass = false;
+		} else if(minQty < 0) {
+			pass = false;
+		} else if(minWeight < 0) {
+			pass = false;
+		}
+		
+		if(pass = true) {
+			//make ajax call
+			var search = new Object();
+			search.name = name;
+			search.code = code;
+			search.category = category;
+			search.priceFrom = priceFrom;
+			search.priceTo = priceTo;
+			search.minQty = minQty;
+			search.maxQty = maxQty;
+			search.minWeight = minWeight;
+			search.maxWeight = maxWeight;
+			
+			//make json
+			var jsonSearch = json_encode(search);
+			
+			var xmlhttp = new XMLHttpRequest();
+			if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}	else {
+			// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.setRequestHeader("Content-type","application/json");
+			xmlhttp.open('POST', 
+				'/source/controller/Search.php',
+				true);
+			xmlhttp.send(jsonSearch);
+			}
+			
+			//get the response text
+	}
     -->
     </script>
   </head>
@@ -148,7 +222,7 @@ $advanced = $_GET['advanced'];
                         <input type="text" id="maxWeightField" 
                         placeholder="Price From">
                     </div>
-					<input type="button" class="btn" value="Advanced Search" onClick="">
+					<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
                 </div>
                 <!-- and more fields for admin...-->
 			</div>
