@@ -1,4 +1,4 @@
-<?php // 
+<?php 
 // echo "before include<br/>";
 include_once ('../DbLayer.php');
 include_once ('../UserRatingProduct');
@@ -52,12 +52,14 @@ include_once ('../UserRatingProduct');
 // 	}
 // 	echo "Cat".$cat."<br/>";
 // 	echo "n ".$n."<br/>";
-// 	try {
+	try {
+		echo "b4";
 		$productList = DbLayer::recommendRelatedProducts($n, $cat);
-// 	}
-// 	catch (Exception $e){
-// 		echo $e.getMessage()."<br/>";
-// 	}
+		echo "after";
+	}
+	catch (Exception $e){
+		echo $e.getMessage()."<br/>";
+	}
 	
 // 	echo "productList array".$productList."<br/>";
 // 	$productJSONList = array();
