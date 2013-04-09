@@ -73,7 +73,7 @@ $advanced = $_GET['advanced'];
 				if(listArray.length==0) {
 					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 				}
-				document.getElementById('resultsDiv').innerHTML=table;
+				document.getElementById('resultsTable').innerHTML=table;
 			}
 		}
 	}
@@ -185,7 +185,7 @@ $advanced = $_GET['advanced'];
 					if(listArray.length==0) {
 						document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 					}
-					document.getElementById('resultsDiv').innerHTML=table;
+					document.getElementById('resultsTable').innerHTML=table;
 				}
 			}
 	}
@@ -293,7 +293,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsDiv">
+            <tbody id="resultsTable">
             </tbody>
             </table>
         </div>
