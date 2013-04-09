@@ -10,10 +10,20 @@
 			var url ="../model/ProductExternalAvailability.php";
 			//gets info with the given id number_format
 			function testGetOne() {
+				function functionToCall() {
+					if (xmlhttp.readyState == 4) {
+						alert(xmlhttp.responseText);
+						document.write(xmlhttp.responseText);
+						var XmlResult = xmlhttp.responseXML;
+					}
+				}
+				
 				var id = document.getElementById("id").value;
 				var q = document.getElementById("idQ").value;
 				var xmlhttp=new XMLHttpRequest();
+				xmlhttp.onreadystatechange = functionToCall;
 				xmlhttp.open('GET', url+'?cid='+id+"&quantity="+q, 'true');
+				
 				xmlhttp.send();
 			}
 			
