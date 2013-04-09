@@ -33,7 +33,11 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 			}
 		}
 	}
-
+	
+	if ($minPrice == -1.0){
+		echo "step 0";
+		return False;	
+	}
 	// sort by stock price from lowest to highest
 	asort($toOrderInfo);
 	
@@ -48,7 +52,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	
 	//Ordering from the chosen store
 	$orderUrl = $choosenStore->getUrl()."/products/".$productId."/order";
-	$data = array('amount' => $quantity);
+	$data = array('amount' => $toOrder);
 	$options = array(
 			'http' => array(
 					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
