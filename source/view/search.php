@@ -17,7 +17,7 @@ $advanced = $_GET['advanced'];
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
-
+	<script type="text/javascript" src="elements/search.js"></script>
   </head>
   <body onLoad="initialLoading(<?php echo $search;);">   
     <?php
