@@ -75,8 +75,7 @@ foreach ($topProductList as $topProduct){
 			"image" => $topProduct.getImage(),
 			"description" => $topProduct.getDescription()
 	);
-	$topProductJSON = json_encode($simpleTopProduct);
-	$topProductJSONList[] =$topProductJSON;
+	$topProductJSONList[] =$simpleTopProduct;
 	//return a list of json data
 }
 echo json_encode($topProductJSONList);	

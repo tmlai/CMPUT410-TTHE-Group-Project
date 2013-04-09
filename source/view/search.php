@@ -42,10 +42,11 @@ $advanced = $_GET['advanced'];
 			'/source/controller/Search.php?searchField=<?php echo $search;?>',
 			true);
 		xmlhttp.send();
+		//need to populate
 	}
     function setToggle() {
       if(dropBool) {
-        document.getElementById("adSearch").className="collapse in";
+        document.getElementById("advSearch").className="collapse in";
       }
       dropIconToggle();
     }
@@ -92,11 +93,11 @@ $advanced = $_GET['advanced'];
         </label>
         <div id="advSearch" class="collapse">
                 <div id="store_div" class="control-group">
-                    <label class="control-label" for="storeField">Access Code
+                    <label class="control-label" for="storeField">Name
                     </label>
                     <div class="controls">
-                        <input type="password" id="storeField" 
-                        placeholder="Access Code">
+                        <input type="text" id="searchNameField" 
+                        placeholder="Search Name">
                     </div>
                 </div>
                 <!-- and more fields for admin...-->
