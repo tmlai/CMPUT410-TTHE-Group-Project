@@ -53,7 +53,7 @@ $advanced = $_GET['advanced'];
 				var table = "";
 				for(var i = 0; i<listArray.length; i++) {
 					table += 
-					"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+					"<tr onclick=\"location.href='/source/product.php?id="+listArray[i].cid+"'\">" +
 						"<td>" +
 						  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
 						"</td>" +
@@ -166,7 +166,7 @@ $advanced = $_GET['advanced'];
 					var table = "";
 					for(var i = 0; i<listArray.length; i++) {
 						table += 
-						"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+						"<tr onclick=\"location.href='/source/product.php?id="+listArray[i].cid+"'\">" +
 							"<td>" +
 							  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
 							"</td>" +
