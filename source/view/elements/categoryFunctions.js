@@ -91,7 +91,7 @@ function buildCategoryContainer(cats) {
     document.getElementById("categorycopntainerDiv").innerHTML += (
       '<div class="span4">'
       + '      <h2>' + cats[i]['name'] + '</h2>\n'
-      + '      <p>' + cats[i]['description'] + '</p>\n';
+      + '      <p>' + cats[i]['description'] + '</p>\n'
       + '      <p><a class="btn" href="category.php?cateId=' 
       + cats[i]['cateId'] +'">View details &raquo;</a></p>\n'
       + '</div>\n'

@@ -43,8 +43,10 @@
                 </ul>
                 
             </li>
-            <li class="dropdown-menu">
-              <a tabindex="-1" href="index.php">Browse Categories</a>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Browse Categories<span class="caret"></span>
+                </a>
               <ul class="dropdown-menu" id="navCatList">
               </ul>
             </li>
