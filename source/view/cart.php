@@ -66,7 +66,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <td id="priceCalc"></td>
             <td>
               <button class="btn btn-success" onclick="submitCart(" 
-                + <?php echo "'" . $_SESSION['user'] . "'" . ?>")">
+                + <?php echo "'" . $_SESSION['user'] . "'";?>")">
               Checkout
               </button>
             </td>
