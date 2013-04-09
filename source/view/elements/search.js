@@ -49,11 +49,12 @@ function initialLoading(searchString) {
 			var listArray = JSON.parse(list);
 			document.getElementById("loadingSpinner").style.visibility = "hidden";
 			document.getElementById("loadingSpinner").innerHTML = "<br>";
+			console.log(listArray);
 			//build the table code
 			var table = "";
 			for(var i = 0; i<listArray.length; i++) {
 				table += 
-				"<tr onclick=\"location.href='/source/product.php?id="+listArray[i].cid+"'\">" +
+				"<tr onclick=\"location.href='/source/view/product.php?id="+listArray[i].cid+"'\">" +
 					"<td>" +
 					  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
 					"</td>" +
@@ -147,7 +148,7 @@ function advSearch() {
 				var table = "";
 				for(var i = 0; i<listArray.length; i++) {
 					table += 
-					"<tr onclick=\"location.href='/source/product.php?id="+listArray[i].cid+"'\">" +
+					"<tr onclick=\"location.href='/source/view/product.php?id="+listArray[i].cid+"'\">" +
 						"<td>" +
 						  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
 						"</td>" +
