@@ -63,7 +63,7 @@ function getCarouselProds() {
       buildCarouselItems(jsonArray);
     }
   };
-  xmlhttp.open('GET', '../model/Recommender/TopProduct.php?numProduct=3', true);
+  xmlhttp.open('GET', '../model/Recommender/TopProduct.php?numProduct=5', true);
   xmlhttp.send();
 }
 
