@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 use model\DbLayer;
 use model\CustomerOrder;
 use model\OrderProduct;
@@ -25,7 +25,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 		$stocksInfo[$url] = $productsInfoJson["quantity"];
 		$eStoreQuantity = intval($productsInfoJson["quantity"]);
 		$eStorePrice = intval($productsInfoJson["price"]);
-		if ($eStoreQuantity >= $quantity 
+		if ($eStoreQuantity >= $toOrder 
 			&& $eStorePrice <= $ourPrice* $GLOBALS["priceTolerance"]){
 			if ($minPrice == -1.0 || $minPrice > $eStorePrice){
 				$minPrice = $eStorePrice;
@@ -70,7 +70,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 function getCreateStoreId($store){
 	$dbLayer = new DbLayer();
-	$storeId = $dbLayer->searchStore($store->$url);
+	$storeId = $dbLayer->searchStore($store->getUrl());
 	
 	if ($storeId == null){
 		if ($dbLayer->addStore($store)){
@@ -137,15 +137,15 @@ if ($requestMethod == "POST"){
 	);
 	
 	$userName = $_SESSION["user"];
-	echo "user name:[".$userName."]<br/>";
+// 	echo "user name:[".$userName."]<br/>";
 	//TODO:
-	$userName = "hcngo";
+// 	$userName = "hcngo";
 	$products = $_POST["orderLists"];
 	
 	$productsJson = json_decode($products, true);
 	//TODO:
-	echo "<br/>username ".$userName."<br/>";
-	echo "<br/>orders ".$products."<br/>\n";
+// 	echo "<br/>username ".$userName."<br/>";
+// 	echo "<br/>orders ".$products."<br/>\n";
 	
 	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
