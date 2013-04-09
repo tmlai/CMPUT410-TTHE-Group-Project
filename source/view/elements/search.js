@@ -40,7 +40,7 @@ function initialLoading(searchString) {
 	}
 	xmlhttp.open('GET', 
 		'/source/controller/Search.php?searchField=' + searchString,
-		false);
+		true);
 	xmlhttp.send();
 	//need to populate
 	xmlhttp.onreadystatechange=function() {
@@ -74,7 +74,11 @@ function initialLoading(searchString) {
 			if(listArray.length==0) {
 				document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 			}
-			document.getElementById('resultsTable').innerHTML=table;
+			var rTableDiv = document.getElementById('resultsTable');
+			if(rTableDiv != null) {
+				document.getElementById('resultsTable').innerHTML=table;
+			}
+			
 
 		}
 	}
