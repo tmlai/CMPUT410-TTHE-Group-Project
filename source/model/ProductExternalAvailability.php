@@ -2,8 +2,13 @@
 use model\DbLayer;
 use model\CustomerOrder;
 use model\OrderProduct;
+use model\Store;
 
 include_once ('DbLayer.php');
+include_once ('CustomerOrder.php');
+include_once ('OrderProduct.php');
+include_once ('Store.php');
+
 
 $priceTolerance = 1.10;
 
@@ -104,7 +109,7 @@ if ($requestMethod == "POST"){
 	$userName = $_SESSION["user"];
 	$products = $_POST["orderLists"];
 	$productsJson = json_decode($productsJson, true);
-	$message = "False";
+
 	$customerOrder = new CustomerOrder(0, "", '', $userName, 0, '');
 	$orderProductsArray = array();
 	foreach($productsJson as $productJson){
@@ -113,8 +118,10 @@ if ($requestMethod == "POST"){
 		$crrStock = $dbLayer->getStock($productId);
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
+			
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, "",
 					 "", $quantity * $ourPrice);
+			$message["status"] = "True order from our own store";
 		}
 		else {
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
@@ -124,7 +131,7 @@ if ($requestMethod == "POST"){
 			$marketInfo = file_get_contents($url);
 			if (!isset($marketInfo) || trim($marketInfo) === ""){
 				//Have not enough product, cannot call the api, cancel processing
-				$message["status"] = "False";
+				$message["status"] = "False have not enough product, cannot call the api";
 			}
 			else{
 				$marketsJson = json_decode($marketInfo, true);
@@ -140,7 +147,7 @@ if ($requestMethod == "POST"){
 							}
 							else{
 								//cannot add new store, cancel processing
-								$message["status"] = "False";
+								$message["status"] = "False cannot add new store";
 							}
 						}
 						$orderProductsArray[] = new OrderProduct(0, $productId, $storeId, $toOrder, $orderJson["order_id"],
@@ -149,7 +156,7 @@ if ($requestMethod == "POST"){
 				}
 				else {
 					//Cannot order from another store, cancel processing
-					$message["status"] = "False";
+					$message["status"] = "False cannot order from another store";
 				}
 			}
 		}		
