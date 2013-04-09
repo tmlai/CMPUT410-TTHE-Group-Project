@@ -136,6 +136,7 @@ function advSearch() {
 		// code for IE6, IE5
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
+		xmlhttp.setRequestHeader("Content-type", "application/json");
 		xmlhttp.open('POST', 
 			'/source/controller/AdvSearch.php',
 			true);
@@ -144,6 +145,7 @@ function advSearch() {
 		
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				alert("it is ready");
 				var list = xmlhttp.responseText;
 				var listArray = JSON.parse(list);
 				console.log(listArray);
