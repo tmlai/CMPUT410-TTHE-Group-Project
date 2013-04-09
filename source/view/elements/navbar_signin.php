@@ -70,7 +70,7 @@
                             </div>
                         </form>
                     </li>
-                    <li><a href="./search.php">Advanced Search</a></li>
+                    <li><a href="./search.php?advanced=true">Advanced Search</a></li>
                 </ul>
             </li>
             <li class="dropdown">
