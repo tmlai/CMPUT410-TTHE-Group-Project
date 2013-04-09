@@ -24,10 +24,17 @@ try {
 			break;
 		case 'post':
 			//$id = file_get_contents("php://input");
-			echo $_SERVER['REQUEST_URI'];
+			$reUri =  $_SERVER['REQUEST_URI'];
+			
+			$first_token  = strtok($reUri, '/');
+			$second_token = strtok('/');
+			$third_token = strtok('/');
+			
+			echo $third_token;
+			
 			$quantity = file_get_contents("php://input");
 			$storeId = 1;
-			$cid = "c000014"; //hardcoded at the moment should retrieve it somehow
+			$cid = $third_token; 
 			$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
 			echo $orderInfo;
 			//NOTE: returns empty atm...
