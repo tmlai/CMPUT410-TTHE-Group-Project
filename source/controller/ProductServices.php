@@ -28,9 +28,7 @@ try {
 			
 			$first_token  = strtok($reUri, '/');
 			$second_token = strtok('/');
-			
-			echo $second_token;
-			
+						
 			$quantity = file_get_contents("php://input");
 			$storeId = 1;
 			$cid = $second_token; 
