@@ -1,5 +1,5 @@
 <?php
-namespace model;
+namespace model\DbLayer;
 
 include_once ('../DbLayer.php');
 
@@ -63,17 +63,19 @@ else{
 }
 
 // $topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
-$topProductList = DbLayer::getTopNSellings(5,null,null);
+$dbLayer = new DbLayer();
+$topProductList = $dbLayer->getTopNSellings(5,null,null);
 $topProductJSONList = array();
 foreach ($topProductList as $topProduct){
 	//todo: modify to just pass id, name, price
 	//do we want to recommend products out of stock?
 	$simpleTopProduct = array (
-			"cid" => $topProduct.getCid(),
-			"name" => $topProduct.getName(),
-			"price" => $topProduct.getPrice(),
-			"image" => $topProduct.getImage(),
-			"description" => $topProduct.getDescription()
+			"cid" => $topProduct->getCid(),
+			"name" => $topProduct->getName(),
+			"price" => $topProduct->getPrice(),
+			"image" => $topProduct->getImage(),
+			"description" => $topProduct->getDescription()
+			//TODO: add more
 	);
 	$topProductJSONList[] =$simpleTopProduct;
 	//return a list of json data
