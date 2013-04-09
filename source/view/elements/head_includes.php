@@ -13,3 +13,6 @@ body {
    }
 } 
 </style>
+<?php
+$categories = $dbLayer->getCategoryList();
+?>

@@ -7,10 +7,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="active brand" href="index.php">TTHE Enterprises</a>
+        <a class="brand" href="index.php">TTHE Enterprises</a>
         <div class="nav-collapse collapse">
             <ul class="nav pull-left">
-            <li class="pull-left"><a href="index.php">Home</a></li>
+            <li class="active pull-left"><a href="index.php">Home</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 Search<span class="caret"></span>
@@ -44,7 +44,12 @@
                     <li class="dropdown-submenu">
                         <a tabindex="-1" href="index.php">Categories</a>
                         <ul class="dropdown-menu">
-                        <li><a href="category.php">Appliance Categories...</a></li>
+                        <?php
+                          foreach($categories as $cat){
+                            echo '<li><a href="category.php?' . $cat . '">' 
+                              . $cat . '</a></li>';
+                          }
+                        ?>
                         </ul>
                     </li>
                 </ul>
