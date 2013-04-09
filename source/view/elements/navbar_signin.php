@@ -74,13 +74,7 @@
                     <li class="divider"></li>
                     <li class="dropdown-submenu">
                         <a tabindex="-1" href="index.php">Categories</a>
-                        <ul class="dropdown-menu">
-                        <?php
-                          /*foreach($categories as $cat){
-                            echo '<li><a href="category.php?' . $cat . '">' 
-                              . $cat . '</a></li>';
-                          }*/
-                        ?>
+                        <ul class="dropdown-menu" id="navCatList">
                         </ul>
                     </li>
                 </ul>
