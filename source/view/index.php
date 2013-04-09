@@ -29,8 +29,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             buttonRight: $("#right-but"),
             altBox: $("#alt-text"),
             titleBox: $("#title-text"),
-            autoRotate: 'right',
-            autoRotateDelay: 1500
+            autoRotate: 'right'
           }
         );
       });
@@ -59,10 +58,10 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <p id="alt-text"></p>
             <!-- All images with class of "cloudcarousel" will be turned into carousel items -->
             <!-- You can place links around these images -->
-            <img class = "cloudcarousel" src="/img/products/c000020.jpg" alt="Flag 1 Description" title="Flag 1 Title" />
-            <img class = "cloudcarousel" src="/img/products/c000019.jpg" alt="Flag 2 Description" title="Flag 2 Title" />
-            <img class = "cloudcarousel" src="/img/products/c000018.jpg" alt="Flag 3 Description" title="Flag 3 Title" />
-            <img class = "cloudcarousel" src="/img/products/c000017.jpg" alt="Flag 4 Description" title="Flag 4 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000020.jpg" height="100" width="100" alt="Flag 1 Description" title="Flag 1 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000019.jpg" height="100" width="100" alt="Flag 2 Description" title="Flag 2 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000018.jpg" height="100" width="100" alt="Flag 3 Description" title="Flag 3 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000017.jpg" height="100" width="100" alt="Flag 4 Description" title="Flag 4 Title" />
         </div>
         
         <!-- Define left and right buttons. -->
