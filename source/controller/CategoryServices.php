@@ -11,8 +11,8 @@ try {
 	if($requestMethod = 'get') {
 			if(!empty($_GET)) {
         // catList param for category list
-        if($_GET['catList']) {
-          $categories = $dbLayer->getCategoryList();
+        if(isset($_GET['catList'])) {
+          $categories = $dbLayer->getCategoriesList();
           $allReturned = array();
           for($i = 0; $i < count($categories); $i++){
             $singleCategory = $categories[i];
@@ -21,14 +21,16 @@ try {
             $description = $singleCategory->getDescription();
             
             //create a new object
-            $singleObj = (object) array(
+            $singleObj = array(
               'cateId'=>$id,
               'name'=>$name,
               'description'=>$description);
-            $allReturned[$i] = $singleObj;
+            $allReturned[] = $singleObj;
           }
           echo \json_encode($allReturned);
-        } elseif($_GET['catProds']) {
+        } elseif(isset($_GET['catProds'])) {
+          $id = $_GET['catProds'];
+          $list = $dbLayer->getProducts($id);
           $allReturned = array();
           for($i=0; $i<count($list);$i++) {
             $singleProduct = $list[$i];
@@ -40,13 +42,13 @@ try {
             $image = $singleProduct->getImage();
             
             //create a new object
-            $singleObj = (object) array(
+            $singleObj = array(
               'cid'=>$cid, 'price'=>$price,
               'weight'=>$weight, 'name'=>$description,
               'image'=>$image);
-            $allReturned[$i] = $singleObj;
+            $allReturned[] = $singleObj;
           }
-          echo json_encode($allReturned);
+          echo \json_encode($allReturned);
         }
 			}
 	}

@@ -1,4 +1,5 @@
 <?php
+session_start();
 use model\DbLayer;
 use model\CustomerOrder;
 use model\OrderProduct;
@@ -14,10 +15,11 @@ $priceTolerance = 1.10;
 
 function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$toOrderInfo = array();
-	$orderedStore = "";
+	$choosenStore = null;
+	$minPrice = -1.0;
 	foreach ($markets as $store){
-		$orderedStore = new Store(0, "2013/04/08 tri", $store["name"], $store["url"]);
-		$url = $orderedStore->getUrl()."/products/".$productId;
+		$checkingStore = new Store(0, "", $store["name"], $store["url"]);
+		$url = $checkingStore->getUrl()."/products/".$productId;
 		$productsInfo = file_get_contents($url);
 		$productsInfoJson = json_decode($productsInfo, true);
 		$stocksInfo[$url] = $productsInfoJson["quantity"];
@@ -25,38 +27,60 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 		$eStorePrice = intval($productsInfoJson["price"]);
 		if ($eStoreQuantity >= $quantity 
 			&& $eStorePrice <= $ourPrice* $GLOBALS["priceTolerance"]){
-			$toOrderInfo[$orderedStore] = $eStorePrice;
+			if ($minPrice == -1.0 || $minPrice > $eStorePrice){
+				$minPrice = $eStorePrice;
+				$choosenStore = $checkingStore;
+			}
 		}
 	}
 
 	// sort by stock price from lowest to highest
 	asort($toOrderInfo);
 	
-	//Ordering
-	$deliverDate = "";
-	foreach ($toOrderInfo as $key => $val){
-		$orderUrl = $key."/products/".$productId."/order";
-		$data = array('amount' => $quantity);
-		$options = array(
-				'http' => array(
-						'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-						'method'  => 'POST',
-						'content' => http_build_query($data),
-				),
-		);
-		$context  = stream_context_create($options);
-		$returnJson = file_get_contents($key, false, $context);
-		if (!isset($deliverDate) || $deliverDate === ""){
-			return False;
-		}
-		else{
-			//Key is the url of the store
-			return array($orderedStore => $returnJsonString);
-		}
+	//get or create a store with the given url
+	$storeId = getCreateStoreId($choosenStore);
+	if ($storeId == False)
+		return False;
+	
+	$choosenStore.setStoreId($storeId);
+	
+	//Ordering from the chosen store
+	$orderUrl = $choosenStore->getUrl()."/products/".$productId."/order";
+	$data = array('amount' => $quantity);
+	$options = array(
+			'http' => array(
+					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method'  => 'POST',
+					'content' => http_build_query($data),
+			),
+	);
+	$context  = stream_context_create($options);
+	$orderResult = file_get_contents($choosenStore->getUrl(), false, $context);
+	if (!isset($orderResult) || $orderResult === ""){
+		return False;
+	}
+	else{
+		$orderResultJson = json_decode($orderResult, true);
+		return OrderProduct(0, $productId, $storeId, $toOrder, $orderResultJson["order_id"],
+				$orderResultJson["delivery_date"], $toOrder * $ourPrice);
 	}
 	
-	
 
+}
+
+function getCreateStoreId($store){
+	$dbLayer = new DbLayer();
+	$storeId = $dbLayer->searchStore($store->$url);
+	
+	if ($storeId == null){
+		if ($dbLayer->addStore($store)){
+			$storeId = $dbLayer->searchStore($store->getUrl());
+		}
+		else{
+			//cannot add new store, cancel processing
+			return False;
+		}
+	}
 }
 
 $url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
@@ -107,11 +131,13 @@ if ($requestMethod == "GET"){
 
 
 if ($requestMethod == "POST"){
-	$message = array("status" => "False by default",
+	$message = array("status" => "False",
+			"message" => "by default",
 			"deliveryDate" => "date time here"
 	);
 	
 	$userName = $_SESSION["user"];
+	echo "user name:[".$userName."]<br/>";
 	//TODO:
 	$userName = "hcngo";
 	$products = $_POST["orderLists"];
@@ -119,10 +145,12 @@ if ($requestMethod == "POST"){
 	$productsJson = json_decode($products, true);
 	//TODO:
 	echo "<br/>username ".$userName."<br/>";
-	echo "<br/>orders ".$products."<br/>";
+	echo "<br/>orders ".$products."<br/>\n";
 	
 	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
+	$failed = False;
+	$success = False;
 	foreach($productsJson as $productJson){
 		$productId = $productJson["cid"];
 		$quantity = $productJson["quantity"];
@@ -131,7 +159,8 @@ if ($requestMethod == "POST"){
 		if ($crrStock >= $quantity){
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
 					 "", $quantity * $ourPrice);
-			$message["status"] = "True";
+			$success = True;
+			$message["message"] .= "Get from our stock\n<br/>";
 		}
 		else {
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
@@ -141,41 +170,34 @@ if ($requestMethod == "POST"){
 			$marketInfo = file_get_contents($url);
 			if (!isset($marketInfo) || trim($marketInfo) === ""){
 				//Have not enough product, cannot call the api, cancel processing
-				$message["status"] = "False have not enough product, cannot call the api";
+				$failed = True;
+				$message["message"] =  "Have not enough product in store for product ".$productId;
+				break;
 			}
 			else{
 				$marketsJson = json_decode($marketInfo, true);
 				$markets = $marketsJson["markets"];
 				$result = processOneProduct($productId,$ourPrice,$toOrder,$markets);
 				if ($result != False){
-					foreach($result as $store => $orderJsonString){
-						$storeId = $dbLayer->searchStore($store->getUrl());
-						$orderJson = json_decode($orderJsonString, true);
-						if ($storeId == null){
-							if ($dbLayer->addStore($store)){
-								$storeId = $dbLayer->searchStore($store->getUrl());
-							}
-							else{
-								//cannot add new store, cancel processing
-								$message["status"] = "False cannot add new store";
-							}
-						}
-						$orderProductsArray[] = new OrderProduct(0, $productId, $storeId, $toOrder, $orderJson["order_id"],
-								$orderJson["delivery_date"], $toOrder * $ourPrice);
-					}
+					$orderProductsArray[] = $result;
+					$success = True;
 				}
 				else {
 					//Cannot order from another store, cancel processing
-					$message["status"] = "False cannot order from another store";
+					$failed = True;
+					$message["message"] = "Could get products from our peer for product ".$productId;
+					break;
 				}
 			}
 		}		
 	}
 	//finished process all order
-	if ($message["status"] == "True"){
+	//If we succeeded at least once and never failed
+	if ($success == True && $failed == False){
+		$message["status"] = "True";
 		$dbLayer->addOrder($customerOrder,$orderProductsArray);
 		//todo
-		$message["deliveryDate"] == "apr mon 8 2013";
+		$message["deliveryDate"] == "2013-04-08";
 	}
 	
 	echo json_encode($message);

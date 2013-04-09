@@ -175,6 +175,7 @@ function buildCartProducts() {
   // reset div for products
   document.getElementById("productsBody").innerHTML = " ";
   document.getElementById("loadingSpinner").style.visibility = "hidden";
+  document.getElementById("loadingSpinner").innerHTML = "<br>";
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
@@ -201,8 +202,7 @@ function buildCartProducts() {
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
-          "<tr onclick=\"location.href='./product.php?id=" + product.id 
-          + "'\">\n<td>\n"
+          "<tr>\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
@@ -221,6 +221,14 @@ function buildCartProducts() {
           + "<td>" + product['id'] + "</td>\n"
           // Description of product
           + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "<td>\n"
+          + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
+          + "   class=\"btn pull-right\""
+          + "onclick=\"location.href='./product.php?id=" + product['id']
+          + "'\">\n"
+          + "       View Product\n"
+          + "   </button>\n"
+          + " </td>\n"
           + "</tr>\n"
         );     
         price += (jsonCart[i].quantity * product['price']);
@@ -237,14 +245,18 @@ function buildCartProducts() {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
 
-function submitCart() {
- var jsonCart = JSON.parse(readCookie('cart'));
-  if(jsonCart == null) {
-    alert("You must have at least one product in order to make a purchase.");
-    return false;
+function submitCart(user) {
+  if(user == null || user == "") {
+    alert("You must be signed in to purchase a cart.");
+  } else {
+    var jsonCart = JSON.parse(readCookie('cart'));
+    if(jsonCart == null) {
+      alert("You must have at least one product in order to make a purchase.");
+      return false;
+    }
+    var dir = location.href;
+    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+    dir = dir + "confirmorder.php";
+    window.location.href = dir;
   }
-  var dir = location.href;
-  dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-  dir = dir + "confirmorder.php";
-  window.location.href = dir;
 }

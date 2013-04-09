@@ -10,7 +10,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
         // Default Style links
-        require($DOCUMENT_ROOT . "./elements/head_includes.php");
+        require("./elements/head_includes.php");
     ?>
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
   </head>
