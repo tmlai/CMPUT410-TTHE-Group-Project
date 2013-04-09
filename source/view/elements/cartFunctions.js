@@ -247,7 +247,14 @@ function buildCartProducts() {
 
 function submitCart(user) {
   if(user == null || user == "") {
-    alert("You must be signed in to purchase a cart.");
+    var pBool = confirm("You must sign in or register to purchase your cart.\n"
+      + "Would you like to register now?");
+    if(pBool) {
+      var dir = location.href;
+      dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+      dir = dir + "register.php";
+      window.location.href = dir;
+    }
   } else {
     var jsonCart = JSON.parse(readCookie('cart'));
     if(jsonCart == null) {
