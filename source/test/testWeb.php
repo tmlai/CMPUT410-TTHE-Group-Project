@@ -22,8 +22,9 @@
 			function testSellOne() {
 				//var id = document.getElementById("idNum2").value;
 				var amt = document.getElementById("amt").value;
+				var id = document.getElementById("idNum2").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('POST', '/source/controller/ProductServices.php', 'true');
+				xmlhttp.open('POST', '/products/'+id+'/order', 'true');
 				xmlhttp.send(amt);
 			}
 			
