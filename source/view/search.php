@@ -103,18 +103,25 @@ $advanced = $_GET['advanced'];
 			// maxWeight = "Null";
 		// }
 		//check range values
-		if(priceFrom != "" || isNaN(priceFrom)) {
+		console.log("before if");
+		if(priceFrom != "" || !isNaN(priceFrom)) {
 			pass = false;
-		} else if(priceTo != "" || isNaN(priceTo)) {
+			console.log("priceFrom");
+		} else if(priceTo != "" || !isNaN(priceTo)) {
 			pass = false;
-		} else if(minQty != "" || isNaN(minQty)) {
+			console.log("priceTo");
+		} else if(minQty != "" || !isNaN(minQty)) {
 			pass = false;
-		} else if(maxQty != "" || isNaN(maxQty)) {
+			console.log("minQty");
+		} else if(maxQty != "" || !isNaN(maxQty)) {
 			pass = false;
-		} else if(minWeight != "" || isNaN(minWeight)) {
+			console.log("maxQty");
+		} else if(minWeight != "" || !isNaN(minWeight)) {
 			pass = false;
-		} else if(maxWeight != "" || isNaN(maxWeight)) {
+			console.log("minWeight");
+		} else if(maxWeight != "" || !isNaN(maxWeight)) {
 			pass = false;
+			console.log("maxWeight");
 		} 
 		
 		if(pass == true) {
