@@ -17,7 +17,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$orderedStore = "";
 	foreach ($markets as $store){
 		$orderedStore = new Store(0, "2013/04/08 tri", $store["name"], $store["url"]);
-		$url = $orderedStore.getUrl()."/products/".$productId;
+		$url = $orderedStore->getUrl()."/products/".$productId;
 		$productsInfo = file_get_contents($url);
 		$productsInfoJson = json_decode($productsInfo, true);
 		$stocksInfo[$url] = $productsInfoJson["quantity"];
@@ -149,11 +149,11 @@ if ($requestMethod == "POST"){
 				$result = processOneProduct($productId,$ourPrice,$toOrder,$markets);
 				if ($result != False){
 					foreach($result as $store => $orderJsonString){
-						$storeId = $dbLayer->searchStore($store.getUrl());
+						$storeId = $dbLayer->searchStore($store->getUrl());
 						$orderJson = json_decode($orderJsonString, true);
 						if ($storeId == null){
 							if ($dbLayer->addStore($store)){
-								$storeId = $dbLayer->searchStore($store.getUrl());
+								$storeId = $dbLayer->searchStore($store->getUrl());
 							}
 							else{
 								//cannot add new store, cancel processing
