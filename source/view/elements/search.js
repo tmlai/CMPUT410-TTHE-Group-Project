@@ -1,4 +1,4 @@
-var dropBool = true;
+var dropBool = false;
 
 function setToggle() {
   if(dropBool) {
