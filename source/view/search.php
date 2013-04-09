@@ -47,7 +47,7 @@ $advanced = $_GET['advanced'];
           data-target="#advSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
-		<div> HELLO WORLD!! </div>
+	<!--	<div> HELLO WORLD!! </div> -->
         <div id="advSearch" class="collapse">
 	<!--
 			<div class="input-append">
