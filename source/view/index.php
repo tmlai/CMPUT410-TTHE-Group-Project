@@ -14,18 +14,18 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     ?>
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
   </head>
-  <body>   
+  <body = "getCategoies()">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
         // user dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+        require("./elements/navbar_user.php");
       } else {
         // sign in dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+        require("./elements/navbar_signin.php");
       }
       // Carousel element
-      require($DOCUMENT_ROOT . "./elements/carousel.php");
+      require("./elements/carousel.php");
     ?>
     <div class="container">
         <div class="row-fluid">
