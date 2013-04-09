@@ -126,6 +126,8 @@ $advanced = $_GET['advanced'];
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 					var list = xmlhttp.responseText;
 					var listArray = JSON.parse(list);
+					document.getElementById("loadingSpinner").style.visibility = "hidden";
+					document.getElementById("loadingSpinner").innerHTML = "<br>";
 					//build the table code
 					var table = "";
 					for(var i = 0; i<listArray.length; i++) {
@@ -258,6 +260,10 @@ $advanced = $_GET['advanced'];
             <tbody id="resultsDiv">
             </tbody>
             </table>
+        </div>
+		<hr>
+        <div id="loadingSpinner" align="center" style="visibility:visible">
+          <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
