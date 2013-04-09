@@ -138,7 +138,7 @@ function advSearch() {
 		}
 		xmlhttp.open('POST', 
 			'/source/controller/AdvSearch.php',
-			true);
+			false);
 		xmlhttp.send(jsonSearch);
 		}
 		
