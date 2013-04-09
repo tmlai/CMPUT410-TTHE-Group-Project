@@ -224,7 +224,7 @@ function buildCartProducts() {
           + "<td>\n"
           + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
           + "   class=\"btn pull-right\""
-          + "onclick=\"location.href='./product.php?id=" + products[i]['cid']
+          + "onclick=\"location.href='./product.php?id=" + product['cid']
           + "'\">\n"
           + "       View Product\n"
           + "   </button>\n"
