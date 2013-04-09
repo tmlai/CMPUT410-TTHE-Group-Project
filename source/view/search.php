@@ -129,7 +129,7 @@ $advanced = $_GET['advanced'];
 			pass = false;
 		}
 		
-		if(pass = true) {
+		if(pass == true) {
 			//make ajax call
 			var search = new Object();
 			search.name = name;
