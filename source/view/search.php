@@ -49,7 +49,7 @@ $advanced = $_GET['advanced'];
         </label>
         <div id="advSearch" class="collapse">
 		<!-- Advanced Search Form -->
-			<form class="form-horizontal" onSubmit="advSearch()" action="" method="post">
+			<form class="form-horizontal" onSubmit="" action="" method="post">
                 <div id="store_div" class="control-group">
                     <label class="control-label" for="searchNameField">Name
                     </label>
@@ -107,7 +107,8 @@ $advanced = $_GET['advanced'];
                     </div>
 					<br>
 					<div class="controls">
-						<input type="submit" class="btn" value="Advanced Search">
+						<input type="submit" class="btn" 
+						 onClick="advSearch()" value="Advanced Search">
 					</div>
 				</div>
 			</form>
