@@ -64,7 +64,6 @@ $advanced = $_GET['advanced'];
 	
 	function advSearch() {
 		var name = document.getElementById('searchNameField').value;
-		alert(name);
 		var code = document.getElementById('searchCodeField').value;
 		var category = document.getElementById('searchCategoryField').value;
 		var priceFrom = document.getElementById('priceFromField').value;
@@ -75,47 +74,46 @@ $advanced = $_GET['advanced'];
 		var maxWeight = document.getElementById('maxWeightField').value;
 		var pass = true;
 		
-		//if empty set it null
-		if (name == null) {
-			name = "Null";
-		}
-		if (code == null) {
-			code = "Null";
-		}
-		if (category == null) {
-			category = "Null";
-		}
-		if (priceFrom == null) {
-			priceFrom = "Null";
-		}
-		if (priceTo == null) {
-			priceTo = "Null";
-		}
-		if (minQty == null) {
-			minQty = "Null";
-		}
-		if (maxQty == null) {
-			maxQty = "Null";
-		}
-		if (minWeight == null) {
-			minWeight = "Null";
-		}
-		if (maxWeight == null) {
-			maxWeight = "Null";
-		}
+		// //if empty set it null
+		// if (name == null) {
+			// name = "Null";
+		// }
+		// if (code == null) {
+			// code = "Null";
+		// }
+		// if (category == null) {
+			// category = "Null";
+		// }
+		// if (priceFrom == null) {
+			// priceFrom = "Null";
+		// }
+		// if (priceTo == null) {
+			// priceTo = "Null";
+		// }
+		// if (minQty == null) {
+			// minQty = "Null";
+		// }
+		// if (maxQty == null) {
+			// maxQty = "Null";
+		// }
+		// if (minWeight == null) {
+			// minWeight = "Null";
+		// }
+		// if (maxWeight == null) {
+			// maxWeight = "Null";
+		// }
 		//check range values
-		if(priceFrom != "" || !isNaN(priceFrom)) {
+		if(priceFrom != "" || isNaN(priceFrom)) {
 			pass = false;
-		}
-		else if(priceTo != "" || !isNaN(priceTo)) {
+		} else if(priceTo != "" || isNaN(priceTo)) {
 			pass = false;
-		} else if(minQty != "" || !isNaN(minQty)) {
+		} else if(minQty != "" || isNaN(minQty)) {
 			pass = false;
-		} else if(maxQty != "" || !isNaN(maxQty)) {
+		} else if(maxQty != "" || isNaN(maxQty)) {
 			pass = false;
-		} else if(minWeight != "" || !isNaN(minWeight)) {
+		} else if(minWeight != "" || isNaN(minWeight)) {
 			pass = false;
-		} else if(maxWeight != "" || !isNaN(maxWeight)) {
+		} else if(maxWeight != "" || isNaN(maxWeight)) {
 			pass = false;
 		} else if(priceFrom < priceTo) {
 			pass = false;
@@ -147,7 +145,7 @@ $advanced = $_GET['advanced'];
 			//make json
 			var jsonSearch = JSON.stringify(search);
 			
-			console.log(search);
+			//console.log(search);
 			var xmlhttp = new XMLHttpRequest();
 			if (window.XMLHttpRequest) {
 			// code for IE7+, Firefox, Chrome, Opera, Safari
