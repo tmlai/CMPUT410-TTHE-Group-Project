@@ -81,14 +81,14 @@ function buildCategoryContainer(cats) {
     var rowBool = (((i + 1) % 3) == 0);
     // end and create new row
     if(rowBool && (i > 0) && (i < cats.length)) {
-      document.getElementById("categorycopntainerDiv").innerHTML += (
+      document.getElementById("categoryContainerDiv").innerHTML += (
         '</div>\n<div class="row-fluid">');
     } else if(rowBool && (i == 0)) {
       // create new row to start
-      document.getElementById("categorycopntainerDiv").innerHTML = (
+      document.getElementById("categoryContainerDiv").innerHTML = (
         '<div class="row-fluid">');
     }
-    document.getElementById("categorycopntainerDiv").innerHTML += (
+    document.getElementById("categoryContainerDiv").innerHTML += (
       '<div class="span4">'
       + '      <h2>' + cats[i]['name'] + '</h2>\n'
       + '      <p>' + cats[i]['description'] + '</p>\n'
@@ -101,7 +101,7 @@ function buildCategoryContainer(cats) {
     }
   }
   // end last row
-  document.getElementById("categorycopntainerDiv").innerHTML += '</div>');
+  document.getElementById("categoryContainerDiv").innerHTML += '</div>';
   
 }
 
