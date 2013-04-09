@@ -115,12 +115,6 @@ $advanced = $_GET['advanced'];
 			pass = false;
 		} else if(maxWeight != "" || isNaN(maxWeight)) {
 			pass = false;
-		} else if(priceFrom < priceTo) {
-			pass = false;
-		} else if(minQty < maxQty) {
-			pass = false;
-		} else if(minWeight < maxWeight) {
-			pass = false;
 		} else if(priceFrom < 0) {
 			pass = false;
 		} else if(minQty < 0) {
