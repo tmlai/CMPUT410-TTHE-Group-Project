@@ -79,7 +79,7 @@ function buildCategoryDropList(cats) {
 function buildCategoryContainer(cats) {
   var htmlCats = "";
   for(var i = 0; i < cats.length; i++) {
-    var rowBool = (((i + 1) % 3) == 0);
+    var rowBool = ((i % 3) == 0);
     // end and create new row
     if(rowBool && (i > 0) && (i < cats.length)) {
       htmlCats += ('</div>\n<div class="row-fluid">');
@@ -104,7 +104,16 @@ function buildCategoryContainer(cats) {
 
 function buildCarouselItems(prods) {
   var catHTML = '<div id="myCarousel" class="carousel slide">\n'
-    + '<div class="carousel-inner" id="carouselItemDiv">\n';
+    + '<ol class="carousel-indicators">\n';
+  for(var i = 0; i < prods.length; i++) {
+    if(i == 0) {}
+      catHTML += 
+        '<li data-target="#myCarousel" data-slide-to="0" class="active"></li>\n';
+    } else {
+      catHTML += '<li data-target="#myCarousel" data-slide-to="1"></li>\n';
+    }
+  }
+  catHTML +=  '</ol><div class="carousel-inner" id="carouselItemDiv">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
     if(i == 0) {

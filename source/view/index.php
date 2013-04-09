@@ -25,16 +25,12 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/navbar_signin.php");
       }
     ?>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12" id="carouselElement">
-        </div>
+    <div class="container">
+      <div id="carouselElement">
       </div>
-      <div class="row-fluid">
-        <div class="span12" id="categoryContainerDiv">
-          <div id="loadingSpinner" align="center" style="visibility:visible">
-              <img src="./elements/img/spinner.gif" alt="...Loading...">
-          </div>
+      <div id="categoryContainerDiv">
+        <div id="loadingSpinner" align="center" style="visibility:visible">
+            <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
       </div>
     </div>
