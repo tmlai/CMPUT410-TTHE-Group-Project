@@ -16,7 +16,8 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script src="./elements/jquery-1.9.1.min.js"></script>
     <!-- Load the CloudCarousel JavaScript file -->
     <!--from: http://www.professorcloud.com/mainsite/carousel-integration.htm-->
-    <script type="text/JavaScript" src="./cloud-carousel/cloud-carousel.1.0.5.js"></script>
+    <script type="text/JavaScript" src="./elements/cloud-carousel/cloud-carousel.1.0.5.js">
+      </script>
     <script>
       $(document).ready(function(){
                      
