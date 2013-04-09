@@ -40,7 +40,7 @@ $advanced = $_GET['advanced'];
 		}
 		xmlhttp.open('GET', 
 			'/source/controller/Search.php?searchField=<?php echo $search;?>',
-			true);
+			false);
 		xmlhttp.send();
 		//need to populate
 		xmlhttp.onreadystatechange=function() {
@@ -305,6 +305,5 @@ $advanced = $_GET['advanced'];
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript">window.onload=initialLoading;</script>
   </body>
 </html>
