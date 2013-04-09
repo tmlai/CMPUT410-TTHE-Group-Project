@@ -8,7 +8,8 @@ include_once ('../UserRatingProduct.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 if ($requestMethod == "POST"){
-	$userName = $_SESSION["user"]; // from session	
+	$userName = $_SESSION["user"]; // from session
+	echo $userName;	
 	if (!isset($userName) || $userName == ""){
 		$message = array(
 				"status" => "Failed",
@@ -18,6 +19,9 @@ if ($requestMethod == "POST"){
 	else {
 		$productId = $_POST["productId"];
 		$rating = $_POST["rating"];
+		
+		echo $productId;
+		echo $rating;
 		
 		$dbLayer = new DbLayer();
 		$result = $dbLayer->rateProduct(new UserRatingProduct($userName,$productId,$rating));
