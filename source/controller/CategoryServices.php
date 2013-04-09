@@ -28,7 +28,7 @@ try {
             $allReturned[$i] = $singleObj;
           }
           echo \json_encode($allReturned);
-        } elseif($_GET['catProds']) {
+        } elseif(!empty($_GET['catProds'])) {
           $allReturned = array();
           for($i=0; $i<count($list);$i++) {
             $singleProduct = $list[$i];
@@ -46,7 +46,7 @@ try {
               'image'=>$image);
             $allReturned[$i] = $singleObj;
           }
-          echo json_encode($allReturned);
+          echo \json_encode($allReturned);
         }
 			}
 	}
