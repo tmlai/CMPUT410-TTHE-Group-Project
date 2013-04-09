@@ -1,4 +1,4 @@
-function setToggle(dropbool) {
+function setToggle(dropBool) {
   if(dropBool == false) {
 	document.getElementById("advSearch").className="collapse in";
   }
