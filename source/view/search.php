@@ -103,31 +103,26 @@ $advanced = $_GET['advanced'];
 			// maxWeight = "Null";
 		// }
 		//check range values
-		if(priceFrom != "" || isNaN(priceFrom)) {
+		console.log("before if");
+		if(priceFrom != "" || !isNaN(priceFrom)) {
 			pass = false;
-		} else if(priceTo != "" || isNaN(priceTo)) {
+			console.log("priceFrom");
+		} else if(priceTo != "" || !isNaN(priceTo)) {
 			pass = false;
-		} else if(minQty != "" || isNaN(minQty)) {
+			console.log("priceTo");
+		} else if(minQty != "" || !isNaN(minQty)) {
 			pass = false;
-		} else if(maxQty != "" || isNaN(maxQty)) {
+			console.log("minQty");
+		} else if(maxQty != "" || !isNaN(maxQty)) {
 			pass = false;
-		} else if(minWeight != "" || isNaN(minWeight)) {
+			console.log("maxQty");
+		} else if(minWeight != "" || !isNaN(minWeight)) {
 			pass = false;
-		} else if(maxWeight != "" || isNaN(maxWeight)) {
+			console.log("minWeight");
+		} else if(maxWeight != "" || !isNaN(maxWeight)) {
 			pass = false;
-		} else if(priceFrom < priceTo) {
-			pass = false;
-		} else if(minQty < maxQty) {
-			pass = false;
-		} else if(minWeight < maxWeight) {
-			pass = false;
-		} else if(priceFrom < 0) {
-			pass = false;
-		} else if(minQty < 0) {
-			pass = false;
-		} else if(minWeight < 0) {
-			pass = false;
-		}
+			console.log("maxWeight");
+		} 
 		
 		if(pass == true) {
 			//make ajax call
@@ -223,31 +218,31 @@ $advanced = $_GET['advanced'];
                     </label>
                     <div class="controls">
                         <input type="text" id="priceToField" 
-                        placeholder="Price From">
+                        placeholder="Price To">
                     </div>
 					<label class="control-label" for="minQtyField">Minimum Quantity
                     </label>
                     <div class="controls">
                         <input type="text" id="minQtyField" 
-                        placeholder="Price From">
+                        placeholder="Minimum Quantity">
                     </div>
 					<label class="control-label" for="maxQtyField">Maximum Quantity
                     </label>
                     <div class="controls">
                         <input type="text" id="maxQtyField" 
-                        placeholder="Price From">
+                        placeholder="Maximum Quantity">
                     </div>
 					<label class="control-label" for="minWeightField">Minimum Weight
                     </label>
                     <div class="controls">
                         <input type="text" id="minWeightField" 
-                        placeholder="Price From">
+                        placeholder="Minimum Weight">
                     </div>
 					<label class="control-label" for="maxWeightField">Maximum Weight
                     </label>
                     <div class="controls">
                         <input type="text" id="maxWeightField" 
-                        placeholder="Price From">
+                        placeholder="Maximum Weight">
                     </div>
 					<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
                 </div>
