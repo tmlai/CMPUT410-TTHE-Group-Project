@@ -7,7 +7,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $search = trim($_GET['searchField']);
 
 $advanced = $_GET['advanced'];
-if ($advanced) {
+if ($advanced == null) {
 	$advanced = "false";
 }
 ?>
