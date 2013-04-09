@@ -14,7 +14,6 @@ if($requestMethod == "get") {
 	$list = $dbLayer->searchProductByName($partial);
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
-		$singleProduct = new Object();
 		$singleProduct = $list[$i];
 		var_dump($singleProduct);
 		echo "<br>";
