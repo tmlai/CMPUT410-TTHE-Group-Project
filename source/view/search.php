@@ -117,14 +117,6 @@ $advanced = $_GET['advanced'];
         <div class="container" id="tableTitles">
             <table class="table table-hover">
             <thead id="tableHead">
-                <tr>
-                    <th><!-- placeholder --></th>
-                    <th>Price</th>
-                    <th>Weight</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                </tr>
             </thead>
             <tbody id="resultsTable">
             </tbody>
