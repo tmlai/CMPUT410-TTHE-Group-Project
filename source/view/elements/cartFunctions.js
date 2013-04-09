@@ -202,8 +202,7 @@ function buildCartProducts() {
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
-          "<tr onclick=\"location.href='./product.php?id=" + product.id 
-          + "'\">\n<td>\n"
+          "<tr>\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
@@ -222,6 +221,14 @@ function buildCartProducts() {
           + "<td>" + product['id'] + "</td>\n"
           // Description of product
           + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "<td>\n"
+          + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
+          + "   class=\"btn pull-right\""
+          + "onclick=\"location.href='./product.php?id=" + products[i]['cid']
+          + "'\">\n"
+          + "       View Product\n"
+          + "   </button>\n"
+          + " </td>\n"
           + "</tr>\n"
         );     
         price += (jsonCart[i].quantity * product['price']);
