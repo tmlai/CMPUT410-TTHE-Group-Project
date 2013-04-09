@@ -101,7 +101,7 @@ function buildCategoryContainer(cats) {
     }
   }
   // end last row
-  document.getElementById("categorycopntainerDiv").innerHTML += '</div>';);
+  document.getElementById("categorycopntainerDiv").innerHTML += '</div>');
   
 }
 
