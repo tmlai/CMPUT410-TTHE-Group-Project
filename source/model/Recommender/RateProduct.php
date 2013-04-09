@@ -1,14 +1,14 @@
 <?php
-echo "before include";
+echo "before include<br/>";
 include_once ('../DbLayer.php');
 include_once ('../UserRatingProduct');
 
-echo "b4 get request method";
+echo "b4 get request method<br/>";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo "before get user from session";
+echo "before get user from session<br/>";
 $userName = $_SESSION["user"]; // from session
-echo "after get user from session".$userName;
+echo "after get user from session".$userName."<br/>";
 
 if ($requestMethod == "POST"){
 	
@@ -43,15 +43,19 @@ elseif ($requestMethod == "GET"){
 	$cat = $_GET["category"];
 	echo "Cat".$cat."<br/>";
 	$n = $_GET["n"];
-	echo "n".$n."<br/>";
+	echo "n ".$n."<br/>";
 	if (!isset($cat) || trim($cat) === ""){
 		$cat = null;
 	}
-	if (!isset($cat) || trim($cat) === ""){
+	if (!isset($n) || trim($n) === ""){
 		$n = 5;
 	}
-	$productList = recommendRelatedProducts($n, $cat);
+	echo "Cat".$cat."<br/>";
+	echo "n ".$n."<br/>";
+	$productList = DbLayer::recommendRelatedProducts($n, $cat);
+	echo "productList array".$productList."<br/>";
 	$productJSONList = array();
+	echo "iterate through the array<br/>";
 	foreach ($productList as $product){
 		$simpleProduct = array (
 			"cid" => $product.getCid(),
