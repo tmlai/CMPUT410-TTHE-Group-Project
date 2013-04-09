@@ -40,7 +40,7 @@ function initialLoading(searchString) {
 	}
 	xmlhttp.open('GET', 
 		'/source/controller/Search.php?searchField=' + searchString,
-		true);
+		false);
 	xmlhttp.send();
 	//need to populate
 	xmlhttp.onreadystatechange=function() {
