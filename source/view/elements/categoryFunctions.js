@@ -77,18 +77,17 @@ function buildCategoryDropList(cats) {
 }
 
 function buildCategoryContainer(cats) {
+  var htmlCats = "";
   for(var i = 0; i < cats.length; i++) {
     var rowBool = (((i + 1) % 3) == 0);
     // end and create new row
     if(rowBool && (i > 0) && (i < cats.length)) {
-      document.getElementById("categoryContainerDiv").innerHTML += (
-        '</div>\n<div class="row-fluid">');
+      htmlCats += ('</div>\n<div class="row-fluid">');
     } else if(rowBool && (i == 0)) {
       // create new row to start
-      document.getElementById("categoryContainerDiv").innerHTML = (
-        '<div class="row-fluid">');
+      htmlCats = ('<div class="row-fluid">');
     }
-    document.getElementById("categoryContainerDiv").innerHTML += (
+    htmlCats += (
       '<div class="span4">'
       + '      <h2>' + cats[i]['name'] + '</h2>\n'
       + '      <p>' + cats[i]['description'] + '</p>\n'
@@ -96,12 +95,10 @@ function buildCategoryContainer(cats) {
       + cats[i]['cateId'] +'">View details &raquo;</a></p>\n'
       + '</div>\n'
     );
-    if((rowFlag == 0) && ((i + 1) != cats.length)) {
-    
-    }
   }
   // end last row
-  document.getElementById("categoryContainerDiv").innerHTML += '</div>';
+  htmlCats += '</div>';
+  document.getElementById("categoryContainerDiv").innerHTML = htmlCats;
   
 }
 
