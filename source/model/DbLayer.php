@@ -622,7 +622,7 @@ class DbLayer implements DbInterface {
 
 		$pdo->commit();
 		$pdo = null;
-		return true;
+		return $orderId;
 	}
 	
 	/*
