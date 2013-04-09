@@ -114,8 +114,9 @@ if ($requestMethod == "POST"){
 	$userName = $_SESSION["user"];
 	$products = $_POST["orderLists"];
 	$productsJson = json_decode($productsJson, true);
-
-	$customerOrder = new CustomerOrder(0, "", '', $userName, 0, '');
+	//todo
+	echo "<br/>username ".$userName."<br/>";
+	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
 	foreach($productsJson as $productJson){
 		$productId = $productJson["cid"];
@@ -123,7 +124,7 @@ if ($requestMethod == "POST"){
 		$crrStock = $dbLayer->getStock($productId);
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
-			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, "",
+			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
 					 "", $quantity * $ourPrice);
 			$message["status"] = "True order from our own store";
 		}
