@@ -12,7 +12,7 @@ if($requestMethod == "get") {
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProductByName($partial);
 	$allReturned = array();
-	for($i=0; $i<count($list):$i++) {
+	for($i=0; $i<count($list);$i++) {
 		$singleProduct = array();
 		$product = $list[$i];
 		
