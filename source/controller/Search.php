@@ -9,10 +9,8 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 
 if($requestMethod == "get") {
 	$partial = $_GET['searchField'];
-	// $dbLayer = new DbLayer();
-	// $list = $dbLayer->searchProduct($search);
 	$dbLayer = new DbLayer();
-	$list = $dbLayer->searchProduct($partial);
+	$list = $dbLayer->searchProductByName($partial);
 	echo \json_encode($list);
 }
 ?>
