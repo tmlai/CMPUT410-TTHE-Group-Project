@@ -1,13 +1,15 @@
 <?php
 namespace model;
+echo "before include";
+include_once ('../DbLayer.php');
+include_once ('../UserRatingProduct');
 
-include_once ('DbLayer.php');
-include_once ('UserRatingProduct');
-
+echo "b4 get request method";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+echo "before get user from session";
 $userName = $_SESSION["user"]; // from session
-
+echo "after get user from session".$userName;
 
 if ($requestMethod == "POST"){
 	
@@ -36,7 +38,7 @@ if ($requestMethod == "POST"){
 			);
 		}
 	}
-	return json_encode($message);
+	echo json_encode($message);
 }
 elseif ($requestMethod == "GET"){
 	$cat = $_GET["category"];
@@ -65,5 +67,5 @@ elseif ($requestMethod == "GET"){
 		$productJSONList[] =$simpleProductJSON;
 	}
 	echo "json array".$productJsonList."<br/>";
-	return json_encode($productJSONList);
+	echo json_encode($productJSONList);
 }
