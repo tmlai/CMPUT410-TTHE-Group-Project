@@ -15,7 +15,7 @@ if($requestMethod == "get") {
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
 		$singleProduct = $list[$i];
-		$allReturned[$i] = $singleProduct;
+		$allReturned[$i] = json_encode($singleProduct);
 		//var_dump($allReturned[$i]);
 	}
 	//echo json_encode($list);
