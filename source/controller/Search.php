@@ -1,8 +1,9 @@
 <?php
 session_start();
 use model\DbLayer;
+use model\Product;
 include_once '../model/DbLayer.php';
-
+include_once '../model/Product.php';
 
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
@@ -13,7 +14,7 @@ if($requestMethod == "get") {
 	$list = $dbLayer->searchProductByName($partial);
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
-		$singleProduct = array();
+		$singleProduct = new Product();
 		$product = $list[$i];
 		
 		$singleProduct['cid'] = $product['cid'];
