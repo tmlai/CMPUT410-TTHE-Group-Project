@@ -70,14 +70,16 @@ function submitOrder() {
   var jsonCart = JSON.parse(readCookie('cart'));
   if(jsonCart == null) {
     alert("You must have at least one product in order to make a purchase.");
+    var dir = location.href;
+    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+    dir = dir + "index.php";
+    window.location.href = dir;
     return false;
   }
-  var dir = location.href;
-  dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-  dir = dir + "index.php";
-  window.location.href = dir;
+  makePurchase();
 }
 
+/*orderLists=[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}*/
 function makePurchase() {
   var jsonCart = JSON.parse(readCookie('cart'));
   if(jsonCart == null) {
