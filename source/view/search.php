@@ -116,7 +116,7 @@ $advanced = $_GET['advanced'];
 			search.maxWeight = maxWeight;
 			
 			//make json
-			var jsonSearch = json_encode(search);
+			var jsonSearch = JSON.stringify(search);
 			
 			var xmlhttp = new XMLHttpRequest();
 			if (window.XMLHttpRequest) {
