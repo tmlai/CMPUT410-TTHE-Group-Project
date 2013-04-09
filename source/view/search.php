@@ -115,13 +115,7 @@ $advanced = $_GET['advanced'];
 			pass = false;
 		} else if(maxWeight != "" || isNaN(maxWeight)) {
 			pass = false;
-		} else if(priceFrom < 0) {
-			pass = false;
-		} else if(minQty < 0) {
-			pass = false;
-		} else if(minWeight < 0) {
-			pass = false;
-		}
+		} 
 		
 		if(pass == true) {
 			//make ajax call
@@ -217,31 +211,31 @@ $advanced = $_GET['advanced'];
                     </label>
                     <div class="controls">
                         <input type="text" id="priceToField" 
-                        placeholder="Price From">
+                        placeholder="Price To">
                     </div>
 					<label class="control-label" for="minQtyField">Minimum Quantity
                     </label>
                     <div class="controls">
                         <input type="text" id="minQtyField" 
-                        placeholder="Price From">
+                        placeholder="Minimum Quantity">
                     </div>
 					<label class="control-label" for="maxQtyField">Maximum Quantity
                     </label>
                     <div class="controls">
                         <input type="text" id="maxQtyField" 
-                        placeholder="Price From">
+                        placeholder="Maximum Quantity">
                     </div>
 					<label class="control-label" for="minWeightField">Minimum Weight
                     </label>
                     <div class="controls">
                         <input type="text" id="minWeightField" 
-                        placeholder="Price From">
+                        placeholder="Minimum Weight">
                     </div>
 					<label class="control-label" for="maxWeightField">Maximum Weight
                     </label>
                     <div class="controls">
                         <input type="text" id="maxWeightField" 
-                        placeholder="Price From">
+                        placeholder="Maximum Weight">
                     </div>
 					<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
                 </div>
