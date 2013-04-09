@@ -72,10 +72,18 @@ function initialLoading(searchString) {
 				"</tr>";
 			}
 			if(listArray.length==0) {
-				document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
+				document.getElementById("tableHead").innerHTL = "";
+				document.getElementById("resultsTable").innerHTML = "<h4>No products found.</h4>"
 			}
-			var rTableDiv = document.getElementById('resultsTable');
-			if(rTableDiv != null) {
+			var htmlTableTitles = "<tr>" +
+									"<th><!-- placeholder --></th>" +
+									"<th>Price</th>" +
+									"<th>Weight</th>" +
+									"<th>Name</th>" +
+									"<th>Code</th>" +
+									"<th>Description</th>" +
+									"</tr>";
+				document.getElementById("tableHead").innerHTL = htmlTableTitles;
 				document.getElementById('resultsTable').innerHTML=table;
 			}
 			
@@ -173,9 +181,18 @@ function advSearch() {
 					"</tr>";
 				}
 				if(listArray.length==0) {
-					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
+					document.getElementById("tableHead").innerHTL = "";
+					document.getElementById("resultsTable").innerHTML = "<h4>No products found.</h4>"
 				}
-				
+				var htmlTableTitles = "<tr>" +
+									"<th><!-- placeholder --></th>" +
+									"<th>Price</th>" +
+									"<th>Weight</th>" +
+									"<th>Name</th>" +
+									"<th>Code</th>" +
+									"<th>Description</th>" +
+									"</tr>";
+				document.getElementById("tableHead").innerHTL = htmlTableTitles;
 				document.getElementById('resultsTable').innerHTML=table;
 			}
 		}
