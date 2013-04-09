@@ -53,8 +53,8 @@ function buildCategoryDropList(cats) {
 }
 
 function buildCarouselItems(prods) {
-  for(var i = 0; i < cats.length; i++) {
-    var product = products[i];
+  for(var i = 0; i < prods.length; i++) {
+    var product = prods[i];
     if(i == 0) {
       document.getElementById("navCatList").innerHTML = '<div class="item active">';
     } else {
