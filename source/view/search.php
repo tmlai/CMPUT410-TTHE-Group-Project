@@ -51,7 +51,7 @@ $advanced = $_GET['advanced'];
 
         <div id="advSearch" class="collapse">
 		<!-- Advanced Search Form -->
-			<form class="form-horizontal">
+			<form class="form-horizontal" onSubmit="advSearch()" action="" method="post">
                 <div id="store_div" class="control-group">
                     <label class="control-label" for="searchNameField">Name
                     </label>
@@ -107,8 +107,9 @@ $advanced = $_GET['advanced'];
                         <input type="text" id="maxWeightField" 
                         placeholder="Maximum Weight">
                     </div>
+					<br>
 					<div class="controls">
-						<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
+						<input type="submit" class="btn" value="Advanced Search">
 					</div>
 				</div>
 			</form>
