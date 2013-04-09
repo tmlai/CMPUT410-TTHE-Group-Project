@@ -1,17 +1,13 @@
-<?php
-echo "before include<br/>";
-include_once ('../DbLayer.php');
-include_once ('../UserRatingProduct');
+<?php 
+use model\DbLayer;
 
-echo "b4 get request method<br/>";
+include_once ('../DbLayer.php');
+include_once ('../UserRatingProduct.php');
+
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo "before get user from session<br/>";
-$userName = $_SESSION["user"]; // from session
-echo "after get user from session".$userName."<br/>";
-
 if ($requestMethod == "POST"){
-	
+	$userName = $_SESSION["user"]; // from session	
 	if (!isset($userName) || $userName === ""){
 		$message = array(
 				"status" => "Failed",
@@ -41,21 +37,21 @@ if ($requestMethod == "POST"){
 }
 elseif ($requestMethod == "GET"){
 	$cat = $_GET["category"];
-	echo "Cat".$cat."<br/>";
+// 	echo "Cat".$cat."<br/>";
 	$n = $_GET["n"];
-	echo "n ".$n."<br/>";
+// 	echo "n ".$n."<br/>";
 	if (!isset($cat) || trim($cat) === ""){
 		$cat = null;
 	}
 	if (!isset($n) || trim($n) === ""){
 		$n = 5;
 	}
-	echo "Cat".$cat."<br/>";
-	echo "n ".$n."<br/>";
-	$productList = DbLayer::recommendRelatedProducts($n, $cat);
-	echo "productList array".$productList."<br/>";
+
+	$dbLayer = new DbLayer();
+	$productList = $dbLayer->recommendRelatedProducts($n, $cat);
+	
+
 	$productJSONList = array();
-	echo "iterate through the array<br/>";
 	foreach ($productList as $product){
 		$simpleProduct = array (
 			"cid" => $product.getCid(),
@@ -64,11 +60,9 @@ elseif ($requestMethod == "GET"){
 			"image" => $product.getImage(),
 			"description" => $product.getDescription()
 		);
-		echo "before encoding<br/>";
 		$simpleProductJSON = json_encode($simpleProduct	);
-		echo "after encoding<br/>";
 		$productJSONList[] =$simpleProductJSON;
 	}
-	echo "json array".$productJsonList."<br/>";
+// 	echo "json array".$productJsonList."<br/>";
 	echo json_encode($productJSONList);
 }
