@@ -128,7 +128,7 @@ function rateProduct(pid, user, value) {
         }
        }
     };
-    xmlhttp.open('POST', '../model/Recommender/RateProduct.php?productID=' + pid 
+    xmlhttp.open('POST', '../model/Recommender/RateProduct.php?productId=' + pid 
       + '&rating=' + value, true);
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send();
