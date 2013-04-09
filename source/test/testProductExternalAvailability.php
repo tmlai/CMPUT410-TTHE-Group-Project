@@ -43,7 +43,7 @@
 						res = document.getElementById("res");
 						res.innerHTML = xmlhttp.responseText);
 					}
-				};
+				}
 				
 				var id = document.getElementById("id").value;
 				var q = document.getElementById("idQ").value;
