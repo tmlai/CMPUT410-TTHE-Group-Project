@@ -83,7 +83,7 @@ function buildCategoryContainer(cats) {
     // end and create new row
     if(rowBool && (i > 0) && (i < cats.length)) {
       htmlCats += ('</div>\n<div class="row-fluid">');
-    } else if(rowBool && (i == 0)) {
+    } else if(i == 0) {
       // create new row to start
       htmlCats = ('<div class="row-fluid">');
     }
