@@ -108,16 +108,19 @@ if ($requestMethod == "GET"){
 
 if ($requestMethod == "POST"){
 	$message = array("status" => "False by default",
-			$message["deliveryDate"] == "date time here"
+			"deliveryDate" => "date time here"
 	);
 	
 	$userName = $_SESSION["user"];
 	//TODO:
 	$userName = "hcngo";
 	$products = $_POST["orderLists"];
+	
 	$productsJson = json_decode($products, true);
 	//TODO:
 	echo "<br/>username ".$userName."<br/>";
+	echo "<br/>orders ".$products."<br/>";
+	
 	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
 	foreach($productsJson as $productJson){
