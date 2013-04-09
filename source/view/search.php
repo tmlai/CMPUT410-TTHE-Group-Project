@@ -93,11 +93,11 @@ $advanced = $_GET['advanced'];
         </label>
         <div id="advSearch" class="collapse">
                 <div id="store_div" class="control-group">
-                    <label class="control-label" for="storeField">Access Code
+                    <label class="control-label" for="storeField">Name
                     </label>
                     <div class="controls">
-                        <input type="password" id="storeField" 
-                        placeholder="Access Code">
+                        <input type="text" id="searchNameField" 
+                        placeholder="Search Name">
                     </div>
                 </div>
                 <!-- and more fields for admin...-->
