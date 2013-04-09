@@ -126,29 +126,30 @@ $advanced = $_GET['advanced'];
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 					var list = xmlhttp.responseText;
 					var listArray = JSON.parse(list);
+					document.getElementById("loadingSpinner").style.visibility = "hidden";
+					document.getElementById("loadingSpinner").innerHTML = "<br>";
 					//build the table code
 					var table = "";
-					console.log(listArray[0].cid);
-					// for(var i = 0; i<listArray.length; i++) {
-						// table += 
-						// "<tr onclick=\"location.href='./product.php?id="+listArray[i].cid+"'\">
-							// <td>
-							  // <img src="" alt="" width="50" height="50">
-							// </td>
-							// <td>$1</td>
-							// <td>1 kg</td>
-							// <td>1name</td>
-							// <td>c1</td>
-							// <td>This is a description...</td>
-							// <td>
-								// <button id="p1" style="position:relative; right:0px;"
-								// class="btn pull-right">
-									// View Product
-								// </button>
-							// </td>
-						// </tr>
-					// }
-					
+					for(var i = 0; i<listArray.length; i++) {
+						table += 
+						"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+							"<td>" +
+							  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
+							"</td>" +
+							"<td>" + listArray[i].price + "</td>" +
+							"<td>" + listArray[i].weight+ " kg</td>" +
+							"<td>" + listArray[i].name + "</td>" +
+							"<td>" + listArray[i].cid + "</td>" +
+							"<td>" + listArray[i].description + "</td>" +
+							"<td>" +
+								"<button style=\"position:relative; right:0px;\"" +
+								"class=\"btn pull-right\">" +
+									"View Product" +
+								"</button>" +
+							"</td>" +
+						"</tr>";
+					}
+					document.getElementById('resultsDiv').innerHTML=table;
 				}
 			}
 	}
@@ -244,8 +245,7 @@ $advanced = $_GET['advanced'];
                 <!-- and more fields for admin...-->
 			</div>
         </div>
-        <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;">
+        <div class="container">
             <table class="table table-hover">
             <thead>
                 <tr>
@@ -257,29 +257,13 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody>
-              <div id="resultsDiv">
-                <!-- product code javascript function will return the product code
-                for the query of the database for creating product.php-->
-                <tr onclick="location.href='./product.php?id=1'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$1</td>
-                    <td>1 kg</td>
-                    <td>1name</td>
-                    <td>c1</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p1" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-              </div>
+            <tbody id="resultsDiv">
             </tbody>
             </table>
+        </div>
+		<hr>
+        <div id="loadingSpinner" align="center" style="visibility:visible">
+          <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
