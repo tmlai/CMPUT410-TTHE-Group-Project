@@ -165,6 +165,7 @@ if ($requestMethod == "POST"){
 		$productId = $productJson["cid"];
 		$quantity = $productJson["quantity"];
 		$crrStock = $dbLayer->getStock($productId);
+		echo "crrStock ".$crrStock."<br/>";
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
@@ -173,8 +174,10 @@ if ($requestMethod == "POST"){
 			$message["message"] .= "Get from our stock\n<br/>";
 		}
 		else {
-			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
+			if ($crrStock > 0){
+				$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
 					"", $quantity * $ourPrice);
+			}
 			$toOrder = $quantity - $crrStock;
 			
 			$marketInfo = file_get_contents($url);
