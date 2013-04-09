@@ -34,7 +34,9 @@
   position: static;
   max-width: 550px;
   padding: 0 60px;
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .carousel-caption h1,
 .carousel-caption .lead {
