@@ -103,8 +103,13 @@ if ($requestMethod == "GET"){
 	
 	echo $message;
 }
+
+
+
 if ($requestMethod == "POST"){
-	$message = array("status" => "True");
+	$message = array("status" => "True",
+			$message["deliveryDate"] == "date time here"
+	);
 	
 	$userName = $_SESSION["user"];
 	$products = $_POST["orderLists"];
@@ -118,7 +123,6 @@ if ($requestMethod == "POST"){
 		$crrStock = $dbLayer->getStock($productId);
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
-			
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, "",
 					 "", $quantity * $ourPrice);
 			$message["status"] = "True order from our own store";
@@ -165,7 +169,7 @@ if ($requestMethod == "POST"){
 	if ($message["status"] == "True"){
 		$dbLayer->addOrder($customerOrder,$orderProductsArray);
 		//todo
-		$message["deliveryDate"] == date();
+		$message["deliveryDate"] == "apr mon 8 2013";
 	}
 	
 	echo json_encode($message);
