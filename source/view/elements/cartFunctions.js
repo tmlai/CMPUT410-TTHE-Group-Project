@@ -152,7 +152,7 @@ function updateCart() {
     var val = document.getElementById(id).value;
     // Delete item from cart
     if(val == 0) {
-      jsonCart[i] = "";
+      jsonCart = jsonCart.splice(i, 1);
     } else {
       jsonCart[i].quantity = val;
     }
@@ -162,6 +162,10 @@ function updateCart() {
   createCookie('cart', jsonCart, 0);
   // Update the cart viewed on cart.php
   buildCartProducts();
+}
+
+function deleteArrayItem(arr, index) {
+  
 }
 
 /*
@@ -200,33 +204,29 @@ function buildCartProducts() {
         //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
-        //if(typeof product['desc'] == 'undefined') {
-          document.getElementById("productsBody").innerHTML += (
-            "<tr>\n<td>\n"
-            // Quantity text field for product
-            + "<input type=\"text\" name=\"qtyField" + product.id
-            + "\" id=\"qtyField" + product.id + "\" value=\"" 
-            + jsonCart[i].quantity + "\" size=\"8\"><td>\n"
-            // Thumbnail of product
-            + " <img src='/img/products/" + product['id'] + ".jpg\'" 
-            + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-            + "</td>\n"
-            // Price of product
-            + "<td>$" + product['price'] + "</td>\n"
-            // Weight of product
-            + "<td>" + product['weight'] + "</td>\n"
-            // Name of product
-            + "<td>" + product['name'] + "</td>\n"
-            // Code of product
-            + "<td>" + product['id'] + "</td>\n"
-            // Description of product
-            + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
-            + "</tr>\n"
-          );     
-          price += (jsonCart[i].quantity * product['price']);
-        //} else {
-        //  emptyCount++;
-        //}
+        document.getElementById("productsBody").innerHTML += (
+          "<tr>\n<td>\n"
+          // Quantity text field for product
+          + "<input type=\"text\" name=\"qtyField" + product.id
+          + "\" id=\"qtyField" + product.id + "\" value=\"" 
+          + jsonCart[i].quantity + "\" size=\"8\"><td>\n"
+          // Thumbnail of product
+          + " <img src='/img/products/" + product['id'] + ".jpg\'" 
+          + "\" alt=\"\" width=\"50\" height=\"50\">\n"
+          + "</td>\n"
+          // Price of product
+          + "<td>$" + product['price'] + "</td>\n"
+          // Weight of product
+          + "<td>" + product['weight'] + "</td>\n"
+          // Name of product
+          + "<td>" + product['name'] + "</td>\n"
+          // Code of product
+          + "<td>" + product['id'] + "</td>\n"
+          // Description of product
+          + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "</tr>\n"
+        );     
+        price += (jsonCart[i].quantity * product['price']);
      }
    
     };
