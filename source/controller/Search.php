@@ -11,9 +11,9 @@ if($requestMethod == "get") {
 	$partial = $_GET['searchField'];
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProductByName($partial);
-	$allReturned = new Array();
+	$allReturned = array();
 	for($i=0; $i<count($list):$i++) {
-		$singleProduct = new Array();
+		$singleProduct = array();
 		$product = $list[$i];
 		
 		$singleProduct['cid'] = $product['cid'];
