@@ -163,9 +163,21 @@ interface DbInterface {
 			array $orderProductsArray);
 	
 	/*
+	 * Get the CustomerOrder object given the $orderId. NULL is returned if
+	 * no matching orderId in the database;
+	 */
+	public function getCustomerOrder($orderId);
+	
+	/*
 	 * Update external delivery date using web services
 	*/
-	public function updateDeliveryDate($auxiliaryOrderId, $storeId);
+	public function updateDeliveryDateExternal($auxiliaryOrderId, $storeId);
+	
+	/*
+	 * Update the delivery date of the whole order to be the latest delivery
+	* date.
+	*/
+	public function updateDeliveryDate($orderId);
 	// 	------------------------------------------------------------------------
 
 	// 	WEB SERVICES SECTION
