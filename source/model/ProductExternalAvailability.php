@@ -60,7 +60,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 			),
 	);
 	$context  = stream_context_create($options);
-	$orderResult = file_get_contents($choosenStore->getUrl(), false, $context);
+	$orderResult = file_get_contents($orderUrl, false, $context);
 	if (!isset($orderResult) || $orderResult === ""){
 		echo "step 2";
 		return False;
