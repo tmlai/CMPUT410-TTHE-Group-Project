@@ -6,10 +6,6 @@
 .carousel .container {
   position: relative;
   z-index: 9;
-  background-image:url('/source/view/bootstrap/img/tthe_carousel.jpg');
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  background-position: inherit; 
 }
 
 .carousel-control {
@@ -39,8 +35,8 @@
   position: static;
   max-width: 550px;
   padding: 0 60px;
-  margin-left: auto;
-  margin-right: auto;
+  /*margin-left: auto;
+  margin-right: auto;*/
   margin-top: 30px;
 }
 .carousel-caption h1,
