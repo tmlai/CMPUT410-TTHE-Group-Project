@@ -24,7 +24,7 @@
 .carousel img {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 25;
   /*min-width: 100%;*/
   height: 225px;
 }
@@ -33,8 +33,8 @@
   background-color: transparent;
   position: static;
   max-width: 550px;
-  padding: 0 20px;
-  margin-top: 2225px;
+  padding: 0 60px;
+  margin-top: 30px;
 }
 .carousel-caption h1,
 .carousel-caption .lead {
