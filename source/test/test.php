@@ -512,11 +512,24 @@ class TestDb {
 		var_dump($store->getUrl());
 	}
 	
-	public static function testUpdateDeliveryDate(){
+	/*
+	 * PASS
+	 */
+	public static function testUpdateDeliveryDateExternal(){
 		$auxiliaryOrderId = "c90b48c0-a0de-11e2-b1c6-7f08d1a779da";
 		$storeId = 7;
 		$dbLayer = new DbLayer();
-		$status = $dbLayer->updateDeliveryDate($auxiliaryOrderId, $storeId);
+		$status = $dbLayer->updateDeliveryDateExternal($auxiliaryOrderId, $storeId);
+		if($status){
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
+	
+	public static function testUpdateDeliveryDate($orderId){
+		$dbLayer = new DbLayer();
+		$status = $dbLayer->updateDeliveryDate($orderId);
 		if($status){
 			echo "true";
 		}else{
@@ -555,5 +568,6 @@ class TestDb {
 // \test\TestDb::testGetListExternalStores();
 // \test\TestDb::testAuthenticateAdmin();
 // \test\TestDb::testLookupStore();
-\test\TestDb::testUpdateDeliveryDate();
+// \test\TestDb::testUpdateDeliveryDateExternal();
+\test\TestDb::testUpdateDeliveryDate(13);
 ?>

@@ -17,9 +17,9 @@ $advanced = $_GET['advanced'];
         // Default Style links
         require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
-
+	<script type="text/javascript" src="elements/search.js"></script>
   </head>
-  <body onLoad="initialLoading(<?php echo $search;);">   
+  <body onLoad="setToggle()"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -129,6 +129,9 @@ $advanced = $_GET['advanced'];
           <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
+	<script type="text/javascript">
+		window.onload=initialLoading('<?php echo $search;?>');
+	</script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>

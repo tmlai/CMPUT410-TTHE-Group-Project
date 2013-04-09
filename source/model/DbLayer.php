@@ -628,7 +628,7 @@ class DbLayer implements DbInterface {
 	/*
 	 * Update external delivery date using web services
 	 */
-	public function updateDeliveryDate($auxiliaryOrderId, $storeId){
+	public function updateDeliveryDateExternal($auxiliaryOrderId, $storeId){
 		$store = $this->lookUpStore($storeId);
 		$realUrl = $store->getUrl()."/orders/".$auxiliaryOrderId;
 		$deliveryDateJson = file_get_contents($realUrl);
@@ -643,6 +643,79 @@ class DbLayer implements DbInterface {
 		$array = array($deliveryDate,$auxiliaryOrderId,$storeId);
 		$stmt = $pdo->prepare($statement);
 		$status = ($stmt->execute($array) == true && $stmt->rowCount() > 0);
+		return $status;
+	}
+	
+	public function getCustomerOrder($orderId){
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM CustomersOrders WHERE orderId = ?";
+		$stmt = $pdo->prepare($statement);
+		$array = array($orderId);
+		$stmt->execute($array);
+		
+		$temp = $stmt->fetchAll();
+		$cuOr = null;
+		foreach($temp as &$row){
+			$cuOr = new CustomerOrder($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+		}
+		return $cuOr;
+	}
+	
+	/*
+	 * Update the delivery date of the whole order to be the latest delivery
+	 * date. 
+	 */
+	public function updateDeliveryDate($orderId){
+		$status = true;
+		
+		$format = 'Y-m-d';
+		
+		$cuOr = $this->getCustomerOrder($orderId);
+		$latestDate = $cuOr->getDeliveryDate();
+		$latestDate = \DateTime::createFromFormat($format,
+				$latestDate);
+		$baseDate = $latestDate;
+		
+		$listOrdersProducts = $this->getListProductsInOrder($orderId);
+		
+		// update external delivery dates
+		foreach($listOrdersProducts as &$op){
+			/* @var $op OrderProduct */
+			$storeId = $op->getStoreId();
+			$auxiOrderId = $op->getAuxiliaryOrderId();
+			$delDate = $op->getDeliveryDate();
+			if($storeId != 1 && isset($auxiOrderId) && $auxiOrderId != ''
+					&& isset($delDate) && $delDate != ''){
+				// update delivery date of orders from external stores;
+				$this->updateDeliveryDateExternal($auxiOrderId, $storeId);
+			}
+		}
+		
+		$listOrdersProducts = $this->getListProductsInOrder($orderId);
+		foreach($listOrdersProducts as &$newOp){
+			/* @var $newOp OrderProduct */
+			$storeId = $newOp->getStoreId();
+			$auxiOrderId = $newOp->getAuxiliaryOrderId();
+			$delDate = $newOp->getDeliveryDate();
+			if($storeId != 1 && isset($auxiOrderId) && $auxiOrderId != ''
+					&& isset($delDate) && $delDate != ''){
+				// compare to get latest delivery date;
+				$dateTemp = \DateTime::createFromFormat($format, $delDate);
+				if($latestDate < $dateTemp){
+					$latestDate = $dateTemp;
+				}
+			}
+		}
+		
+		if($latestDate > $baseDate){
+			// update new delivery date for the whole order
+			$pdo = self::getPdo();
+			$statement = "UPDATE CustomersOrders SET deliveryDate = ? WHERE orderId = ?";
+			$stmt = $pdo->prepare($statement);
+			$array = array($latestDate->format($format), $orderId);
+			$status = ($stmt->execute($array) == true && $stmt->rowCount() > 0);
+		}
+		
 		return $status;
 	}
 
