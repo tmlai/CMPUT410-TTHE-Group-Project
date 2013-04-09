@@ -74,13 +74,13 @@ function buildRelatedProducts(products) {
   var div = document.getElementById("resultsDiv");
   for(var i = 0; i < products.length; i++) {
     div.write(
-      "<tr onclick=\"location.href='./product.php?id='" + products[i]['id']
+      "<tr onclick=\"location.href='./product.php?id='" + products[i]['cid']
       + "\">\n"
       // Rank/index of product
       + "<td>" + (i + 1) + "</td>\n"
       + "<td>\n"
       // Thumbnail of product
-      + " <img src='/img/products/" + products[i]['id'] + ".jpg\'" 
+      + " <img src='/img/products/" + products[i]['cid'] + ".jpg\'" 
       + "\" alt=\"\" width=\"50\" height=\"50\">\n"
       + "</td>\n"
       // Price of product
@@ -90,7 +90,7 @@ function buildRelatedProducts(products) {
       // Name of product
       + "<td>" + products[i]['name'] + "</td>\n"
       // Code of product
-      + "<td>" + products[i]['id'] + "</td>\n"
+      + "<td>" + products[i]['cid'] + "</td>\n"
       // Description of product
       + "<td>" + products[i]['description'].substring(0, 35) + "...</td>\n"
       + "<td>\n"
