@@ -31,6 +31,21 @@ class Product {
 		$array['totalSold'] = $this->totalSold;
 		return \json_encode($array);
 	}
+	
+	public function toAssociativeArray(){
+		$array = array();
+		$array['cid'] = $this->cid;
+		$array['name'] = $this->name;
+		$array['description'] = $this->description;
+		$array['image'] = $this->image;
+		$array['price'] = $this->price;
+		$array['weight'] = $this->weight;
+		$array['dimensions'] = $this->dimensions;
+		$array['stock'] = $this->stock;
+		$array['rating'] = $this->rating;
+		$array['totalSold'] = $this->totalSold;
+		return $array;
+	}
 
 	public function __construct($cid, $name, $description, $image, $price,
 			$weight, $dimensions, $stock) {
