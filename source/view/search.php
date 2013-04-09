@@ -126,7 +126,6 @@ $advanced = $_GET['advanced'];
 			// code for IE6, IE5
 				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 			}
-			xmlhttp.setRequestHeader("Content-type","application/json");
 			xmlhttp.open('POST', 
 				'/source/controller/AdvSearch.php',
 				true);
