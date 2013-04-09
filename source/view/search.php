@@ -125,7 +125,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable">
+            <tbody id="resultsTable" onLoad="initialLoading('<?php echo $search;?>')">
             </tbody>
             </table>
         </div>
@@ -136,9 +136,6 @@ $advanced = $_GET['advanced'];
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-		window.onload=initialLoading('<?php echo $search;?>');
-	</script>
 	<script type="text/javascript" language="Javascript"
 		src="elements/search.js"></script>
   </body>
