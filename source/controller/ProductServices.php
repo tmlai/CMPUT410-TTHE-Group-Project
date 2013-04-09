@@ -28,13 +28,12 @@ try {
 			
 			$first_token  = strtok($reUri, '/');
 			$second_token = strtok('/');
-			$third_token = strtok('/');
 			
-			echo $third_token;
+			echo $second_token;
 			
 			$quantity = file_get_contents("php://input");
 			$storeId = 1;
-			$cid = $third_token; 
+			$cid = $second_token; 
 			$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
 			echo $orderInfo;
 			//NOTE: returns empty atm...
