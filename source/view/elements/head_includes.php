@@ -3,6 +3,8 @@
 <link href="bootstrap/css/custom.css" rel="stylesheet">
 <script type="text/javascript" language="JavaScript" 
   src="elements/cookieFunctions.js"></script>
+<script type="text/javascript" language="JavaScript" 
+  src="elements/categoryFunctions.js"></script>
 <style type="text/css">
 body {
    padding-top: 60px;
@@ -13,6 +15,3 @@ body {
    }
 } 
 </style>
-<?php
-//$categories = $dbLayer->getCategoryList();
-?>

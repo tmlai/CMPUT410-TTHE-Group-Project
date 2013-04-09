@@ -61,6 +61,95 @@ $advanced = $_GET['advanced'];
           "Advanced Search  <i class=\"icon-chevron-down\"></i>";
       }
     }
+	
+	function advSearch() {
+		var name = document.getElementById('searchNameField').value;
+		var code = document.getElementById('searchCodeField').value;
+		var category = document.getElementById('searchCategoryField').value;
+		var priceFrom = document.getElementById('priceFromField').value;
+		var priceTo = document.getElementById('priceToField').value;
+		var minQty = document.getElementById('minQtyField').value;
+		var maxQty = document.getElementById('maxQtyField').value;
+		var minWeight = document.getElementById('minWeightField').value;
+		var maxWeight = document.getElementById('maxWeightField').value;
+		var pass = true;
+		
+		// //if empty set it null
+		// if (name == null) {
+			// name = "Null";
+		// }
+		// if (code == null) {
+			// code = "Null";
+		// }
+		// if (category == null) {
+			// category = "Null";
+		// }
+		// if (priceFrom == null) {
+			// priceFrom = "Null";
+		// }
+		// if (priceTo == null) {
+			// priceTo = "Null";
+		// }
+		// if (minQty == null) {
+			// minQty = "Null";
+		// }
+		// if (maxQty == null) {
+			// maxQty = "Null";
+		// }
+		// if (minWeight == null) {
+			// minWeight = "Null";
+		// }
+		// if (maxWeight == null) {
+			// maxWeight = "Null";
+		// }
+		//check range values
+		if(priceFrom != "" || isNaN(priceFrom)) {
+			pass = false;
+		} else if(priceTo != "" || isNaN(priceTo)) {
+			pass = false;
+		} else if(minQty != "" || isNaN(minQty)) {
+			pass = false;
+		} else if(maxQty != "" || isNaN(maxQty)) {
+			pass = false;
+		} else if(minWeight != "" || isNaN(minWeight)) {
+			pass = false;
+		} else if(maxWeight != "" || isNaN(maxWeight)) {
+			pass = false;
+		} 
+		
+		if(pass == true) {
+			//make ajax call
+			var search = new Object();
+			search.name = name;
+			search.code = code;
+			search.category = category;
+			search.priceFrom = priceFrom;
+			search.priceTo = priceTo;
+			search.minQty = minQty;
+			search.maxQty = maxQty;
+			search.minWeight = minWeight;
+			search.maxWeight = maxWeight;
+			
+			//make json
+			var jsonSearch = JSON.stringify(search);
+			
+			//console.log(search);
+			var xmlhttp = new XMLHttpRequest();
+			if (window.XMLHttpRequest) {
+			// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}	else {
+			// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.open('POST', 
+				'/source/controller/AdvSearch.php',
+				true);
+			xmlhttp.send(jsonSearch);
+			}
+			
+			//get the response text
+	}
     -->
     </script>
   </head>
@@ -122,33 +211,33 @@ $advanced = $_GET['advanced'];
                     </label>
                     <div class="controls">
                         <input type="text" id="priceToField" 
-                        placeholder="Price From">
+                        placeholder="Price To">
                     </div>
 					<label class="control-label" for="minQtyField">Minimum Quantity
                     </label>
                     <div class="controls">
                         <input type="text" id="minQtyField" 
-                        placeholder="Price From">
+                        placeholder="Minimum Quantity">
                     </div>
 					<label class="control-label" for="maxQtyField">Maximum Quantity
                     </label>
                     <div class="controls">
                         <input type="text" id="maxQtyField" 
-                        placeholder="Price From">
+                        placeholder="Maximum Quantity">
                     </div>
 					<label class="control-label" for="minWeightField">Minimum Weight
                     </label>
                     <div class="controls">
                         <input type="text" id="minWeightField" 
-                        placeholder="Price From">
+                        placeholder="Minimum Weight">
                     </div>
 					<label class="control-label" for="maxWeightField">Maximum Weight
                     </label>
                     <div class="controls">
                         <input type="text" id="maxWeightField" 
-                        placeholder="Price From">
+                        placeholder="Maximum Weight">
                     </div>
-					<input type="button" class="btn" value="Advanced Search" onClick="">
+					<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
                 </div>
                 <!-- and more fields for admin...-->
 			</div>

@@ -345,7 +345,9 @@ class TestDb {
 	public static function testSearchProductByConstraints() {
 		$dbLayer = new DbLayer();
 
-		$cateId = 1;
+		$name = null;
+		$code = null;
+		$category = null;
 		$priceRange = array();
 
 		// 		$priceRange[DbLayer::LOWER_BOUND] = 700;
@@ -360,7 +362,7 @@ class TestDb {
 		// 		$weightRange[DbLayer::UPPER_BOUND] = 20;
 
 		$list = $dbLayer
-				->searchProductByConstraints($cateId, $priceRange, $availRange,
+				->searchProductByConstraints($name,$code,$category, $priceRange, $availRange,
 						$weightRange);
 		var_dump($list);
 	}
@@ -521,7 +523,7 @@ class TestDb {
 // \test\TestDb::testAddOrder();
 // \test\TestDb::testSearchProductByCode();
 // \test\TestDb::testSearchProductByCategory();
-// \test\TestDb::testSearchProductByConstraints();
+\test\TestDb::testSearchProductByConstraints();
 // \test\TestDb::testGetCustomersOrders();
 // \test\TestDb::testGetListProductsInOrder();
 // \test\TestDb::testGetOlapReport();

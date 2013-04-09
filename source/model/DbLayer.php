@@ -77,7 +77,7 @@ class DbLayer implements DbInterface {
 	 *             $password: the admin password
 	 * Return type: true if successfully, false if fails
 	 */
-		public function addAdmin($username, $password) {
+	public function addAdmin($username, $password) {
 		$pdo = self::getPdo();
 
 		$preState = "INSERT INTO Admins values(?,?)";
@@ -149,24 +149,24 @@ class DbLayer implements DbInterface {
 
 	public function authenticateAdmin($username, $password) {
 		$status = -1;
-		
+
 		$pdo = self::getPdo();
-		
+
 		$preState = "SELECT password FROM Admins  WHERE name=?";
-		
+
 		$stmt = $pdo->prepare($preState);
-		
+
 		$stmt->bindParam(1, $username);
-		
+
 		$stmt->execute();
-		
+
 		// 		while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
 		// 			if($row['password'] == $password){
 		// 				$exist = true;
 		// 				break;
 		// 			}
 		// 		}
-		
+
 		$list = $stmt->fetchAll();
 		if (count($list) == 0) {
 			// no user with the indicated username exists
@@ -183,9 +183,9 @@ class DbLayer implements DbInterface {
 			}
 		}
 		$pdo = null;
-		
+
 		return $status;
-		
+
 	}
 
 	// Products section
@@ -413,19 +413,19 @@ class DbLayer implements DbInterface {
 	}
 
 	// -------------------------------------------------------------------------
-	
+
 	/*
 	 * Get the list of external stores which we do business with
-	*/
-	public function getListExternalStores(){
+	 */
+	public function getListExternalStores() {
 		$pdo = self::getPdo();
 		$statement = "SELECT * FROM Stores WHERE storeId <> 1";
 		$stmt = $pdo->prepare($statement);
 		$stmt->execute();
-		
+
 		$list = array();
 		$temp = $stmt->fetchAll();
-		foreach($temp as &$row){
+		foreach ($temp as &$row) {
 			$store = new Store($row[0], $row[1], $row[2], $row[3]);
 			$list[] = $store;
 		}
@@ -880,11 +880,106 @@ class DbLayer implements DbInterface {
 	 * @param	$availRange		the availability range {lowerBound, upperBound}
 	 * @param	$weightRange	the weight Range {lowerBound, upperBound}
 	 */
-	public function searchProductByConstraints($cateId, $priceRange,
-			$availRange, $weightRange) {
+// 	public function searchProductByConstraints($cateId, $priceRange,
+// 			$availRange, $weightRange) {
+// 		$pdo = self::getPdo();
+
+// 		$statement = "SELECT * FROM Products p, ProductsMapCategories pmc WHERE p.cid = pmc.cid AND pmc.cateId = ? ";
+
+// 		$lowerBound = $priceRange[self::LOWER_BOUND];
+// 		if (isset($lowerBound)) {
+// 			$statement .= " AND p.price >= {$lowerBound}";
+// 		}
+
+// 		$upperBound = $priceRange[self::UPPER_BOUND];
+// 		if (isset($upperBound)) {
+// 			$statement .= " AND p.price <= {$upperBound} ";
+// 		}
+
+// 		$lowerBound = $availRange[self::LOWER_BOUND];
+// 		if (isset($lowerBound)) {
+// 			$statement .= " AND p.stock >= {$lowerBound} ";
+// 		}
+
+// 		$upperBound = $availRange[self::UPPER_BOUND];
+// 		if (isset($upperBound)) {
+// 			$statement .= " AND p.stock <= {$upperBound} ";
+// 		}
+
+// 		$lowerBound = $weightRange[self::LOWER_BOUND];
+// 		if (isset($lowerBound)) {
+// 			$statement .= " AND p.weight >= {$lowerBound} ";
+// 		}
+
+// 		$upperBound = $weightRange[self::UPPER_BOUND];
+// 		if (isset($upperBound)) {
+// 			$statement .= " AND p.weight <= {$upperBound} ";
+// 		}
+
+// 		$stmt = $pdo->prepare($statement);
+// 		$array = array($cateId);
+
+// 		$stmt->execute($array);
+// 		$temp = $stmt->fetchAll();
+// 		$list = array();
+
+// 		foreach ($temp as &$row) {
+// 			$product = new Product($row[0], $row[1], $row[2], $row[3], $row[4],
+// 					$row[5], $row[6], $row[7]);
+// 			$list[] = $product;
+// 		}
+
+// 		$pdo = null;
+// 		return $list;
+// 	}
+
+	/*
+	 * @param	$name			name
+	 * @param 	$code			product id
+	 * @param	$category		category name
+	 * @param	$priceRange		the price range {lowerBound, upperBound}.
+	 * 							null to indicate no constraint on lower/upper.
+	 * @param	$availRange		the availability range {lowerBound, upperBound}
+	 * @param	$weightRange	the weight Range {lowerBound, upperBound}
+	 */
+	public function searchProductByConstraints($name, $code, $category,
+			$priceRange, $availRange, $weightRange) {
+
 		$pdo = self::getPdo();
 
-		$statement = "SELECT * FROM Products p, ProductsMapCategories pmc WHERE p.cid = pmc.cid AND pmc.cateId = ? ";
+		$statement = "SELECT * FROM Products p, ProductsMapCategories pmc, Categories c
+		 WHERE p.cid = pmc.cid AND pmc.cateId = c.cateId ";
+
+		if (isset($name) && $name != '') {
+			$name = strtolower($name);
+
+			$first = substr($name, 0, 1);
+			$capFirst = strtoupper($first);
+			$rest = substr($name, 1);
+			
+			$statement .= " AND p.name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+		}
+		
+		if(isset($code) && $code != ''){
+			$code = strtolower($code);
+			
+			$first = substr($code, 0, 1);
+			$capFirst = strtoupper($first);
+			$rest = substr($code, 1);
+				
+			$statement .= " AND p.cid REGEXP '[{$first}{$capFirst}]{$rest}' ";
+		}
+		
+		if(isset($category) && $category != ''){
+			$category = strtolower($category);
+			
+			$first = substr($category, 0, 1);
+			$capFirst = strtoupper($first);
+			$rest = substr($category, 1);
+			
+			$statement .= " AND c.name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+				
+		}
 
 		$lowerBound = $priceRange[self::LOWER_BOUND];
 		if (isset($lowerBound)) {
@@ -915,11 +1010,10 @@ class DbLayer implements DbInterface {
 		if (isset($upperBound)) {
 			$statement .= " AND p.weight <= {$upperBound} ";
 		}
-
+		
 		$stmt = $pdo->prepare($statement);
-		$array = array($cateId);
 
-		$stmt->execute($array);
+		$stmt->execute();
 		$temp = $stmt->fetchAll();
 		$list = array();
 
@@ -931,6 +1025,7 @@ class DbLayer implements DbInterface {
 
 		$pdo = null;
 		return $list;
+
 	}
 
 	// 	-----------------------------------------------------------------------
@@ -1073,24 +1168,24 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 		return $list;
 	}
-	
+
 	public function getGenOlapReport(Olap $olapObj) {
 		$pdo = self::getPdo();
-	
+
 		$statement = "SELECT username, cid, storeId, SUM(aggregatedCount) as aggregatedCount, 
 		SUM(amounts) as amounts
 		 FROM OlapReport WHERE ";
-	
+
 		$username = $olapObj->getUsername();
 		if (isset($username) == false) {
 			$statement .= " username is NULL ";
-	
+
 		} elseif ($username == '') {
 			$statement .= " username is not NULL ";
 		} else {
 			$statement .= " username = '{$username}' ";
 		}
-	
+
 		$cid = $olapObj->getCid();
 		if (isset($cid) == false) {
 			$statement .= " AND cid is NULL ";
@@ -1099,7 +1194,7 @@ class DbLayer implements DbInterface {
 		} else {
 			$statement .= " AND cid = '{$cid}' ";
 		}
-	
+
 		$storeId = $olapObj->getStoreId();
 		if (isset($storeId) == false) {
 			$statement .= " AND storeId is NULL ";
@@ -1108,7 +1203,7 @@ class DbLayer implements DbInterface {
 		} else {
 			$statement .= " AND storeId = {$storeId} ";
 		}
-	
+
 		$from = $olapObj->getFrom();
 		$to = $olapObj->getTo();
 		if (isset($from) == false && isset($to) == false) {
@@ -1118,25 +1213,23 @@ class DbLayer implements DbInterface {
 			$statement .= " AND orderDate >= '{$from}' ";
 			$statement .= " AND orderDate <= '{$to}' ";
 		}
-		
+
 		$statement .= " GROUP BY username, cid, storeId ";
-	
+
 		$stmt = $pdo->prepare($statement);
 		$stmt->execute();
-	
+
 		$temp = $stmt->fetchAll();
 		$list = array();
 		foreach ($temp as &$row) {
-			$olap = new Olap($row[0], $row[1], $row[2], $from, $to,
-					$row[3], $row[4]);
+			$olap = new Olap($row[0], $row[1], $row[2], $from, $to, $row[3],
+					$row[4]);
 			$list[] = $olap;
 		}
-	
+
 		$pdo = null;
 		return $list;
 	}
-	
-	
 
 	/*
 	 * Get the top n sellings products within a period.
