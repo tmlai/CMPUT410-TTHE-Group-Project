@@ -92,7 +92,18 @@ function makePurchase(cart) {
     arr['quantity'] = cart[i]['quantity'];
     purchase.push(arr);
   }
-  function sendPurchase(JSON.stringify(purchase));
+  var response = sendPurchase(JSON.stringify(purchase));
+  if(response == "false") {
+    alert("Unable to make purchase at this time, we appreciate your patience and"
+    + " support, please try again");
+  } else {
+    alert("Thank you for your Purchase!\n"
+    + "The expected delivery date of your order is " + response);
+    var dir = location.href;
+    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+    dir = dir + "index.php";
+    window.location.href = dir;
+  }
 }
 
 function sendPurchase(jsonInv) {
