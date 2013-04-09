@@ -162,7 +162,11 @@
 
 		#VIEW OUTSTANDING ORDER  
 		Get Customer name from Session
-		Return , [{"order":[{"pid":"product id", "quantity":"30"}, 
-						{"pid":"product id", "quantity":"30"}, 
-						{"pid":"product id", "quantity":"30"}],
-				"delivery_date":"somedate"}, {}, {} ]
+		Return , [{"orderId":"...",
+				  "order":[{"pid":"product id", "quantity":"30", "amount":"..."}, 
+						{"pid":"product id", "quantity":"30", "amount":"..."}, 
+						{"pid":"product id", "quantity":"30", "amount":"..."}],
+				  "delivery_date":"somedate"}, 
+				  {}, 
+				  {} ]
+ 

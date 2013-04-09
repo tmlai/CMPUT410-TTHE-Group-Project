@@ -33,6 +33,7 @@ foreach($list as &$co){
 		$eachTuple = array();
 		$eachTuple['pid'] = $op->getCid();
 		$eachTuple['quantity'] = $op->getQuantity();
+		$eachTuple['amount'] = $op->getAmount();
 		$productList[] = $eachTuple;
 	}
 	$oneOrder["order"] = $productList;
