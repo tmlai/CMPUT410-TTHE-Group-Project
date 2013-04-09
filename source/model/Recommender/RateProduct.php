@@ -8,7 +8,7 @@ include_once ('../UserRatingProduct.php');
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 if ($requestMethod == "POST"){
-	$userName = $_SESSION["user"]; // from session	
+	$userName = $_SESSION["user"]; // from session
 	if (!isset($userName) || $userName == ""){
 		$message = array(
 				"status" => "Failed",

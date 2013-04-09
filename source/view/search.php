@@ -26,7 +26,7 @@ $advanced = $_GET['advanced'];
             echo "dropBool = true;\n";
     ?>
 	function initialLoading() {
-		setToggle();
+		//setToggle();
 		//send ajax call to get a list of products
 		var xmlhttp = new XMLHttpRequest();
 		var productList = new Array();
@@ -53,7 +53,7 @@ $advanced = $_GET['advanced'];
 				var table = "";
 				for(var i = 0; i<listArray.length; i++) {
 					table += 
-					"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+					"<tr onclick=\"location.href='/source/product.php?id="+listArray[i].cid+"'\">" +
 						"<td>" +
 						  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
 						"</td>" +
@@ -73,11 +73,8 @@ $advanced = $_GET['advanced'];
 				if(listArray.length==0) {
 					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 				}
-				//don't write if null!!!
-				if(document.getElementById('resultsTable') != null) {
-					document.getElementById('resultsTable').innerHTML=table;
-				}
-				
+				document.getElementById('resultsTable').innerHTML=table;
+
 			}
 		}
 	}
@@ -169,7 +166,7 @@ $advanced = $_GET['advanced'];
 					var table = "";
 					for(var i = 0; i<listArray.length; i++) {
 						table += 
-						"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+						"<tr onclick=\"location.href='/source/product.php?id="+listArray[i].cid+"'\">" +
 							"<td>" +
 							  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
 							"</td>" +
@@ -189,17 +186,14 @@ $advanced = $_GET['advanced'];
 					if(listArray.length==0) {
 						document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 					}
-					//don't write if null!!
-					if(document.getElementById('resultsTable') != null) {
-						document.getElementById('resultsTable').innerHTML=table;
-					}
+					document.getElementById('resultsTable').innerHTML=table;
 				}
 			}
 	}
     -->
     </script>
   </head>
-  <body onLoad="initialLoading();">   
+  <body onLoad="setToggle();">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -300,7 +294,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable">
+            <tbody id="resultsTable" onLoad="initialLoading()">
             </tbody>
             </table>
         </div>
