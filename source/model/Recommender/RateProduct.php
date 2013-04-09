@@ -52,7 +52,13 @@ elseif ($requestMethod == "GET"){
 	}
 	echo "Cat".$cat."<br/>";
 	echo "n ".$n."<br/>";
-	$productList = DbLayer::recommendRelatedProducts($n, $cat);
+	try {
+		$productList = DbLayer::recommendRelatedProducts($n, $cat);
+	}
+	catch (Exception $e){
+		echo $e.getMessage()."<br/>";
+	}
+	
 	echo "productList array".$productList."<br/>";
 	$productJSONList = array();
 	echo "iterate through the array<br/>";
