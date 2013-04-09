@@ -22,7 +22,7 @@ function getCategories() {
   xmlhttp.send();
 }
 
-functions buildCategoryList(cats) {
+function buildCategoryList(cats) {
   for(var i = 0; i < cats.length; i++) {
     document.getElementById("navCatList").innerHTML = (
       '<li><a href="category.php?' + cats[i]['cateId'] + '">' 
