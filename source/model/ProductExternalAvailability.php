@@ -107,7 +107,7 @@ if ($requestMethod == "GET"){
 
 
 if ($requestMethod == "POST"){
-	$message = array("status" => "True",
+	$message = array("status" => "False by default",
 			$message["deliveryDate"] == "date time here"
 	);
 	
@@ -115,7 +115,7 @@ if ($requestMethod == "POST"){
 	//TODO:
 	$userName = "hcngo";
 	$products = $_POST["orderLists"];
-	$productsJson = json_decode($productsJson, true);
+	$productsJson = json_decode($products, true);
 	//TODO:
 	echo "<br/>username ".$userName."<br/>";
 	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
@@ -128,7 +128,7 @@ if ($requestMethod == "POST"){
 		if ($crrStock >= $quantity){
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
 					 "", $quantity * $ourPrice);
-			$message["status"] = "True order from our own store";
+			$message["status"] = "True";
 		}
 		else {
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
