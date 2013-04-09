@@ -41,9 +41,10 @@
 					if (xmlhttp.readyState == 4) {
 						alert(xmlhttp.responseText);
 						res = document.getElementById("res");
-						res.innerHTML = xmlhttp.responseText)
+						res.innerHTML = xmlhttp.responseText);
 					}
-				}
+				};
+				
 				var id = document.getElementById("id").value;
 				var q = document.getElementById("idQ").value;
 				var xmlhttp=new XMLHttpRequest();
