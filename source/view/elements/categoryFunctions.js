@@ -106,7 +106,7 @@ function buildCarouselItems(prods) {
   var catHTML = '<div id="myCarousel" class="carousel slide">\n'
     + '<ol class="carousel-indicators">\n';
   for(var i = 0; i < prods.length; i++) {
-    if(i == 0) {}
+    if(i == 0) {
       catHTML += 
         '<li data-target="#myCarousel" data-slide-to="0" class="active"></li>\n';
     } else {
