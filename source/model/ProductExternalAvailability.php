@@ -1,5 +1,7 @@
 <?php
 use model\DbLayer;
+use model\CustomerOrder;
+use model\OrderProduct;
 
 include_once ('DbLayer.php');
 
