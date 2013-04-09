@@ -294,7 +294,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable" onLoad="initialLoading()">
+            <tbody id="resultsTable">
             </tbody>
             </table>
         </div>
