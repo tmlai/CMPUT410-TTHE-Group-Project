@@ -1,10 +1,6 @@
 /* Carousel base class */
 .carousel {
   margin-bottom: 10px;
-  background-image:url('/source/view/bootstrap/img/tthe_carousel.jpg');
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  background-position: inherit;
 }
 
 .carousel-tthebkg {
