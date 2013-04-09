@@ -1,14 +1,14 @@
 <?php
-echo "before include";
+echo "before include<br/>";
 include_once ('../DbLayer.php');
 include_once ('../UserRatingProduct');
 
-echo "b4 get request method";
+echo "b4 get request method<br/>";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-echo "before get user from session";
+echo "before get user from session<br/>";
 $userName = $_SESSION["user"]; // from session
-echo "after get user from session".$userName;
+echo "after get user from session".$userName."<br/>";
 
 if ($requestMethod == "POST"){
 	
