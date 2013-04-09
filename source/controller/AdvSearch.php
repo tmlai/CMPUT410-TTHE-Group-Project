@@ -10,6 +10,7 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 $jsonSearch = file_get_contents("php://input");
 $search = json_decode($jsonSearch, true);
 if($requestMethod == "post") {
+	$dbLayer = new DbLayer();
 	$name = trim($search['name']);
 	$code = trim($search['code']);
 	$category = trim($search['category']);
@@ -49,32 +50,33 @@ if($requestMethod == "post") {
 		$maxWeight = null;
 	}
 	//build arrays for ranges
-	$priceRange = new Array($priceFrom, $priceTo);
-	$availRange = new Array($minQty, $maxQty);
-	$weightRange = new Array($minWeight, $maxWeight);
-	
-	$dbLayer = new DbLayer();
+	$priceRange[DbLayer::LOWER_BOUND] = $priceFrom;
+	$priceRange[DbLayer::UPPER_BOUND] = $priceTo;
+	$availRange[DbLayer::LOWER_BOUND] = $minQty;
+	$availRange[DbLayer::UPPER_BOUND] = $maxQty;
+	$weightRange[DbLayer::LOWER_BOUND] = $minWeight;
+	$weightRange[DbLayer::UPPER_BOUND] = $maxWeight;
+
 	$list = $dbLayer->searchProductByConstraints(
 		$name, $code, $category, $priceRange, $availRange, $weightRange );
-	var_dump($list);
-	// $allReturned = array();
-	// for($i=0; $i<count($list);$i++) {
-		// $singleProduct = $list[$i];
-		// $cid = $singleProduct->getCid();
-		// $price = $singleProduct->getPrice();
-		// $weight = $singleProduct->getWeight();
-		// $name = $singleProduct->getName();
-		// $description = $singleProduct->getDescription();
-		// $image = $singleProduct->getImage();
+	//var_dump($list);
+	$allReturned = array();
+	for($i=0; $i<count($list); $i++) {
+		$singleProduct = $list[$i];
+		$cid = $singleProduct->getCid();
+		$price = $singleProduct->getPrice();
+		$weight = $singleProduct->getWeight();
+		$name = $singleProduct->getName();
+		$description = $singleProduct->getDescription();
+		$image = $singleProduct->getImage();
 		
-		// //create a new object
-		// $singleObj = (object) array(
-			// 'cid'=>$cid, 'price'=>$price,
-			// 'weight'=>$weight, 'name'=>$description,
-			// 'image'=>$image);
-		// $allReturned[$i] = $singleObj;
-	// }
-
-	// echo json_encode($allReturned);
+		//create a new object
+		$singleObj = (object) array(
+			'cid'=>$cid, 'price'=>$price,
+			'weight'=>$weight, 'name'=>$description,
+			'image'=>$image);
+		$allReturned[$i] = $singleObj;
+	}
+	echo json_encode($allReturned);
 }
 ?>

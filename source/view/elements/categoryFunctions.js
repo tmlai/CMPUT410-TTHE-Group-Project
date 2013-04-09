@@ -1,7 +1,7 @@
 /*
- * Get the list of categories.
+ * Get the list of categories for navbar.
  */
-function getCategories() {
+function getMenuCategories() {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -15,26 +15,72 @@ function getCategories() {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      buildCategoryList(jsonArray);
+      buildCategoryDropList(jsonArray);
     }
   };
   xmlhttp.open('GET', '/source/controller/CategoryServices.php?catList', true);
   xmlhttp.send();
 }
 
-function buildCategoryList(cats) {
+function getCarouselProds() {
+  var xmlhttp = new XMLHttpRequest();
+	if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}	else {
+    // code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+  
+  // Return if product is in stock
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      var jsonArray = JSON.parse(xmlhttp.responseText);
+      buildCarouselItems(jsonArray);
+    }
+  };
+  xmlhttp.open('GET', '../model/Recommender/RateProduct.php?numProduct=3', true);
+  xmlhttp.send();
+}
+
+function buildCategoryDropList(cats) {
   for(var i = 0; i < cats.length; i++) {
-    document.getElementById("navCatList").innerHTML = (
+    document.getElementById("navCatList").innerHTML += (
       '<li><a href="category.php?' + cats[i]['cateId'] + '">' 
       + cats[i]['name'] + '</a></li>'
     );
   }
 }
 
+function buildCarouselItems(prods) {
+  for(var i = 0; i < cats.length; i++) {
+    if(i == 0) {
+      document.getElementById("navCatList").innerHTML = '<div class="item active">';
+    } else {
+      document.getElementById("navCatList").innerHTML += '<div class="item">';
+    }
+    document.getElementById("navCatList").innerHTML += (
+      '<a href="#1">\n'
+      + '<img src="../assets/img/examples/slide-03.jpg" alt="">\n'
+      + '<div class="container">\n'
+      + '  <div class="carousel-caption">\n'
+      + '    <h1>Welcome</h1>\n'
+      + '    <p class="lead">Browse through our many products.</p>\n'
+      + '    <p>The 2nd Appliance name goes here...</p>\n'
+      + '    <a class="btn btn-large btn-primary" href="#">See Product Details</a>\n'
+      + '  </div>\n'
+      + '</div>\n'
+      + '</a>\n'
+      + '</div>\n'
+    );
+  }
+}
+
+
 /*
  * Get category products of a specific category id.
  */
- function getCategoryProducts(cateId) {
+ function getCategoryProducts(cateId, ) {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -61,7 +107,7 @@ function buildCategoryList(cats) {
  * Build and write the html for the Top Ranked Related Products.
  * @param products array
  */ 
-function buildRelatedProducts(products) {
+function buildCategoryProductList(products) {
   for(var i = 0; i < products.length; i++) {
     document.getElementById("resultsDiv").innerHTML += (
       "<tr onclick=\"location.href='./product.php?id=" + products[i]['cid']
@@ -92,63 +138,4 @@ function buildRelatedProducts(products) {
       + "</tr>\n"
     );
   }
-}
-
-function rateProduct(pid, user, value) {
-  if(user == null || user == "") {
-    alert("You must be signed in to rate a product.");
-  } else {
-    var xmlhttp = new XMLHttpRequest();
-    if (window.XMLHttpRequest) {
-      // code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp=new XMLHttpRequest();
-    }	else {
-      // code for IE6, IE5
-      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    // Return if product is in stock
-    xmlhttp.onreadystatechange=function() {
-      if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        jsonArray = JSON.parse(xmlhttp.responseText);
-        if(jsonArray.status == "ok") {
-          alert("Thank you for rating our products, we value your support!");
-          document.location.reload(true);
-        } else {
-          alert("Server session timed out, please sign in again to rate a product.");
-        }
-       }
-    };
-    xmlhttp.open('POST', '../model/Recommender/RateProduct.php?productID=' + pid 
-      + '&rating=' + value, true);
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send();
-  }
-}
-
-/*
- * AJAX call for one product info
- */
- function getOneProduct(pid) {
-  var xmlhttp = new XMLHttpRequest();
-	if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlhttp=new XMLHttpRequest();
-	}	else {
-    // code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-  
-  // Return if product is in stock
-  xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      //var jsonObj = JSON.parse(xmlhttp.responseText);
-      //alert("cart DEBUG: getting one product: " + jsonObj[1]);
-      //console.log(jsonObj);
-      //var jsonArray = xmlhttp.responseText;
-      return(xmlhttp.responseText);
-    }
-  };
-  xmlhttp.open('GET', '../controller/ProductServices.php?id=' + pid, false);
-  xmlhttp.send();
 }
