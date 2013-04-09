@@ -1,4 +1,4 @@
-var bool = true;
+var dropBool = true;
 
 function setToggle(dropBool) {
   if(dropBool == "false") {
