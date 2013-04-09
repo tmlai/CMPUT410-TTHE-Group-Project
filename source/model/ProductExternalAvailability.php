@@ -1,4 +1,6 @@
 <?php
+use model\DbLayer;
+
 include_once ('DbLayer');
 
 $priceTolerance = 1.10;
@@ -51,7 +53,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 }
 
 $url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
-
+$dbLayer = new DbLayer();
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $markets = "";
 
@@ -65,7 +67,7 @@ if ($requestMethod == "GET"){
 	else{
 		$productId = $_GET["cid"];
 		$quantity = intval($_GET["quantity"]);
-		$ourPrice = DbLayer::getPrice($productId);
+		$ourPrice = $dbLayer->getPrice($productId);
 // 		echo "<br />Asking for id ".$productId." quantity ".$quantity."<br />";
 		try {
 			$marketsJson = json_decode($marketInfo, true);
@@ -106,8 +108,8 @@ if ($requestMethod == "POST"){
 	foreach($productsJson as $productJson){
 		$productId = $productJson["cid"];
 		$quantity = $productJson["quantity"];
-		$crrStock = DbLayer::getStock($productId);
-		$ourPrice = DbLayer::getPrice($productId);
+		$crrStock = $dbLayer->getStock($productId);
+		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, "",
 					 "", $quantity * $ourPrice);
@@ -128,11 +130,11 @@ if ($requestMethod == "POST"){
 				$result = processOneProduct($productId,$ourPrice,$toOrder,$markets);
 				if ($result != False){
 					foreach($result as $store => $orderJsonString){
-						$storeId = DbLayer::searchStore($store.getUrl());
+						$storeId = $dbLayer->searchStore($store.getUrl());
 						$orderJson = json_decode($orderJsonString, true);
 						if ($storeId == null){
-							if (DbLayer::addStore($store)){
-								$storeId = DbLayer::searchStore($store.getUrl());
+							if ($dbLayer->addStore($store)){
+								$storeId = $dbLayer->searchStore($store.getUrl());
 							}
 							else{
 								//cannot add new store, cancel processing
@@ -152,7 +154,7 @@ if ($requestMethod == "POST"){
 	}
 	//finished process all order
 	if ($message["status"] == "True"){
-		DbLayer::addOrder($customerOrder,$orderProductsArray);
+		$dbLayer->addOrder($customerOrder,$orderProductsArray);
 		//todo
 		$message["deliveryDate"] == date();
 	}
