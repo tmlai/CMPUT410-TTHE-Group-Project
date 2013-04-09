@@ -43,12 +43,11 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	
 	//get or create a store with the given url
 	$choosenStore = getCreateStoreId($choosenStore);
-	if ($storeId == False){
+	if ($choosenStore == False){
 		echo "step 1";
 		return False;
 	}
 	
-	$choosenStore->setStoreId($storeId);
 	
 	//Ordering from the chosen store
 	$orderUrl = $choosenStore->getUrl()."/products/".$productId."/order";
@@ -68,7 +67,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	}
 	else{
 		$orderResultJson = json_decode($orderResult, true);
-		return new OrderProduct(0, $productId, $storeId, $toOrder, $orderResultJson["order_id"],
+		return new OrderProduct(0, $productId, $choosenStore->getStoreId(), $toOrder, $orderResultJson["order_id"],
 				$orderResultJson["delivery_date"], $toOrder * $ourPrice);
 	}
 	
