@@ -9,6 +9,8 @@ function buildInvoice() {
   var price = 0;
   // reset div for products
   document.getElementById("productsBody").innerHTML = " ";
+  document.getElementById("loadingSpinner").style.visibility = "hidden";
+  document.getElementById("loadingSpinner").innerHTML = "<br>";
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Order is empty.</h4>";
@@ -68,7 +70,14 @@ function buildInvoice() {
 
 function submitOrder(user) {
   if(user == null || user == "") {
-    alert("You must be signed in to purchase a cart.");
+    var pBool = confirm("You must sign in or register to purchase your cart.\n"
+      + "Would you like to register now?");
+    if(pBool) {
+      var dir = location.href;
+      dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+      dir = dir + "register.php";
+      window.location.href = dir;
+    }
   } else {
     var jsonCart = JSON.parse(readCookie('cart'));
     if(jsonCart == null) {

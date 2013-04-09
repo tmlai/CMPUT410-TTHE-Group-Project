@@ -43,6 +43,43 @@ $advanced = $_GET['advanced'];
 			true);
 		xmlhttp.send();
 		//need to populate
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var list = xmlhttp.responseText;
+				var listArray = JSON.parse(list);
+				document.getElementById("loadingSpinner").style.visibility = "hidden";
+				document.getElementById("loadingSpinner").innerHTML = "<br>";
+				//build the table code
+				var table = "";
+				for(var i = 0; i<listArray.length; i++) {
+					table += 
+					"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+						"<td>" +
+						  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
+						"</td>" +
+						"<td>" + listArray[i].price + "</td>" +
+						"<td>" + listArray[i].weight+ " kg</td>" +
+						"<td>" + listArray[i].name + "</td>" +
+						"<td>" + listArray[i].cid + "</td>" +
+						"<td>" + listArray[i].description + "</td>" +
+						"<td>" +
+							"<button style=\"position:relative; right:0px;\"" +
+							"class=\"btn pull-right\">" +
+								"View Product" +
+							"</button>" +
+						"</td>" +
+					"</tr>";
+				}
+				if(listArray.length==0) {
+					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
+				}
+				//don't write if null!!!
+				if(document.getElementById('resultsTable') != null) {
+					document.getElementById('resultsTable').innerHTML=table;
+				}
+				
+			}
+		}
 	}
     function setToggle() {
       if(dropBool) {
@@ -54,11 +91,13 @@ $advanced = $_GET['advanced'];
       if(dropBool) {
         dropBool = false;
         document.getElementById("dropDiv").innerHTML=
-          "Advanced Search  <i class=\"icon-chevron-up\"></i>";
+          'Advanced Search  <i class="icon-chevron-up" data-toggle="collapse"'
+            + ' data-target="#advSearch"></i>';
       } else {
         dropBool = true;
         document.getElementById("dropDiv").innerHTML=
-          "Advanced Search  <i class=\"icon-chevron-down\"></i>";
+          'Advanced Search  <i class="icon-chevron-down" data-toggle="collapse"'
+            + ' data-target="#advSearch"></i>';
       }
     }
 	
@@ -120,7 +159,42 @@ $advanced = $_GET['advanced'];
 			xmlhttp.send(jsonSearch);
 			}
 			
-			//get the response text
+			xmlhttp.onreadystatechange=function() {
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					var list = xmlhttp.responseText;
+					var listArray = JSON.parse(list);
+					document.getElementById("loadingSpinner").style.visibility = "hidden";
+					document.getElementById("loadingSpinner").innerHTML = "<br>";
+					//build the table code
+					var table = "";
+					for(var i = 0; i<listArray.length; i++) {
+						table += 
+						"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+							"<td>" +
+							  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
+							"</td>" +
+							"<td>" + listArray[i].price + "</td>" +
+							"<td>" + listArray[i].weight+ " kg</td>" +
+							"<td>" + listArray[i].name + "</td>" +
+							"<td>" + listArray[i].cid + "</td>" +
+							"<td>" + listArray[i].description + "</td>" +
+							"<td>" +
+								"<button style=\"position:relative; right:0px;\"" +
+								"class=\"btn pull-right\">" +
+									"View Product" +
+								"</button>" +
+							"</td>" +
+						"</tr>";
+					}
+					if(listArray.length==0) {
+						document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
+					}
+					//don't write if null!!
+					if(document.getElementById('resultsTable') != null) {
+						document.getElementById('resultsTable').innerHTML=table;
+					}
+				}
+			}
 	}
     -->
     </script>
@@ -214,8 +288,7 @@ $advanced = $_GET['advanced'];
                 <!-- and more fields for admin...-->
 			</div>
         </div>
-        <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;">
+        <div class="container" id="tableTitles">
             <table class="table table-hover">
             <thead>
                 <tr>
@@ -227,77 +300,13 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody>
-              <div id="resultsDiv">
-                <!-- product code javascript function will return the product code
-                for the query of the database for creating product.php-->
-                <tr onclick="location.href='./product.php?id=1'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$1</td>
-                    <td>1 kg</td>
-                    <td>1name</td>
-                    <td>c1</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p1" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=2'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$2</td>
-                    <td>2 kg</td>
-                    <td>2name</td>
-                    <td>c2</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p2" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=3'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$3</td>
-                    <td>3 kg</td>
-                    <td>3name</td>
-                    <td>c3</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p3" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=4'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$4</td>
-                    <td>4 kg</td>
-                    <td>4name</td>
-                    <td>c4</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p4" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-              </div>
+            <tbody id="resultsTable">
             </tbody>
             </table>
+        </div>
+		<hr>
+        <div id="loadingSpinner" align="center" style="visibility:visible">
+          <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>

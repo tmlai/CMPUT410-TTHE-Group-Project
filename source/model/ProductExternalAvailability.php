@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 use model\DbLayer;
 use model\CustomerOrder;
 use model\OrderProduct;
@@ -33,22 +33,25 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 			}
 		}
 	}
-
+	
+	if ($minPrice == -1.0){
+		echo "step 0";
+		return False;	
+	}
 	// sort by stock price from lowest to highest
 	asort($toOrderInfo);
 	
 	//get or create a store with the given url
-	$storeId = getCreateStoreId($choosenStore);
-	if ($storeId == False){
+	$choosenStore = getCreateStoreId($choosenStore);
+	if ($choosenStore == False){
 		echo "step 1";
 		return False;
 	}
 	
-	$choosenStore->setStoreId($storeId);
 	
 	//Ordering from the chosen store
 	$orderUrl = $choosenStore->getUrl()."/products/".$productId."/order";
-	$data = array('amount' => $quantity);
+	$data = array('amount' => $toOrder);
 	$options = array(
 			'http' => array(
 					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
@@ -57,14 +60,14 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 			),
 	);
 	$context  = stream_context_create($options);
-	$orderResult = file_get_contents($choosenStore->getUrl(), false, $context);
+	$orderResult = file_get_contents($orderUrl, false, $context);
 	if (!isset($orderResult) || $orderResult === ""){
 		echo "step 2";
 		return False;
 	}
 	else{
 		$orderResultJson = json_decode($orderResult, true);
-		return new OrderProduct(0, $productId, $storeId, $toOrder, $orderResultJson["order_id"],
+		return new OrderProduct(0, $productId, $choosenStore->getStoreId(), $toOrder, $orderResultJson["order_id"],
 				$orderResultJson["delivery_date"], $toOrder * $ourPrice);
 	}
 	
@@ -73,12 +76,12 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 function getCreateStoreId($store){
 	$dbLayer = new DbLayer();
-	$storeId = $dbLayer->searchStore($store->getUrl());
+	$storeDb = $dbLayer->searchStore($store->getUrl());
 	
-	if ($storeId == null){
+	if ($storeDb == null){
 		if ($dbLayer->addStore($store)){
-			$storeId = $dbLayer->searchStore($store->getUrl());
-			return $storeId;
+			$storeDb = $dbLayer->searchStore($store->getUrl());
+			return $storeDb;
 		}
 		else{
 			//cannot add new store, cancel processing
@@ -86,7 +89,7 @@ function getCreateStoreId($store){
 		}
 	}
 	else{
-		return $storeId;
+		return $storeDb;
 	}
 }
 
@@ -162,6 +165,7 @@ if ($requestMethod == "POST"){
 		$productId = $productJson["cid"];
 		$quantity = $productJson["quantity"];
 		$crrStock = $dbLayer->getStock($productId);
+		echo "crrStock ".$crrStock."<br/>";
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
@@ -170,8 +174,10 @@ if ($requestMethod == "POST"){
 			$message["message"] .= "Get from our stock\n<br/>";
 		}
 		else {
-			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
+			if ($crrStock > 0){
+				$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
 					"", $quantity * $ourPrice);
+			}
 			$toOrder = $quantity - $crrStock;
 			
 			$marketInfo = file_get_contents($url);
@@ -202,6 +208,7 @@ if ($requestMethod == "POST"){
 	//If we succeeded at least once and never failed
 	if ($success == True && $failed == False){
 		$message["status"] = "True";
+		echo "array size ".count($orderProductsArray)." <br/>";
 		$dbLayer->addOrder($customerOrder,$orderProductsArray);
 		//todo
 		$message["deliveryDate"] == "2013-04-08";

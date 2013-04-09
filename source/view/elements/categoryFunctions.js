@@ -53,20 +53,21 @@ function buildCategoryDropList(cats) {
 }
 
 function buildCarouselItems(prods) {
-  for(var i = 0; i < cats.length; i++) {
+  for(var i = 0; i < prods.length; i++) {
+    var product = prods[i];
     if(i == 0) {
-      document.getElementById("navCatList").innerHTML = '<div class="item active">';
+      document.getElementById("carouselItemDiv").innerHTML = '<div class="item active">';
     } else {
-      document.getElementById("navCatList").innerHTML += '<div class="item">';
+      document.getElementById("carouselItemDiv").innerHTML += '<div class="item">';
     }
-    document.getElementById("navCatList").innerHTML += (
-      '<a href="#1">\n'
-      + '<img src="../assets/img/examples/slide-03.jpg" alt="">\n'
+    document.getElementById("carouselItemDiv").innerHTML += (
+      '<a href="./product.php?id=' + product['cid'] + '">\n'
+      + '<img src=".../img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
       + '    <h1>Welcome</h1>\n'
       + '    <p class="lead">Browse through our many products.</p>\n'
-      + '    <p>The 2nd Appliance name goes here...</p>\n'
+      + '    <p>' + product['description'] + '</p>\n'
       + '    <a class="btn btn-large btn-primary" href="#">See Product Details</a>\n'
       + '  </div>\n'
       + '</div>\n'
@@ -80,7 +81,7 @@ function buildCarouselItems(prods) {
 /*
  * Get category products of a specific category id.
  */
- function getCategoryProducts(cateId, ) {
+ function getCategoryProducts(cateId) {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari

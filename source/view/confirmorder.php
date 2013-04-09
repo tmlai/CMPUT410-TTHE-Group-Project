@@ -50,6 +50,9 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           </table>
         </div>
         <hr>
+        <div id="loadingSpinner" align="center" style="visibility:visible">
+          <img src="./elements/img/spinner.gif" alt="...Loading...">
+        </div>
         <div align="center">
         <table border="0" width="100%">
           <col align="left">

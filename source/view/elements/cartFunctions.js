@@ -206,26 +206,28 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" class=\"input-mini\"><td>\n"
+          + jsonCart[i].quantity + "\" class=\"input-mini\">"
+          + "<td " + getProdLink(product['id']) + ">\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
           + "</td>\n"
           // Price of product
-          + "<td>$" + product['price'] + "</td>\n"
+          + "<td " + getProdLink(product['id']) + ">$" 
+          + product['price'] + "</td>\n"
           // Weight of product
-          + "<td>" + product['weight'] + "</td>\n"
+          + "<td " + getProdLink(product['id']) + ">" 
+          + product['weight'] + "</td>\n"
           // Name of product
-          + "<td>" + product['name'] + "</td>\n"
+          + "<td " + getProdLink(product['id']) + ">" + product['name'] + "</td>\n"
           // Code of product
-          + "<td>" + product['id'] + "</td>\n"
+          + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
           // Description of product
-          + "<td>" + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td>\n"
-          + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
+          + "<td " + + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "<td " + + getProdLink(product['id']) + ">\n"
+          + " <button style=\"position:relative; right:0px;\"\n"
           + "   class=\"btn pull-right\""
-          + "onclick=\"location.href='./product.php?id=" + product['id']
-          + "'\">\n"
+          + getProdLink(product['id']) + ">\n"
           + "       View Product\n"
           + "   </button>\n"
           + " </td>\n"
@@ -245,9 +247,20 @@ function buildCartProducts() {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
 
+function getProdLink(pid) {
+  return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
+}
+
 function submitCart(user) {
   if(user == null || user == "") {
-    alert("You must be signed in to purchase a cart.");
+    var pBool = confirm("You must sign in or register to purchase your cart.\n"
+      + "Would you like to register now?");
+    if(pBool) {
+      var dir = location.href;
+      dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+      dir = dir + "register.php";
+      window.location.href = dir;
+    }
   } else {
     var jsonCart = JSON.parse(readCookie('cart'));
     if(jsonCart == null) {
