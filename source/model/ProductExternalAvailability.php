@@ -1,7 +1,7 @@
 <?php
 use model\DbLayer;
 
-include_once ('DbLayer');
+include_once ('DbLayer.php');
 
 $priceTolerance = 1.10;
 

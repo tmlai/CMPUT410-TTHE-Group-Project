@@ -15,7 +15,8 @@ if($requestMethod == "get") {
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
 		$singleProduct = $list[$i];
-		var_dump(json_encode($singleProduct));
+		$cid = $singleProduct->cid;
+		echo $cid;
 	}
 	//echo json_encode($list);
 	 //var_dump($allReturned);
