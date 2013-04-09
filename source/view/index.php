@@ -13,8 +13,30 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/head_includes.php");
     ?>
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
+    <script src="elements/jquery-1.9.1.min.js"></script>
+    <!-- Load the CloudCarousel JavaScript file -->
+    <!--from: http://www.professorcloud.com/mainsite/carousel-integration.htm-->
+    <script type="text/JavaScript" src="/cloud-carousel/cloud-carousel.1.0.5.js"></script>
+    <script>
+      $(document).ready(function(){
+                     
+        // This initialises carousels on the container elements specified, in this case, carousel1.
+        $("#carousel1").CloudCarousel(		
+          {			
+            xPos: 128,
+            yPos: 32,
+            buttonLeft: $("#left-but"),
+            buttonRight: $("#right-but"),
+            altBox: $("#alt-text"),
+            titleBox: $("#title-text"),
+            autoRotate: 'right',
+            autoRotateDelay: 1500
+          }
+        );
+      });
+</script>
   </head>
-  <body onLoad="getMenuCategories(); getCarouselProds(); getCategoriesContainer();" >   
+  <body onLoad="getMenuCategories(); getCategoriesContainer();" >   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -27,10 +49,25 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       // Carousel element
       require("./elements/carousel.php");
     ?>
-    <div class="container" ide="categoryContainerDiv">
+    <div class="container" id="categoryContainerDiv">
       <div id="loadingSpinner" align="center" style="visibility:visible">
             <img src="./elements/img/spinner.gif" alt="...Loading...">
       </div>
+      <!-- This is the container for the carousel. -->
+        <div id = "carousel1" style="width:500px; height:250px;background:#000;overflow:scroll;">            
+            <p id="title-text"></p>
+            <p id="alt-text"></p>
+            <!-- All images with class of "cloudcarousel" will be turned into carousel items -->
+            <!-- You can place links around these images -->
+            <img class = "cloudcarousel" src="/img/products/c000020.jpg" alt="Flag 1 Description" title="Flag 1 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000019.jpg" alt="Flag 2 Description" title="Flag 2 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000018.jpg" alt="Flag 3 Description" title="Flag 3 Title" />
+            <img class = "cloudcarousel" src="/img/products/c000017.jpg" alt="Flag 4 Description" title="Flag 4 Title" />
+        </div>
+        
+        <!-- Define left and right buttons. -->
+        <button id="left-but"  type="button" value="Left"><i class="icon-arrow-left"></i></button>
+        <button id="right-but" type="button" value="Right"><i class="icon-arrow-Right"></i></button>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
