@@ -14,6 +14,7 @@ if($requestMethod == "get") {
 	$list = $dbLayer->searchProductByName($partial);
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
+		$singleProduct = new Product();
 		$singleProduct = $list[$i];
 		$cid = $singleProduct->cid;
 		echo $cid;
