@@ -114,13 +114,14 @@ function buildCarouselItems(prods) {
     }
     catHTML += (
       '<a href="./product.php?id=' + product['cid'] + '">\n'
-      + '<img src=".../img/products/' + product['cid'] + '.jpg" alt="">\n'
+      + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
       + '    <h1>Welcome</h1>\n'
       + '    <p class="lead">Browse through our many products.</p>\n'
       + '    <p>' + product['description'] + '</p>\n'
-      + '    <a class="btn btn-large btn-primary" href="#">See Product Details</a>\n'
+      + '    <a class="btn btn-large btn-primary" href=""./product.php?id='
+      + product['cid'] + '">See Product Details</a>\n'
       + '  </div>\n'
       + '</div>\n'
       + '</a>\n'
