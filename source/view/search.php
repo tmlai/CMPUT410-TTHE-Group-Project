@@ -107,8 +107,9 @@ $advanced = $_GET['advanced'];
                         <input type="text" id="maxWeightField" 
                         placeholder="Maximum Weight">
                     </div>
-				
-					<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
+					<div align="center">
+						<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
+					</div>
 				</div>
 			</form>
 	
