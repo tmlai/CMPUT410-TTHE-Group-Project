@@ -44,7 +44,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 		return False;
 	}
 	
-	$choosenStore.setStoreId($storeId);
+	$choosenStore->setStoreId($storeId);
 	
 	//Ordering from the chosen store
 	$orderUrl = $choosenStore->getUrl()."/products/".$productId."/order";
