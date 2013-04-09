@@ -16,14 +16,14 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script src="elements/jquery-1.9.1.min.js"></script>
     <!-- Load the CloudCarousel JavaScript file -->
     <!--from: http://www.professorcloud.com/mainsite/carousel-integration.htm-->
-    <script type="text/JavaScript" src="elements/cloud-carousel/cloud-carousel.1.0.5.js"></script>
+    <script src="elements/cloud-carousel/cloud-carousel.1.0.5.js"></script>
     <script>
       $(document).ready(function(){
                      
         // This initialises carousels on the container elements specified, in this case, carousel1.
         $("#carousel1").CloudCarousel(		
           {
-            reflHeight: 56,
+            /*reflHeight: 56,
             reflGap:2,
             xPos: 128,
             yPos: 32,
@@ -33,7 +33,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             titleBox: $("#title-text"),
             autoRotate: 'left',
             autoRotateDelay: 1200,
-            speed:0.2
+            speed:0.2*/
+            xPos: 128,
+            yPos: 32,
+            buttonLeft: $("#left-but"),
+            buttonRight: $("#right-but"),
+            altBox: $("#alt-text"),
+            titleBox: $("#title-text")
           }
         );
       });
