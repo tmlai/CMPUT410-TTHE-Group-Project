@@ -10,6 +10,7 @@ $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
 $jsonSearch = file_get_contents("php://input");
 $search = json_decode($jsonSearch, true);
 if($requestMethod == "post") {
+	$dbLayer = new DbLayer();
 	$name = trim($search['name']);
 	$code = trim($search['code']);
 	$category = trim($search['category']);
@@ -55,8 +56,7 @@ if($requestMethod == "post") {
 	$availRange[DbLayer::UPPER_BOUND] = $maxQty;
 	$weightRange[DbLayer::LOWER_BOUND] = $minWeight;
 	$weightRange[DbLayer::UPPER_BOUND] = $maxWeight;
-	
-	$dbLayer = new DbLayer();
+
 	$list = $dbLayer->searchProductByConstraints(
 		$name, $code, $category, $priceRange, $availRange, $weightRange );
 	var_dump($list);
