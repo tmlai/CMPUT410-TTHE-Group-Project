@@ -30,6 +30,8 @@ try {
 			$second_token = strtok('/');
 			$third_token = strtok('/');
 			
+			echo $third_token;
+			
 			$quantity = file_get_contents("php://input");
 			$storeId = 1;
 			$cid = $third_token; 
