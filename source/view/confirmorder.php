@@ -37,7 +37,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <table class="table"> 
             <thead>
                 <tr>
-                  <th>Order Quantity</th>
                   <th><!-- placeholder --></th>
                   <th>Price</th>
                   <th>Weight</th>
@@ -49,7 +48,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <tbody id="productsBody">
             </tbody>
           </table>
-          
         </div>
         <hr>
         <div align="center">
@@ -59,11 +57,12 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="right">
           <tr>
             <td align="left">
-                  <button class="btn btn-info">Go Back to Cart</button>
+                  <button class="btn btn-info" onclick="cart.php">
+                    Go Back to Cart</button>
             </td>
             <td id="priceCalc"></td>
             <td>
-              <button class="btn btn-success" onclick="makePurchase()">
+              <button class="btn btn-success" onclick="submitOrder()">
               Confirm Purchase
               </button>
             </td>
