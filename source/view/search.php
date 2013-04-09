@@ -107,7 +107,7 @@ $advanced = $_GET['advanced'];
                     </div>
 					<br>
 					<div class="controls">
-						<input type="submit" class="btn" 
+						<input type="button" class="btn" 
 						 onClick="advSearch()" value="Advanced Search">
 					</div>
 				</div>
