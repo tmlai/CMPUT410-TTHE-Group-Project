@@ -11,13 +11,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
-      src="./elements/cartFunctions.js"></script>
+      src="./elements/purchaseFunctions.js"></script>
     <?php
         // Default Style links
         require("./elements/head_includes.php");
     ?>
   </head>
-  <body onLoad="buildCartProducts()">
+  <body onLoad="buildInvoice()">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -34,7 +34,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       <form name="cartForm" onSubmit="updateCart();">
         <div id="resultsDiv">
           <form name="cartForm" onSubmit="updateCart();">
-            <table class="table table-hover"> 
+            <table class="table"> 
             <thead>
                 <tr>
                   <th>Order Quantity</th>
@@ -58,13 +58,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="center">
           <col align="right">
           <tr>
-            <td>
-              <button class="btn btn-primary" type="submit">Update Cart</button>
+            <td align="left">
+                  <button class="btn btn-info">Go Back to Cart</button>
             </td>
             <td id="priceCalc"></td>
             <td>
-              <button class="btn btn-success" onclick="confirmorder.php">
-              Checkout
+              <button class="btn btn-success" onclick="makePurchase()">
+              Confirm Purchase
               </button>
             </td>
           </tr>

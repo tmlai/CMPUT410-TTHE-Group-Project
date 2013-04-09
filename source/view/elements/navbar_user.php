@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         </button>
-        <a class="brand" href="#">TTHE Enterprises</a>
+        <a class="brand" href="index.php">TTHE Enterprises</a>
         <div class="nav-collapse collapse">
             <ul class="nav pull-left">
             <li class="active pull-left"><a href="index.php">Home</a></li>

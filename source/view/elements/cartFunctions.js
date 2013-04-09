@@ -152,7 +152,7 @@ function updateCart() {
     var val = document.getElementById(id).value;
     // Delete item from cart
     if(val == 0) {
-      jsonCart = jsonCart.splice(i, 1);
+      jsonCart.splice(i, 1);
     } else {
       jsonCart[i].quantity = val;
     }
@@ -205,11 +205,12 @@ function buildCartProducts() {
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
-          "<tr>\n<td>\n"
+          "<tr onclick=\"location.href='./product.php?id=" + product.id 
+          + "'\">\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" size=\"8\"><td>\n"
+          + jsonCart[i].quantity + "\" class=\"input-small\"><td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
