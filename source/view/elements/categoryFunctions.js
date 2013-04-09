@@ -103,7 +103,8 @@ function buildCategoryContainer(cats) {
 }
 
 function buildCarouselItems(prods) {
-  var catHTML = '<div id="myCarousel" class="carousel slide">\n';
+  var catHTML = '<div id="myCarousel" class="carousel slide">\n'
+    + '<div class="carousel-tthebkg">';
   catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
@@ -124,7 +125,7 @@ function buildCarouselItems(prods) {
       + product['cid'] + '">See Product Details</a>\n'
       + '  </div>\n'
       + '</div>\n'
-      + '</a>\n'
+      + '</a>\n></div>'
       + '</div>\n'
     );
   }
