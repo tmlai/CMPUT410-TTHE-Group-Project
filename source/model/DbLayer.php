@@ -1276,9 +1276,6 @@ class DbLayer implements DbInterface {
 			}
 		}
 
-		var_dump($newList);
-		echo "<br><br> ... <br><br>";
-
 		// Sore the final list based on final score
 		usort($newList, 'self::cmp');
 		return $newList;
