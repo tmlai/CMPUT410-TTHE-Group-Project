@@ -120,7 +120,7 @@ function rateProduct(pid, user, value) {
     xmlhttp.onreadystatechange=function() {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
         jsonArray = JSON.parse(xmlhttp.responseText);
-        if(jsonArray.status == "ok") {
+        if(jsonArray.status == "Ok") {
           alert("Thank you for rating our products, we value your support!");
           document.location.reload(true);
         } else {
