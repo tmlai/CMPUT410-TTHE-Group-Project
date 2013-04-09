@@ -1,6 +1,7 @@
-<?php 
+<?php
+session_start();
 use model\DbLayer;
-
+use model\UserRatingProduct;
 include_once ('../DbLayer.php');
 include_once ('../UserRatingProduct.php');
 
@@ -8,7 +9,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 if ($requestMethod == "POST"){
 	$userName = $_SESSION["user"]; // from session	
-	if (!isset($userName) || $userName === ""){
+	if (!isset($userName) || $userName == ""){
 		$message = array(
 				"status" => "Failed",
 				"message" => "You have to login"
@@ -18,7 +19,8 @@ if ($requestMethod == "POST"){
 		$productId = $_POST["productId"];
 		$rating = $_POST["rating"];
 		
-		$result = DbLayer.php::rateProduct(new UserRatingProduct($userName,$productId,$rating));
+		$dbLayer = new DbLayer();
+		$result = $dbLayer->rateProduct(new UserRatingProduct($userName,$productId,$rating));
 		$message = array();
 		if ($result){
 			$message = array(
