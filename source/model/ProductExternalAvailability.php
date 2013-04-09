@@ -78,6 +78,7 @@ function getCreateStoreId($store){
 	if ($storeId == null){
 		if ($dbLayer->addStore($store)){
 			$storeId = $dbLayer->searchStore($store->getUrl());
+			return $storeId;
 		}
 		else{
 			//cannot add new store, cancel processing
