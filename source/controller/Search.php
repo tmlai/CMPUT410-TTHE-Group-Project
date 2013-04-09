@@ -15,14 +15,14 @@ if($requestMethod == "get") {
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
 		$singleProduct = $list[$i];
-		var_dump($singleProduct);
-		echo "<br>";
-		// $singleProduct['cid'] = $product['cid'];
-		// $singleProduct['name'] = $product['name']; 
-		// $singleProduct['price'] = $product['price']; 
-		// $singleProduct['weight'] = $product['weight'];
-		// $singleProduct['description'] = $product['description'];
+		
+		$singleProduct['cid'] = $product['cid'];
+		$singleProduct['name'] = $product['name']; 
+		$singleProduct['price'] = $product['price']; 
+		$singleProduct['weight'] = $product['weight'];
+		$singleProduct['description'] = $product['description'];
 		$allReturned[$i] = $singleProduct;
+		var_dump($allReturned[$i]);
 	}
 	//echo json_encode($list);
 	// var_dump($allReturned);
