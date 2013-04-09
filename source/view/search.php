@@ -122,7 +122,6 @@ $advanced = $_GET['advanced'];
                 </tr>
             </thead>
             <tbody id="resultsTable">
-				FILLER!!
             </tbody>
             </table>
         </div>
@@ -131,10 +130,10 @@ $advanced = $_GET['advanced'];
 		  <img src="./elements/img/spinner.gif" alt="...Loading...">
 		</div>
     </div> <!-- /container -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		window.onload=initialLoading('<?php echo $search;?>');
 	</script>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
