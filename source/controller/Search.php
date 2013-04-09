@@ -29,8 +29,7 @@ if($requestMethod == "get") {
 			'image'=>$image);
 		$allReturned[$i] = $singleObj;
 	}
-	//echo json_encode($list);
-	 //var_dump($allReturned);
+
 	echo json_encode($allReturned);
 }
 ?>
