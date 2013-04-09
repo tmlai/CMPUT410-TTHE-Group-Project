@@ -237,14 +237,18 @@ function buildCartProducts() {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
 
-function submitCart() {
- var jsonCart = JSON.parse(readCookie('cart'));
-  if(jsonCart == null) {
-    alert("You must have at least one product in order to make a purchase.");
-    return false;
+function submitCart(user) {
+  if(user == null || user == "") {
+    alert("You must be signed in to purchase a cart.");
+  } else {
+    var jsonCart = JSON.parse(readCookie('cart'));
+    if(jsonCart == null) {
+      alert("You must have at least one product in order to make a purchase.");
+      return false;
+    }
+    var dir = location.href;
+    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+    dir = dir + "confirmorder.php";
+    window.location.href = dir;
   }
-  var dir = location.href;
-  dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-  dir = dir + "confirmorder.php";
-  window.location.href = dir;
 }

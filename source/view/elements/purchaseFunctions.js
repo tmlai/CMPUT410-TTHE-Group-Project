@@ -66,17 +66,21 @@ function buildInvoice() {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
 
-function submitOrder() {
-  var jsonCart = JSON.parse(readCookie('cart'));
-  if(jsonCart == null) {
-    alert("You must have at least one product in order to make a purchase.");
-    var dir = location.href;
-    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-    dir = dir + "index.php";
-    window.location.href = dir;
-    return false;
+function submitOrder(user) {
+  if(user == null || user == "") {
+    alert("You must be signed in to purchase a cart.");
+  } else {
+    var jsonCart = JSON.parse(readCookie('cart'));
+    if(jsonCart == null) {
+      alert("You must have at least one product in order to make a purchase.");
+      var dir = location.href;
+      dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+      dir = dir + "index.php";
+      window.location.href = dir;
+      return false;
+    }
+    makePurchase(jsonCart);
   }
-  makePurchase(jsonCart);
 }
 
 /*
