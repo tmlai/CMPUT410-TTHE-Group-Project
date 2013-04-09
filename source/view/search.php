@@ -17,8 +17,7 @@ $advanced = $_GET['advanced'];
         // Default Style links
         require("./elements/head_includes.php");
     ?>
-	<script type="text/javascript" language="Javascript"
-		src="elements/search.js"></script>
+	
   </head>
   <body onLoad="setToggle()"> 
     <?php
@@ -34,7 +33,6 @@ $advanced = $_GET['advanced'];
     <div class="container">
         <h3>
         <?php 
-			var_dump($advanced);
           if($search != "") {
             echo "Search Results for " . $search; 
           } else if($advanced == "true") {
@@ -141,5 +139,7 @@ $advanced = $_GET['advanced'];
 	<script type="text/javascript">
 		window.onload=initialLoading('<?php echo $search;?>');
 	</script>
+	<script type="text/javascript" language="Javascript"
+		src="elements/search.js"></script>
   </body>
 </html>
