@@ -120,7 +120,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable" onLoad="initialLoading(<?php echo $search;?>);">
+            <tbody id="resultsTable">
             </tbody>
             </table>
         </div>
@@ -129,6 +129,7 @@ $advanced = $_GET['advanced'];
           <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
+	<script type="text/javascript">initialLoading(<?php echo $search;?>);</script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
