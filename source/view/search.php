@@ -75,7 +75,7 @@ $advanced = $_GET['advanced'];
 		var pass = true;
 		
 		//check range values
-		if(priceFrom = "" || !isNaN(priceFrom)) {
+		if(priceFrom != "" || !isNaN(priceFrom)) {
 			pass = false;
 		}
 		else if(priceTo != "" || !isNaN(priceTo)) {
