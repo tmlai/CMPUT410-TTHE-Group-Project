@@ -42,10 +42,11 @@ $advanced = $_GET['advanced'];
 			'/source/controller/Search.php?searchField=<?php echo $search;?>',
 			true);
 		xmlhttp.send();
+		//need to populate
 	}
     function setToggle() {
       if(dropBool) {
-        document.getElementById("adSearch").className="collapse in";
+        document.getElementById("advSearch").className="collapse in";
       }
       dropIconToggle();
     }

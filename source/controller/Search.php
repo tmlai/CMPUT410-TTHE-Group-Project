@@ -15,11 +15,21 @@ if($requestMethod == "get") {
 	$allReturned = array();
 	for($i=0; $i<count($list);$i++) {
 		$singleProduct = $list[$i];
-		$cid = $singleProduct->cid;
-		echo $cid;
+		$cid = $singleProduct->getCid();
+		$price = $singleProduct->getPrice();
+		$weight = $singleProduct->getWeight();
+		$name = $singleProduct->getName();
+		$description = $singleProduct->getDescription();
+		$image = $singleProduct->getImage();
+		
+		//create a new object
+		$singleObj = (object) array(
+			'cid'=>$cid, 'price'=>$price,
+			'weight'=>$weight, 'name'=>$description,
+			'image'=>$image);
+		$allReturned[$i] = $singleObj;
 	}
-	//echo json_encode($list);
-	 //var_dump($allReturned);
-	// echo json_encode($allReturned);
+
+	echo json_encode($allReturned);
 }
 ?>
