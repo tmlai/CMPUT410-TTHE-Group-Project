@@ -43,15 +43,19 @@ elseif ($requestMethod == "GET"){
 	$cat = $_GET["category"];
 	echo "Cat".$cat."<br/>";
 	$n = $_GET["n"];
-	echo "n".$n."<br/>";
+	echo "n ".$n."<br/>";
 	if (!isset($cat) || trim($cat) === ""){
 		$cat = null;
 	}
-	if (!isset($cat) || trim($cat) === ""){
+	if (!isset($n) || trim($n) === ""){
 		$n = 5;
 	}
+	echo "Cat".$cat."<br/>";
+	echo "n ".$n."<br/>";
 	$productList = recommendRelatedProducts($n, $cat);
+	echo "productList array".$productList."<br/>";
 	$productJSONList = array();
+	echo "iterate through the array<br/>";
 	foreach ($productList as $product){
 		$simpleProduct = array (
 			"cid" => $product.getCid(),
