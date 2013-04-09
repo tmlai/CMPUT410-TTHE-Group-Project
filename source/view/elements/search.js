@@ -136,7 +136,7 @@ function advSearch() {
 		// code for IE6, IE5
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
-		xmlhttp.setRequestHeader("Content-type", "application/json");
+		//xmlhttp.setRequestHeader("Content-type", "application/json");
 		xmlhttp.open('POST', 
 			'/source/controller/AdvSearch.php',
 			true);
@@ -175,6 +175,7 @@ function advSearch() {
 				if(listArray.length==0) {
 					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 				}
+				
 				document.getElementById('resultsTable').innerHTML=table;
 			}
 		}
