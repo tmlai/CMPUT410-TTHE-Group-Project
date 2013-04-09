@@ -151,7 +151,7 @@ $advanced = $_GET['advanced'];
 					<input type="button" class="btn" value="Advanced Search" onClick="">
                 </div>
                 <!-- and more fields for admin...-->
-				
+			</div>
         </div>
         <div class="container" style="width:100%; height:300px; position:relative; 
         bottom:0px; overflow:auto;">
