@@ -145,7 +145,7 @@ $advanced = $_GET['advanced'];
 			
 			//make json
 			var jsonSearch = JSON.stringify(search);
-			
+			alert(jsonSearch);
 			var xmlhttp = new XMLHttpRequest();
 			if (window.XMLHttpRequest) {
 			// code for IE7+, Firefox, Chrome, Opera, Safari
