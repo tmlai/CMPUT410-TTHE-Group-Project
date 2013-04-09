@@ -718,6 +718,15 @@ class DbLayer implements DbInterface {
 		
 		return $status;
 	}
+	
+	public function updateOrdersBeforeViewing($username){
+		$cuOrLists = $this->getCustomersOrders($username, false);
+		foreach($cuOrLists as &$each){
+			// update delivery date of each order
+			/* @var $each CustomerOrder */
+			$this->updateDeliveryDate($each->getOrderId());
+		}
+	}
 
 	// 	------------------------------------------------------------------------
 

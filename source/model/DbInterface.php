@@ -178,6 +178,11 @@ interface DbInterface {
 	* date.
 	*/
 	public function updateDeliveryDate($orderId);
+	
+	/*
+	 * Update delivery date of each order of this user.
+	 */
+	public function updateOrdersBeforeViewing($username);
 	// 	------------------------------------------------------------------------
 
 	// 	WEB SERVICES SECTION

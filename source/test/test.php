@@ -527,6 +527,9 @@ class TestDb {
 		}
 	}
 	
+	/*
+	 * PASS
+	 */
 	public static function testUpdateDeliveryDate($orderId){
 		$dbLayer = new DbLayer();
 		$status = $dbLayer->updateDeliveryDate($orderId);
@@ -569,5 +572,5 @@ class TestDb {
 // \test\TestDb::testAuthenticateAdmin();
 // \test\TestDb::testLookupStore();
 // \test\TestDb::testUpdateDeliveryDateExternal();
-\test\TestDb::testUpdateDeliveryDate(13);
+// \test\TestDb::testUpdateDeliveryDate(13);
 ?>
