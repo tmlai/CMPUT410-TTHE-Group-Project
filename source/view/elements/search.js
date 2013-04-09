@@ -22,10 +22,10 @@ function dropIconToggle() {
 }
 
 function initialLoading(searchString) {
-	// if(searchString != "")
-        // dropBool = false;
-    // else
-        // dropBool = true;
+	if(searchString != "")
+        dropBool = false;
+    else
+        dropBool = true;
 	
 	//send ajax call to get a list of products
 	var xmlhttp = new XMLHttpRequest();
