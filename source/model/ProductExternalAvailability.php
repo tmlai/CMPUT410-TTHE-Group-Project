@@ -165,6 +165,7 @@ if ($requestMethod == "POST"){
 		$productId = $productJson["cid"];
 		$quantity = $productJson["quantity"];
 		$crrStock = $dbLayer->getStock($productId);
+		echo "crrStock ".$crrStock."<br/>";
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
