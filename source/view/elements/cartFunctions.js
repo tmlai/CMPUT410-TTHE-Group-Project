@@ -248,7 +248,7 @@ function buildCartProducts() {
 }
 
 function getProdLink(pid) {
-  return "onclick=\"location.href='./product.php?id=" + pid['id']+ "'\"";
+  return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
 }
 
 function submitCart(user) {
