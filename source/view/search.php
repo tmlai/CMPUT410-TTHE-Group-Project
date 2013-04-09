@@ -35,11 +35,11 @@ $advanced = $_GET['advanced'];
         <h3>
         <?php 
 			echo "advanced = " . $advanced;
-          if($search != "" || $search != null) {
+          if($search != "") {
             echo "Search Results for " . $search; 
           } else if($advanced == true) {
 			echo "Advanced Search";
-		  } else if ($search == "" || $search == null){
+		  } else if ($search == ""){
             echo "A blank search is given, please enter a search.";
           }
         ?>
