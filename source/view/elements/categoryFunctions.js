@@ -129,7 +129,7 @@ function buildCarouselItems(prods) {
       + '    <h1>Welcome</h1>\n'
       + '    <p class="lead">Browse through our many products.</p>\n'
       + '    <p>' + product['description'] + '</p>\n'
-      + '    <a class="btn btn-large btn-primary" href=""./product.php?id='
+      + '    <a class="btn btn-large btn-primary" href="./product.php?id='
       + product['cid'] + '">See Product Details</a>\n'
       + '  </div>\n'
       + '</div>\n'
