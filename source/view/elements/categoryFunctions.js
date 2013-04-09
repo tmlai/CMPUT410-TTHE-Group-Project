@@ -131,8 +131,9 @@ function buildCarouselItems(prods) {
   catHTML += '</div>\n'
     + '<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>\n'
     + '<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>\n'
+    + '<div class="carousel-bkg">\n'
     + '<img class="bkg" src="/source/view/bootstrap/img/tthe_carousel.jpg" alt="">\n'
-    + '</div>\n'
+    + '</div></div>\n'
   document.getElementById("carouselElement").innerHTML = catHTML;
 }
 

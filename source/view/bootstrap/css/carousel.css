@@ -31,7 +31,7 @@
   height: 225px;
 }
 
-.carousel .bkg img {
+.carousel-bkg img {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,16 +58,4 @@
 }
 .carousel-caption .btn {
   margin-top: 10px;
-}
-
-.carousel-tthebkg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 225px;
-  background-image:url('/source/view/bootstrap/img/tthe_carousel.jpg');
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  z-index: -1;
 }
