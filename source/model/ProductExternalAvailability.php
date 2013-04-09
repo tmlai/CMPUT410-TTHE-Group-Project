@@ -112,9 +112,11 @@ if ($requestMethod == "POST"){
 	);
 	
 	$userName = $_SESSION["user"];
+	//TODO:
+	$userName = "hcngo";
 	$products = $_POST["orderLists"];
 	$productsJson = json_decode($productsJson, true);
-	//todo
+	//TODO:
 	echo "<br/>username ".$userName."<br/>";
 	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
