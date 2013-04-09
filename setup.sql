@@ -48,16 +48,37 @@ FOREIGN KEY(statusId) REFERENCES Status(statusId),
 FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
 */
 
-CREATE TABLE CustomersOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
-orderDate DATETIME not null ,username varchar(20) not null, payment DECIMAL(15,2), deliveryDate DATE not null,
-PRIMARY KEY(orderId),
-FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
 
 
 CREATE TABLE Stores(storeId int not null AUTO_INCREMENT, description varchar(1000), 
 name varchar(200) not null, url varchar(200) not null,
 PRIMARY KEY(storeId),
 UNIQUE(url))ENGINE=INNODB;
+
+CREATE TABLE CustomersOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
+orderDate DATETIME not null ,username varchar(20) not null, payment DECIMAL(15,2), deliveryDate DATE not null,
+PRIMARY KEY(orderId),
+FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
+
+CREATE TABLE OrdersProducts(orderId int not null, cid varchar(20) not null, 
+storeId int not null, quantity int not null, auxiliaryOrderId varchar(36), deliveryDate DATE,amount DECIMAL(15,2) not null,
+PRIMARY KEY(orderId,cid,storeId),
+FOREIGN KEY(orderId) REFERENCES CustomersOrders(orderId),
+FOREIGN KEY(cid) REFERENCES Products(cid),
+FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
+
+CREATE TABLE TransactionsOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
+orderDate DATETIME not null ,username varchar(20) not null, payment DECIMAL(15,2), deliveryDate DATE not null,
+PRIMARY KEY(orderId),
+FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
+
+CREATE TABLE TransactionsProducts(orderId int not null, cid varchar(20) not null, 
+storeId int not null, quantity int not null, auxiliaryOrderId varchar(36), deliveryDate DATE,amount DECIMAL(15,2) not null,
+PRIMARY KEY(orderId,cid,storeId),
+FOREIGN KEY(orderId) REFERENCES TransactionsOrders(orderId),
+FOREIGN KEY(cid) REFERENCES Products(cid),
+FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
+
 
 /*
 CREATE TABLE OrdersProducts(orderId int not null, cid varchar(20) not null, 
@@ -70,12 +91,6 @@ FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
 
 -- Auxiliary order id is the order id another store gave back to us.
 
-CREATE TABLE OrdersProducts(orderId int not null, cid varchar(20) not null, 
-storeId int not null, quantity int not null, auxiliaryOrderId varchar(36), deliveryDate DATE,amount DECIMAL(15,2) not null,
-PRIMARY KEY(orderId,cid,storeId),
-FOREIGN KEY(orderId) REFERENCES CustomersOrders(orderId),
-FOREIGN KEY(cid) REFERENCES Products(cid),
-FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
 
 CREATE TABLE StoresOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
 orderDate DATETIME not null, storeId int not null, payment DECIMAL(15,2), deliveryDate DATE not null,

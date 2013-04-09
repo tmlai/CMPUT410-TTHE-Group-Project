@@ -17,10 +17,9 @@ $advanced = $_GET['advanced'];
         // Default Style links
         require("./elements/head_includes.php");
     ?>
-	<script type="text/javascript" language="Javascript"
-		src="elements/search.js"></script>
+	
   </head>
-  <body onLoad="setToggle()"> 
+  <body onLoad="setToggle(); initialLoading('<?php echo $search;?>');"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -126,7 +125,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable" onLoad="initialLoading('<?php echo $search;?>')">
+            <tbody id="resultsTable">
             </tbody>
             </table>
         </div>
@@ -137,6 +136,7 @@ $advanced = $_GET['advanced'];
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-	
+	<script type="text/javascript" language="Javascript"
+		src="elements/search.js"></script>
   </body>
 </html>
