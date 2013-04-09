@@ -49,7 +49,7 @@
 				var orderLists = Array(1);
 				var an_order = new OrderProduct(id,q);
 				orderLists[0] = an_order;
-				alert(JSON.stringify(orderLists[0]));
+				alert(JSON.stringify(orderLists));
 				var params = "orderLists="+ JSON.stringify(orderLists[0]);
 					
 				xmlhttp.open('POST', url, false);
