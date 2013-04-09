@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 use model\DbLayer;
 use model\CustomerOrder;
 use model\OrderProduct;
@@ -202,6 +202,7 @@ if ($requestMethod == "POST"){
 	//If we succeeded at least once and never failed
 	if ($success == True && $failed == False){
 		$message["status"] = "True";
+		echo "array size ".count($orderProductsArray)." <br/>";
 		$dbLayer->addOrder($customerOrder,$orderProductsArray);
 		//todo
 		$message["deliveryDate"] == "2013-04-08";
