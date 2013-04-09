@@ -88,19 +88,70 @@ $advanced = $_GET['advanced'];
         ?>
         </h3>
         <label class="clabel" id="dropbutton" data-toggle="collapse" 
-          data-target="#adSearch" onclick="dropIconToggle();">
+          data-target="#advSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
         <div id="advSearch" class="collapse">
+			<div class="input-append">
                 <div id="store_div" class="control-group">
-                    <label class="control-label" for="storeField">Name
+                    <label class="control-label" for="searchNameField">Name
                     </label>
                     <div class="controls">
                         <input type="text" id="searchNameField" 
                         placeholder="Search Name">
                     </div>
+					<label class="control-label" for="searchCodeField">Code
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="searchCodeField" 
+                        placeholder="Search Code">
+                    </div>
+					<label class="control-label" for="searchCategoryField">Category
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="searchCategoryField" 
+                        placeholder="Search Catagory">
+                    </div>
+					<label class="control-label" for="priceFromField">Price From
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="priceFromField" 
+                        placeholder="Price From">
+                    </div>
+					<label class="control-label" for="priceToField">Price To
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="priceToField" 
+                        placeholder="Price From">
+                    </div>
+					<label class="control-label" for="minQtyField">Minimum Quantity
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="minQtyField" 
+                        placeholder="Price From">
+                    </div>
+					<label class="control-label" for="maxQtyField">Maximum Quantity
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="maxQtyField" 
+                        placeholder="Price From">
+                    </div>
+					<label class="control-label" for="minWeightField">Minimum Weight
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="minWeightField" 
+                        placeholder="Price From">
+                    </div>
+					<label class="control-label" for="maxWeightField">Maximum Weight
+                    </label>
+                    <div class="controls">
+                        <input type="text" id="maxWeightField" 
+                        placeholder="Price From">
+                    </div>
+					<input type="button" class="btn" value="Advanced Search" onClick="">
                 </div>
                 <!-- and more fields for admin...-->
+				
         </div>
         <div class="container" style="width:100%; height:300px; position:relative; 
         bottom:0px; overflow:auto;">
