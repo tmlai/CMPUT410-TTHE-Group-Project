@@ -1,5 +1,5 @@
 function setToggle(dropbool) {
-  if(dropBool = true) {
+  if(dropBool == false) {
 	document.getElementById("advSearch").className="collapse in";
   }
   dropIconToggle();
