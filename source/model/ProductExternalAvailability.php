@@ -42,7 +42,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	asort($toOrderInfo);
 	
 	//get or create a store with the given url
-	$storeId = getCreateStoreId($choosenStore);
+	$choosenStore = getCreateStoreId($choosenStore);
 	if ($storeId == False){
 		echo "step 1";
 		return False;
@@ -77,12 +77,12 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 function getCreateStoreId($store){
 	$dbLayer = new DbLayer();
-	$storeId = $dbLayer->searchStore($store->getUrl());
+	$storeDb = $dbLayer->searchStore($store->getUrl());
 	
-	if ($storeId == null){
+	if ($storeDb == null){
 		if ($dbLayer->addStore($store)){
-			$storeId = $dbLayer->searchStore($store->getUrl());
-			return $storeId;
+			$storeDb = $dbLayer->searchStore($store->getUrl());
+			return $storeDb;
 		}
 		else{
 			//cannot add new store, cancel processing
@@ -90,7 +90,7 @@ function getCreateStoreId($store){
 		}
 	}
 	else{
-		return $storeId;
+		return $storeDb;
 	}
 }
 
