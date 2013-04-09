@@ -39,8 +39,10 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	
 	//get or create a store with the given url
 	$storeId = getCreateStoreId($choosenStore);
-	if ($storeId == False)
+	if ($storeId == False){
+		echo "step 1";
 		return False;
+	}
 	
 	$choosenStore.setStoreId($storeId);
 	
@@ -57,11 +59,12 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$context  = stream_context_create($options);
 	$orderResult = file_get_contents($choosenStore->getUrl(), false, $context);
 	if (!isset($orderResult) || $orderResult === ""){
+		echo "step 2";
 		return False;
 	}
 	else{
 		$orderResultJson = json_decode($orderResult, true);
-		return OrderProduct(0, $productId, $storeId, $toOrder, $orderResultJson["order_id"],
+		return new OrderProduct(0, $productId, $storeId, $toOrder, $orderResultJson["order_id"],
 				$orderResultJson["delivery_date"], $toOrder * $ourPrice);
 	}
 	
@@ -75,11 +78,15 @@ function getCreateStoreId($store){
 	if ($storeId == null){
 		if ($dbLayer->addStore($store)){
 			$storeId = $dbLayer->searchStore($store->getUrl());
+			return $storeId;
 		}
 		else{
 			//cannot add new store, cancel processing
 			return False;
 		}
+	}
+	else{
+		return $storeId;
 	}
 }
 
@@ -133,7 +140,7 @@ if ($requestMethod == "GET"){
 if ($requestMethod == "POST"){
 	$message = array("status" => "False",
 			"message" => "by default",
-			"deliveryDate" => "date time here"
+			"deliveryDate" => ""
 	);
 	
 	$userName = $_SESSION["user"];
