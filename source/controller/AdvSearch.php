@@ -7,7 +7,8 @@ include_once '../model/Product.php';
 
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
-$name = $_POST['name']
+$jsonSearch = file_get_contents("php://input");
+$search = json_decode($jsonSearch, true);
 if($requestMethod == "post") {
 	// $name = trim()
 	// $code = document.getElementById('searchCodeField').value.trim;
@@ -18,8 +19,8 @@ if($requestMethod == "post") {
 	// $maxQty = document.getElementById('maxQtyField').value.trim;
 	// $minWeight = document.getElementById('minWeightField').value.trim;
 	// $maxWeight = document.getElementById('maxWeightField').value.trim;
+	var_dump($search);
 	
-	echo $name;
 	
 	
 	

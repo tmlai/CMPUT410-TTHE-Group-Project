@@ -116,7 +116,7 @@ $advanced = $_GET['advanced'];
 			search.maxWeight = maxWeight;
 			
 			//make json
-			var jsonSearch = json_encode(search);
+			var jsonSearch = JSON.stringify(search);
 			
 			var xmlhttp = new XMLHttpRequest();
 			if (window.XMLHttpRequest) {
@@ -126,9 +126,8 @@ $advanced = $_GET['advanced'];
 			// code for IE6, IE5
 				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 			}
-			xmlhttp.setRequestHeader("Content-type","application/json");
 			xmlhttp.open('POST', 
-				'/source/controller/Search.php',
+				'/source/controller/AdvSearch.php',
 				true);
 			xmlhttp.send(jsonSearch);
 			}
