@@ -29,6 +29,8 @@ try {
           }
           echo \json_encode($allReturned);
         } elseif(!empty($_GET['catProds'])) {
+          $id = $_GET['catProds'];
+          $list = $dbLayer->getProducts($id);
           $allReturned = array();
           for($i=0; $i<count($list);$i++) {
             $singleProduct = $list[$i];
