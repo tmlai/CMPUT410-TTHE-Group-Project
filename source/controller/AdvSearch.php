@@ -19,7 +19,7 @@ if($requestMethod == "post") {
 	// $maxQty = document.getElementById('maxQtyField').value.trim;
 	// $minWeight = document.getElementById('minWeightField').value.trim;
 	// $maxWeight = document.getElementById('maxWeightField').value.trim;
-	var_dump($search);
+	var_dump($jsonSearch);
 	
 	
 	
