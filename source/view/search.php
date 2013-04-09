@@ -43,6 +43,39 @@ $advanced = $_GET['advanced'];
 			true);
 		xmlhttp.send();
 		//need to populate
+		xmlhttp.onreadystatechange=function() {
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				var list = xmlhttp.responseText;
+				var listArray = JSON.parse(list);
+				document.getElementById("loadingSpinner").style.visibility = "hidden";
+				document.getElementById("loadingSpinner").innerHTML = "<br>";
+				//build the table code
+				var table = "";
+				for(var i = 0; i<listArray.length; i++) {
+					table += 
+					"<tr onclick=\"location.href='/product.php?id="+listArray[i].cid+"'\">" +
+						"<td>" +
+						  "<img src=\"\" alt=\"\" width=\"50\" height=\"50\">" +
+						"</td>" +
+						"<td>" + listArray[i].price + "</td>" +
+						"<td>" + listArray[i].weight+ " kg</td>" +
+						"<td>" + listArray[i].name + "</td>" +
+						"<td>" + listArray[i].cid + "</td>" +
+						"<td>" + listArray[i].description + "</td>" +
+						"<td>" +
+							"<button style=\"position:relative; right:0px;\"" +
+							"class=\"btn pull-right\">" +
+								"View Product" +
+							"</button>" +
+						"</td>" +
+					"</tr>";
+				}
+				if(listArray.length==0) {
+					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
+				}
+				document.getElementById('resultsDiv').innerHTML=table;
+			}
+		}
 	}
     function setToggle() {
       if(dropBool) {
