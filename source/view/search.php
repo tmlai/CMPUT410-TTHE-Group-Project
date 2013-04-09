@@ -149,6 +149,9 @@ $advanced = $_GET['advanced'];
 							"</td>" +
 						"</tr>";
 					}
+					if(listArray.length==0) {
+						document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
+					}
 					document.getElementById('resultsDiv').innerHTML=table;
 				}
 			}
@@ -245,7 +248,7 @@ $advanced = $_GET['advanced'];
                 <!-- and more fields for admin...-->
 			</div>
         </div>
-        <div class="container">
+        <div class="container" id="tableTitles">
             <table class="table table-hover">
             <thead>
                 <tr>
