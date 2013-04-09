@@ -138,7 +138,7 @@ function advSearch() {
 		}
 		xmlhttp.open('POST', 
 			'/source/controller/AdvSearch.php',
-			false);
+			true);
 		xmlhttp.send(jsonSearch);
 		}
 		
@@ -146,6 +146,7 @@ function advSearch() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 				var list = xmlhttp.responseText;
 				var listArray = JSON.parse(list);
+				console.log(listArray);
 				document.getElementById("loadingSpinner").style.visibility = "hidden";
 				document.getElementById("loadingSpinner").innerHTML = "<br>";
 				//build the table code
