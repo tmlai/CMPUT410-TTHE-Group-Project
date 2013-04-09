@@ -632,7 +632,8 @@ class DbLayer implements DbInterface {
 		$store = $this->lookUpStore($storeId);
 		$realUrl = $store->getUrl()."/orders/".$auxiliaryOrderId;
 		$deliveryDateJson = file_get_contents($realUrl);
-		$deliveryDate = json_decode($deliveryDateJson,true);
+		$deliveryDateArray = json_decode($deliveryDateJson,true);
+		$deliveryDate = $deliveryDateArray['delivery_date'];
 		
 		$pdo = self::getPdo();
 		$statement = "UPDATE OrdersProducts 
