@@ -6,6 +6,7 @@ function setToggle() {
   }
   dropIconToggle();
 }
+
 function dropIconToggle() {
   if(dropBool) {
 	dropBool = false;
@@ -25,8 +26,6 @@ function initialLoading(searchString) {
         dropBool = false;
     else
         dropBool = true;
-
-	setToggle();
 	
 	//send ajax call to get a list of products
 	var xmlhttp = new XMLHttpRequest();

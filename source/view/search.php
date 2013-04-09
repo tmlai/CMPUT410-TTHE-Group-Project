@@ -129,7 +129,10 @@ $advanced = $_GET['advanced'];
           <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
-	<script type="text/javascript">window.onload=initialLoading(<?php echo $search;?>);</script>
+	<script type="text/javascript">
+		var search = <?php echo $search;?>;
+		window.onload=initialLoading(search);
+	</script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </body>
