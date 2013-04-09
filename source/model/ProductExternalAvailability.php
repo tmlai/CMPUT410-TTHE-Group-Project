@@ -16,8 +16,8 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$toOrderInfo = array();
 	$orderedStore = "";
 	foreach ($markets as $store){
-		$orderedStore = new Store(0, date(), $store["name"], $store["url"]);
-		$url = $orderedStore.getUrl()."/products/".$productId;
+		$orderedStore = new Store(0, "2013/04/08 tri", $store["name"], $store["url"]);
+		$url = $orderedStore->getUrl()."/products/".$productId;
 		$productsInfo = file_get_contents($url);
 		$productsInfoJson = json_decode($productsInfo, true);
 		$stocksInfo[$url] = $productsInfoJson["quantity"];
@@ -107,15 +107,21 @@ if ($requestMethod == "GET"){
 
 
 if ($requestMethod == "POST"){
-	$message = array("status" => "True",
-			$message["deliveryDate"] == "date time here"
+	$message = array("status" => "False by default",
+			"deliveryDate" => "date time here"
 	);
 	
 	$userName = $_SESSION["user"];
+	//TODO:
+	$userName = "hcngo";
 	$products = $_POST["orderLists"];
-	$productsJson = json_decode($productsJson, true);
-
-	$customerOrder = new CustomerOrder(0, "", '', $userName, 0, '');
+	
+	$productsJson = json_decode($products, true);
+	//TODO:
+	echo "<br/>username ".$userName."<br/>";
+	echo "<br/>orders ".$products."<br/>";
+	
+	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
 	foreach($productsJson as $productJson){
 		$productId = $productJson["cid"];
@@ -123,9 +129,9 @@ if ($requestMethod == "POST"){
 		$crrStock = $dbLayer->getStock($productId);
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
-			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, "",
+			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
 					 "", $quantity * $ourPrice);
-			$message["status"] = "True order from our own store";
+			$message["status"] = "True";
 		}
 		else {
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
@@ -143,11 +149,11 @@ if ($requestMethod == "POST"){
 				$result = processOneProduct($productId,$ourPrice,$toOrder,$markets);
 				if ($result != False){
 					foreach($result as $store => $orderJsonString){
-						$storeId = $dbLayer->searchStore($store.getUrl());
+						$storeId = $dbLayer->searchStore($store->getUrl());
 						$orderJson = json_decode($orderJsonString, true);
 						if ($storeId == null){
 							if ($dbLayer->addStore($store)){
-								$storeId = $dbLayer->searchStore($store.getUrl());
+								$storeId = $dbLayer->searchStore($store->getUrl());
 							}
 							else{
 								//cannot add new store, cancel processing

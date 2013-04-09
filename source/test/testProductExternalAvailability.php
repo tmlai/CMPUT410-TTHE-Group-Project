@@ -26,6 +26,11 @@
 				
 				xmlhttp.send();
 			}
+
+			function OrderProduct(id,q){
+				this.cid = id;
+				this.quantity = q;
+			}
 			
 			//another store doing a post to us to buy one
 			function testBuyOne() {
@@ -41,7 +46,11 @@
 				var id = document.getElementById("id").value;
 				var q = document.getElementById("idQ").value;
 				var xmlhttp=new XMLHttpRequest();
-				var params = "id="+id+"&q="+q;
+				var orderLists = Array(1);
+				var an_order = new OrderProduct(id,q);
+				orderLists[0] = an_order;
+				alert(JSON.stringify(orderLists));
+				var params = "orderLists="+ JSON.stringify(orderLists);
 					
 				xmlhttp.open('POST', url, false);
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
