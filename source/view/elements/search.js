@@ -22,10 +22,10 @@ function dropIconToggle() {
 }
 
 function initialLoading(searchString) {
-	if(searchString != "")
-        dropBool = false;
-    else
-        dropBool = true;
+	// if(searchString != "")
+        // dropBool = false;
+    // else
+        // dropBool = true;
 	
 	//send ajax call to get a list of products
 	var xmlhttp = new XMLHttpRequest();
@@ -74,7 +74,11 @@ function initialLoading(searchString) {
 			if(listArray.length==0) {
 				document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 			}
-			document.getElementById('resultsTable').innerHTML=table;
+			var rTableDiv = document.getElementById('resultsTable');
+			if(rTableDiv != null) {
+				document.getElementById('resultsTable').innerHTML=table;
+			}
+			
 
 		}
 	}
@@ -132,6 +136,7 @@ function advSearch() {
 		// code for IE6, IE5
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
+		xmlhttp.setRequestHeader("Content-type", "application/json");
 		xmlhttp.open('POST', 
 			'/source/controller/AdvSearch.php',
 			true);
@@ -140,8 +145,10 @@ function advSearch() {
 		
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+				alert("it is ready");
 				var list = xmlhttp.responseText;
 				var listArray = JSON.parse(list);
+				console.log(listArray);
 				document.getElementById("loadingSpinner").style.visibility = "hidden";
 				document.getElementById("loadingSpinner").innerHTML = "<br>";
 				//build the table code
