@@ -55,7 +55,7 @@ FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
 
 
 CREATE TABLE Stores(storeId int not null AUTO_INCREMENT, description varchar(1000), 
-name varchar(200) not null, url varchar(50) not null,
+name varchar(200) not null, url varchar(200) not null,
 PRIMARY KEY(storeId),
 UNIQUE(url))ENGINE=INNODB;
 
@@ -211,18 +211,30 @@ INSERT INTO Categories(name,description) values('air purifier','');
 INSERT INTO Categories(name,description) values('heater','');
 INSERT INTO Categories(name,description) values('coffee accessories','');
 
-
-INSERT INTO Stores(description,name,url) values('this is our store', 'store#1','http://cs410.cs.ualberta.ca:41041');
-INSERT INTO Stores(description,name,url) values('this is store #2', 'store#2','http://cs410.cs.ualberta.ca:41021');
-INSERT INTO Stores(description,name,url) values('this is store #3', 'store#3','http://cs410.cs.ualberta.ca:41031');
-INSERT INTO Stores(description,name,url) values('this is store #5', 'store#3','http://cs410.cs.ualberta.ca:41051');
-INSERT INTO Stores(description,name,url) values('this is store #6', 'store#3','http://cs410.cs.ualberta.ca:41061');
-
-
 /*
-INSERT INTO Status
-values(1, 'not paid','');
-INSERT INTO Status
-values(2, 'paid','');
+ * 
+Name	Url	Status
+TA Market	http://cs410-98.cs.ualberta.ca	Ready
+eBad	http://cs410-02.cs.ualberta.ca/eBad	Ready
+Firesale	http://cs410-01.cs.ualberta.ca/firesale/index.php/api	Ready
+eCommerce	http://cs410-07.cs.ualberta.ca/Programs/api/?Page=index&service=	Ready
+eMCS Appliances	http://cs410-03.cs.ualberta.ca/api	Ready
+TETH Store	http://cs410-04.cs.ualberta.ca	Ready
+The Black Market	http://cs410-06.cs.ualberta.ca/api	Ready
+ */
+/*
+INSERT INTO Stores(description,name,url) values('this is our store. Store ID is ALWAYS 1. store#4', 'TETH Store','http://cs410-04.cs.ualberta.ca');
+INSERT INTO Stores(description,name,url) values('this is store #1', 'Firesale','http://cs410-01.cs.ualberta.ca/firesale/index.php/api');
+INSERT INTO Stores(description,name,url) values('this is store #2', 'eBad','http://cs410-02.cs.ualberta.ca/eBad');
+INSERT INTO Stores(description,name,url) values('this is store #3', 'eMCS Appliances','http://cs410-03.cs.ualberta.ca/api');
+INSERT INTO Stores(description,name,url) values('this is store #6', 'The Black Market','http://cs410-06.cs.ualberta.ca/api');
+INSERT INTO Stores(description,name,url) values('this is store #7', 'eCommerce','http://cs410-07.cs.ualberta.ca/Programs/api/?Page=index&service=');
+INSERT INTO Stores(description,name,url) values('this is TA Market', 'TA Market','http://cs410-98.cs.ualberta.ca');
 */
-
+UPDATE Stores SET description = 'this is our store. Store ID is ALWAYS 1. store#4', name = 'TETH Store', url = 'http://cs410-04.cs.ualberta.ca' WHERE storeId = 1;
+UPDATE Stores SET description = 'this is store #1', name = 'Firesale', url = 'http://cs410-01.cs.ualberta.ca/firesale/index.php/api' WHERE storeId = 2;
+UPDATE Stores SET description = 'this is store #2', name = 'eBad', url = 'http://cs410-02.cs.ualberta.ca/eBad' WHERE storeId = 3;
+UPDATE Stores SET description = 'this is store #3', name = 'eMCS Appliances', url = 'http://cs410-03.cs.ualberta.ca/api' WHERE storeId = 4;
+UPDATE Stores SET description = 'this is store #6', name = 'The Black Market', url = 'http://cs410-06.cs.ualberta.ca/api'WHERE storeId = 5;
+UPDATE Stores SET description = 'this is store #7', name = 'eCommerce', url = 'http://cs410-07.cs.ualberta.ca/Programs/api/?Page=index&service=' WHERE storeId = 6 ;
+UPDATE Stores SET description = 'this is TA Market', name = 'TA Market', url = 'http://cs410-98.cs.ualberta.ca' WHERE storeId = 7 ;
