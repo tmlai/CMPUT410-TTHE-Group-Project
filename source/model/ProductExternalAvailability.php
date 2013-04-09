@@ -85,6 +85,9 @@ function getCreateStoreId($store){
 			return False;
 		}
 	}
+	else{
+		return $storeId;
+	}
 }
 
 $url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
