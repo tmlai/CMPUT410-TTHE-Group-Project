@@ -45,7 +45,7 @@ elseif ($requestMethod == "GET"){
 	echo "Cat".$cat."<br/>";
 	$n = $_GET["n"];
 	echo "n ".$n."<br/>";
-// 	if (!isset($cat) || trim($cat) === ""){
+	if (!isset($cat) || trim($cat) === ""){
 		$cat = null;
 	}
 	if (!isset($n) || trim($n) === ""){
