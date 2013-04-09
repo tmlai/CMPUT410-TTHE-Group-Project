@@ -6,9 +6,10 @@
 .carousel .container {
   position: relative;
   z-index: 9;
-  background-image:url('/source/view/bootstrap/img/tthe_carousel_hard.jpg');
-  min-width: 100%;
-  min-height: 100%;
+  background-image:url('/source/view/bootstrap/img/tthe_carousel.jpg');
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position: inherit; 
 }
 
 .carousel-control {
@@ -17,7 +18,7 @@
   margin-top: 0;
   font-size: 120px;
   text-shadow: 0 1px 1px rgba(0,0,0,.4);
-  background-color: #t;
+  background-color: #transparent;
   border: 0;
   z-index: 10;
 }
