@@ -9,12 +9,12 @@ function setToggle() {
 
 function dropIconToggle() {
   if(dropBool) {
-	dropBool = false;
+	dropBool = true;
 	document.getElementById("dropDiv").innerHTML=
 	  'Advanced Search  <i class="icon-chevron-up" data-toggle="collapse"'
 		+ ' data-target="#advSearch"></i>';
   } else {
-	dropBool = true;
+	dropBool = false;
 	document.getElementById("dropDiv").innerHTML=
 	  'Advanced Search  <i class="icon-chevron-down" data-toggle="collapse"'
 		+ ' data-target="#advSearch"></i>';
