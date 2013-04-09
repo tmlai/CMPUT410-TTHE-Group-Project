@@ -11,6 +11,7 @@ if($requestMethod == "get") {
 	$partial = $_GET['searchField'];
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProductByName($partial);
-	echo \json_encode($list);
+	var_dump($list);
+	//echo \json_encode($list);
 }
 ?>
