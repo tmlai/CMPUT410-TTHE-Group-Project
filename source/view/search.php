@@ -139,7 +139,7 @@ $advanced = $_GET['advanced'];
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		//window.onload=initialLoading('<?php echo $search;?>');
+		window.onload=initialLoading('<?php echo $search;?>');
 	</script>
   </body>
 </html>
