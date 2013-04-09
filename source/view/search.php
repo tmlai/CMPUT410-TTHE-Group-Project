@@ -294,11 +294,8 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable">
+            <tbody id="resultsTable" onLoad="initialLoading()">
             </tbody>
-				<script type="text/javascript">
-					initialLoading();
-				</script>
             </table>
         </div>
 		<hr>
