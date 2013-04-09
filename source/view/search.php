@@ -255,27 +255,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody>
-              <div id="resultsDiv">
-                <!-- product code javascript function will return the product code
-                for the query of the database for creating product.php-->
-                <tr onclick="location.href='./product.php?id=1'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$1</td>
-                    <td>1 kg</td>
-                    <td>1name</td>
-                    <td>c1</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p1" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-              </div>
+            <tbody id="resultsDiv">
             </tbody>
             </table>
         </div>
