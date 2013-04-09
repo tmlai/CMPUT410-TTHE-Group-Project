@@ -22,7 +22,7 @@ function getMenuCategories() {
   xmlhttp.send();
 }
 
-getCarouselProds() {
+function getCarouselProds() {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -54,9 +54,24 @@ function buildCategoryDropList(cats) {
 
 function buildCarouselItems(prods) {
   for(var i = 0; i < cats.length; i++) {
+    if(i == 0) {
+      document.getElementById("navCatList").innerHTML = '<div class="item active">';
+    } else {
+      document.getElementById("navCatList").innerHTML += '<div class="item">';
+    }
     document.getElementById("navCatList").innerHTML += (
-      '<li><a href="category.php?' + cats[i]['cateId'] + '">' 
-      + cats[i]['name'] + '</a></li>'
+      '<a href="#1">\n'
+      + '<img src="../assets/img/examples/slide-03.jpg" alt="">\n'
+      + '<div class="container">\n'
+      + '  <div class="carousel-caption">\n'
+      + '    <h1>Welcome</h1>\n'
+      + '    <p class="lead">Browse through our many products.</p>\n'
+      + '    <p>The 2nd Appliance name goes here...</p>\n'
+      + '    <a class="btn btn-large btn-primary" href="#">See Product Details</a>\n'
+      + '  </div>\n'
+      + '</div>\n'
+      + '</a>\n'
+      + '</div>\n'
     );
   }
 }
