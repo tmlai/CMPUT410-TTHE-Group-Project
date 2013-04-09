@@ -50,7 +50,7 @@
 				var an_order = new OrderProduct(id,q);
 				orderLists[0] = an_order;
 				alert(JSON.stringify(orderLists));
-				var params = "orderLists="+ JSON.stringify(orderLists[0]);
+				var params = "orderLists="+ JSON.stringify(orderLists);
 					
 				xmlhttp.open('POST', url, false);
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
