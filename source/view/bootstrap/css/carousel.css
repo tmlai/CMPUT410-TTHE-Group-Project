@@ -13,7 +13,9 @@
   margin-top: 0;
   font-size: 120px;
   text-shadow: 0 1px 1px rgba(0,0,0,.4);
-  background-color: transparent;
+  background-color: #FFFFFF;
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
   border: 0;
   z-index: 10;
 }
@@ -30,7 +32,9 @@
 }
 
 .carousel-caption {
-  background-color: transparent;
+  background-color: #333333;
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
   position: static;
   max-width: 550px;
   padding: 0 60px;
