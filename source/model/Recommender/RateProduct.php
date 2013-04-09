@@ -58,7 +58,8 @@ elseif ($requestMethod == "GET"){
 			"name" => $product->getName(),
 			"price" => $product->getPrice(),
 			"image" => $product->getImage(),
-			"description" => $product->getDescription()
+			"description" => $product->getDescription(),
+				"weight" => $product->getWeight()
 		);
 		$simpleProductJSON = json_encode($simpleProduct	);
 		$productJSONList[] =$simpleProductJSON;

@@ -36,10 +36,6 @@ function buildInvoice() {
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
           "<tr>\n<td>\n"
-          // Quantity text field for product
-          + "<input type=\"text\" name=\"qtyField" + product.id
-          + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" class=\"input-small\"><td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
@@ -68,4 +64,24 @@ function buildInvoice() {
     + price;
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+}
+
+function submitOrder() {
+  var jsonCart = JSON.parse(readCookie('cart'));
+  if(jsonCart == null) {
+    alert("You must have at least one product in order to make a purchase.");
+    return false;
+  }
+  var dir = location.href;
+  dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+  dir = dir + "index.php";
+  window.location.href = dir;
+}
+
+function makePurchase() {
+  var jsonCart = JSON.parse(readCookie('cart'));
+  if(jsonCart == null) {
+    alert("You must ha");
+    return false;
+  }
 }

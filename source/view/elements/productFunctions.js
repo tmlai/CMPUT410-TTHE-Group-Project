@@ -92,7 +92,7 @@ function buildRelatedProducts(products) {
       // Code of product
       + "<td>" + products[i]['id'] + "</td>\n"
       // Description of product
-      + "<td>" + products[i]['desc'].substring(0, 35) + "...</td>\n"
+      + "<td>" + products[i]['description'].substring(0, 35) + "...</td>\n"
       + "<td>\n"
       + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
       + "   class=\"btn pull-right\">\n"

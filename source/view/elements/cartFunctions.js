@@ -164,10 +164,6 @@ function updateCart() {
   buildCartProducts();
 }
 
-function deleteArrayItem(arr, index) {
-  
-}
-
 /*
  * Build and write the html for the Cart Products.
  * @param products array
@@ -179,6 +175,7 @@ function buildCartProducts() {
   var price = 0;
   // reset div for products
   document.getElementById("productsBody").innerHTML = " ";
+  document.getElementById("loadingSpinner").style.visibility = "hidden";
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
@@ -239,4 +236,16 @@ function buildCartProducts() {
     + price;
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+}
+
+function submitCart() {
+ var jsonCart = JSON.parse(readCookie('cart'));
+  if(jsonCart == null) {
+    alert("You must have at least one product in order to make a purchase.");
+    return false;
+  }
+  var dir = location.href;
+  dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+  dir = dir + "confirmorder.php";
+  window.location.href = dir;
 }
