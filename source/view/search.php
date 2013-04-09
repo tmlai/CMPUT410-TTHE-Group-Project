@@ -78,15 +78,15 @@ $advanced = $_GET['advanced'];
 		if(priceFrom = "" || !isNaN(priceFrom)) {
 			pass = false;
 		}
-		else if(priceTo = "" || !isNaN(priceTo)) {
+		else if(priceTo != "" || !isNaN(priceTo)) {
 			pass = false;
-		} else if(minQty = "" || !isNaN(minQty)) {
+		} else if(minQty != "" || !isNaN(minQty)) {
 			pass = false;
-		} else if(maxQty = "" || !isNaN(maxQty)) {
+		} else if(maxQty != "" || !isNaN(maxQty)) {
 			pass = false;
-		} else if(minWeight = "" || !isNaN(minWeight)) {
+		} else if(minWeight != "" || !isNaN(minWeight)) {
 			pass = false;
-		} else if(maxWeight = "" || !isNaN(maxWeight)) {
+		} else if(maxWeight != "" || !isNaN(maxWeight)) {
 			pass = false;
 		} else if(priceFrom < priceTo) {
 			pass = false;
