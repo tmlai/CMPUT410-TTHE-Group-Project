@@ -19,7 +19,7 @@ $advanced = $_GET['advanced'];
     ?>
 	<script type="text/javascript" src="elements/search.js"></script>
   </head>
-  <body onLoad="initialLoading(<?php echo $search;?>);">   
+  <body onLoad="setToggle()"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -120,7 +120,7 @@ $advanced = $_GET['advanced'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody id="resultsTable">
+            <tbody id="resultsTable" onLoad="initialLoading(<?php echo $search;?>);">
             </tbody>
             </table>
         </div>
