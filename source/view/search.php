@@ -64,6 +64,7 @@ $advanced = $_GET['advanced'];
 	
 	function advSearch() {
 		var name = document.getElementById('searchNameField').value.trim;
+		alert(name);
 		var code = document.getElementById('searchCodeField').value.trim;
 		var category = document.getElementById('searchCategoryField').value.trim;
 		var priceFrom = document.getElementById('priceFromField').value.trim;
