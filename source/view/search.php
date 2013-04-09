@@ -63,15 +63,16 @@ $advanced = $_GET['advanced'];
     }
 	
 	function advSearch() {
-		var name = document.getElementById('searchNameField').value.trim;
-		var code = document.getElementById('searchCodeField').value.trim;
-		var category = document.getElementById('searchCategoryField').value.trim;
-		var priceFrom = document.getElementById('priceFromField').value.trim;
-		var priceTo = document.getElementById('priceToField').value.trim;
-		var minQty = document.getElementById('minQtyField').value.trim;
-		var maxQty = document.getElementById('maxQtyField').value.trim;
-		var minWeight = document.getElementById('minWeightField').value.trim;
-		var maxWeight = document.getElementById('maxWeightField').value.trim;
+		var name = document.getElementById('searchNameField').value;
+		alert(name);
+		var code = document.getElementById('searchCodeField').value;
+		var category = document.getElementById('searchCategoryField').value;
+		var priceFrom = document.getElementById('priceFromField').value;
+		var priceTo = document.getElementById('priceToField').value;
+		var minQty = document.getElementById('minQtyField').value;
+		var maxQty = document.getElementById('maxQtyField').value;
+		var minWeight = document.getElementById('minWeightField').value;
+		var maxWeight = document.getElementById('maxWeightField').value;
 		var pass = true;
 		
 		//if empty set it null
