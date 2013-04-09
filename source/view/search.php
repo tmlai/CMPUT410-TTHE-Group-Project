@@ -120,7 +120,9 @@ $advanced = $_GET['advanced'];
 			xmlhttp.send(jsonSearch);
 			}
 			
-			//get the response text
+			var list = xmlhttp.responseText;
+			var listArray = JSON.parse(list);
+			console.log(listArray);
 	}
     -->
     </script>
