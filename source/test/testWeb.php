@@ -24,6 +24,7 @@
 				
 				function functionToCall() {
 		if (xmlhttp.readyState == 4) {
+			alert(xmlhttp.responseText);
 			document.write(xmlhttp.responseText);
 			var XmlResult = xmlhttp.responseXML;
 		}
@@ -31,7 +32,7 @@
 				var amt = document.getElementById("amt").value;
 				var id = document.getElementById("idNum2").value;
 				var xmlhttp=new XMLHttpRequest();
-				xmlhttp.open('POST', '/products/'+id+'/order', 'true');
+				xmlhttp.open('POST', '/products/'+id+'/order', false);
 				xmlhttp.onreadystatechange = functionToCall;
 				xmlhttp.send(amt);
 			}
