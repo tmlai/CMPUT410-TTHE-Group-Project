@@ -25,10 +25,10 @@ $advanced = $_GET['advanced'];
       // Navigation Bar
       if($_SESSION['user'] != "") {
         // user dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_user.php");
+        require("/elements/navbar_user.php");
       } else {
         // sign in dropdown
-        require($DOCUMENT_ROOT . "./elements/navbar_signin.php");
+        require("/elements/navbar_signin.php");
       }
     ?>
     <div class="container">
@@ -47,8 +47,9 @@ $advanced = $_GET['advanced'];
           data-target="#advSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
-		
+	<!--	<div> HELLO WORLD!! </div> -->
         <div id="advSearch" class="collapse">
+	<!--
 			<div class="input-append">
                 <div id="store_div" class="control-group">
                     <label class="control-label" for="searchNameField">Name
@@ -57,7 +58,7 @@ $advanced = $_GET['advanced'];
                         <input type="text" id="searchNameField" 
                         placeholder="Search Name">
                     </div>
-				<!--
+				
 					<label class="control-label" for="searchCodeField">Code
                     </label>
                     <div class="controls">
@@ -106,11 +107,11 @@ $advanced = $_GET['advanced'];
                         <input type="text" id="maxWeightField" 
                         placeholder="Maximum Weight">
                     </div>
-				-->
+				
 					<input type="button" class="btn" value="Advanced Search" onClick="advSearch()">
                 </div>
 			</div>
-
+	-->
         </div>
         <div class="container" id="tableTitles">
             <table class="table table-hover">
@@ -136,7 +137,7 @@ $advanced = $_GET['advanced'];
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		window.onload=initialLoading('<?php echo $search;?>');
+		//window.onload=initialLoading('<?php echo $search;?>');
 	</script>
   </body>
 </html>
