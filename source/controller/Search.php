@@ -16,10 +16,10 @@ if($requestMethod == "get") {
 	for($i=0; $i<count($list);$i++) {
 		$singleProduct = $list[$i];
 		$allReturned[$i] = $singleProduct;
-		var_dump($allReturned[$i]);
+		//var_dump($allReturned[$i]);
 	}
 	//echo json_encode($list);
-	// var_dump($allReturned);
+	 var_dump(json_encode($allReturned));
 	// echo json_encode($allReturned);
 }
 ?>
