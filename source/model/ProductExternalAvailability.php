@@ -70,7 +70,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 function getCreateStoreId($store){
 	$dbLayer = new DbLayer();
-	$storeId = $dbLayer->searchStore($store->$getUrl);
+	$storeId = $dbLayer->searchStore($store->getUrl());
 	
 	if ($storeId == null){
 		if ($dbLayer->addStore($store)){

@@ -40,8 +40,8 @@
 				function functionToCall() {
 					if (xmlhttp.readyState == 4) {
 						alert(xmlhttp.responseText);
-						document.write(xmlhttp.responseText);
-						var XmlResult = xmlhttp.responseXML;
+						res = document.getElementById("res");
+						res.innerHTML = xmlhttp.responseText)
 					}
 				}
 				var id = document.getElementById("id").value;
@@ -50,7 +50,7 @@
 				var orderLists = Array(1);
 				var an_order = new OrderProduct(id,q);
 				orderLists[0] = an_order;
-				alert(JSON.stringify(orderLists));
+				//alert(JSON.stringify(orderLists));
 				var params = "orderLists="+ JSON.stringify(orderLists);
 					
 				xmlhttp.open('POST', url, false);
@@ -67,5 +67,7 @@
 		Id: <input type="text" id="id"><br>
 		<input type="button" onClick="testBuyOne()" value="Buy something">
 		Quantity: <input type="text" id="idQ"><br>
+		
+		<div id="res"></div>
 	</body>
 </html>
