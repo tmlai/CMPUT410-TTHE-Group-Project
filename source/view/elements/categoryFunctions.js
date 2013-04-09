@@ -82,12 +82,11 @@ function buildCategoryContainer(cats) {
     // end and create new row
     if(rowBool && (i > 0) && (i < cats.length)) {
       document.getElementById("categorycopntainerDiv").innerHTML += (
-        '</div>\n<div class="row-fluid">'
-      );
+        '</div>\n<div class="row-fluid">');
     } else if(rowBool && (i == 0)) {
       // create new row to start
       document.getElementById("categorycopntainerDiv").innerHTML = (
-        '<div class="row-fluid">'
+        '<div class="row-fluid">');
     }
     document.getElementById("categorycopntainerDiv").innerHTML += (
       '<div class="span4">'
