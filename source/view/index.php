@@ -13,7 +13,8 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/head_includes.php");
     ?>
     <link href="bootstrap/css/carousel.css" rel="stylesheet">
-    <script src="elements/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" 
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <!-- Load the CloudCarousel JavaScript file -->
     <!--from: http://www.professorcloud.com/mainsite/carousel-integration.htm-->
     <script src="elements/cloud-carousel/cloud-carousel.1.0.5.js"></script>
