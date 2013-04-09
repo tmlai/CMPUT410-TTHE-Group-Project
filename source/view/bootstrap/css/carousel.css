@@ -1,6 +1,8 @@
 /* Carousel base class */
 .carousel {
   margin-bottom: 10px;
+  min-width: 100%;
+  height: 225px;
 }
 
 .carousel .container {
@@ -27,6 +29,15 @@
   left: 25;
   /*min-width: 100%;*/
   height: 225px;
+}
+
+.carousel .bkg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  /*height: 225px;*/
+  z-index: -1;
 }
 
 .carousel-caption {
