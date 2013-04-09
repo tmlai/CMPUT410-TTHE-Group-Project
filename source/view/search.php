@@ -74,34 +74,6 @@ $advanced = $_GET['advanced'];
 		var maxWeight = document.getElementById('maxWeightField').value;
 		var pass = true;
 		
-		// //if empty set it null
-		// if (name == null) {
-			// name = "Null";
-		// }
-		// if (code == null) {
-			// code = "Null";
-		// }
-		// if (category == null) {
-			// category = "Null";
-		// }
-		// if (priceFrom == null) {
-			// priceFrom = "Null";
-		// }
-		// if (priceTo == null) {
-			// priceTo = "Null";
-		// }
-		// if (minQty == null) {
-			// minQty = "Null";
-		// }
-		// if (maxQty == null) {
-			// maxQty = "Null";
-		// }
-		// if (minWeight == null) {
-			// minWeight = "Null";
-		// }
-		// if (maxWeight == null) {
-			// maxWeight = "Null";
-		// }
 		//check range values
 		if(priceFrom != "" && isNaN(priceFrom)) {
 			pass = false;

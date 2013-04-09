@@ -59,25 +59,24 @@ if($requestMethod == "post") {
 
 	$list = $dbLayer->searchProductByConstraints(
 		$name, $code, $category, $priceRange, $availRange, $weightRange );
-	var_dump($list);
-	// $allReturned = array();
-	// for($i=0; $i<count($list);$i++) {
-		// $singleProduct = $list[$i];
-		// $cid = $singleProduct->getCid();
-		// $price = $singleProduct->getPrice();
-		// $weight = $singleProduct->getWeight();
-		// $name = $singleProduct->getName();
-		// $description = $singleProduct->getDescription();
-		// $image = $singleProduct->getImage();
+	//var_dump($list);
+	$allReturned = array();
+	for($i=0; $i<count($list); $i++) {
+		$singleProduct = $list[$i];
+		$cid = $singleProduct->getCid();
+		$price = $singleProduct->getPrice();
+		$weight = $singleProduct->getWeight();
+		$name = $singleProduct->getName();
+		$description = $singleProduct->getDescription();
+		$image = $singleProduct->getImage();
 		
-		// //create a new object
-		// $singleObj = (object) array(
-			// 'cid'=>$cid, 'price'=>$price,
-			// 'weight'=>$weight, 'name'=>$description,
-			// 'image'=>$image);
-		// $allReturned[$i] = $singleObj;
-	// }
-
-	// echo json_encode($allReturned);
+		//create a new object
+		$singleObj = (object) array(
+			'cid'=>$cid, 'price'=>$price,
+			'weight'=>$weight, 'name'=>$description,
+			'image'=>$image);
+		$allReturned[$i] = $singleObj;
+	}
+	echo json_encode($allReturned);
 }
 ?>
