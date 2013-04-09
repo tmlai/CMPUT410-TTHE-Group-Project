@@ -54,6 +54,7 @@ function buildCategoryDropList(cats) {
 
 function buildCarouselItems(prods) {
   for(var i = 0; i < cats.length; i++) {
+    var product = products[i];
     if(i == 0) {
       document.getElementById("navCatList").innerHTML = '<div class="item active">';
     } else {
@@ -80,7 +81,7 @@ function buildCarouselItems(prods) {
 /*
  * Get category products of a specific category id.
  */
- function getCategoryProducts(cateId, ) {
+ function getCategoryProducts(cateId) {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
