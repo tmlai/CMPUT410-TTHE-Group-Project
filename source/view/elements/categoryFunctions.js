@@ -103,14 +103,16 @@ function buildCategoryContainer(cats) {
 }
 
 function buildCarouselItems(prods) {
+  var catHTML = '<div id="myCarousel" class="carousel slide">\n'
+    + '<div class="carousel-inner" id="carouselItemDiv">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
     if(i == 0) {
-      document.getElementById("carouselItemDiv").innerHTML = '<div class="item active">\n';
+      catHTML += '<div class="item active">\n';
     } else {
-      document.getElementById("carouselItemDiv").innerHTML += '<div class="item">\n';
+      catHTML += '<div class="item">\n';
     }
-    document.getElementById("carouselItemDiv").innerHTML += (
+    catHTML += (
       '<a href="./product.php?id=' + product['cid'] + '">\n'
       + '<img src=".../img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
@@ -125,6 +127,11 @@ function buildCarouselItems(prods) {
       + '</div>\n'
     );
   }
+  catHTML += '</div>\n'
+    + '<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>\n'
+    + '<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>\n'
+    + '</div>\n'
+  document.getElementById("carouselElement").innerHTML = catHTML;
 }
 
 
