@@ -49,9 +49,12 @@ if($requestMethod == "post") {
 		$maxWeight = null;
 	}
 	//build arrays for ranges
-	$priceRange = new Array($priceFrom, $priceTo);
-	$availRange = new Array($minQty, $maxQty);
-	$weightRange = new Array($minWeight, $maxWeight);
+	$priceRange[DbLayer::LOWER_BOUND] = $priceFrom;
+	$priceRange[DbLayer::UPPER_BOUND] = $priceTo;
+	$availRange[DbLayer::LOWER_BOUND] = $minQty;
+	$availRange[DbLayer::UPPER_BOUND] = $maxQty;
+	$weightRange[DbLayer::LOWER_BOUND] = $minWeight;
+	$weightRange[DbLayer::UPPER_BOUND] = $maxWeight;
 	
 	$dbLayer = new DbLayer();
 	$list = $dbLayer->searchProductByConstraints(

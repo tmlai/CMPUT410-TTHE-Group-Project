@@ -103,7 +103,6 @@ $advanced = $_GET['advanced'];
 			// maxWeight = "Null";
 		// }
 		//check range values
-		console.log("before if");
 		if(priceFrom != "" && isNaN(priceFrom)) {
 			pass = false;
 		} else if(priceTo != "" && isNaN(priceTo)) {
