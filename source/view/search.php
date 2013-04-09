@@ -34,11 +34,11 @@ $advanced = $_GET['advanced'];
     <div class="container">
         <h3>
         <?php 
-          if($search != "") {
+          if($search != "" || $search != null) {
             echo "Search Results for " . $search; 
-          } else if($advanced == null) {
+          } else if($advanced == true) {
 			echo "Advanced Search";
-		  } else if ($search == ""){
+		  } else if ($search == "" || $search == null){
             echo "A blank search is given, please enter a search.";
           }
         ?>
@@ -48,7 +48,7 @@ $advanced = $_GET['advanced'];
           data-target="#advSearch" onclick="dropIconToggle();">
           <div id="dropDiv"></div>
         </label>
-
+		<div></div>
         <div id="advSearch" class="collapse">
 		<!-- Advanced Search Form -->
 			<form class="form-horizontal" onSubmit="advSearch()" action="" method="post">
