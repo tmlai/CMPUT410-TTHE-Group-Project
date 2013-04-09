@@ -26,7 +26,7 @@ if($requestMethod == "get") {
 		$singleObj = (object) array(
 			'cid'=>$cid, 'price'=>$price,
 			'weight'=>$weight, 'name'=>$name,
-			'image'=>$image), 'description'=>$description;
+			'image'=>$image, 'description'=>$description);
 		$allReturned[$i] = $singleObj;
 	}
 
