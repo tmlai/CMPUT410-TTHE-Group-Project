@@ -7,4 +7,4 @@ RewriteEngine on
 RewriteRule ^products/(c?[0-9]+)/order/?$ source/controller/ProductServices.php?id=$1
 RewriteRule ^products/(c?[0-9]+)/?$ source/controller/ProductServices.php?id=$1
 RewriteRule ^products/?$ source/controller/ProductServices.php
-RewriteRule ^orders/([0-9]+)/?$ source/controller/OrderServices.php?oid=$1
+RewriteRule ^orders/([A-Za-z0-9]+)/?$ source/controller/OrderServices.php?oid=$1
