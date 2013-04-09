@@ -61,8 +61,7 @@ elseif ($requestMethod == "GET"){
 			"description" => $product->getDescription(),
 				"weight" => $product->getWeight()
 		);
-		$simpleProductJSON = json_encode($simpleProduct	);
-		$productJSONList[] =$simpleProductJSON;
+		$productJSONList[] =$simpleProduct;
 	}
 // 	echo "json array".$productJsonList."<br/>";
 	echo json_encode($productJSONList);

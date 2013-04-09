@@ -61,7 +61,7 @@ $product = json_decode($product, true);
                   ?>
                 <hr>
                 <div class="row-fluid">
-                  <div class="span9">
+                  <div class="span12">
                     <h3>Top Ranked Related Products:</h3>
                     <table class="table table-hover">
                       <thead>

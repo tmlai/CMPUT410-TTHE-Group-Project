@@ -1,7 +1,14 @@
 <?php
 use model\DbLayer;
+use model\CustomerOrder;
+use model\OrderProduct;
+use model\Store;
 
 include_once ('DbLayer.php');
+include_once ('CustomerOrder.php');
+include_once ('OrderProduct.php');
+include_once ('Store.php');
+
 
 $priceTolerance = 1.10;
 
@@ -9,8 +16,8 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$toOrderInfo = array();
 	$orderedStore = "";
 	foreach ($markets as $store){
-		$orderedStore = new Store(0, date(), $store["name"], $store["url"]);
-		$url = $orderedStore.getUrl()."/products/".$productId;
+		$orderedStore = new Store(0, "2013/04/08 tri", $store["name"], $store["url"]);
+		$url = $orderedStore->getUrl()."/products/".$productId;
 		$productsInfo = file_get_contents($url);
 		$productsInfoJson = json_decode($productsInfo, true);
 		$stocksInfo[$url] = $productsInfoJson["quantity"];
@@ -96,14 +103,25 @@ if ($requestMethod == "GET"){
 	
 	echo $message;
 }
+
+
+
 if ($requestMethod == "POST"){
-	$message = array("status" => "True");
+	$message = array("status" => "False by default",
+			"deliveryDate" => "date time here"
+	);
 	
 	$userName = $_SESSION["user"];
+	//TODO:
+	$userName = "hcngo";
 	$products = $_POST["orderLists"];
-	$productsJson = json_decode($productsJson, true);
-	$message = "False";
-	$customerOrder = new CustomerOrder(0, "", '', $userName, 0, '');
+	
+	$productsJson = json_decode($products, true);
+	//TODO:
+	echo "<br/>username ".$userName."<br/>";
+	echo "<br/>orders ".$products."<br/>";
+	
+	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
 	foreach($productsJson as $productJson){
 		$productId = $productJson["cid"];
@@ -111,8 +129,9 @@ if ($requestMethod == "POST"){
 		$crrStock = $dbLayer->getStock($productId);
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
-			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, "",
+			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $quantity, 0,
 					 "", $quantity * $ourPrice);
+			$message["status"] = "True";
 		}
 		else {
 			$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
@@ -122,7 +141,7 @@ if ($requestMethod == "POST"){
 			$marketInfo = file_get_contents($url);
 			if (!isset($marketInfo) || trim($marketInfo) === ""){
 				//Have not enough product, cannot call the api, cancel processing
-				$message["status"] = "False";
+				$message["status"] = "False have not enough product, cannot call the api";
 			}
 			else{
 				$marketsJson = json_decode($marketInfo, true);
@@ -130,15 +149,15 @@ if ($requestMethod == "POST"){
 				$result = processOneProduct($productId,$ourPrice,$toOrder,$markets);
 				if ($result != False){
 					foreach($result as $store => $orderJsonString){
-						$storeId = $dbLayer->searchStore($store.getUrl());
+						$storeId = $dbLayer->searchStore($store->getUrl());
 						$orderJson = json_decode($orderJsonString, true);
 						if ($storeId == null){
 							if ($dbLayer->addStore($store)){
-								$storeId = $dbLayer->searchStore($store.getUrl());
+								$storeId = $dbLayer->searchStore($store->getUrl());
 							}
 							else{
 								//cannot add new store, cancel processing
-								$message["status"] = "False";
+								$message["status"] = "False cannot add new store";
 							}
 						}
 						$orderProductsArray[] = new OrderProduct(0, $productId, $storeId, $toOrder, $orderJson["order_id"],
@@ -147,7 +166,7 @@ if ($requestMethod == "POST"){
 				}
 				else {
 					//Cannot order from another store, cancel processing
-					$message["status"] = "False";
+					$message["status"] = "False cannot order from another store";
 				}
 			}
 		}		
@@ -156,7 +175,7 @@ if ($requestMethod == "POST"){
 	if ($message["status"] == "True"){
 		$dbLayer->addOrder($customerOrder,$orderProductsArray);
 		//todo
-		$message["deliveryDate"] == date();
+		$message["deliveryDate"] == "apr mon 8 2013";
 	}
 	
 	echo json_encode($message);

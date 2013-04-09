@@ -1,17 +1,7 @@
 /*
- * Make the AJAX calls for a products availability and recommended related 
- * products.
+ * Get the list of categories.
  */
-function loadProductAJAX(pid, category) {
-  checkInStock(pid);
-  getRelatedProducts(category);
-}
-
-/*
- * Check if product is available (quantity > 0).
- * @return  true/false if available
- */
-function checkInStock(pid) {
+function getCategories() {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -25,24 +15,26 @@ function checkInStock(pid) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      var orderBtn = document.getElementById("orderBtn");
-      orderBtn.style.visibility= "visible";
-      if((jsonArray.quantity + getExternalAvail(pid)) <= 0) {
-        orderBtn.className = "btn btn-danger";
-        orderBtn.innerHTML ="Out of Stock";
-      }
-      document.getElementById("stockDiv").innerHTML = "";
+      buildCategoryList(jsonArray);
     }
   };
-  xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
-  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.open('GET', '/source/controller/CategoryServices.php?catList', true);
   xmlhttp.send();
 }
 
+function buildCategoryList(cats) {
+  for(var i = 0; i < cats.length; i++) {
+    document.getElementById("navCatList").innerHTML = (
+      '<li><a href="category.php?' + cats[i]['cateId'] + '">' 
+      + cats[i]['name'] + '</a></li>'
+    );
+  }
+}
+
 /*
- * Adds five of the Top Ranked Related Products of a category to product.php
+ * Get category products of a specific category id.
  */
- function getRelatedProducts(category) {
+ function getCategoryProducts(cateId) {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -60,9 +52,8 @@ function checkInStock(pid) {
       buildRelatedProducts(jsonArray);
     }
   };
-  xmlhttp.open('GET', '../model/Recommender/RateProduct.php?category='
-    + category, true);
-  //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.open('GET', '/source/controller/CategoryServices.php?catProds='
+    + cateId, true);
   xmlhttp.send();
 }
 

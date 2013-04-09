@@ -117,7 +117,14 @@
 		1.	Search for external store availability of a product for a quantity
 		    - return type(GET): true/false
 		    - sending parameters: cid, quantity
-		
+		ADVANCED SEARCH
+		1. sending json format: 
+			[{"code":"#","category":"value",
+			"priceFrom":"value", "priceTo":"value", "availFrom":"value", 
+			"availTo":"value", "weightFrom":"value", "weightTo":"value"}]
+		   returning json format:
+			JSON format (ie: [{getOneProduct($cid)}, {getOneProduct($cid)}]
+				of array of products in getOneProduct($cid) json format.
 		
 		PURCHASE MODEL
 		algorithm for purchasing/transaction:

@@ -74,8 +74,7 @@
                     <li class="divider"></li>
                     <li class="dropdown-submenu">
                         <a tabindex="-1" href="index.php">Categories</a>
-                        <ul class="dropdown-menu">
-                        <li><a href="category.php">Appliance Categories...</a></li>
+                        <ul class="dropdown-menu" id="navCatList">
                         </ul>
                     </li>
                 </ul>
