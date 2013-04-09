@@ -54,11 +54,12 @@ elseif ($requestMethod == "GET"){
 	$productJSONList = array();
 	foreach ($productList as $product){
 		$simpleProduct = array (
-			"cid" => $product.getCid(),
-			"name" => $product.getName(),
-			"price" => $product.getPrice(),
-			"image" => $product.getImage(),
-			"description" => $product.getDescription()
+			"cid" => $product->getCid(),
+			"name" => $product->getName(),
+			"price" => $product->getPrice(),
+			"image" => $product->getImage(),
+			"description" => $product->getDescription(),
+				"weight" => $product->getWeight()
 		);
 		$simpleProductJSON = json_encode($simpleProduct	);
 		$productJSONList[] =$simpleProductJSON;

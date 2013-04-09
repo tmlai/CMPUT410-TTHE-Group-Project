@@ -147,6 +147,47 @@ class DbLayer implements DbInterface {
 		return $status;
 	}
 
+	public function authenticateAdmin($username, $password) {
+		$status = -1;
+		
+		$pdo = self::getPdo();
+		
+		$preState = "SELECT password FROM Admins  WHERE name=?";
+		
+		$stmt = $pdo->prepare($preState);
+		
+		$stmt->bindParam(1, $username);
+		
+		$stmt->execute();
+		
+		// 		while($row = $stmt->fetch(\PDO::FETCH_ASSOC)){
+		// 			if($row['password'] == $password){
+		// 				$exist = true;
+		// 				break;
+		// 			}
+		// 		}
+		
+		$list = $stmt->fetchAll();
+		if (count($list) == 0) {
+			// no user with the indicated username exists
+			$status = 0;
+		} else {
+			for ($i = 0; $i < count($list); $i++) {
+				if (strcmp($list[$i][0], $password) == 0) {
+					$status = 1;
+					break;
+				}
+			}
+			if ($status == -1) {
+				$status = 0;
+			}
+		}
+		$pdo = null;
+		
+		return $status;
+		
+	}
+
 	// Products section
 	public function addProduct(Product $prod) {
 
