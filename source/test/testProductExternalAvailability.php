@@ -41,7 +41,7 @@
 					if (xmlhttp.readyState == 4) {
 						alert(xmlhttp.responseText);
 						res = document.getElementById("res");
-						res.innerHTML = xmlhttp.responseText);
+						res.innerHTML = xmlhttp.responseText;
 					}
 				}
 				
