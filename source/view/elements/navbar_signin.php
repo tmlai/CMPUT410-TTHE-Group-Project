@@ -71,14 +71,12 @@
                         </form>
                     </li>
                     <li><a href="./search.php">Advanced Search</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-submenu">
-                        <a tabindex="-1" href="index.php">Categories</a>
-                        <ul class="dropdown-menu" id="navCatList">
-                        </ul>
-                    </li>
                 </ul>
-                
+            </li>
+            <li class="dropdown-menu">
+              <a tabindex="-1" href="index.php">Browse Categories</a>
+              <ul class="dropdown-menu" id="navCatList">
+              </ul>
             </li>
             </ul><ul class="nav pull-right">
             <li class="pull-right"><a href="cart.php">View Cart    
