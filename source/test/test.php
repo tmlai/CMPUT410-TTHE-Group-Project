@@ -534,5 +534,5 @@ class TestDb {
 // \test\TestDb::testRecommendRelatedProducts();
 // \test\TestDb::testGetListCustomers();
 // \test\TestDb::testGetListExternalStores();
-// \test\TestDb::testAuthenticateAdmin();
+\test\TestDb::testAuthenticateAdmin();
 ?>

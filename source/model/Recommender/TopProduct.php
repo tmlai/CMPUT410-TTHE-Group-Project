@@ -1,7 +1,8 @@
 <?php
-namespace model\DbLayer;
-
+use model\DbLayer;
+use model\Product;
 include_once ('../DbLayer.php');
+include_once ('../Product.php');
 
 // function checkStock($productId){
 // 	$stock = DbLayer::getStock($productId);
@@ -13,10 +14,17 @@ include_once ('../DbLayer.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-$crrDate = date();
+$format = 'Y-m-d H:i:s';
 $days = 30;
-$category = "";
-$numberOfProduct = "1";
+$to = new \DateTime();
+$from = new \DateTime();
+$from->sub(new \DateInterval("P{$days}D"));
+
+$to = $to->format($format);
+$from = $from->format($format);
+
+$category = null;
+$numberOfProduct = 10;
 
 if ($requestMethod == "POST"){
 	$tempDate = $_POST["date"];
@@ -62,22 +70,14 @@ else{
 	exit();
 }
 
-// $topProductList = DbLayer::getTopNSellings($numberOfProduct,$crrDate-$days,$crrDate);
 $dbLayer = new DbLayer();
-$topProductList = $dbLayer->getTopNSellings(5,null,null);
+$topProductList = $dbLayer->getTopNSellings($numberOfProduct, $from, $to, $category);
+
+// $topProductList = $dbLayer->getTopNSellings(5,null,null);
 $topProductJSONList = array();
-foreach ($topProductList as $topProduct){
-	//todo: modify to just pass id, name, price
-	//do we want to recommend products out of stock?
-	$simpleTopProduct = array (
-			"cid" => $topProduct->getCid(),
-			"name" => $topProduct->getName(),
-			"price" => $topProduct->getPrice(),
-			"image" => $topProduct->getImage(),
-			"description" => $topProduct->getDescription()
-			//TODO: add more
-	);
-	$topProductJSONList[] =$simpleTopProduct;
+foreach ($topProductList as &$topProduct){
+	/* @var $topProduct Product */
+	$topProductJSONList[] = $topProduct->toAssociativeArray();
 	//return a list of json data
 }
 echo json_encode($topProductJSONList);	

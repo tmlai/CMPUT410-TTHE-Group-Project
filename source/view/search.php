@@ -73,6 +73,7 @@ $advanced = $_GET['advanced'];
 				if(listArray.length==0) {
 					document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 				}
+				//don't write if null!!!
 				if(document.getElementById('resultsTable') != null) {
 					document.getElementById('resultsTable').innerHTML=table;
 				}
@@ -188,7 +189,10 @@ $advanced = $_GET['advanced'];
 					if(listArray.length==0) {
 						document.getElementById("tableTitles").innerHTML = "<h4>No products found.</h4>"
 					}
-					document.getElementById('resultsTable').innerHTML=table;
+					//don't write if null!!
+					if(document.getElementById('resultsTable') != null) {
+						document.getElementById('resultsTable').innerHTML=table;
+					}
 				}
 			}
 	}
