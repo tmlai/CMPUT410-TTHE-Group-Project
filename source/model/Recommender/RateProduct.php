@@ -1,5 +1,4 @@
 <?php
-namespace model;
 echo "before include";
 include_once ('../DbLayer.php');
 include_once ('../UserRatingProduct');
