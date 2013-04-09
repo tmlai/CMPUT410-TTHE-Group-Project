@@ -205,7 +205,8 @@ function buildCartProducts() {
         //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
-          "<tr>\n<td>\n"
+          "<tronclick=\"location.href='./product.php?id=" + product.id 
+          + "'\">\n<td>\n"
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
