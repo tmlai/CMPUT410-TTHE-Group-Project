@@ -130,8 +130,7 @@ $advanced = $_GET['advanced'];
         </div>
     </div> <!-- /container -->
 	<script type="text/javascript">
-		var search = <?php echo $search;?>;
-		window.onload=initialLoading(search);
+		window.onload=initialLoading('<?php echo $search;?>');
 	</script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
