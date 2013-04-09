@@ -71,9 +71,8 @@ function checkInStock(pid) {
  * @param products array
  */ 
 function buildRelatedProducts(products) {
-  var div = document.getElementById("resultsDiv");
   for(var i = 0; i < products.length; i++) {
-    div.write(
+    document.getElementById("resultsDiv").write(
       "<tr onclick=\"location.href='./product.php?id='" + products[i]['cid']
       + "\">\n"
       // Rank/index of product

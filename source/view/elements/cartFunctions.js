@@ -102,7 +102,6 @@ function getJsonCartElement(pid, qty) {
   var arr = {};
   arr['pid'] = pid;
   arr['quantity'] = qty;
-  //arr = JSON.stringify(arr);
   return(arr);
 
 }
@@ -207,7 +206,7 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" class=\"input-small\"><td>\n"
+          + jsonCart[i].quantity + "\" class=\"input-mini\"><td>\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
