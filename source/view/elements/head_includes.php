@@ -14,5 +14,5 @@ body {
 } 
 </style>
 <?php
-$categories = $dbLayer->getCategoryList();
+//$categories = $dbLayer->getCategoryList();
 ?>

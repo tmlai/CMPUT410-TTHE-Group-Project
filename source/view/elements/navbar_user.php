@@ -45,10 +45,10 @@
                         <a tabindex="-1" href="index.php">Categories</a>
                         <ul class="dropdown-menu">
                         <?php
-                          foreach($categories as $cat){
+                          /*foreach($categories as $cat){
                             echo '<li><a href="category.php?' . $cat . '">' 
                               . $cat . '</a></li>';
-                          }
+                          }*/
                         ?>
                         </ul>
                     </li>
