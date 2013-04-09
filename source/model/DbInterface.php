@@ -123,6 +123,8 @@ interface DbInterface {
 	 */
 	public function searchStore($url);
 	
+	public function lookUpStore($storeId);
+	
 	/*
 	 * Get the list of external stores which we do business with
 	 */
@@ -159,6 +161,11 @@ interface DbInterface {
 	 */
 	public function addOrder(CustomerOrder $customerOrder,
 			array $orderProductsArray);
+	
+	/*
+	 * Update external delivery date using web services
+	*/
+	public function updateDeliveryDate($auxiliaryOrderId, $storeId);
 	// 	------------------------------------------------------------------------
 
 	// 	WEB SERVICES SECTION

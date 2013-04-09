@@ -464,6 +464,23 @@ class DbLayer implements DbInterface {
 		$pdo = null;
 		return $store;
 	}
+	
+	public function lookUpStore($storeId){
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Stores WHERE storeId = ?";
+		
+		$array = array($storeId);
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute($array);
+		
+		$temp = $stmt->fetchAll();
+		$store = null;
+		foreach ($temp as &$row) {
+			$store = new Store($row[0], $row[1], $row[2], $row[3]);
+		}
+		$pdo = null;
+		return $store;
+	}
 
 	/*
 	 * order products from other stores
@@ -606,6 +623,27 @@ class DbLayer implements DbInterface {
 		$pdo->commit();
 		$pdo = null;
 		return true;
+	}
+	
+	/*
+	 * Update external delivery date using web services
+	 */
+	public function updateDeliveryDate($auxiliaryOrderId, $storeId){
+		$store = $this->lookUpStore($storeId);
+		$realUrl = $store->getUrl()."/orders/".$auxiliaryOrderId;
+		$deliveryDateJson = file_get_contents($realUrl);
+		$deliveryDateArray = json_decode($deliveryDateJson,true);
+		$deliveryDate = $deliveryDateArray['delivery_date'];
+		
+		$pdo = self::getPdo();
+		$statement = "UPDATE OrdersProducts 
+		SET deliveryDate = ? 
+		WHERE auxiliaryOrderId = ? AND storeId = ? ";
+		
+		$array = array($deliveryDate,$auxiliaryOrderId,$storeId);
+		$stmt = $pdo->prepare($statement);
+		$status = ($stmt->execute($array) == true && $stmt->rowCount() > 0);
+		return $status;
 	}
 
 	// 	------------------------------------------------------------------------

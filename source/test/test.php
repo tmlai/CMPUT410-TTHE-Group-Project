@@ -504,6 +504,25 @@ class TestDb {
 		$list = $dbLayer->recommendRelatedProducts($n, $cateId);
 		var_dump($list);
 	}
+	
+	public static function testLookupStore(){
+		$storeId = 1;
+		$dbLayer = new DbLayer();
+		$store = $dbLayer->lookUpStore($storeId);
+		var_dump($store->getUrl());
+	}
+	
+	public static function testUpdateDeliveryDate(){
+		$auxiliaryOrderId = "c90b48c0-a0de-11e2-b1c6-7f08d1a779da";
+		$storeId = 7;
+		$dbLayer = new DbLayer();
+		$status = $dbLayer->updateDeliveryDate($auxiliaryOrderId, $storeId);
+		if($status){
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
 }
 // \test\TestDb::testAddProduct();
 // \test\TestDb::testAddCustomer();
@@ -534,5 +553,7 @@ class TestDb {
 // \test\TestDb::testRecommendRelatedProducts();
 // \test\TestDb::testGetListCustomers();
 // \test\TestDb::testGetListExternalStores();
-\test\TestDb::testAuthenticateAdmin();
+// \test\TestDb::testAuthenticateAdmin();
+// \test\TestDb::testLookupStore();
+\test\TestDb::testUpdateDeliveryDate();
 ?>
