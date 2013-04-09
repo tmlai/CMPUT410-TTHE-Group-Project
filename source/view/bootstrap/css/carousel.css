@@ -1,6 +1,11 @@
 /* Carousel base class */
 .carousel {
   margin-bottom: 10px;
+  min-width: 100%;
+  height: 225px;
+  background-image:url('/source/view/bootstrap/img/tthe_carousel.jpg');
+  background-repeat:no-repeat;
+  background-attachment:fixed;
 }
 
 .carousel .container {
