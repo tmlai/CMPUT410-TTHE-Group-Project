@@ -40,7 +40,7 @@ $advanced = $_GET['advanced'];
 		}
 		xmlhttp.open('GET', 
 			'/source/controller/Search.php?searchField=<?php echo $search;?>',
-			true);
+			false);
 		xmlhttp.send();
 		//need to populate
 		xmlhttp.onreadystatechange=function() {
