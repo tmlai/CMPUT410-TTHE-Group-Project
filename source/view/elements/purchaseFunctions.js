@@ -76,14 +76,60 @@ function submitOrder() {
     window.location.href = dir;
     return false;
   }
-  makePurchase();
+  makePurchase(jsonCart);
 }
 
-/*orderLists=[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}*/
-function makePurchase() {
-  var jsonCart = JSON.parse(readCookie('cart'));
-  if(jsonCart == null) {
-    alert("You must ha");
-    return false;
+/*
+ * 
+ * orderLists=[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}...]
+ *
+ */
+function makePurchase(cart) {
+  var purchase = new Array();
+  for(var i = 0; i < cart.length; i++) {
+    var arr = {};
+    arr['cid'] = cart[i]['pid'];
+    arr['quantity'] = cart[i]['quantity'];
+    purchase.push(arr);
   }
+  var response = sendPurchase(JSON.stringify(purchase));
+  if(response == "false") {
+    alert("Unable to make purchase at this time, we appreciate your patience and"
+    + " support, please try again");
+  } else {
+    alert("Thank you for your Purchase!\n"
+    + "The expected delivery date of your order is " + response);
+    var dir = location.href;
+    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+    dir = dir + "index.php";
+    window.location.href = dir;
+  }
+}
+
+function sendPurchase(jsonInv) {
+  // AJAX call for external stores
+  var xmlhttp = new XMLHttpRequest();
+	if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	}	else {
+    // code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+  
+  // Return if product is in stock
+  xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      var response = JSON.parse(xmlhttp.responseText);
+      if(response['status'] == "true") {
+        return response['deliveryDate'];
+      }
+      return "false";
+    }
+  };
+  
+  xmlhttp.open('POST', '../model/ProductExternalAvailability.php?cid=' + pid + '&quantity='
+    + qty, false);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send();
 }
