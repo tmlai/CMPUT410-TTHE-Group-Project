@@ -27,7 +27,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     ?>
 	<script>
 		//debugging
-		alert(<?php echo $_SESSION['admin'];?>);
+		alert('<?php echo $_SESSION['admin'];?>');
 	</script>
     <div id="carouselElement">
     </div>
