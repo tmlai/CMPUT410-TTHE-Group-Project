@@ -35,6 +35,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             <table class="table"> 
             <thead>
                 <tr>
+                  <th>Quantity</th>
                   <th><!-- placeholder --></th>
                   <th>Price</th>
                   <th>Weight</th>
