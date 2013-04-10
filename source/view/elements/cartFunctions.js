@@ -248,6 +248,9 @@ function buildCartProducts() {
   }
 }
 
+/*
+ * Set an array of buttons to "val"
+ */
 function setButtonsVisiblity(val, buttons) {
   for(var i = 0; i < buttons.length; i++) {
     document.getElementById(buttons[i]).style.visibility = val;
