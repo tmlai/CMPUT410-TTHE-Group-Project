@@ -28,8 +28,8 @@ try {
 		$first_token = strtok($reUri, '/');
 		$second_token = strtok('/');
 
-		$quantity = file_get_contents("php://input");
-		echo $quantity;
+		//$quantity = file_get_contents("php://input");
+		$quantity = $_POST['amount'];
 		$storeId = 1;
 		$cid = $second_token;
 		$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity['amount']);
