@@ -196,7 +196,7 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" class=\"input-mini\">"
+          + jsonCart[i].quantity + "\" class=\"input-mini\"></td>"
           + "<td " + getProdLink(product['id']) + ">\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
@@ -214,7 +214,7 @@ function buildCartProducts() {
           + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
           // Description of product
           + "<td " + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td " + getProdLink(product['id']) + ">\n"
+          + "<td>\n"
           + " <button " + getProdLink(product['id']) + "style=\"position:relative; right:0px;\"\n"
           + "   class=\"btn pull-right\">\n"
           + "       View Product\n"
@@ -232,7 +232,7 @@ function buildCartProducts() {
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
-    + price.toFixed(2);
+    + parseFloat(price).toFixed(2);
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
@@ -252,6 +252,7 @@ function submitCart(user) {
       window.location.href = dir;
     }
   } else {
+    updateCart();
     var jsonCart = JSON.parse(readCookie('cart'));
     if(jsonCart == null) {
       alert("You must have at least one product in order to make a purchase.");

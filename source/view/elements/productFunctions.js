@@ -27,12 +27,12 @@ function checkInStock(pid) {
       try{
         var jsonArray = JSON.parse(xmlhttp.responseText);
         var orderBtn = document.getElementById("orderBtn");
-        orderBtn.style.visibility= "visible";
         if(getExternalAvail(pid) == false) {
           orderBtn.className = "btn btn-danger";
           orderBtn.innerHTML ="Out of Stock";
         }
         document.getElementById("stockDiv").innerHTML = "";
+        orderBtn.style.visibility= "visible";
       } catch (err) {
         orderBtn.className = "btn btn-danger";
         orderBtn.innerHTML ="Out of Stock";
