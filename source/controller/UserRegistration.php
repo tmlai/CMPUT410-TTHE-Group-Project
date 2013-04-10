@@ -12,7 +12,7 @@ session_start();
 	<head>
 		<title> UserRegistration </title>
     <!-- Goto previous page -->
-		<META HTTP-EQUIV="refresh" CONTENT="2;URL=<?php echo $_SESSION['prevPage']?>">
+		<META HTTP-EQUIV="refresh" CONTENT="2;URL=/source/view/index.php">
 	</head>
 	<body>
 		<?php 
