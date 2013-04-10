@@ -252,6 +252,7 @@ function submitCart(user) {
       window.location.href = dir;
     }
   } else {
+    updateCart();
     var jsonCart = JSON.parse(readCookie('cart'));
     if(jsonCart == null) {
       alert("You must have at least one product in order to make a purchase.");
