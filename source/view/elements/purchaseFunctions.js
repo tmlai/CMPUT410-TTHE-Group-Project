@@ -101,7 +101,7 @@ function makePurchase(cart) {
     arr['quantity'] = cart[i]['quantity'];
     purchase.push(arr);
   }
-  sendPurchase('orderLists='JSON.stringify(purchase));
+  sendPurchase('orderLists=' + JSON.stringify(purchase));
   /*
   var response = sendPurchase(JSON.stringify(purchase));
   if(response == "false") {
