@@ -1,0 +1,136 @@
+"SELECT * FROM Customers";
+
+--------------------------------------
+
+"INSERT INTO Customers values
+(username, password, address,
+ city, postalCode, email)";
+ 
+--------------------------------------
+
+"INSERT INTO Admins values(username, password)";
+
+----------------------------------------
+
+"SELECT password FROM Customers WHERE username='username'";
+
+
+----------------------------------------
+
+"INSERT INTO Products values(cid, name, description, 
+		image, price, weight, dimensions, stock)";
+
+----------------------------------------
+
+"INSERT INTO ProductsMapCategories values(cid, cateId)";
+
+----------------------------------------
+
+"UPDATE Products SET stock = stock - {number of same items sold 
+	in the transaction} 
+WHERE cid = 'cid' AND stock >= {number of same items sold 
+	in the transaction} ";
+----------------------------------------
+
+"SELECT * FROM UsersRatingProducts 
+ WHERE username = 'username'
+ AND cid = 'cid' ";
+
+----------------------------------------
+
+"UPDATE UsersRatingProducts 
+ SET rating = 'rating' 
+ WHERE username = 'username' AND cid = 'cid'";
+
+----------------------------------------
+
+"SELECT * FROM Products p, ProductsMapCategories pc 
+	WHERE p.cid = pc.cid AND pc.cateId = 'cateId'";
+	
+----------------------------------------
+
+"INSERT INTO Stores(description,name,url) 
+ values(description='store description', 
+ name='store name', url='store url')";
+
+----------------------------------------
+
+"INSERT INTO OrdersProducts
+ values(orderId, cid, store id, quantity, 'orderId from external source,
+ delivery date, 'total cost from order')";
+
+----------------------------------------
+
+"INSERT INTO CustomersOrders(description,orderDate,
+ username,payment,deliveryDate)
+ values(description='order description',
+ orderDate='date of the order',
+ username='username',
+ payment='payment status',
+ deliveryDate='expected delivery date')";
+ 
+ -----------------------------------------
+ 
+ "UPDATE OrdersProducts 
+  SET deliveryDate = 'expected delivery date' 
+  WHERE auxiliaryOrderId = 'order id recieved from external source'
+  AND storeId = 'store id' ";
+ -----------------------------------------
+ 
+ "SELECT * FROM CustomersOrders 
+ WHERE orderId = 'order id we provided'";
+ 
+-----------------------------------------
+
+ "UPDATE CustomersOrders 
+ SET deliveryDate = 'updated delivery date'
+ WHERE orderId = 'order id'";
+ 
+-----------------------------------------
+
+"SELECT cid FROM Products WHERE stock > 0";
+
+-----------------------------------------
+
+"SELECT name, pc.cateId 
+ FROM Categories c, ProductsMapCategories pc 
+ WHERE c.cateId = pc.cateId AND pc.cid = 'product id'";
+
+-----------------------------------------
+
+"SELECT * from Products WHERE name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+
+-----------------------------------------
+
+"SELECT cateId FROM Categories WHERE name REGEXP '[{$first}{$capFirst}]{$rest}' ";
+
+-----------------------------------------
+
+"SELECT * FROM OutstandingOrders WHERE username = 'username' 
+AND deliveryDate >= 'expected delivery date'";
+
+-----------------------------------------
+
+"SELECT username, cid, storeId, SUM(aggregatedCount) as aggregatedCount, 
+		SUM(amounts) as amounts
+		 FROM OlapReport WHERE  username = 'username'";
+
+-----------------------------------------
+
+"SELECT * FROM Products p,
+		(SELECT op.cid as cid, SUM(op.quantity) as total FROM OrdersProducts op, CustomersOrders co WHERE co.orderId = op.orderId AND "
+		 co.orderDate >= '{$from}' AND co.orderDate <= '{$to}' 
+		 GROUP BY op.cid ORDER BY total DESC LIMIT 0,{$n}) top WHERE top.cid = p.cid ";
+
+-----------------------------------------
+
+"SELECT * FROM Products p, ProductsRating proRat
+		 WHERE p.cid = proRat.cid AND " . $cateIndicated
+				. " ORDER BY proRat.rating DESC
+		 LIMIT 0,{$n} ";
+
+-----------------------------------------
+
+"UPDATE CustomersOrders SET payment = ? WHERE orderId = ?";
+
+-----------------------------------------
