@@ -31,10 +31,11 @@
 	}
 				var amt = document.getElementById("amt").value;
 				var id = document.getElementById("idNum2").value;
+				var params = "amount=" + amt;
 				var xmlhttp=new XMLHttpRequest();
 				xmlhttp.open('POST', '/products/'+id+'/order', false);
 				xmlhttp.onreadystatechange = functionToCall;
-				xmlhttp.send(amt);
+				xmlhttp.send(params);
 			}
 			
 			function testGetDeliveryDate() {
