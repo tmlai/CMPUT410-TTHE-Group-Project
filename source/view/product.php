@@ -17,6 +17,7 @@ $product = json_decode($product, true);
   <head>
     <title>TTHE Enterprise - Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
     <?php
         // Default Style links
         require("./elements/head_includes.php");

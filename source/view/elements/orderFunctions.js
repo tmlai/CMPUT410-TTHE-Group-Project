@@ -44,6 +44,7 @@ function buildOrders(orders) {
       + '<table class="table">\n'
       +  '<thead>\n'
       +  '  <tr>\n'
+      +  '    <th>Prodoct Name</th>\n'
       +  '    <th>Prodoct ID</th>\n'
       +  '    <th>Quantity</th>\n'
       +  '    <th>Product(s) Cost</th>\n'
@@ -51,9 +52,12 @@ function buildOrders(orders) {
       +  '</thead>\n'
       +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
+        var prodName = JSON.parse(getOneProduct(prod['pid']));
+        prodName = prodName['name'];
         var prod = order['order'][j];
         oHtml += '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
+        + '<td>' + prodName + '</td>'
         +      '<td>' + prod['quantity'] + '</td>'
         +      '<td>$' + String(prod['amount']) + '</td>'
         +    '</tr>\n';
