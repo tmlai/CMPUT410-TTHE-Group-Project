@@ -229,7 +229,6 @@ function writeCateInfo(cateId) {
 function getProdLink(pid) {
   return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
 }
-}
 
 /*
  * Build and write the html for the Category Products.
