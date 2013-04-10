@@ -225,6 +225,7 @@ INSERT INTO Categories(name,description) values('air conditioner and fan','');
 INSERT INTO Categories(name,description) values('air purifier','');
 INSERT INTO Categories(name,description) values('heater','');
 INSERT INTO Categories(name,description) values('coffee accessories','');
+INSERT INTO Categories(name,description) values('phone','');
 
 /*
  * 
