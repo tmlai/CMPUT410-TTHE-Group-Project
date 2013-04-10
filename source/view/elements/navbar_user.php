@@ -60,7 +60,7 @@
                <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="./elements/outstandingorders.php">
+                <li><a href="./elements/orders.php">
                   View Outsanding Orders</a></li>
                  <?php 
                   if($_SESSION['admin'] == 1)
