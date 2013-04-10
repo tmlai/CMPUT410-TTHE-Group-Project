@@ -23,7 +23,7 @@ if ($advanced == null) {
 	
   </head>
   <body onLoad="setToggle('<?php echo $advanced;?>'); 
-	initialLoading('<?php echo $search;?>'); getMenuCategories();"> 
+	initialLoading('<?php echo $search;?>'); getMenuCategories(); getMenuCategories();"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {

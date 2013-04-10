@@ -17,7 +17,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/head_includes.php");
     ?>
   </head>
-  <body onLoad="buildCartProducts()">
+  <body onLoad="buildCartProducts(); getMenuCategories();">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {

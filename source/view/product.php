@@ -35,7 +35,7 @@ $product = json_decode($product, true);
   <body onLoad="loadProductAJAX(<?php 
       echo "'" . $_SESSION['productID'] . "', ";
       echo "'" . $product['cateId'] . "'";
-    ?>);">
+    ?>); getMenuCategories();">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {

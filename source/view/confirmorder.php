@@ -17,7 +17,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/head_includes.php");
     ?>
   </head>
-  <body onLoad="buildInvoice()">
+  <body onLoad="buildInvoice(); getMenuCategories();">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
