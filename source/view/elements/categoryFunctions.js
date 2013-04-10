@@ -128,7 +128,7 @@ function buildCarouselItems(prods) {
     }
     catHTML += (
       '<a href="./product.php?id=' + product['cid'] + '">\n'
-      + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
+      + '<img src="/img/products/' + product['image'] '" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
       + '    <h1>Welcome to Our Store</h1>\n'
@@ -253,7 +253,7 @@ function buildCatProducts(jsonArray) {
           document.getElementById("productsBody").innerHTML += (
             "<tr " + getProdLink(product['id']) + ">\n<td>\n"
             // Thumbnail of product
-            + " <img src='/img/products/" + product['image'] + "\'" 
+            + " <img src='/img/products/" + product['img'] + "\'" 
             + "\" alt=\"\" width=\"50\" height=\"50\">\n"
             + "</td>\n"
             // Price of product
