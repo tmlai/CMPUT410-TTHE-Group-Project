@@ -147,6 +147,7 @@ function buildCarouselItems(prods) {
       "<h4>No products in this category.</h4>";
     return false;
   }
+  writeCateInfo(cateId);
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -160,8 +161,6 @@ function buildCarouselItems(prods) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      // var jsonArray = xmlhttp.responseText;
-      return jsonArray;
       buildCatProducts(jsonArray);
     }
   };
@@ -173,7 +172,7 @@ function buildCarouselItems(prods) {
 /*
  * Build and write the html for the Top Ranked Related Products.
  * @param products array
- */ 
+ *
 function buildCategoryProductList(products) {
   for(var i = 0; i < products.length; i++) {
     document.getElementById("resultsDiv").innerHTML += (
@@ -205,7 +204,7 @@ function buildCategoryProductList(products) {
       + "</tr>\n"
     );
   }
-}
+}*/
 
 /*
  * Place the name and description of a category in the category.php page.
@@ -222,7 +221,7 @@ function writeCateInfo(cateId) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      var catInfo = JSON.parse(xmlhttp.responseText);
+      var cateInfo = JSON.parse(xmlhttp.responseText);
       document.getElementById("catHero").innerHTML = '<h1>' + cateInfo['name'] 
         + '</h1>\n' + '<p>' + cateInfo['description'] + '</p>';
     }
