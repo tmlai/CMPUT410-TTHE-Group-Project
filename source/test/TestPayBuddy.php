@@ -26,6 +26,8 @@
 						res = document.getElementById("res");
 						res.innerHTML = xmlhttp.responseText;
 						var json = JSON.parse(xmlhttp.responseText);
+						alert(json);
+						alert(json["status"]);
 						if (json["status"] == "True"){
 							window.location(json["message"]);
 						}
