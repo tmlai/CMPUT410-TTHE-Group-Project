@@ -1,5 +1,17 @@
 <?php
+session_start();
+
 use model\DbLayer;
+use model\TransactionLayer;
+use model\CustomerOrder;
+use model\OrderProduct;
+use model\Store;
+
+include_once ('DbLayer.php');
+include_once ('CustomerOrder.php');
+include_once ('OrderProduct.php');
+include_once ('Store.php');
+include_once ('TransactionLayer');
 
 include_once '../model/DbLayer.php';
 
@@ -22,10 +34,23 @@ if ($requestMethod == "GET"){
 	}
 	else {
 		$dbLayer = new DbLayer();
-		$dbLayer->comleteTransaction($transactionId);
-		
-	}
-	
-	
-	
+		$traLayer = new TransactionLayer();		
+		$traInfo = $traLayer->getTransactionForOrder($transactionId);
+		if (count($traInfo) == 0){
+			$message = "Invalid transction info. If you believe this is an error, 
+					please see our technical support team for help. Thank you.";
+			echo $message;
+		}
+		else{
+			$res = $dbLayer->addOrder($traInfo[0], $traInfo[1]);
+			if ($res == 0){
+				echo "Our system is experiency a difficulty. Please contact our technical team for help.";
+			}
+			else {
+				echo "Your transaction is completed. Your order number is ".$res;
+				echo "<a href='http://cs410.cs.ualberta.ca:41041'>Click here to return to our store</a>";
+			}	
+		}	
+	}	
 }
+?>

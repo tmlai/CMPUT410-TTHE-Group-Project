@@ -74,29 +74,11 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 }
 
-function getCreateStoreId($store){
-	$dbLayer = new DbLayer();
-	$storeDb = $dbLayer->searchStore($store->getUrl());
-	
-	if ($storeDb == null){
-		if ($dbLayer->addStore($store)){
-			$storeDb = $dbLayer->searchStore($store->getUrl());
-			return $storeDb;
-		}
-		else{
-			//cannot add new store, cancel processing
-			return False;
-		}
-	}
-	else{
-		return $storeDb;
-	}
-}
+
 
 $url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
 $dbLayer = new DbLayer();
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-$markets = "";
 
 if ($requestMethod == "GET"){
 	$message = "False";
@@ -215,11 +197,5 @@ if ($requestMethod == "POST"){
 	}
 	
 	echo json_encode($message);
-// 
 
-	
-	
-
-// 	echo $message;
-// 	exit();
 }

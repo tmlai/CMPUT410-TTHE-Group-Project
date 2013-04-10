@@ -1,6 +1,7 @@
 <?php
 session_start();
 use model\DbLayer;
+use model\TransactionLayer;
 use model\CustomerOrder;
 use model\OrderProduct;
 use model\Store;
@@ -9,6 +10,7 @@ include_once ('DbLayer.php');
 include_once ('CustomerOrder.php');
 include_once ('OrderProduct.php');
 include_once ('Store.php');
+include_once ('TransactionLayer');
 
 
 $priceTolerance = 1.10;
@@ -37,7 +39,6 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	}
 
 	if ($minPrice == -1.0){
-		echo "step 0";
 		return False;
 	}
 	// sort by stock price from lowest to highest
@@ -46,7 +47,6 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	//get or create a store with the given url
 	$choosenStore = getCreateStoreId($choosenStore);
 	if ($choosenStore == False){
-		echo "step 1";
 		return False;
 	}
 
@@ -64,7 +64,6 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$context  = stream_context_create($options);
 	$orderResult = file_get_contents($orderUrl, false, $context);
 	if (!isset($orderResult) || $orderResult === ""){
-		echo "step 2";
 		return False;
 	}
 	else{
@@ -75,8 +74,6 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 
 }
-
-
 
 function getCreateStoreId($store){
 	$dbLayer = new DbLayer();
@@ -102,7 +99,8 @@ if ($requestMethod == "POST"){
 			"message" => "by default",
 			"deliveryDate" => ""
 	);
-
+	$dbLayer = new DbLayer();
+	
 	$userName = $_SESSION["user"];
 	$products = $_POST["orderLists"];
 	$productsJson = json_decode($products, true);
@@ -116,7 +114,7 @@ if ($requestMethod == "POST"){
 		$productId = $productJson["cid"];
 		$quantity = $productJson["quantity"];
 		$crrStock = $dbLayer->getStock($productId);
-		echo "crrStock ".$crrStock."<br/>";
+// 		echo "crrStock ".$crrStock."<br/>";
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
 			$orderProduct = new OrderProduct(0, $productId, 1, $quantity, 0,
@@ -161,17 +159,22 @@ if ($requestMethod == "POST"){
 	//finished process all order
 	//If we succeeded at least once and never failed
 	if ($success == True && $failed == False){
-		$message["status"] = "True";
-		$transactionId = $dbLayer->addTransaction($customerOrder,$orderProductsArray);
-		$payBuddyUrl = "http://cs410.cs.ualberta.ca:42001/paybuddy/payment.cgi?";
-		$params = "grp=".$groupNumber;
-		$params.= "&amt=".$totalAmount;
-		$params.= "&tx=".$transactionId;
-		$params.= "&ret=".$retUrl;
-		$params.= "target=_blank";
-		header("Location:".$payBuddyUrl.$params);
+		$transLayer = new TransactionLayer();
+		$transactionId = $transLayer->addTransaction($customerOrder,$orderProductsArray);
+		if ($transactionId == 0){
+			$message["message"] = "Transaction could not be stored into database";
+		}
+		else{
+			$message["status"] = "True";
+			$payBuddyUrl = "http://cs410.cs.ualberta.ca:42001/paybuddy/payment.cgi?";
+			$params = "grp=".$groupNumber;
+			$params.= "&amt=".$totalAmount;
+			$params.= "&tx=".$transactionId;
+			$params.= "&ret=".$retUrl;
+			$params.= "target=_blank";
+			header("Location:".$payBuddyUrl.$params);
+		}
 	}
-
 	echo json_encode($message);
-
 }
+?>
