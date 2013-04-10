@@ -245,7 +245,7 @@ function buildCatProducts(jsonArray) {
           + "       View Product\n"
           + "   </button>\n"
           + " </td>\n"
-          + "</tr>\n"
+          + "</tr>\n";
         );     
      }
    
