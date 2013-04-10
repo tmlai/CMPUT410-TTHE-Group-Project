@@ -27,12 +27,12 @@ session_start();
 		$regex = "/([ABCEGHJKLMNPRSTVWXYZ]\d){3}/i";
 		
 		//check input validation
-		if($username == "" || $password == "" || $email == "")
-			$pass = false;
-		else if(!preg_match($regex,$postal))
-			$pass = false;
-		else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-			$pass = false;
+		// if($username == "" || $password == "" || $email == "")
+			// $pass = false;
+		// else if(!preg_match($regex,$postal))
+			// $pass = false;
+		// else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+			// $pass = false;
 		//try to get the admin check box value (was it checked)
 		try {
 			$adminChecked = $_POST['adminCheck'];
