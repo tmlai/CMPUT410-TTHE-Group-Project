@@ -101,7 +101,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
         </div>
         <div id="adminOp" class="collapse">
           <div id="store_div" class="control-group">
-              <label class="control-label" for="adminCode">Access Code
+              <label class="control-label" for="adminCode">* Access Code
               </label>
               <div class="controls">
                   <input type="password" id="adminCode" name="adminCode"
