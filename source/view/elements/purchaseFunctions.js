@@ -59,7 +59,6 @@ function buildInvoice() {
   }
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
-  //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     +  parseFloat(price).toFixed(2);
   if(emptyCount == jsonCart.length)
