@@ -10,7 +10,7 @@ include_once ('DbLayer.php');
 include_once ('CustomerOrder.php');
 include_once ('OrderProduct.php');
 include_once ('Store.php');
-include_once ('TransactionLayer');
+include_once ('TransactionLayer.php');
 
 
 $priceTolerance = 1.10;
