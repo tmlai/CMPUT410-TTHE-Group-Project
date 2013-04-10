@@ -1,3 +1,6 @@
+/*
+ * Validate Registration.
+ */
 function checkRegistration() {
 	var username = document.getElementById("userField").value;
 	var password = document.getElementById("passField").value;

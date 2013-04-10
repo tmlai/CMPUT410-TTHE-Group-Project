@@ -1,5 +1,8 @@
 var dropBool = true;
 
+/*
+ * Set the dropdown toggle based off boolean dropBool.
+ */
 function setToggle(dropBool) {
   if(dropBool == "true") {
 	document.getElementById("advSearch").className="collapse in";
@@ -7,6 +10,9 @@ function setToggle(dropBool) {
   dropIconToggle();
 }
 
+/*
+ * Update icon for drop toggle.
+ */
 function dropIconToggle() {
   if(dropBool) {
 	dropBool = false;
@@ -21,12 +27,7 @@ function dropIconToggle() {
   }
 }
 
-function initialLoading(searchString) {
-	// if(searchString != "")
-        // dropBool = false;
-    // else
-        // dropBool = true;
-	
+function initialLoading(searchString) {	
 	//send ajax call to get a list of products
 	var xmlhttp = new XMLHttpRequest();
 	var productList = new Array();
@@ -49,7 +50,6 @@ function initialLoading(searchString) {
 			var listArray = JSON.parse(list);
 			document.getElementById("loadingSpinner").style.visibility = "hidden";
 			document.getElementById("loadingSpinner").innerHTML = "<br>";
-			// console.log(listArray);
 			//build the table code
 			var table = "";
 			for(var i = 0; i<listArray.length; i++) {

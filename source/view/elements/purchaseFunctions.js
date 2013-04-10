@@ -118,13 +118,14 @@ function sendPurchase(jsonInv) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var response = JSON.parse(xmlhttp.responseText);
       if(response['status'] == "True") {
-        //return response['deliveryDate'];
         // Delete cart cookie on purchase
         eraseCookie('cart');
         // Redirect user
         window.location.replace(response["message"]);
       } else {
+        // Display message
         alert(response["message"]);
+        // Redirect user
         var dir = location.href;
         dir = dir.substr(0, dir.lastIndexOf("/") + 1);
         dir = dir + "cart.php";
