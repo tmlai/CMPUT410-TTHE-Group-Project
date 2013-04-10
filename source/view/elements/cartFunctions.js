@@ -166,6 +166,7 @@ function buildCartProducts() {
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
     return false;
   }
   
@@ -236,8 +237,11 @@ function buildCartProducts() {
   document.getElementById("loadingSpinner").innerHTML = "<br>";
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + parseFloat(price).toFixed(2);
-  if(emptyCount == jsonCart.length)
+  if(emptyCount == jsonCart.length) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+    document.getElementById("loadingSpinner").style.visibility = "hidden";
+    document.getElementById("loadingSpinner").innerHTML = "<br>";
+  }
 }
 
 function getProdLink(pid) {
