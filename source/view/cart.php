@@ -31,7 +31,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <div class="container">
       <h3>Your Current Cart</h3>
       <!--<div class="container">-->
-      <form name="cartForm" onSubmit="updateCart();">
         <div id="resultsDiv">
           <form name="cartForm" onSubmit="updateCart();">
             <table class="table table-hover"> 

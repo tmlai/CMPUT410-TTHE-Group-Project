@@ -222,7 +222,7 @@ function buildCartProducts() {
           + " </td>\n"
           + "</tr>\n"
         );     
-        price += num.toFixed((jsonCart[i].quantity * product['price']));
+        price += (jsonCart[i].quantity * product['price']).toFixed(2);
      }
    
     };
