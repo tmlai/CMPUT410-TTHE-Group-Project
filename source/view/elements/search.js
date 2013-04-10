@@ -56,8 +56,8 @@ function initialLoading(searchString) {
 				table += 
 				"<tr onclick=\"location.href='/source/view/product.php?id="+listArray[i].cid+"'\">" +
 					"<td>" +
-					  "<img src=\""  + product['image']
-            + "\" alt=\"\" width=\"50\" height=\"50\">" +
+					  "<img src=\""  + listArray[i].image + 
+             "\" alt=\"\" width=\"50\" height=\"50\">" +
 					"</td>" +
 					"<td>" + listArray[i].price + "</td>" +
 					"<td>" + listArray[i].weight+ " kg</td>" +
