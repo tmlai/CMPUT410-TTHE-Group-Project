@@ -49,8 +49,10 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       if(jsonArray.quantity < qty) {
         
         var qtyBool = getExternalAvail(pid, qty - jsonArray.quantity);
+        alert(qtyBool);
         if(qtyBool != false) {
           qty = qtyAvail;
+          return true;
         } else {
           alert("Sorry we did not have the quantity you requested, please take"
             + " a look at our Top Ranked Related Products for other options.");
