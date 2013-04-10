@@ -33,13 +33,12 @@ function buildOrders(orders) {
     var order = orders[i];
     oHtml += '<div class="accordion-group">\n'
       + '    <div class="accordion-heading">\n'
-      + '      <a class="accordion-toggle" data-toggle="collapse in" '
-      + 'data-parent="#outstandingAccordion" href="#collapse' + order['orderId'] + '">\n'      
-      + 'Order ID: ' + order['orderId'] + '    -    '
-      + 'Date: ' + order['delivery_date']
+      + '      <a class="accordion-toggle" data-toggle="collapse" '
+      + 'data-parent="#outstandingAccordion" href="#collapse' + order['orderId'] + '">\n'
+      + 'Order ID: ' + order['orderId'] + '    -    Date: ' + order['delivery_date']
       + '    -    Total Cost: ' + order['price_total']
       + '</a>\n</div>\n'
-      + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse in">\n'
+      + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse">\n'
       + '      <div class="accordion-inner">\n';
       
       for(var j = 0; j < order['order'].length; j++) {
