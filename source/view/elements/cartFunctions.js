@@ -248,9 +248,9 @@ function buildCartProducts() {
   }
 }
 
-function setButtonsVisiblity(val, buttonOne, buttonTwo) {
-  for(var i = 0; i < vals.length; i++) {
-    document.getElementById(vals[i]).style.visibility = val;
+function setButtonsVisiblity(val, buttons) {
+  for(var i = 0; i < buttons.length; i++) {
+    document.getElementById(buttons[i]).style.visibility = val;
   }
 }
 
