@@ -2,6 +2,7 @@
 namespace view;
 session_start(); 
 $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
+$cateId = $_GET['cateId'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
   </head>
-  <body onLoad="getMenuCategories();">   
+  <body onLoad="getMenuCategories(); buildCatProducts('<?php echo $cateId;?>');">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -25,13 +26,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       }
     ?>
     <div class="container">
-        <div class="hero-unit">
+        <div class="hero-unit" id="catHero">
             <h1>Category Name</h1>
             <p>This is a category description.</p>
         </div>
         <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;">
-                        <table class="table table-hover">
+        bottom:0px; overflow:auto;" id="resultsDiv">
+          <table class="table table-hover">
             <thead>
                 <tr>
                     <th><!-- placeholder --></th>
@@ -42,78 +43,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
                     <th>Description</th>
                 </tr>
             </thead>
-            <tbody>
-              <div id="resultsDiv">
-                <!-- product code javascript function will return the product code
-                for the query of the database for creating product.php-->
-                <tr onclick="location.href='./product.php?id=1'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$1</td>
-                    <td>1 kg</td>
-                    <td>1name</td>
-                    <td>c1</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p1" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=2'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$2</td>
-                    <td>2 kg</td>
-                    <td>2name</td>
-                    <td>c2</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p2" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=3'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$3</td>
-                    <td>3 kg</td>
-                    <td>3name</td>
-                    <td>c3</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p3" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-                <tr onclick="location.href='./product.php?id=4'">
-                    <td>
-                      <img src="" alt="" width="50" height="50">
-                    </td>
-                    <td>$4</td>
-                    <td>4 kg</td>
-                    <td>4name</td>
-                    <td>c4</td>
-                    <td>This is a description...</td>
-                    <td>
-                        <button id="p4" style="position:relative; right:0px;"
-                        class="btn pull-right">
-                            View Product
-                        </button>
-                    </td>
-                </tr>
-              </div>
+            <tbody id="productsBody">
             </tbody>
-            </table>
-            <hr>
+          </table>
+        </div>
+        <hr>
+        <div id="loadingSpinner" align="center" style="visibility:visible">
+          <img src="./elements/img/spinner.gif" alt="...Loading...">
         </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
