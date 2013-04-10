@@ -27,6 +27,8 @@ foreach($list as &$co){
 	$orderId = $co->getOrderId();
 	$oneOrder["orderId"] = $orderId;
 	
+	$oneOrder["price_total"] = $co->getOrderCost();
+	
 	$temp = $dbLayer->getListProductsInOrder($orderId);
 	foreach($temp as &$op){
 		/* @var $op OrderProduct */
