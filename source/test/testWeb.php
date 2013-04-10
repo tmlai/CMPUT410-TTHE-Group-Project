@@ -34,6 +34,7 @@
 				var params = "amount=" + amt;
 				var xmlhttp=new XMLHttpRequest();
 				xmlhttp.open('POST', '/products/'+id+'/order', false);
+				http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				xmlhttp.onreadystatechange = functionToCall;
 				xmlhttp.send(params);
 			}
