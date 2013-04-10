@@ -188,41 +188,47 @@ function buildCartProducts() {
     // Return if product is in stock
     xmlhttp.onreadystatechange=function() {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
-        //console.log(getOneProduct(jsonCart[i]['pid']));
-        var product = JSON.parse(xmlhttp.responseText);
-        document.getElementById("productsBody").innerHTML += (
-          "<tr>\n<td>\n"
-          // Quantity text field for product
-          + "<input type=\"text\" name=\"qtyField" + product.id
-          + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" class=\"input-mini\"></td>"
-          + "<td " + getProdLink(product['id']) + ">\n"
-          // Thumbnail of product
-          + " <img src='/img/products/" + product['id'] + ".jpg\'" 
-          + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-          + "</td>\n"
-          // Price of product
-          + "<td " + getProdLink(product['id']) + ">$" 
-          + product['price'] + "</td>\n"
-          // Weight of product
-          + "<td " + getProdLink(product['id']) + ">" 
-          + product['weight'] + "</td>\n"
-          // Name of product
-          + "<td " + getProdLink(product['id']) + ">" + product['name'] + "</td>\n"
-          // Code of product
-          + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
-          // Description of product
-          + "<td " + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td>\n"
-          + " <button " + getProdLink(product['id']) + "style=\"position:relative; right:0px;\"\n"
-          + "   class=\"btn pull-right\">\n"
-          + "       View Product\n"
-          + "   </button>\n"
-          + " </td>\n"
-          + "</tr>\n"
-        );     
-        price += (jsonCart[i].quantity * product['price']);
+        try{
+          if(xmlhttp.responseText == "") {
+           throw "err"; 
+          }
+          var product = JSON.parse(xmlhttp.responseText);
+          document.getElementById("productsBody").innerHTML += (
+            "<tr>\n<td>\n"
+            // Quantity text field for product
+            + "<input type=\"text\" name=\"qtyField" + product.id
+            + "\" id=\"qtyField" + product.id + "\" value=\"" 
+            + jsonCart[i].quantity + "\" class=\"input-mini\"></td>"
+            + "<td " + getProdLink(product['id']) + ">\n"
+            // Thumbnail of product
+            + " <img src='/img/products/" + product['id'] + ".jpg\'" 
+            + "\" alt=\"\" width=\"50\" height=\"50\">\n"
+            + "</td>\n"
+            // Price of product
+            + "<td " + getProdLink(product['id']) + ">$" 
+            + product['price'] + "</td>\n"
+            // Weight of product
+            + "<td " + getProdLink(product['id']) + ">" 
+            + product['weight'] + "</td>\n"
+            // Name of product
+            + "<td " + getProdLink(product['id']) + ">" + product['name'] + "</td>\n"
+            // Code of product
+            + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
+            // Description of product
+            + "<td " + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
+            + "<td>\n"
+            + " <button " + getProdLink(product['id']) + "style=\"position:relative; right:0px;\"\n"
+            + "   class=\"btn pull-right\">\n"
+            + "       View Product\n"
+            + "   </button>\n"
+            + " </td>\n"
+            + "</tr>\n"
+          );     
+          price += (jsonCart[i].quantity * product['price']);
+        } catch(err) {
+          document.getElementById("productsBody").innerHTML += 
+            '<tr><td>No Information available.</td></tr>';
+        }
      }
    
     };
