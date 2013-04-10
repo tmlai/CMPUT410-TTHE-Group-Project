@@ -180,7 +180,6 @@ if ($requestMethod == "POST"){
 			$params.= "&amt=".number_format($totalAmount,2,'.','');
 			$params.= "&tx=".$transactionId;
 			$params.= "&ret=".$retUrl;
-			$params.= "target=_blank";
 			//header("Location:".$payBuddyUrl.$params);
 			$message["message"]= "".$payBuddyUrl.$params;
 		}

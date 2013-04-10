@@ -23,9 +23,9 @@ if($requestMethod == "post") {
   
   // Check if user is admin (1 if admin, 0 not)
   if($dbLayer->authenticateAdmin($username, $password))
-    $_SEESION['admin'] = 1;
+    $_SESSION['admin'] = 1;
   else
-    $_SEESION['admin'] = 0;
+    $_SESSION['admin'] = 0;
   
 	if($status == 2) {
 		$_SESSION['user'] = $username;

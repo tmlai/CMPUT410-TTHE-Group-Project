@@ -55,7 +55,7 @@ if ($requestMethod == "GET"){
 					echo "Your transaction is completed successfully.<br/>";
 					echo "Your order number is ".$res."<br />";
 					echo "Your delivery date is ".$customerOrder->getDeliveryDate()."<br />";
-					echo "<a href='http://cs410.cs.ualberta.ca:41041'>Click here to return to our store</a>";
+					echo "<a href='http://cs410.cs.ualberta.ca:41041/source/view/'>Click here to return to our store</a>";
 				}
 			}
 			else {
