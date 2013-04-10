@@ -28,7 +28,7 @@
 }
 
 function buildOrders(orders) {
-  oHtml = '<div class="accordion" id="outstandingAccordion">\n';
+  var oHtml = '<div class="accordion" id="outstandingAccordion">\n';
   for(var i = 0; i < orders.length; i++) {
     var order = orders[i];
     oHtml += '<div class="accordion-group">\n'
