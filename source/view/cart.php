@@ -17,7 +17,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/head_includes.php");
     ?>
   </head>
-  <body onLoad="buildCartProducts()">
+  <body onLoad="buildCartProducts(); getMenuCategories();">
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -53,6 +53,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         <hr>
         <div id="loadingSpinner" align="center" style="visibility:visible">
           <img src="./elements/img/spinner.gif" alt="...Loading...">
+          <p class="muted">...Retrieving Cart Information...</p>
         </div>
         <div align="center">
         <table border="0" width="100%">

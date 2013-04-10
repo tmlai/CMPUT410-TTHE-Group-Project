@@ -1,7 +1,7 @@
 /*
  * AJAX call for outstanding orders.
  */
- function getOutstandingOrders(pid) {
+ function getOutstandingOrders() {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -41,7 +41,7 @@ function buildOrders(orders) {
       + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse in">\n'
       + '      <div class="accordion-inner">\n';
       
-      for(var j = 0; j < order['order'].length, j++) {
+      for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
         oHTML += 
         '<table class="table">\n'

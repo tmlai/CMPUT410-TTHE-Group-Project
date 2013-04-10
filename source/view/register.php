@@ -39,7 +39,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
 
     </style>
   </head>
-  <body>   
+  <body getMenuCategories();>   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {

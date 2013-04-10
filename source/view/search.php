@@ -23,7 +23,7 @@ if ($advanced == null) {
 	
   </head>
   <body onLoad="setToggle('<?php echo $advanced;?>'); 
-	initialLoading('<?php echo $search;?>'); getMenuCategories();"> 
+	initialLoading('<?php echo $search;?>'); getMenuCategories(); getMenuCategories();"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -128,8 +128,9 @@ if ($advanced == null) {
             </table>
         </div>
 		<hr>
-        <div id="loadingSpinner" align="center" style="visibility:visible">
+    <div id="loadingSpinner" align="center" style="visibility:visible">
 		  <img src="./elements/img/spinner.gif" alt="...Loading...">
+      <p class="muted">...Searching...</p>
 		</div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>

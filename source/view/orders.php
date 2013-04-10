@@ -12,9 +12,10 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         // Default Style links
         require("./elements/head_includes.php");
     ?>
-    <link href="bootstrap/css/carousel.css" rel="stylesheet">
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/orderFunctions.js"></script>
   </head>
-  <body onLoad="getMenuCategories();">   
+  <body onLoad="getMenuCategories(); getOutstandingOrders();">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -28,6 +29,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <div class="container" id="ordersContainer">
       <div id="loadingSpinner" align="center" style="visibility:visible">
         <img src="./elements/img/spinner.gif" alt="...Loading...">
+        <p class="muted">...Retrieving Orders...</p>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>
