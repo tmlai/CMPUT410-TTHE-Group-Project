@@ -89,7 +89,7 @@ $product = json_decode($product, true);
                   <li class="span10">
                     <div class="thumbnail">
 					<?php
-					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
+					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$product['image'].jpg' alt='$product['image'] is missing'></a>";
 					?>
                       <h4>Price: </h4>
                       <h3>$<?php echo $product['price']?></h3>
