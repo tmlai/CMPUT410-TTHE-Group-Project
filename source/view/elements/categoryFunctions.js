@@ -253,7 +253,7 @@ function buildCatProducts(jsonArray) {
           document.getElementById("productsBody").innerHTML += (
             "<tr " + getProdLink(product['id']) + ">\n<td>\n"
             // Thumbnail of product
-            + " <img src='/img/products/" + product['img'] + "\'" 
+            + " <img src='/img/products/" + product['image'] + "\'" 
             + "\" alt=\"\" width=\"50\" height=\"50\">\n"
             + "</td>\n"
             // Price of product
