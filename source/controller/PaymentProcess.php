@@ -6,11 +6,11 @@ use model\CustomerOrder;
 use model\OrderProduct;
 use model\Store;
 
-include_once ('DbLayer.php');
-include_once ('CustomerOrder.php');
-include_once ('OrderProduct.php');
-include_once ('Store.php');
-include_once ('TransactionLayer');
+include_once ('../model/DbLayer.php');
+include_once ('../model/CustomerOrder.php');
+include_once ('../model/OrderProduct.php');
+include_once ('../model/Store.php');
+include_once ('../model/TransactionLayer.php');
 
 
 $priceTolerance = 1.10;
