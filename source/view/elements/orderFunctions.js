@@ -58,8 +58,7 @@ function buildOrders(orders) {
         +      '<td>$' + String(prod['amount']) + '</td>'
         +    '</tr>\n';
       }
-      oHtml += 
-        +  '</tbody>\n'
+      oHtml += '</tbody>\n'
         +  '</table>\n'
         +  '</div>\n'
         + '</div>\n'
