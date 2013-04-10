@@ -2,13 +2,13 @@
 session_start();
 use model\DbLayer;
 use model\TransactionLayer;
-use model\CustomerOrder;
-use model\OrderProduct;
+use model\TransactionOrder;
+use model\TransactionProduct;
 use model\Store;
 
 include_once ('../model/DbLayer.php');
-include_once ('../model/CustomerOrder.php');
-include_once ('../model/OrderProduct.php');
+include_once ('../model/TransactionOrder.php');
+include_once ('../model/TransactionProduct.php');
 include_once ('../model/Store.php');
 include_once ('../model/TransactionLayer.php');
 
@@ -100,17 +100,21 @@ $url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
 if ($requestMethod == "POST"){
 	$message = array("status" => "False",
 			"message" => "by default",
-			"deliveryDate" => ""
 	);
 	
 // 	echo "hahaha";
 	$dbLayer = new DbLayer();
 	
 	$userName = $_SESSION["user"];
+	if (!isset($userName) || $userName === ""){
+		$message = "You did not login. Please login first! Thank you.";
+		echo $message;
+		exit();
+	}
 	$products = $_POST["orderLists"];
 	$productsJson = json_decode($products, true);
 
-	$customerOrder = new CustomerOrder(0, '', '', $userName, 0, '');
+	$customerOrder = new TransactionOrder(0, '', '', $userName, 0, '');
 	$orderProductsArray = array();
 	$failed = False;
 	$success = False;
@@ -122,7 +126,7 @@ if ($requestMethod == "POST"){
 // 		echo "crrStock ".$crrStock."<br/>";
 		$ourPrice = $dbLayer->getPrice($productId);
 		if ($crrStock >= $quantity){
-			$orderProduct = new OrderProduct(0, $productId, 1, $quantity, 0,
+			$orderProduct = new TransactionProduct(0, $productId, 1, $quantity, 0,
 					"", $quantity * $ourPrice);
 			$orderProductsArray[] = $orderProduct;
 			$totalAmount += $orderProduct->getAmount();
@@ -131,7 +135,7 @@ if ($requestMethod == "POST"){
 		}
 		else {
 			if ($crrStock > 0){
-				$orderProductsArray[] = new OrderProduct(0, $productId, 1, $crrStock, "",
+				$orderProductsArray[] = new TransactionProduct(0, $productId, 1, $crrStock, "",
 						"", $quantity * $ourPrice);
 			}
 			$toOrder = $quantity - $crrStock;
