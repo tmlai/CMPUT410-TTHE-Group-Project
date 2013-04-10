@@ -14,15 +14,17 @@ function addProdToCart(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      updateCartProductQty(pid, xmlhttp.responseText);
-      var cartBool = confirm("Product has been added to cart. Would you like to"
-        + " go to view the cart?");
-      if(cartBool) {
-        var dir = location.href;
-        dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-        dir = dir + "cart.php";
-        window.location.href = dir;
-      } 
+      var cartCheck = updateCartProductQty(pid, xmlhttp.responseText);
+      if(cartCheck != false) {
+        var cartBool = confirm("Product has been added to cart. Would you like to"
+          + " go to view the cart?");
+        if(cartBool) {
+          var dir = location.href;
+          dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+          dir = dir + "cart.php";
+          window.location.href = dir;
+        } 
+      }
     }
   };
   
@@ -117,7 +119,6 @@ function getExternalAvail(pid, qty = 1) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var response = xmlhttp.responseText;
       response = response.trim();
-      alert("response = " + response);
       if(response == "True") {
         return true;
       }
