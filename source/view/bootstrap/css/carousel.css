@@ -28,7 +28,9 @@
   top: 0;
   left: 45px;
   /*min-width: 100%;*/
-  height: 400px;
+  height: 350px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .carousel-bkg img {
@@ -43,13 +45,13 @@
 }
 
 .carousel-caption {
-  background-color: #666666;
+  background-color: transparent;
   position: static;
   max-width: 550px;
   padding: 0 60px;
   margin-top: 60px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 150px;
 }
 .carousel-caption h1,
 .carousel-caption .lead {
