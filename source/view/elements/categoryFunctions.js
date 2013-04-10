@@ -250,7 +250,7 @@ function buildCatProducts(jsonArray) {
      }
    
     };
-    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonArray[i]['pid'], false);
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonArray[i]['cid'], false);
     xmlhttp.send();
   }
   if(jsonArray.length == 0) {
