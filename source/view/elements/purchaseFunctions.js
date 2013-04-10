@@ -136,6 +136,9 @@ function sendPurchase(jsonInv) {
       var response = JSON.parse(xmlhttp.responseText);
       if(response['status'] == "True") {
         //return response['deliveryDate'];
+        // Delete cart cookie on purchase
+        eraseCookie('cart');
+        // Redirect user
         window.location.replace(response["message"]);
       } else {
         alert("Unable to make purchase at this time, we appreciate your patience and"
