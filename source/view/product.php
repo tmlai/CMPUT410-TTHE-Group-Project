@@ -11,6 +11,7 @@ $id = $_SESSION['productID'];
 $dbLayer = new DbLayer();
 $product = $product = $dbLayer->getOneProduct($id);
 $product = json_decode($product, true);
+$img = trim($product['img']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,7 +90,7 @@ $product = json_decode($product, true);
                   <li class="span10">
                     <div class="thumbnail">
 					<?php
-					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$product['image'].jpg' alt='$product['image'] is missing'></a>";
+					  echo "<a href='/img/products/$img'><img src='/img/products/$img' alt='$img is missing'></a>";
 					?>
                       <h4>Price: </h4>
                       <h3>$<?php echo $product['price']?></h3>

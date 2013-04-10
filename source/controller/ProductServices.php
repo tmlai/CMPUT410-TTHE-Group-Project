@@ -32,7 +32,7 @@ try {
 		$quantity = $_POST['amount'];
 		$storeId = 1;
 		$cid = $second_token;
-		$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity['amount']);
+		$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity);
 		echo $orderInfo;
 	//NOTE: returns empty atm...
 
