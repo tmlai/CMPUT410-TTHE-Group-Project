@@ -104,7 +104,7 @@ function buildCategoryContainer(cats) {
 
 function buildCarouselItems(prods) {
   var catHTML = '<div id="myCarousel" class="carousel slide" data-interval="1500">\n';
-  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
+  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv" data-interval="1500">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
     if(i == 0) {
