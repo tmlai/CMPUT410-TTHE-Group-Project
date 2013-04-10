@@ -28,7 +28,8 @@
 }
 
 function buildOrders(orders) {
-  var oHtml = '<div class="accordion" id="outstandingAccordion">\n';
+  var oHtml = '<h3>Your Orders:</h3>'
+    + '<div class="accordion" id="outstandingAccordion">\n';
   for(var i = 0; i < orders.length; i++) {
     var order = orders[i];
     oHtml += '<div class="accordion-group">\n'
@@ -36,7 +37,7 @@ function buildOrders(orders) {
       + '      <a class="accordion-toggle" data-toggle="collapse" '
       + 'data-parent="#outstandingAccordion" href="#collapse' + order['orderId'] + '">\n'
       + 'Order ID: ' + order['orderId'] + '    -    Date: ' + order['delivery_date']
-      + '    -    Total Cost: ' + order['price_total']
+      + '    -    Total Cost: $' + order['price_total']
       + '</a>\n</div>\n'
       + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse">\n'
       + '      <div class="accordion-inner">\n'
@@ -55,7 +56,7 @@ function buildOrders(orders) {
         +    '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
         +      '<td>' + prod['quantity'] + '</td>'
-        +      '<td>' + prod['amount'] + '</td>'
+        +      '<td>$' + prod['amount'] + '</td>'
         +    '</tr>\n';
       }
       oHtml += 
@@ -66,6 +67,7 @@ function buildOrders(orders) {
         + '</div>\n';   
   }
   oHtml += '</div>';
+  oHtml = str.replace("NaN","");
   document.getElementById('ordersContainer').innerHTML = oHtml;
 
 }
