@@ -115,6 +115,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
              <!-- <label class="checkbox">
                 <input type="checkbox"> Remember me
               </label>-->
+			  * Required Fields
               <button type="submit"
                 class="btn btn-success">Register</button>
             </div>
