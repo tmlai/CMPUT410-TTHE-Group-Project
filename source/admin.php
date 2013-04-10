@@ -195,7 +195,7 @@ use model\Olap;
 	</td>
 	</tr>
 	</table>
-	<a href='/source/view/index.php'>Back to main page</a>"
+	<a href='/source/view/index.php'>Back to main page</a>
 	<?php
 		$submitVal = $_GET['submit'];
 		$submitTop = $_GET['submitTop'];
