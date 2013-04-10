@@ -11,7 +11,7 @@ $cateId = $_GET['cateId'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
       // Default Style links
-      require($DOCUMENT_ROOT . "./elements/head_includes.php");
+      require("./elements/head_includes.php");
     ?>
   </head>
   <body onLoad="getMenuCategories(); getCategoryProducts('<?php echo $cateId;?>');">   
