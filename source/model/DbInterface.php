@@ -105,6 +105,11 @@ interface DbInterface {
 	 * Return type: array of category objects
 	 */
 	public function getCategoriesList();
+	
+	/*
+	 * Given category id, return Category Object.
+	 */
+	public function getOneCategory($cateId);
 
 	/*
 	 * Return a list of products belonging to some category

@@ -377,6 +377,21 @@ class DbLayer implements DbInterface {
 
 		return $list;
 	}
+	
+	public function getOneCategory($cateId){
+		$pdo = self::getPdo();
+		$statement = "SELECT * FROM Categories WHERE cateId = ?";
+		$array = array($cateId);
+		$stmt = $pdo->prepare($statement);
+		$stmt->execute($array);
+		
+		$temp = $stmt->fetchAll();
+		$cateObj = null;
+		foreach($temp as &$row){
+			$cateObj = new Category($row[0], $row[1], $row[2]);
+		}
+		return $cateObj;
+	}
 
 	/*
 	 * Return a list of products belonging to some category

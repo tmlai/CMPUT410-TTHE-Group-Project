@@ -34,6 +34,10 @@ if ($requestMethod == 'get') {
 			$allReturned[] = $prod->toAssociativeArray();
 		}
 		echo json_encode($allReturned);
+	} elseif (isset($_GET['cateId'])){
+		$cateId = $_GET['cateId'];
+		$cateObj = $dbLayer->getOneCategory($cateId);
+		echo $cateObj->json_encode();
 	}
 }
 ?>
