@@ -81,7 +81,7 @@ function initialLoading(searchString) {
 									"<th>Code</th>" +
 									"<th>Description</th>" +
 									"</tr>";
-			document.getElementById("tableHead").innerHTL = htmlTableTitles;
+			document.getElementById("tableHead").innerHTML = htmlTableTitles;
 			document.getElementById('resultsTable').innerHTML=table;
 			
 			if(listArray.length==0) {
