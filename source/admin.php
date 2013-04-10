@@ -1,10 +1,17 @@
 <?php
+session_start();
 use model\DbLayer;
 
 include_once "adminHelper.php";
 include_once "./model/Olap.php";
 use controller\AdminHelper;
 use model\Olap;
+
+if(isset($_SESSION['admin']) || $_SESSION['admin'] == null) {
+	echo "You do not have permission to access this page."
+	echo "<a href='/source/view/index.php'>Back to main page</a>";
+	die();
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

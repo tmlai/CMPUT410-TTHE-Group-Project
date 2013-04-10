@@ -65,7 +65,7 @@
                  <?php 
                   if($_SESSION['admin'] == 1)
                     echo  '<li><a href="../admin.php">
-                          . Admin Module</a></li>';
+                          Admin Module</a></li>';
                  ?>
                 <li><a href="./elements/signout.php">Sign Out</a></li>
               </ul>
