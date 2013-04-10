@@ -390,7 +390,7 @@ class TestDb {
 	 * PASS
 	 */
 	public static function testGetListProductsInOrder(){
-		$orderId = 6;
+		$orderId = 9;
 		$dbLayer = new DbLayer();
 		$list = $dbLayer->getListProductsInOrder($orderId);
 		
@@ -609,7 +609,7 @@ class TestDb {
 // \test\TestDb::testGetProductsInStock();
 // \test\TestDb::testGetOneProduct();
 // \test\TestDb::testGetStock();
-\test\TestDb::testReceiveOrderFromStore();
+// \test\TestDb::testReceiveOrderFromStore();
 // \test\TestDb::testCheckDeliveryDate();
 // \test\TestDb::testAddOrder();
 // \test\TestDb::testSearchProductByCode();
