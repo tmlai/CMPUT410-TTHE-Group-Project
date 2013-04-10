@@ -56,10 +56,10 @@ function buildOrders(orders) {
         +      '<td>' + prod['pid'] + '</td>'
         +      '<td>' + prod['quantity'] + '</td>'
         +      '<td>' + prod['amount'] + '</td>'
-        +    '</tr>\n'
+        +    '</tr>\n';
       }
       oHtml += 
-        +  '</tbody>\n';
+        +  '</tbody>\n'
         +  '</table>\n'
         +  '</div>\n'
         + '</div>\n'
