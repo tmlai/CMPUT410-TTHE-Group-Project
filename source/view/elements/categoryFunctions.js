@@ -224,6 +224,7 @@ function writeCateInfo(cateId) {
   xmlhttp.open('GET', '/source/controller/CategoryServices.php?cateId='
     + cateId, true);
   xmlhttp.send();
+  
 }
 
 function getProdLink(pid) {
@@ -238,7 +239,7 @@ function buildCatProducts(cateId) {
   var emptyCount = 0;
   var price = 0;
   // If no cart exists
-  if(cateId == null || cateId == "" || cateName == null || cateName == "" ) {
+  if(cateId == null || cateId == "") {
     document.getElementById("resultsDiv").innerHTML = 
       "<h4>No products in this category.</h4>";
     return false;
