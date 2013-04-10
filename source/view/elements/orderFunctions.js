@@ -40,27 +40,26 @@ function buildOrders(orders) {
       + '</a>\n</div>\n'
       + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse">\n'
       + '      <div class="accordion-inner">\n'
-      + '<table class="table">\n';
-      
+      + '<table class="table">\n'
+      +  '<thead>\n'
+      +  '  <tr>\n'
+      +  '    <th>Prodoct ID</th>\n'
+      +  '    <th>Quantity</th>\n'
+      +  '    <th>Product(s) Cost</th>\n'
+      +  '  </tr>\n'
+      +  '</thead>\n'
+      +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
         oHtml += 
-        +  '<thead>\n'
-        +  '  <tr>\n'
-        +  '    <th>Prodoct ID</th>\n'
-        +  '    <th>Quantity</th>\n'
-        +  '    <th>Product(s) Cost</th>\n'
-        +  '  </tr>\n'
-        +  '</thead>\n'
-        +  '<tbody>\n'
         +    '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
         +      '<td>' + prod['quantity'] + '</td>'
         +      '<td>' + prod['amount'] + '</td>'
         +    '</tr>\n'
-        +  '</tbody>\n';
       }
       oHtml += 
+        +  '</tbody>\n';
         +  '</table>\n'
         +  '</div>\n'
         + '</div>\n'
