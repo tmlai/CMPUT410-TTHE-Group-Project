@@ -23,7 +23,7 @@
       }
     }
   };
-  xmlhttp.open('GET', '../controller/viewOutstandingOrder.php', true);
+  xmlhttp.open('GET', '../controller/viewOutstandingOrders.php', true);
   xmlhttp.send();
 }
 
