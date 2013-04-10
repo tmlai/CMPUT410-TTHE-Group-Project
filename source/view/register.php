@@ -6,6 +6,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
   <head>
     <title>TTHE Enterprise - Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
 	<script src="/source/view/elements/register.js"></script>
     <?php
         // Default Style links
