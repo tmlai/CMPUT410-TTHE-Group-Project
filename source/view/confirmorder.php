@@ -52,6 +52,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         <hr>
         <div id="loadingSpinner" align="center" style="visibility:visible">
           <img src="./elements/img/spinner.gif" alt="...Loading...">
+          <p class="muted">...Retrieving Cart Information...</p>
         </div>
         <div align="center" id="buttonsDiv">
         <table border="0" width="100%">

@@ -12,7 +12,8 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         // Default Style links
         require("./elements/head_includes.php");
     ?>
-    <link href="bootstrap/css/carousel.css" rel="stylesheet">
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/orderFunctions.js"></script>
   </head>
   <body onLoad="getMenuCategories(); getOutstandingOrders();">   
     <?php
