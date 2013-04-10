@@ -166,7 +166,8 @@ function buildCartProducts() {
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
-    document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+    document.getElementById("loadingSpinner").style.visibility = "hidden";
+    document.getElementById("loadingSpinner").innerHTML = "<br>";
     return false;
   }
   

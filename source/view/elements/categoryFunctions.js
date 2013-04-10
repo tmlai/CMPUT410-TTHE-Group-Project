@@ -103,8 +103,8 @@ function buildCategoryContainer(cats) {
 }
 
 function buildCarouselItems(prods) {
-  var catHTML = '<div id="myCarousel" class="carousel slide">\n';
-  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
+  var catHTML = '<div id="myCarousel" class="carousel slide" data-interval="2000">\n';
+  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv" data-interval="2000">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
     if(i == 0) {
@@ -114,8 +114,7 @@ function buildCarouselItems(prods) {
     }
     catHTML += (
       '<a href="./product.php?id=' + product['cid'] + '">\n'
-      + '<img src="/img/products/' + product['cid'] + '.jpg" '
-      + getProdLink(product['cid']) + ' alt="">\n'
+      + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
       + '    <h1>Welcome to Our Store</h1>\n'
@@ -135,7 +134,14 @@ function buildCarouselItems(prods) {
     + '<div class="carousel-bkg">\n'
     + '<img class="bkg" src="/source/view/bootstrap/img/tthe_carousel.jpg" alt="">\n'
     + '</div></div>\n'
-  document.getElementById("carouselElement").innerHTML = catHTML;
+    document.getElementById("carouselElement").innerHTML = catHTML;
+    $(document).ready(function () {
+      $('.carousel').carousel({
+          interval: 2000
+      });
+
+      $('.carousel').carousel('cycle');
+  });
 }
 
 
