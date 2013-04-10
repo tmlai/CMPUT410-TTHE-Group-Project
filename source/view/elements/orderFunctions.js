@@ -53,7 +53,7 @@ function buildOrders(orders) {
       +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
-        var prodName = JSON.parse(getOneProduct(prod['pid']));
+        var prodName = getOneProduct(prod['pid']);
         prodName = prodName['name'];
         oHtml += '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
