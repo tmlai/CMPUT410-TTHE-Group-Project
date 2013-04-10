@@ -42,14 +42,27 @@ if ($requestMethod == "GET"){
 			echo $message;
 		}
 		else{
-			$res = $dbLayer->addOrder($traInfo[0], $traInfo[1]);
-			if ($res == 0){
-				echo "Our system is experiency a difficulty. Please contact our technical team for help.";
+			$traValidity = $traInfo[0]->getValidity();
+			$res = 0;
+			if ($traValidity == 1){
+				$res = $dbLayer->addOrderEnhanced($traInfo[0], $traInfo[1]);
+				if ($res == 0 ){
+					echo "Our system is experiency a difficulty. Please contact our technical team for help.";
+				}
+				else {
+					$customerOrder = $dbLayer->getCustomerOrder($res);
+					setcookie("cart","",-1);
+					echo "Your transaction is completed successfully.<br/>";
+					echo "Your order number is ".$res."<br />";
+					echo "Your delivery date is ".$customerOrder->getDeliveryDate()."<br />";
+					echo "<a href='http://cs410.cs.ualberta.ca:41041'>Click here to return to our store</a>";
+				}
 			}
 			else {
-				echo "Your transaction is completed. Your order number is ".$res;
+				echo "Your transaction has completed successfully.<br/>";
 				echo "<a href='http://cs410.cs.ualberta.ca:41041'>Click here to return to our store</a>";
-			}	
+			}
+			
 		}	
 	}	
 }
