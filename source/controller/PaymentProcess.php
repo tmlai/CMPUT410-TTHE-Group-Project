@@ -181,7 +181,8 @@ if ($requestMethod == "POST"){
 			$params.= "&tx=".$transactionId;
 			$params.= "&ret=".$retUrl;
 			$params.= "target=_blank";
-			header("Location:".$payBuddyUrl.$params);
+			//header("Location:".$payBuddyUrl.$params);
+			$message["message"]= "".$payBuddyUrl.$params;
 		}
 	}
 	echo json_encode($message);

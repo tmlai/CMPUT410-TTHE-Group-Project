@@ -4,7 +4,6 @@
 ?>
 <html>
 	<header>
-		<title> testWeb.php </title>
 		<script>
 			//gets all the id numbers in stock
 
@@ -23,9 +22,16 @@
 				
 				function functionToCall() {
 					if (xmlhttp.readyState == 4) {
-						alert(xmlhttp.responseText);
+						//alert(xmlhttp.responseText);
 						res = document.getElementById("res");
 						res.innerHTML = xmlhttp.responseText;
+						var json = JSON.parse(xmlhttp.responseText);
+						if (json["status"] == "True"){
+							window.location(json["message"]);
+						}
+						else {
+							alert(json["message"]);
+						}
 					}
 				}
 				
