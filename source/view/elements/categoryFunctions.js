@@ -134,8 +134,14 @@ function buildCarouselItems(prods) {
     + '<div class="carousel-bkg">\n'
     + '<img class="bkg" src="/source/view/bootstrap/img/tthe_carousel.jpg" alt="">\n'
     + '</div></div>\n'
-  document.getElementById("carouselElement").innerHTML = catHTML;
-  document.getElementById("carouselElement").focus();
+    document.getElementById("carouselElement").innerHTML = catHTML;
+    $(document).ready(function () {
+      $('.carousel').carousel({
+          interval: 2000
+      });
+
+      $('.carousel').carousel('cycle');
+  });
 }
 
 
