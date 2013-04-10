@@ -169,42 +169,6 @@ function buildCarouselItems(prods) {
   xmlhttp.send();
 }
 
-/*
- * Build and write the html for the Top Ranked Related Products.
- * @param products array
- *
-function buildCategoryProductList(products) {
-  for(var i = 0; i < products.length; i++) {
-    document.getElementById("resultsDiv").innerHTML += (
-      "<tr onclick=\"location.href='./product.php?id=" + products[i]['cid']
-      + "'\">\n"
-      // Rank/index of product
-      + "<td>" + (i + 1) + "</td>\n"
-      + "<td>\n"
-      // Thumbnail of product
-      + " <img src='/img/products/" + products[i]['cid'] + ".jpg\'" 
-      + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-      + "</td>\n"
-      // Price of product
-      + "<td>$" + products[i]['price'] + "</td>\n"
-      // Weight of product
-      + "<td>" + products[i]['weight'] + "</td>\n"
-      // Name of product
-      + "<td>" + products[i]['name'] + "</td>\n"
-      // Code of product
-      + "<td>" + products[i]['cid'] + "</td>\n"
-      // Description of product
-      + "<td>" + products[i]['description'].substring(0, 35) + "...</td>\n"
-      + "<td>\n"
-      + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
-      + "   class=\"btn pull-right\">\n"
-      + "       View Product\n"
-      + "   </button>\n"
-      + " </td>\n"
-      + "</tr>\n"
-    );
-  }
-}*/
 
 /*
  * Place the name and description of a category in the category.php page.
@@ -288,6 +252,10 @@ function buildCatProducts(jsonArray) {
     };
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
+  }
+  if(jsonArray.length == 0) {
+    document.getElementById("resultsDiv").innerHTML = 
+      "<h4>No products in this category. Please browse our other categories.</h4>";
   }
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
