@@ -30,8 +30,7 @@ $cateId = $_GET['cateId'];
             <h1>Category Name</h1>
             <p>This is a category description.</p>
         </div>
-        <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;" id="resultsDiv">
+        <div class="container" id="resultsDiv">
           <table class="table table-hover">
             <thead>
                 <tr>

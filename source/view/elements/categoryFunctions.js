@@ -117,7 +117,7 @@ function buildCarouselItems(prods) {
       + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
-      + '    <h1>Welcome</h1>\n'
+      + '    <h1>Welcome to Our Store</h1>\n'
       + '    <p class="lead">Browse through our many products.</p>\n'
       + '    <p>' + product['description'] + '</p>\n'
       + '    <a class="btn btn-large btn-primary" href="./product.php?id='
@@ -250,7 +250,7 @@ function buildCatProducts(jsonArray) {
      }
    
     };
-    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonArray[i]['cid'], false);
     xmlhttp.send();
   }
   if(jsonArray.length == 0) {

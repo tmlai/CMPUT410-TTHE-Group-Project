@@ -1,10 +1,12 @@
 <?php
+session_start();
 use model\DbLayer;
 
 include_once "adminHelper.php";
 include_once "./model/Olap.php";
 use controller\AdminHelper;
 use model\Olap;
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -91,7 +93,13 @@ use model\Olap;
 		</script>
 	</head>
 	<body>
-	
+		<?php 
+		if($_SESSION['admin'] == null || $_SESSION['admin'] == "") {
+			echo "You do not have permission to access this page.<br>";
+			echo "<a href='/source/view/index.php'>Back to main page</a>";
+			die();
+		}
+		?>
 	<table width="100%">
 	<tr>
 	<td>
@@ -187,6 +195,7 @@ use model\Olap;
 	</td>
 	</tr>
 	</table>
+	<a href='/source/view/index.php'>Back to main page</a>
 	<?php
 		$submitVal = $_GET['submit'];
 		$submitTop = $_GET['submitTop'];
