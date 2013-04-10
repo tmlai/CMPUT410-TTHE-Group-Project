@@ -70,7 +70,7 @@ function getCarouselProds() {
 function buildCategoryDropList(cats) {
   for(var i = 0; i < cats.length; i++) {
     document.getElementById("navCatList").innerHTML += (
-      '<li><a href="category.php?' + cats[i]['cateId'] + '">' 
+      '<li><a href="category.php?cateId=' + cats[i]['cateId'] + '">' 
       + cats[i]['name'] + '</a></li>'
     );
   }
