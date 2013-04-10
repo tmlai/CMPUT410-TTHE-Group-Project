@@ -61,14 +61,16 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="right">
           <tr>
             <td align="left">
-              <button class="btn btn-info" onclick="location.href='./cart.php'">
-                Go Back to Cart</button>
+              <button id="updateButton" class="btn btn-info" 
+              onclick="location.href='./cart.php'">
+                Go Back to Cart
+              </button>
             </td>
             <td id="priceCalc"></td>
             <td>
               <button class="btn btn-success" onclick="submitOrder(<?php 
                 echo "'" . $_SESSION['user'] . "'";
-              ?>)">
+              ?>)" id="submitButton">
               Confirm Purchase
               </button>
             </td>

@@ -71,7 +71,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
               <button class="btn btn-success" onclick="submitCart(<?php 
                 echo "'" . $_SESSION['user'] . "'";
               ?>)" id="submitButton" style="visibility:visible">
-              Checkout
+                Checkout
               </button>
             </td>
           </tr>
