@@ -14,6 +14,8 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     ?>
     <script type="text/javascript" language="JavaScript" 
       src="./elements/orderFunctions.js"></script>
+    <script type="text/javascript" language="JavaScript" 
+      src="./elements/productFunctions.js"></script>
   </head>
   <body onLoad="getMenuCategories(); getOutstandingOrders();">   
     <?php
