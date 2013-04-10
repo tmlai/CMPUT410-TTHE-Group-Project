@@ -45,23 +45,23 @@ function buildOrders(orders) {
         var prod = order['order'][j];
         oHtml += 
         '<table class="table">\n'
-          '<thead>\n'
-          '  <tr>\n'
-          '    <th>Prodoct ID</th>\n'
-          '    <th>Quantity</th>\n'
-          '    <th>Product(s) Cost</th>\n'
-          '  </tr>\n'
-          '</thead>\n'
-          '<tbody>\n'
-            '<tr>\n'
-              '<td>' + prod['pid'] + '</td>'
-              '<td>' + prod['quantity'] + '</td>'
-              '<td>' + prod['amount'] + '</td>'
-            '</tr>\n'
-          '</tbody>\n'
-        '</table>\n';
+        +  '<thead>\n'
+        +  '  <tr>\n'
+        +  '    <th>Prodoct ID</th>\n'
+        +  '    <th>Quantity</th>\n'
+        +  '    <th>Product(s) Cost</th>\n'
+        +  '  </tr>\n'
+        +  '</thead>\n'
+        +  '<tbody>\n'
+        +    '<tr>\n'
+        +      '<td>' + prod['pid'] + '</td>'
+        +      '<td>' + prod['quantity'] + '</td>'
+        +      '<td>' + prod['amount'] + '</td>'
+        +    '</tr>\n'
+        +  '</tbody>\n'
+        + '</table>\n';
       }
-      oHtml +='</div>\n'
+      oHtml += '</div>\n'
         + '    </div>\n'
         + '  </div>\n';   
   }
