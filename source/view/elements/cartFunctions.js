@@ -49,7 +49,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
       if(jsonArray.quantity < qty) {
         
         var qtyBool = getExternalAvail(pid, qty - jsonArray.quantity);
-        if(qtyBool) {
+        if(qtyBool != false) {
           qty = qtyAvail;
         } else {
           alert("Sorry we did not have the quantity you requested, please take"
