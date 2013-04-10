@@ -59,7 +59,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="right">
           <tr>
             <td align="left">
-              <button class="btn btn-info" onclick="location.href='./cart.php">
+              <button class="btn btn-info" onclick="location.href='./cart.php'">
                 Go Back to Cart</button>
             </td>
             <td id="priceCalc"></td>
