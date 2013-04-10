@@ -232,7 +232,7 @@ function buildCartProducts() {
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
-    + price.toFixed(2);
+    + price;
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
