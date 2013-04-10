@@ -40,9 +40,11 @@
 				var id = document.getElementById("id").value;
 				var q = document.getElementById("idQ").value;
 				var xmlhttp=new XMLHttpRequest();
-				var orderLists = Array(1);
+				var orderLists = Array(2);
 				var an_order = new OrderProduct(id,q);
+				var another_order = new OrderProduct("c000002",q);
 				orderLists[0] = an_order;
+				orderLists[1] = another_order;
 				//alert(JSON.stringify(orderLists));
 				var params = "orderLists="+ JSON.stringify(orderLists);
 					

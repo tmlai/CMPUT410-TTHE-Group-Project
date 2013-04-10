@@ -138,10 +138,15 @@
 			
 		1.	Purchase will send json for the purchase order, and server-side
 			will order from external stores as needed...
-			return format: JSON format{"deliveryDate":"", "status":"true/false"}
+			return format: JSON format{"messsage":"", "status":"True/False"}
+			if "status" is  "False" then "message" contains the error message
+			if "status" is "True" then "message" contains the paybuddy url that the browser
+			MUST redirect to.
+			Upon transaction complete, it will erase the cart data in cookies.
 			
 			sending (POST) in JSON format (Note: get user from $_SESSION['user']): 
 				orderLists=[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}...]
+			to the following url: controller/PaymentProcess.php
 				
 		RECOMMENDATION MODEL:
 		1.	Calling for top ranked products.
