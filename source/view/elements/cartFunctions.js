@@ -115,8 +115,9 @@ function getExternalAvail(pid, qty = 1) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      var response = JSON.parse(xmlhttp.responseText);
-      if(xmlhttp.responseText == "True") {
+      var response = xmlhttp.responseText;
+      response = response.trim();
+      if(response == "True") {
         return true;
       }
       return false;
