@@ -4,7 +4,6 @@
 ?>
 <html>
 	<header>
-		<title> testWeb.php </title>
 		<script>
 			//gets all the id numbers in stock
 
@@ -23,18 +22,29 @@
 				
 				function functionToCall() {
 					if (xmlhttp.readyState == 4) {
-						alert(xmlhttp.responseText);
+						//alert(xmlhttp.responseText);
 						res = document.getElementById("res");
 						res.innerHTML = xmlhttp.responseText;
+						var json = JSON.parse(xmlhttp.responseText);
+						alert(json);
+						alert(json["status"]);
+						if (json["status"] == "True"){
+							window.location.replace(json["message"]);
+						}
+						else {
+							alert(json["message"]);
+						}
 					}
 				}
 				
 				var id = document.getElementById("id").value;
 				var q = document.getElementById("idQ").value;
 				var xmlhttp=new XMLHttpRequest();
-				var orderLists = Array(1);
+				var orderLists = Array(2);
 				var an_order = new OrderProduct(id,q);
+				var another_order = new OrderProduct("c000002",q);
 				orderLists[0] = an_order;
+				orderLists[1] = another_order;
 				//alert(JSON.stringify(orderLists));
 				var params = "orderLists="+ JSON.stringify(orderLists);
 					

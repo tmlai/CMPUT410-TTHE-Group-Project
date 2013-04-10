@@ -142,6 +142,12 @@ function buildCarouselItems(prods) {
  * Get category products of a specific category id.
  */
  function getCategoryProducts(cateId) {
+  if(cateId == null || cateId == "") {
+    document.getElementById("resultsDiv").innerHTML = 
+      "<h4>No products in this category.</h4>";
+    return false;
+  }
+  writeCateInfo(cateId);
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -155,8 +161,7 @@ function buildCarouselItems(prods) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
-      // var jsonArray = xmlhttp.responseText;
-      buildRelatedProducts(jsonArray);
+      buildCatProducts(jsonArray);
     }
   };
   xmlhttp.open('GET', '/source/controller/CategoryServices.php?catProds='
@@ -164,42 +169,6 @@ function buildCarouselItems(prods) {
   xmlhttp.send();
 }
 
-/*
- * Build and write the html for the Top Ranked Related Products.
- * @param products array
- */ 
-function buildCategoryProductList(products) {
-  for(var i = 0; i < products.length; i++) {
-    document.getElementById("resultsDiv").innerHTML += (
-      "<tr onclick=\"location.href='./product.php?id=" + products[i]['cid']
-      + "'\">\n"
-      // Rank/index of product
-      + "<td>" + (i + 1) + "</td>\n"
-      + "<td>\n"
-      // Thumbnail of product
-      + " <img src='/img/products/" + products[i]['cid'] + ".jpg\'" 
-      + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-      + "</td>\n"
-      // Price of product
-      + "<td>$" + products[i]['price'] + "</td>\n"
-      // Weight of product
-      + "<td>" + products[i]['weight'] + "</td>\n"
-      // Name of product
-      + "<td>" + products[i]['name'] + "</td>\n"
-      // Code of product
-      + "<td>" + products[i]['cid'] + "</td>\n"
-      // Description of product
-      + "<td>" + products[i]['description'].substring(0, 35) + "...</td>\n"
-      + "<td>\n"
-      + " <button id=\"p1\" style=\"position:relative; right:0px;\"\n"
-      + "   class=\"btn pull-right\">\n"
-      + "       View Product\n"
-      + "   </button>\n"
-      + " </td>\n"
-      + "</tr>\n"
-    );
-  }
-}
 
 /*
  * Place the name and description of a category in the category.php page.
@@ -216,7 +185,7 @@ function writeCateInfo(cateId) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      var catInfo = JSON.parse(xmlhttp.responseText);
+      var cateInfo = JSON.parse(xmlhttp.responseText);
       document.getElementById("catHero").innerHTML = '<h1>' + cateInfo['name'] 
         + '</h1>\n' + '<p>' + cateInfo['description'] + '</p>';
     }
@@ -231,23 +200,13 @@ function getProdLink(pid) {
   return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
 }
 
+
 /*
  * Build and write the html for the Category Products.
  * @param products array
  */ 
-function buildCatProducts(cateId) {
-  var emptyCount = 0;
-  var price = 0;
-  // If no cart exists
-  if(cateId == null || cateId == "") {
-    document.getElementById("resultsDiv").innerHTML = 
-      "<h4>No products in this category.</h4>";
-    return false;
-  }
-   
-  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
-  //var product;
-  for(var i = 0; i < jsonCart.length; i++) {
+function buildCatProducts(jsonArray) {
+  for(var i = 0; i < jsonArray.length; i++) {
     var xmlhttp = new XMLHttpRequest();
     if (window.XMLHttpRequest) {
       // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -291,9 +250,12 @@ function buildCatProducts(cateId) {
      }
    
     };
-    xmlhttp.open('GET', '/source/controller/CategoryServices.php?catProds='
-      + cateId, true);
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
+  }
+  if(jsonArray.length == 0) {
+    document.getElementById("resultsDiv").innerHTML = 
+      "<h4>No products in this category. Please browse our other categories.</h4>";
   }
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
