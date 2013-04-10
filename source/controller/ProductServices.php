@@ -30,7 +30,6 @@ try {
 
 		//$quantity = file_get_contents("php://input");
 		$quantity = $_POST['amount'];
-		echo $quantity;
 		$storeId = 1;
 		$cid = $second_token;
 		$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity['amount']);
