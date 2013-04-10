@@ -114,7 +114,8 @@ function buildCarouselItems(prods) {
     }
     catHTML += (
       '<a href="./product.php?id=' + product['cid'] + '">\n'
-      + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
+      + '<img src="/img/products/' + product['cid'] + '.jpg" '
+      + getProdLink(product['cid']) + ' alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
       + '    <h1>Welcome to Our Store</h1>\n'
