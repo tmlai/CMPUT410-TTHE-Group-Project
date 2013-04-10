@@ -41,28 +41,18 @@ function addProdToCart(pid) {
 function updateCartProductQty(pid, jsonArray, qty = 1) {
   var jsonArray = JSON.parse(jsonArray);
   var cartJson = JSON.parse(readCookie('cart'));
-  // For quantity used from other stores.
-  var qtyExternal = 0;
   
   // Check if cart cookie exists
   if(cartJson != null){
       if(jsonArray.quantity < qty) {
         
-        // Check external stores for remaining quantity
-        qtyExternal = checkExternalAvail(pid, qty - jsonArray.quantity);
-        var qtyAvail = qtyExternal + jsonArray.quantity;
-        if(qytAvail < qty) {
-          var qtyBool = confirm("Only " + qtyAvail + " of this product(" + pid 
-            + ") is available, " + (qty - qtyAvail) + " are on backorder, "
-            + "would you like to purchase the " + qtyAvail + " available at this"
-            + " time?");
-          if(qtyBool) {
-            qty = qtyAvail;
-          } else {
-            alert("Sorry we did not have the quantity you requested, please take"
-              + " a look at our Top Ranked Related Products for other options.");
-            return false;
-          }
+        var qtyBool = getExternalAvail(pid, qty - jsonArray.quantity);
+        if(qtyBool) {
+          qty = qtyAvail;
+        } else {
+          alert("Sorry we did not have the quantity you requested, please take"
+            + " a look at our Top Ranked Related Products for other options.");
+          return false;
         }
       }
       // Add pid entry with quantity to cart.
