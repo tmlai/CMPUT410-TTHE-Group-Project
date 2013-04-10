@@ -39,12 +39,12 @@ function buildOrders(orders) {
       + '    -    Total Cost: ' + order['price_total']
       + '</a>\n</div>\n'
       + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse">\n'
-      + '      <div class="accordion-inner">\n';
+      + '      <div class="accordion-inner">\n'
+      + '<table class="table">\n';
       
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
         oHtml += 
-        '<table class="table">\n'
         +  '<thead>\n'
         +  '  <tr>\n'
         +  '    <th>Prodoct ID</th>\n'
@@ -58,12 +58,13 @@ function buildOrders(orders) {
         +      '<td>' + prod['quantity'] + '</td>'
         +      '<td>' + prod['amount'] + '</td>'
         +    '</tr>\n'
-        +  '</tbody>\n'
-        + '</table>\n';
+        +  '</tbody>\n';
       }
-      oHtml += '</div>\n'
-        + '    </div>\n'
-        + '  </div>\n';   
+      oHtml += 
+        +  '</table>\n'
+        +  '</div>\n'
+        + '</div>\n'
+        + '</div>\n';   
   }
   oHtml += '</div>';
   document.getElementById('ordersContainer').innerHTML = oHtml;
