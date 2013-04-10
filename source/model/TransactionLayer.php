@@ -23,7 +23,8 @@ class TransactionLayer {
 		$temp = $stmt->fetchAll();
 		$traOrd = null;
 		foreach($temp as &$row){
-			$traOrd = new CustomerOrder($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+			$traOrd = new TransactionOrder($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+			$traOrd->setValidity($row[6]);
 		}
 		
 		$statement = "SELECT * FROM TransactionsProducts WHERE orderId = ?";
@@ -34,7 +35,7 @@ class TransactionLayer {
 		
 		$listTraProd = array();
 		foreach($temp as &$each){
-			$oneTraProd = new OrderProduct($each[0], $each[1], $each[2], $each[3], $each[4], $each[5], $each[6]);
+			$oneTraProd = new TransactionProduct($each[0], $each[1], $each[2], $each[3], $each[4], $each[5], $each[6]);
 			$listTraProd[] = $oneTraProd;
 		}
 		
@@ -76,8 +77,8 @@ class TransactionLayer {
 		$pdo = DbLayer::getPdo();
 		$pdo->beginTransaction();
 	
-		$statement = "INSERT INTO TransactionsOrders(description,orderDate,username,payment,deliveryDate)
-		values(?,?,?,?,?)";
+		$statement = "INSERT INTO TransactionsOrders(description,orderDate,username,payment,deliveryDate, validity)
+		values(?,?,?,?,?,?)";
 		$stmt = $pdo->prepare($statement);
 	
 		$date = new \DateTime();
@@ -88,7 +89,7 @@ class TransactionLayer {
 	
 		$array = array($transactionOrder->getDescription(), $orderDate,
 				$transactionOrder->getUsername(), $transactionOrder->getPayment(),
-				$deliveryDate);
+				$deliveryDate, $transactionOrder->getValidity());
 	
 		$value = $stmt->execute($array);
 		$value = ($value == true && $stmt->rowCount() > 0);
