@@ -221,7 +221,7 @@ function writeCateInfo(cateId) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      var catInfo = JSON.parse(xmlhttp.responseText);
+      var cateInfo = JSON.parse(xmlhttp.responseText);
       document.getElementById("catHero").innerHTML = '<h1>' + cateInfo['name'] 
         + '</h1>\n' + '<p>' + cateInfo['description'] + '</p>';
     }
