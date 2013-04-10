@@ -11,7 +11,7 @@ $id = $_SESSION['productID'];
 $dbLayer = new DbLayer();
 $product = $product = $dbLayer->getOneProduct($id);
 $product = json_decode($product, true);
-$img = trim($product['image']);
+$img = trim($product['img']);
 ?>
 <!DOCTYPE html>
 <html>
