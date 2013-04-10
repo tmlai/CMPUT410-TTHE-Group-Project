@@ -29,6 +29,7 @@ try {
 		$second_token = strtok('/');
 
 		$quantity = file_get_contents("php://input");
+		echo $quantity;
 		$storeId = 1;
 		$cid = $second_token;
 		$orderInfo = $dbLayer->receiveOrderFromStore($storeId, $cid, $quantity['amount']);
