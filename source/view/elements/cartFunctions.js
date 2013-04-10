@@ -213,16 +213,16 @@ function buildCartProducts() {
           // Code of product
           + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
           // Description of product
-          + "<td " + + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td " + + getProdLink(product['id']) + ">\n"
-          + " <button style=\"position:relative; right:0px;\"\n"
+          + "<td " + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "<td " + getProdLink(product['id']) + ">\n"
+          + " <button " + getProdLink(product['id']) + "style=\"position:relative; right:0px;\"\n"
           + "   class=\"btn pull-right\">\n"
           + "       View Product\n"
           + "   </button>\n"
           + " </td>\n"
           + "</tr>\n"
         );     
-        price += (jsonCart[i].quantity * product['price']).toFixed(2);
+        price += (jsonCart[i].quantity * product['price']);
      }
    
     };
@@ -232,7 +232,7 @@ function buildCartProducts() {
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
-    + price;
+    + price.toFixed(2);
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
