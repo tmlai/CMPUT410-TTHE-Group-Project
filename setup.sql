@@ -227,6 +227,23 @@ INSERT INTO Categories(name,description) values('heater','');
 INSERT INTO Categories(name,description) values('coffee accessories','');
 INSERT INTO Categories(name,description) values('phone','');
 
+UPDATE Categories SET description = 'This is washer category. Washer is for washing' WHERE name = 'washer';
+UPDATE Categories SET description = 'This is dryer category. Dryer is for drying' WHERE name = 'dryer' ;
+UPDATE Categories SET description = 'This is laundry accessories. Laundry accessories is for laundrying' WHERE name = 'laundry accessories' ;
+UPDATE Categories SET description = 'This is refrigerator' WHERE name = 'refrigerator' ;
+UPDATE Categories SET description = 'This is cooking' WHERE name = 'cooking' ;
+UPDATE Categories SET description = 'This is dishwasher' WHERE name = 'dishwasher' ;
+UPDATE Categories SET description = 'This is freezer' WHERE name = 'freezer' ;
+UPDATE Categories SET description = 'This is microwave' WHERE name = 'microwave' ;
+UPDATE Categories SET description = 'This is small kitchen appliances' WHERE name = 'small kitchen appliances' ;
+UPDATE Categories SET description = 'This is TV' WHERE name = 'TV' ;
+UPDATE Categories SET description = 'This is laptop' WHERE name = 'laptop' ;
+UPDATE Categories SET description =  'This is computer accessories' WHERE name = 'computer accessories' ;
+UPDATE Categories SET description =  'This is air conditioner and fan' WHERE name = 'air conditioner and fan' ;
+UPDATE Categories SET description =  'This is air purifier' WHERE name = 'air purifier' ;
+UPDATE Categories SET description = 'This is heater' WHERE name = 'heater' ;
+UPDATE Categories SET description =  'This is coffee accessories' WHERE name = 'coffee accessories' ;
+UPDATE Categories SET description =  'This is phone' WHERE name = 'phone' ;
 /*
  * 
 Name	Url	Status
@@ -254,3 +271,29 @@ UPDATE Stores SET description = 'this is store #3', name = 'eMCS Appliances', ur
 UPDATE Stores SET description = 'this is store #6', name = 'The Black Market', url = 'http://cs410-06.cs.ualberta.ca/api'WHERE storeId = 5;
 UPDATE Stores SET description = 'this is store #7', name = 'eCommerce', url = 'http://cs410-07.cs.ualberta.ca/Programs/api/?Page=index&service=' WHERE storeId = 6 ;
 UPDATE Stores SET description = 'this is TA Market', name = 'TA Market', url = 'http://cs410-98.cs.ualberta.ca' WHERE storeId = 7 ;
+
+UPDATE Products SET weight=1 WHERE cid = 'c000001';
+UPDATE Products SET weight=2 WHERE cid = 'c000002';
+UPDATE Products SET weight=3 WHERE cid = 'c000003';
+UPDATE Products SET weight=4 WHERE cid = 'c000004';
+UPDATE Products SET weight=5 WHERE cid = 'c000005';
+UPDATE Products SET weight=6 WHERE cid = 'c000006';
+UPDATE Products SET weight=7 WHERE cid = 'c000007';
+UPDATE Products SET weight=8 WHERE cid = 'c000008';
+UPDATE Products SET weight=9 WHERE cid = 'c000009';
+UPDATE Products SET weight=10 WHERE cid = 'c000010';
+UPDATE Products SET weight=11 WHERE cid = 'c000011';
+UPDATE Products SET weight=12 WHERE cid = 'c000012';
+UPDATE Products SET weight=13 WHERE cid = 'c000013';
+UPDATE Products SET weight=14 WHERE cid = 'c000014';
+UPDATE Products SET weight=15 WHERE cid = 'c000015';
+UPDATE Products SET weight=16 WHERE cid = 'c000016';
+UPDATE Products SET weight=17 WHERE cid = 'c000017';
+UPDATE Products SET weight=18 WHERE cid = 'c000018';
+UPDATE Products SET weight=19 WHERE cid = 'c000019';
+UPDATE Products SET weight=20 WHERE cid = 'c000020';
+UPDATE Products SET weight=1 WHERE cid = 'd000001';
+UPDATE Products SET weight=2 WHERE cid = 'd000001';
+
+
+

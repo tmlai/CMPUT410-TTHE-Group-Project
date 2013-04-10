@@ -609,7 +609,7 @@ class TestDb {
 // \test\TestDb::testGetProductsInStock();
 // \test\TestDb::testGetOneProduct();
 // \test\TestDb::testGetStock();
-// \test\TestDb::testReceiveOrderFromStore();
+\test\TestDb::testReceiveOrderFromStore();
 // \test\TestDb::testCheckDeliveryDate();
 // \test\TestDb::testAddOrder();
 // \test\TestDb::testSearchProductByCode();
