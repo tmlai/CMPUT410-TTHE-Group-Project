@@ -8,6 +8,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
   <head>
     <title>TTHE Enterprise - View Cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
@@ -32,8 +33,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       <h3>Your Current Cart</h3>
       <!--<div class="container">-->
         <div id="resultsDiv">
-          <form name="cartForm" onSubmit="updateCart();">
-            <table class="table table-hover"> 
+          <table class="table table-hover"> 
             <thead>
                 <tr>
                   <th>Order Quantity</th>
@@ -61,21 +61,22 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="right">
           <tr>
             <td>
-              <button class="btn btn-primary" type="submit">Update Cart</button>
+              <button id="updateButton" class="btn btn-primary" type="submit" 
+                onclick="updateCart();" style="visibility:visible">
+                Update Cart
+              </button>
             </td>
             <td id="priceCalc"></td>
             <td>
               <button class="btn btn-success" onclick="submitCart(<?php 
                 echo "'" . $_SESSION['user'] . "'";
-              ?>)">
-              Checkout
+              ?>)" id="submitButton" style="visibility:visible">
+                Checkout
               </button>
             </td>
           </tr>
         </table>
-        </div>
-      </form>
-        
+      </div>        
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

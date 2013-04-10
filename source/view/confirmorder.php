@@ -8,6 +8,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
   <head>
     <title>TTHE Enterprise - Confirm Order</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
     <script type="text/javascript" language="JavaScript" 
@@ -29,12 +30,13 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       }
     ?>
     <div class="container">
-      <h3>Your Current Cart</h3>
+      <h3>Your Current Purchase Order</h3>
       <!--<div class="container">-->
         <div id="resultsDiv">
             <table class="table"> 
             <thead>
                 <tr>
+                  <th>Quantity</th>
                   <th><!-- placeholder --></th>
                   <th>Price</th>
                   <th>Weight</th>
@@ -59,14 +61,16 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="right">
           <tr>
             <td align="left">
-              <button class="btn btn-info" onclick="location.href='./cart.php'">
-                Go Back to Cart</button>
+              <button id="updateButton" class="btn btn-info" 
+              onclick="location.href='./cart.php'">
+                Go Back to Cart
+              </button>
             </td>
             <td id="priceCalc"></td>
             <td>
               <button class="btn btn-success" onclick="submitOrder(<?php 
                 echo "'" . $_SESSION['user'] . "'";
-              ?>)">
+              ?>)" id="submitButton">
               Confirm Purchase
               </button>
             </td>

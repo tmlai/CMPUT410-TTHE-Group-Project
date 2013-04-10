@@ -103,8 +103,8 @@ function buildCategoryContainer(cats) {
 }
 
 function buildCarouselItems(prods) {
-  var catHTML = '<div id="myCarousel" class="carousel slide">\n';
-  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
+  var catHTML = '<div id="myCarousel" class="carousel slide" data-interval="2000">\n';
+  catHTML +=  '<div class="carousel-inner" id="carouselItemDiv" data-interval="2000">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
     if(i == 0) {
@@ -134,7 +134,14 @@ function buildCarouselItems(prods) {
     + '<div class="carousel-bkg">\n'
     + '<img class="bkg" src="/source/view/bootstrap/img/tthe_carousel.jpg" alt="">\n'
     + '</div></div>\n'
-  document.getElementById("carouselElement").innerHTML = catHTML;
+    document.getElementById("carouselElement").innerHTML = catHTML;
+    $(document).ready(function () {
+      $('.carousel').carousel({
+          interval: 2000
+      });
+
+      $('.carousel').carousel('cycle');
+  });
 }
 
 
@@ -219,34 +226,42 @@ function buildCatProducts(jsonArray) {
     // Return if product is in stock
     xmlhttp.onreadystatechange=function() {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        var product = JSON.parse(xmlhttp.responseText);
-        document.getElementById("productsBody").innerHTML += (
-          "<tr" + getProdLink(product['id'] + ">\n<td>\n"
-          // Thumbnail of product
-          + " <img src='/img/products/" + product['id'] + ".jpg\'" 
-          + "\" alt=\"\" width=\"50\" height=\"50\">\n"
-          + "</td>\n"
-          // Price of product
-          + "<td>$" 
-          + product['price'] + "</td>\n"
-          // Weight of product
-          + "<td>" 
-          + product['weight'] + "</td>\n"
-          // Name of product
-          + "<td>" + product['name'] + "</td>\n"
-          // Code of product
-          + "<td>" + product['id'] + "</td>\n"
-          // Description of product
-          + "<td>" 
-          + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td>\n"
-          + " <button style=\"position:relative; right:0px;\"\n"
-          + "   class=\"btn pull-right\">\n"
-          + "       View Product\n"
-          + "   </button>\n"
-          + " </td>\n"
-          + "</tr>\n"
-        );     
+        try{
+          if(xmlhttp.responseText == "") {
+           throw "err"; 
+          }
+          var product = JSON.parse(xmlhttp.responseText);
+          document.getElementById("productsBody").innerHTML += (
+            "<tr " + getProdLink(product['id']) + ">\n<td>\n"
+            // Thumbnail of product
+            + " <img src='/img/products/" + product['id'] + ".jpg\'" 
+            + "\" alt=\"\" width=\"50\" height=\"50\">\n"
+            + "</td>\n"
+            // Price of product
+            + "<td>$" 
+            + product['price'] + "</td>\n"
+            // Weight of product
+            + "<td>" 
+            + product['weight'] + "</td>\n"
+            // Name of product
+            + "<td>" + product['name'] + "</td>\n"
+            // Code of product
+            + "<td>" + product['id'] + "</td>\n"
+            // Description of product
+            + "<td>" 
+            + product['desc'].substring(0, 35) + "...</td>\n"
+            + "<td>\n"
+            + " <button style=\"position:relative; right:0px;\"\n"
+            + "   class=\"btn pull-right\">\n"
+            + "       View Product\n"
+            + "   </button>\n"
+            + " </td>\n"
+            + "</tr>\n"
+          );     
+        } catch(err) {
+          document.getElementById("productsBody").innerHTML += 
+            '<tr><td>No Information available.</td></tr>';
+        }
      }
    
     };

@@ -390,7 +390,7 @@ class TestDb {
 	 * PASS
 	 */
 	public static function testGetListProductsInOrder(){
-		$orderId = 6;
+		$orderId = 9;
 		$dbLayer = new DbLayer();
 		$list = $dbLayer->getListProductsInOrder($orderId);
 		

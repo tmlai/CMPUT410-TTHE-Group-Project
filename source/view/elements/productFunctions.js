@@ -24,19 +24,25 @@ function checkInStock(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      var jsonArray = JSON.parse(xmlhttp.responseText);
-      var orderBtn = document.getElementById("orderBtn");
-      orderBtn.style.visibility= "visible";
-      if((jsonArray.quantity + getExternalAvail(pid)) <= 0) {
+      try{
+        var jsonArray = JSON.parse(xmlhttp.responseText);
+        var orderBtn = document.getElementById("orderBtn");
+        if(getExternalAvail(pid) == false) {
+          orderBtn.className = "btn btn-danger";
+          orderBtn.innerHTML ="Out of Stock";
+        }
+        document.getElementById("stockDiv").innerHTML = "";
+        //orderBtn.style.visibility= "visible";
+      } catch (err) {
         orderBtn.className = "btn btn-danger";
         orderBtn.innerHTML ="Out of Stock";
       }
-      document.getElementById("stockDiv").innerHTML = "";
     }
   };
   xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
+  orderBtn.style.visibility= "visible";
 }
 
 /*

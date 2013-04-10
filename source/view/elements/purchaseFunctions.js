@@ -32,8 +32,10 @@ function buildInvoice() {
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
           "<tr>\n<td>\n"
+          // Quantity for purchase
+          + jsonCart[i].quantity + "</td>\n"
           // Thumbnail of product
-          + " <img src='/img/products/" + product['id'] + ".jpg\'" 
+          + "<td> <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
           + "</td>\n"
           // Price of product
@@ -57,9 +59,8 @@ function buildInvoice() {
   }
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
-  //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
-    + price;
+    +  parseFloat(price).toFixed(2);
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }
@@ -134,6 +135,9 @@ function sendPurchase(jsonInv) {
       var response = JSON.parse(xmlhttp.responseText);
       if(response['status'] == "True") {
         //return response['deliveryDate'];
+        // Delete cart cookie on purchase
+        eraseCookie('cart');
+        // Redirect user
         window.location.replace(response["message"]);
       } else {
         alert("Unable to make purchase at this time, we appreciate your patience and"

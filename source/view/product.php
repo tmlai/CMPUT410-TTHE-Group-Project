@@ -11,12 +11,14 @@ $id = $_SESSION['productID'];
 $dbLayer = new DbLayer();
 $product = $product = $dbLayer->getOneProduct($id);
 $product = json_decode($product, true);
+$img = trim($product['img']);
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <title>TTHE Enterprise - Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
     <?php
         // Default Style links
         require("./elements/head_includes.php");
@@ -88,7 +90,7 @@ $product = json_decode($product, true);
                   <li class="span10">
                     <div class="thumbnail">
 					<?php
-					  echo "<a href='/img/products/$id.jpg'><img src='/img/products/$id.jpg' alt='$id is missing'></a>";
+					  echo "<a href='/img/products/$img'><img src='/img/products/$img' alt='$img is missing'></a>";
 					?>
                       <h4>Price: </h4>
                       <h3>$<?php echo $product['price']?></h3>
