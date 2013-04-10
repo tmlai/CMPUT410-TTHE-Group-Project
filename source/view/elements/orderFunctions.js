@@ -43,7 +43,7 @@ function buildOrders(orders) {
       
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
-        oHTML += 
+        oHtml += 
         '<table class="table">\n'
           '<thead>\n'
           '  <tr>\n'
