@@ -15,7 +15,7 @@
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var orders = JSON.parse(xmlhttp.responseText);
-      if(order.length == 0) {
+      if(orders.length == 0) {
         document.getElementById('ordersContainer').innerHTML = 
           '<h3>You currently have no orders to be viewed.</h3>';
       } else {
@@ -29,7 +29,7 @@
 
 function buildOrders(orders) {
   oHtml = '<div class="accordion" id="outstandingAccordion">\n';
-  for(var i = 0; i < order.length; i++) {
+  for(var i = 0; i < orders.length; i++) {
     var order = order[i];
     oHtml += '<div class="accordion-group">\n'
       + '    <div class="accordion-heading">\n'
