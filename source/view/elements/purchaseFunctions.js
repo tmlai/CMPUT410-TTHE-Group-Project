@@ -143,10 +143,9 @@ function sendPurchase(jsonInv) {
     }
   };
   
-  xmlhttp.open('POST', '../controller/PaymentProcess.php?cid=' + pid + '&quantity='
-    + qty, false);
+  xmlhttp.open('POST', '../controller/PaymentProcess.php', false);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xmlhttp.send();
+  xmlhttp.send(jsonInv);
   
   // Change document to inform customer
   document.getElementById('resultsDiv').innerHTML = ' <br> ';
