@@ -95,8 +95,9 @@ use model\Olap;
 	<body>
 		<?php 
 		if($_SESSION['admin'] == null || $_SESSION['admin'] == "") {
-			echo "You do not have permission to access this page.";
+			echo "You do not have permission to access this page.<br>";
 			echo "<a href='/source/view/index.php'>Back to main page</a>";
+			die();
 		}
 		?>
 	<table width="100%">
@@ -194,6 +195,7 @@ use model\Olap;
 	</td>
 	</tr>
 	</table>
+	<a href='/source/view/index.php'>Back to main page</a>
 	<?php
 		$submitVal = $_GET['submit'];
 		$submitTop = $_GET['submitTop'];
