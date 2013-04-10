@@ -177,7 +177,7 @@ if ($requestMethod == "POST"){
 			$message["status"] = "True";
 			$payBuddyUrl = "http://cs410.cs.ualberta.ca:42001/paybuddy/payment.cgi?";
 			$params = "grp=".$groupNumber;
-			$params.= "&amt=".$totalAmount;
+			$params.= "&amt=".number_format($totalAmount,2,'.','');
 			$params.= "&tx=".$transactionId;
 			$params.= "&ret=".$retUrl;
 			$params.= "target=_blank";
