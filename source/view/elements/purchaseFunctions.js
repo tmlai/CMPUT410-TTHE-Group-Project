@@ -140,8 +140,7 @@ function sendPurchase(jsonInv) {
         // Redirect user
         window.location.replace(response["message"]);
       } else {
-        alert("Unable to make purchase at this time, we appreciate your patience and"
-          + " support, please try again");
+        alert(response["message"]);
         var dir = location.href;
         dir = dir.substr(0, dir.lastIndexOf("/") + 1);
         dir = dir + "cart.php";
