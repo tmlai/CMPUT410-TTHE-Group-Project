@@ -103,7 +103,7 @@ function buildCategoryContainer(cats) {
 }
 
 function buildCarouselItems(prods) {
-  var catHTML = '<div id="myCarousel" class="carousel slide carousel-tthebkg">\n';
+  var catHTML = '<div id="myCarousel" class="carousel slide">\n';
   catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
@@ -117,12 +117,13 @@ function buildCarouselItems(prods) {
       + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
+      + '    <div class="carousel-caption-bkg">'
       + '    <h1>Welcome</h1>\n'
       + '    <p class="lead">Browse through our many products.</p>\n'
       + '    <p>' + product['description'] + '</p>\n'
       + '    <a class="btn btn-large btn-primary" href="./product.php?id='
       + product['cid'] + '">See Product Details</a>\n'
-      + '  </div>\n'
+      + '  </div></div>\n'
       + '</div>\n'
       + '</a>\n'
       + '</div>\n'
@@ -131,7 +132,9 @@ function buildCarouselItems(prods) {
   catHTML += '</div>\n'
     + '<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>\n'
     + '<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>\n'
-    + '</div>\n'
+    + '<div class="carousel-bkg">\n'
+    + '<img class="bkg" src="/source/view/bootstrap/img/tthe_carousel.jpg" alt="">\n'
+    + '</div></div>\n'
   document.getElementById("carouselElement").innerHTML = catHTML;
 }
 

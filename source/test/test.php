@@ -1,5 +1,9 @@
 <?php
 namespace test;
+use model\TransactionLayer;
+
+use model\TransactionProduct;
+
 use model\TransactionOrder;
 
 use model\Category;
@@ -18,7 +22,7 @@ use model\DbLayer;
 
 use model\UserRatingProduct;
 
-// include_once "../model/DbLayer.php";
+include_once "../model/DbLayer.php";
 include_once "../model/TransactionLayer.php";
 class TestDb {
 	
@@ -549,6 +553,40 @@ class TestDb {
 				$orderDate, $username, $payment, $deliveryDate);
 		echo($trOr->getOrderId());
 	}
+	
+	/*
+	 * PASS
+	 */
+	public static function testAddTransactionOrder(){
+		$customerOrder = new TransactionOrder(0, "#1 tran ord", '', 'hcngo', 0, '');
+		$orderProductsArray = array();
+		
+		$date = new \DateTime();
+		
+		for ($i = 6; $i < 10; $i++) {
+			$date->add(new \DateInterval('P1D'));
+			$deliveryDate = $date->format('Y-m-d');
+			$orderProduct = new TransactionProduct(0, 'c00000' . $i, 3, 5, $i,
+					$deliveryDate, 0);
+			$orderProductsArray[] = $orderProduct;
+		}
+		$trLayer = new TransactionLayer();
+		$value = $trLayer->addTransaction($customerOrder, $orderProductsArray);
+		if ($value) {
+			echo "true";
+		} else {
+			echo "false";
+		}
+		
+	}
+	
+	public static function testGetTransactionForOrder($transactionId){
+		$tsLayer = new TransactionLayer();
+		$array = $tsLayer->getTransactionForOrder($transactionId);
+		var_dump($array[0]);
+		echo "<br><br>";
+		var_dump($array[1]);
+	}
 }
 // \test\TestDb::testAddProduct();
 // \test\TestDb::testAddCustomer();
@@ -584,4 +622,6 @@ class TestDb {
 // \test\TestDb::testUpdateDeliveryDateExternal();
 // \test\TestDb::testUpdateDeliveryDate(13);
 // \test\TestDb::testExtendClass();
+// \test\TestDb::testAddTransactionOrder();
+// \test\TestDb::testGetTransactionForOrder(4);
 ?>

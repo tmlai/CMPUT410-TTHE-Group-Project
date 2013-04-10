@@ -3,9 +3,9 @@ namespace model;
 use model\DbLayer;
 use model\TransactionOrder;
 use model\TransactionProduct;
-include_once 'TransactionOrder.php';
-include_once 'TransactionProduct.php';
-include_once "Dblayer.php";
+include_once "TransactionOrder.php";
+include_once "TransactionProduct.php";
+include_once "DbLayer.php";
 class TransactionLayer {
 	
 	/* 
@@ -51,7 +51,7 @@ class TransactionLayer {
 	* 				since this action is a small step in a transaction.
 	*/
 	public function transactOneProduct(\PDO $pdo, TransactionProduct $transactProduct) {
-		$statement = "INSERT INTO OrdersProducts values(?,?,?,?,?,?,?)";
+		$statement = "INSERT INTO TransactionsProducts values(?,?,?,?,?,?,?)";
 		$stmt = $pdo->prepare($statement);
 	
 		$array = array($transactProduct->getOrderId(), $transactProduct->getCid(),
@@ -97,10 +97,16 @@ class TransactionLayer {
 			// TODO
 			echo "TransactionsOrders insert";
 			$pdo = null;
-			return false;
+			return 0;
 		}
 	
 		$orderId = $pdo->lastInsertId();
+		
+		// modify orderId
+		foreach($transactionProductsArray as &$onetp){
+			/* @var $onetp TransactionProduct */
+			$onetp->setOrderId($orderId);
+		}
 	
 		
 		// 		Insert each tuple into TransactionsProducts table.
@@ -112,13 +118,13 @@ class TransactionLayer {
 				// TODO
 				echo "TransactionProduct insert";
 				$pdo = null;
-				return false;
+				return 0;
 			}
 		}
 	
 		$pdo->commit();
 		$pdo = null;
-		return true;
+		return $orderId;
 	}
 	
 	

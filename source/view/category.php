@@ -13,7 +13,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
   </head>
-  <body>   
+  <body onLoad="getMenuCategories();">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {

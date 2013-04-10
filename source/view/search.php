@@ -7,6 +7,9 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $search = trim($_GET['searchField']);
 
 $advanced = $_GET['advanced'];
+if ($advanced == null) {
+	$advanced = "false";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,8 @@ $advanced = $_GET['advanced'];
     ?>
 	
   </head>
-  <body onLoad="setToggle(); initialLoading('<?php echo $search;?>');"> 
+  <body onLoad="setToggle('<?php echo $advanced;?>'); 
+	initialLoading('<?php echo $search;?>'); getMenuCategories();"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -29,6 +33,7 @@ $advanced = $_GET['advanced'];
         // sign in dropdown
         require("/elements/navbar_signin.php");
       }
+
     ?>
     <div class="container">
         <h3>
@@ -49,7 +54,7 @@ $advanced = $_GET['advanced'];
         </label>
         <div id="advSearch" class="collapse">
 		<!-- Advanced Search Form -->
-			<form class="form-horizontal" onSubmit="advSearch()" action="" method="post">
+			<form class="form-horizontal" onSubmit="" action="" method="post">
                 <div id="store_div" class="control-group">
                     <label class="control-label" for="searchNameField">Name
                     </label>
@@ -107,7 +112,8 @@ $advanced = $_GET['advanced'];
                     </div>
 					<br>
 					<div class="controls">
-						<input type="submit" class="btn" value="Advanced Search">
+						<input type="button" class="btn" 
+						 onClick="advSearch()" value="Advanced Search">
 					</div>
 				</div>
 			</form>
@@ -115,15 +121,7 @@ $advanced = $_GET['advanced'];
         </div>
         <div class="container" id="tableTitles">
             <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th><!-- placeholder --></th>
-                    <th>Price</th>
-                    <th>Weight</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                </tr>
+            <thead id="tableHead">
             </thead>
             <tbody id="resultsTable">
             </tbody>
