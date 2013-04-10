@@ -29,7 +29,7 @@
 						alert(json);
 						alert(json["status"]);
 						if (json["status"] == "True"){
-							window.location(json["message"]);
+							window.location.replace(json["message"]);
 						}
 						else {
 							alert(json["message"]);
