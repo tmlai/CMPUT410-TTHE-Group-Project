@@ -95,7 +95,7 @@ use model\Olap;
 	<body>
 		<?php 
 		if($_SESSION['admin'] == null || $_SESSION['admin'] == "") {
-			echo "You do not have permission to access this page."
+			echo "You do not have permission to access this page.";
 			echo "<a href='/source/view/index.php'>Back to main page</a>";
 		}
 		?>
