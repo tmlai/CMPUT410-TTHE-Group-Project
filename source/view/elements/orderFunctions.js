@@ -67,7 +67,7 @@ function buildOrders(orders) {
         + '</div>\n';   
   }
   oHtml += '</div>';
-  if(oHtml.indexOf('NaN'') >= 0) alert("found NaN!");
+  if(oHtml.indexOf('NaN') >= 0) alert("found NaN!");
   document.getElementById('ordersContainer').innerHTML = oHtml;
 
 }
