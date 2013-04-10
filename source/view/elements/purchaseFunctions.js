@@ -101,7 +101,7 @@ function makePurchase(cart) {
     arr['quantity'] = cart[i]['quantity'];
     purchase.push(arr);
   }
-  sendPurchase(JSON.stringify(purchase));
+  sendPurchase('orderLists='JSON.stringify(purchase));
   /*
   var response = sendPurchase(JSON.stringify(purchase));
   if(response == "false") {
@@ -143,7 +143,7 @@ function sendPurchase(jsonInv) {
     }
   };
   
-  xmlhttp.open('POST', '../controller/PaymentProcess.php', false);
+  xmlhttp.open('POST', '../controller/PaymentProcess.php', true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send(jsonInv);
   
