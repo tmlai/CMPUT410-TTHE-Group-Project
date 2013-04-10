@@ -52,7 +52,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
       }
     ?>
     <div class="container">
-    <form name="loginform" class="form-horizontal" 
+    <form name="registerForm" class="form-horizontal" 
         enctype="application/json" action="../controller/UserRegistration.php" 
         onSubmit="return checkRegistration();" method="post">
         <h2 class="form-horizontal-heading text-center">Please Register</h2>
