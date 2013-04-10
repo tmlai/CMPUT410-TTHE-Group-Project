@@ -38,6 +38,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
       }
 
     </style>
+
   </head>
   <body getMenuCategories();>   
     <?php
@@ -114,7 +115,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
              <!-- <label class="checkbox">
                 <input type="checkbox"> Remember me
               </label>-->
-              <button type="submit" 
+              <button type="submit" onSubmit="return checkInput();"
                 class="btn btn-success">Register</button>
             </div>
         </div>
