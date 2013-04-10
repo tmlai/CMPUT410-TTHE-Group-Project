@@ -2,7 +2,7 @@
 .carousel {
   margin-bottom: 10px;
   min-width: 100%;
-  height: 225px;
+  height: 400px;
 }
 
 .carousel .container {
@@ -21,31 +21,33 @@
 }
 
 .carousel .item {
-  height: 225px;
+  height: 400px;
 }
 .carousel img {
   position: absolute;
   top: 0;
-  left: 25;
+  left: 45px;
   /*min-width: 100%;*/
-  height: 225px;
+  height: 400px;
 }
 
-.carousel .bkg img {
+.carousel-bkg img {
   position: absolute;
   top: 0;
   left: 0;
+  padding-right:5px;
+  padding-left:5px;
   min-width: 100%;
-  /*height: 225px;*/
+  height: 400px;
   z-index: -1;
 }
 
 .carousel-caption {
-  background-color: transparent;
+  background-color: #666666;
   position: static;
   max-width: 550px;
   padding: 0 60px;
-  margin-top: 0px;
+  margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -58,16 +60,4 @@
 }
 .carousel-caption .btn {
   margin-top: 10px;
-}
-
-.carousel-tthebkg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  height: 225px;
-  background-image:url('/source/view/bootstrap/img/tthe_carousel.jpg');
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  z-index: -1;
 }

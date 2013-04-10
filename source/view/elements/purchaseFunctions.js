@@ -9,17 +9,11 @@ function buildInvoice() {
   var price = 0;
   // reset div for products
   document.getElementById("productsBody").innerHTML = " ";
-  document.getElementById("loadingSpinner").style.visibility = "hidden";
-  document.getElementById("loadingSpinner").innerHTML = "<br>";
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Order is empty.</h4>";
     return false;
   }
-  
-   
-  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
-  //var product;
   for(var i = 0; i < jsonCart.length; i++) {
     var xmlhttp = new XMLHttpRequest();
     if (window.XMLHttpRequest) {
@@ -61,6 +55,8 @@ function buildInvoice() {
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
+  document.getElementById("loadingSpinner").style.visibility = "hidden";
+  document.getElementById("loadingSpinner").innerHTML = "<br>";
   //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + price;

@@ -174,8 +174,6 @@ function buildCartProducts() {
   var price = 0;
   // reset div for products
   document.getElementById("productsBody").innerHTML = " ";
-  document.getElementById("loadingSpinner").style.visibility = "hidden";
-  document.getElementById("loadingSpinner").innerHTML = "<br>";
   // If no cart exists
   if(jsonCart == null) {
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
@@ -239,7 +237,8 @@ function buildCartProducts() {
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
-  //document.getElementById("resultsDiv").innerHTML += getTableHTML("tail");
+  document.getElementById("loadingSpinner").style.visibility = "hidden";
+  document.getElementById("loadingSpinner").innerHTML = "<br>";
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + price;
   if(emptyCount == jsonCart.length)

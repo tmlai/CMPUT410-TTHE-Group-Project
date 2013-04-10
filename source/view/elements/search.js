@@ -1,7 +1,7 @@
 var dropBool = true;
 
-function setToggle() {
-  if(dropBool) {
+function setToggle(dropBool) {
+  if(dropBool == "true") {
 	document.getElementById("advSearch").className="collapse in";
   }
   dropIconToggle();
@@ -71,10 +71,7 @@ function initialLoading(searchString) {
 					"</td>" +
 				"</tr>";
 			}
-			if(listArray.length==0) {
-				document.getElementById("tableHead").innerHTL = "";
-				document.getElementById("resultsTable").innerHTML = "<h4>No products found.</h4>"
-			}
+			
 			var htmlTableTitles = "<tr>" +
 									"<th><!-- placeholder --></th>" +
 									"<th>Price</th>" +
@@ -85,6 +82,11 @@ function initialLoading(searchString) {
 									"</tr>";
 			document.getElementById("tableHead").innerHTL = htmlTableTitles;
 			document.getElementById('resultsTable').innerHTML=table;
+			
+			if(listArray.length==0) {
+				document.getElementById("tableHead").innerHTL = "";
+				document.getElementById("resultsTable").innerHTML = "<h4>No products found.</h4>"
+			}
 		}
 	}
 }
@@ -150,10 +152,8 @@ function advSearch() {
 		
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-				alert("it is ready");
 				var list = xmlhttp.responseText;
 				var listArray = JSON.parse(list);
-				console.log(listArray);
 				document.getElementById("loadingSpinner").style.visibility = "hidden";
 				document.getElementById("loadingSpinner").innerHTML = "<br>";
 				//build the table code
@@ -177,10 +177,6 @@ function advSearch() {
 						"</td>" +
 					"</tr>";
 				}
-				if(listArray.length==0) {
-					document.getElementById("tableHead").innerHTL = "";
-					document.getElementById("resultsTable").innerHTML = "<h4>No products found.</h4>"
-				}
 				var htmlTableTitles = "<tr>" +
 									"<th><!-- placeholder --></th>" +
 									"<th>Price</th>" +
@@ -189,8 +185,13 @@ function advSearch() {
 									"<th>Code</th>" +
 									"<th>Description</th>" +
 									"</tr>";
-				document.getElementById("tableHead").innerHTL = htmlTableTitles;
+				document.getElementById("tableHead").innerHTML = htmlTableTitles;
 				document.getElementById('resultsTable').innerHTML=table;
+				
+				if(listArray.length==0) {
+					document.getElementById("tableHead").innerHTL = "";
+					document.getElementById("resultsTable").innerHTML = "<h4>No products found.</h4>"
+				}
 			}
 		}
 }

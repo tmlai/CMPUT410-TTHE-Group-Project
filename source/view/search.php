@@ -7,6 +7,9 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 $search = trim($_GET['searchField']);
 
 $advanced = $_GET['advanced'];
+if ($advanced == null) {
+	$advanced = "false";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +22,8 @@ $advanced = $_GET['advanced'];
     ?>
 	
   </head>
-  <body onLoad="setToggle(); initialLoading('<?php echo $search;?>');"> 
+  <body onLoad="setToggle('<?php echo $advanced;?>'); 
+	initialLoading('<?php echo $search;?>'); getMenuCategories();"> 
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
@@ -29,6 +33,7 @@ $advanced = $_GET['advanced'];
         // sign in dropdown
         require("/elements/navbar_signin.php");
       }
+
     ?>
     <div class="container">
         <h3>
@@ -117,14 +122,6 @@ $advanced = $_GET['advanced'];
         <div class="container" id="tableTitles">
             <table class="table table-hover">
             <thead id="tableHead">
-                <tr>
-                    <th><!-- placeholder --></th>
-                    <th>Price</th>
-                    <th>Weight</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Description</th>
-                </tr>
             </thead>
             <tbody id="resultsTable">
             </tbody>
