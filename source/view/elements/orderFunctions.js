@@ -37,7 +37,7 @@ function buildOrders(orders) {
       + '      <a class="accordion-toggle" data-toggle="collapse" '
       + 'data-parent="#outstandingAccordion" href="#collapse' + order['orderId'] + '">\n'
       + 'Order ID: ' + order['orderId'] + '    -    Date: ' + order['delivery_date']
-      + '    -    Total Cost: $' + order['price_total']
+      + '    -    Total Cost: $' + String(order['price_total'])
       + '</a>\n</div>\n'
       + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse">\n'
       + '      <div class="accordion-inner">\n'
@@ -56,7 +56,7 @@ function buildOrders(orders) {
         +    '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
         +      '<td>' + prod['quantity'] + '</td>'
-        +      '<td>$' + prod['amount'] + '</td>'
+        +      '<td>$' + String(prod['amount']) + '</td>'
         +    '</tr>\n';
       }
       oHtml += 
@@ -67,7 +67,7 @@ function buildOrders(orders) {
         + '</div>\n';   
   }
   oHtml += '</div>';
-  oHtml = oHtml.replace("NaN","");
+  if(oHtml.indexOf('NaN'') >= 0) alert("found NaN!");
   document.getElementById('ordersContainer').innerHTML = oHtml;
 
 }
