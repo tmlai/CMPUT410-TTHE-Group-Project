@@ -52,8 +52,7 @@ function buildOrders(orders) {
       +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
-        oHtml += 
-        +    '<tr>\n'
+        oHtml += '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
         +      '<td>' + prod['quantity'] + '</td>'
         +      '<td>$' + String(prod['amount']) + '</td>'
