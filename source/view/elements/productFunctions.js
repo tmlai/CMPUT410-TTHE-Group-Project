@@ -25,14 +25,14 @@ function checkInStock(pid) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       try{
-      var jsonArray = JSON.parse(xmlhttp.responseText);
-      var orderBtn = document.getElementById("orderBtn");
-      orderBtn.style.visibility= "visible";
-      if((jsonArray.quantity + getExternalAvail(pid)) <= 0) {
-        orderBtn.className = "btn btn-danger";
-        orderBtn.innerHTML ="Out of Stock";
-      }
-      document.getElementById("stockDiv").innerHTML = "";
+        var jsonArray = JSON.parse(xmlhttp.responseText);
+        var orderBtn = document.getElementById("orderBtn");
+        orderBtn.style.visibility= "visible";
+        if(getExternalAvail(pid) == false) {
+          orderBtn.className = "btn btn-danger";
+          orderBtn.innerHTML ="Out of Stock";
+        }
+        document.getElementById("stockDiv").innerHTML = "";
       } catch (err) {
         orderBtn.className = "btn btn-danger";
         orderBtn.innerHTML ="Out of Stock";
