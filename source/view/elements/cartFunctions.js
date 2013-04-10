@@ -120,6 +120,7 @@ function getExternalAvail(pid, qty = 1) {
       var response = xmlhttp.responseText;
       response = response.trim();
       if(response == "True") {
+        alert("true")
         return true;
       }
       return false;
