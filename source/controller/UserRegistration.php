@@ -27,7 +27,7 @@ session_start();
 		$regex = "/([ABCEGHJKLMNPRSTVWXYZ]\d){3}/i";
 		
 		//check input validation
-		if($username == "" || $password == "")
+		if($username == "" || $password == "" || $email == "")
 			$pass = false;
 		else if(!preg_match($regex,$postal))
 			$pass = false;
