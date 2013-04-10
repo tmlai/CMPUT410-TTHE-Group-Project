@@ -196,7 +196,7 @@ function buildCartProducts() {
           // Quantity text field for product
           + "<input type=\"text\" name=\"qtyField" + product.id
           + "\" id=\"qtyField" + product.id + "\" value=\"" 
-          + jsonCart[i].quantity + "\" class=\"input-mini\">"
+          + jsonCart[i].quantity + "\" class=\"input-mini\"></td>"
           + "<td " + getProdLink(product['id']) + ">\n"
           // Thumbnail of product
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
@@ -214,7 +214,7 @@ function buildCartProducts() {
           + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
           // Description of product
           + "<td " + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td " + getProdLink(product['id']) + ">\n"
+          + "<td>\n"
           + " <button " + getProdLink(product['id']) + "style=\"position:relative; right:0px;\"\n"
           + "   class=\"btn pull-right\">\n"
           + "       View Product\n"
