@@ -67,7 +67,7 @@ function buildOrders(orders) {
         + '</div>\n';   
   }
   oHtml += '</div>';
-  oHtml = str.replace("NaN","");
+  oHtml = oHtml.replace("NaN","");
   document.getElementById('ordersContainer').innerHTML = oHtml;
 
 }
