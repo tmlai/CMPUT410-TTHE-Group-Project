@@ -142,6 +142,10 @@ function sendPurchase(jsonInv) {
       } else {
         alert("Unable to make purchase at this time, we appreciate your patience and"
           + " support, please try again");
+        var dir = location.href;
+        dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+        dir = dir + "cart.php";
+        window.location.href = dir;
       }
       return "false";
     }

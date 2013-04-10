@@ -46,6 +46,9 @@ function getCategoriesContainer() {
   xmlhttp.send();
 }
 
+/*
+ * Get the carousel element.
+ */
 function getCarouselProds() {
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
@@ -67,6 +70,9 @@ function getCarouselProds() {
   xmlhttp.send();
 }
 
+/*
+ * Build the navbar dropdown for categories.
+ */
 function buildCategoryDropList(cats) {
   for(var i = 0; i < cats.length; i++) {
     document.getElementById("navCatList").innerHTML += (
@@ -76,6 +82,10 @@ function buildCategoryDropList(cats) {
   }
 }
 
+/*
+ * Build and write the html for categories displayed in a div with name, 
+ * description, and a link to the category page.
+ */
 function buildCategoryContainer(cats) {
   var htmlCats = "";
   for(var i = 0; i < cats.length; i++) {
@@ -102,6 +112,10 @@ function buildCategoryContainer(cats) {
   
 }
 
+/*
+ * Build and write the html for a carousel div of a product list.
+ * @param   prods   the list of products
+ */
 function buildCarouselItems(prods) {
   var catHTML = '<div id="myCarousel" class="carousel slide" data-interval="2000">\n';
   catHTML +=  '<div class="carousel-inner" id="carouselItemDiv" data-interval="2000">\n';
@@ -135,6 +149,7 @@ function buildCarouselItems(prods) {
     + '<img class="bkg" src="/source/view/bootstrap/img/tthe_carousel.jpg" alt="">\n'
     + '</div></div>\n'
     document.getElementById("carouselElement").innerHTML = catHTML;
+    // Initialize the carousel to slide.
     $(document).ready(function () {
       $('.carousel').carousel({
           interval: 2000
@@ -154,6 +169,7 @@ function buildCarouselItems(prods) {
       "<h4>No products in this category.</h4>";
     return false;
   }
+  // Write the title "hero" element for the category.
   writeCateInfo(cateId);
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
@@ -203,6 +219,9 @@ function writeCateInfo(cateId) {
   
 }
 
+/*
+ * Return string of the javascript link to a product.
+ */
 function getProdLink(pid) {
   return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
 }
@@ -259,6 +278,7 @@ function buildCatProducts(jsonArray) {
             + "</tr>\n"
           );     
         } catch(err) {
+          // Tell user no info is available for the product.
           document.getElementById("productsBody").innerHTML += 
             '<tr><td>No Information available.</td></tr>';
         }
@@ -272,6 +292,7 @@ function buildCatProducts(jsonArray) {
     document.getElementById("resultsDiv").innerHTML = 
       "<h4>No products in this category. Please browse our other categories.</h4>";
   }
+  // Hide the spinner
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
 }

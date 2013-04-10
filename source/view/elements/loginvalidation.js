@@ -1,3 +1,6 @@
+/*
+ * Validate userField form.
+ */
 function checkLogin() {
   if(document.loginform.usernameField.value == "" && 
       document.loginform.usernameField.value == "") {

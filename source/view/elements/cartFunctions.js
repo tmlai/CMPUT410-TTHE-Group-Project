@@ -129,10 +129,6 @@ function getExternalAvail(pid, qty = 1) {
   xmlhttp.send();
 }
 
-function sendPurchase(user) {
-  alert("Debug: open order page, then on that page see order and confirm purchase...");
-}
-
 function updateCart() {
   var jsonCart = JSON.parse(readCookie('cart'));
   for(var i = 0; i < jsonCart.length; i++) {
@@ -157,7 +153,6 @@ function updateCart() {
  * @param products array
  */ 
 function buildCartProducts() {
-  //var div = document.getElementById("resultsDiv");
   var jsonCart = JSON.parse(readCookie('cart'));
   var emptyCount = 0;
   var price = 0;
@@ -172,8 +167,6 @@ function buildCartProducts() {
     return false;
   }
   
-   
-  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
   //var product;
   for(var i = 0; i < jsonCart.length; i++) {
     var xmlhttp = new XMLHttpRequest();
@@ -224,6 +217,7 @@ function buildCartProducts() {
             + " </td>\n"
             + "</tr>\n"
           );     
+          // Update the price value
           price += (jsonCart[i].quantity * product['price']);
         } catch(err) {
           document.getElementById("productsBody").innerHTML += 
@@ -235,21 +229,27 @@ function buildCartProducts() {
     xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
+  // Hide the spinner
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
+  // Make buttons visible
   setButtonsVisiblity("visible", new Array("updateButton", "submitButton"));
+  // Update price
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + parseFloat(price).toFixed(2);
   if(emptyCount == jsonCart.length) {
+    // Hide the buttons
     setButtonsVisiblity("hidden", new Array("updateButton", "submitButton"));
+    // Write to user that the cart is empty
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
+    // Hide the spinner
     document.getElementById("loadingSpinner").style.visibility = "hidden";
     document.getElementById("loadingSpinner").innerHTML = "<br>";
   }
 }
 
 /*
- * Set an array of buttons to "val"
+ * Set an array of buttons to the visibility style of val.
  */
 function setButtonsVisiblity(val, buttons) {
   for(var i = 0; i < buttons.length; i++) {
@@ -257,10 +257,16 @@ function setButtonsVisiblity(val, buttons) {
   }
 }
 
+/*
+ * Return string of javascript link to a product
+ */
 function getProdLink(pid) {
   return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
 }
 
+/*
+ * Check if user signed in, if so go to confirm purchase order page.
+ */
 function submitCart(user) {
   if(user == null || user == "") {
     var pBool = confirm("You must sign in or register to purchase your cart.\n"

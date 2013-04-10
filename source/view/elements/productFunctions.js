@@ -32,7 +32,7 @@ function checkInStock(pid) {
           orderBtn.innerHTML ="Out of Stock";
         }
         document.getElementById("stockDiv").innerHTML = "";
-        //orderBtn.style.visibility= "visible";
+        orderBtn.style.visibility= "visible";
       } catch (err) {
         orderBtn.className = "btn btn-danger";
         orderBtn.innerHTML ="Out of Stock";
@@ -42,7 +42,7 @@ function checkInStock(pid) {
   xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
-  orderBtn.style.visibility= "visible";
+  //orderBtn.style.visibility= "visible";
 }
 
 /*

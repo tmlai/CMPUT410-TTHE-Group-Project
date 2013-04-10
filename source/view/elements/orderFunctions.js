@@ -27,6 +27,10 @@
   xmlhttp.send();
 }
 
+/*
+ * Build an "accordian" style div of the outstanding orders, with info inside
+ * each accordian element.
+ */
 function buildOrders(orders) {
   var oHtml = '<h3>Your Orders:</h3>'
     + '<div class="accordion" id="outstandingAccordion">\n';
@@ -51,6 +55,7 @@ function buildOrders(orders) {
       +  '  </tr>\n'
       +  '</thead>\n'
       +  '<tbody>\n';
+      // Build a table inside for product/info and quantities.
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
         var prodName = "";
