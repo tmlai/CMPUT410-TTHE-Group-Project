@@ -25,11 +25,16 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/navbar_signin.php");
       }
     ?>
+	<script>
+		//debugging
+		alert('<?php echo $_SESSION['admin'];?>');
+	</script>
     <div id="carouselElement">
     </div>
     <div id="categoryContainerDiv">
       <div id="loadingSpinner" align="center" style="visibility:visible">
           <img src="./elements/img/spinner.gif" alt="...Loading...">
+          <p class="muted">...Retrieving Category Information...</p>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>
