@@ -132,7 +132,7 @@ function sendPurchase(jsonInv) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var response = JSON.parse(xmlhttp.responseText);
-      if(response['status'] == "true") {
+      if(response['status'] == "True") {
         //return response['deliveryDate'];
         window.location.replace(response["message"]);
       } else {
