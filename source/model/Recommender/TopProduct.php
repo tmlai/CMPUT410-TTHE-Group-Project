@@ -29,7 +29,7 @@ $numberOfProduct = 10;
 if ($requestMethod == "POST"){
 	$tempDate = $_POST["date"];
 	if (!isset($tempDate) || trim($tempDate) === "")
-		$crrDate = date();
+		$crrDate = new \DateTime();
 	
 	$tempDays = $_POST["days"];
 	if (!isset($tempDays) || trim($tempDays) === "")
