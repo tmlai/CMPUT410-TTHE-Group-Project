@@ -29,7 +29,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       }
     ?>
     <div class="container">
-      <h3>Your Current Cart</h3>
+      <h3>Your Current Purchase Order</h3>
       <!--<div class="container">-->
         <div id="resultsDiv">
             <table class="table"> 

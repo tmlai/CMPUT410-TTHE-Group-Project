@@ -32,8 +32,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
       <h3>Your Current Cart</h3>
       <!--<div class="container">-->
         <div id="resultsDiv">
-          <!--<form name="cartForm" onSubmit="updateCart();"-->
-            <table class="table table-hover"> 
+          <table class="table table-hover"> 
             <thead>
                 <tr>
                   <th>Order Quantity</th>
@@ -74,9 +73,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             </td>
           </tr>
         </table>
-        </div>
-      <!--</form>-->
-        
+      </div>        
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
