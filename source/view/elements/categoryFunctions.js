@@ -142,6 +142,11 @@ function buildCarouselItems(prods) {
  * Get category products of a specific category id.
  */
  function getCategoryProducts(cateId) {
+  if(cateId == null || cateId == "") {
+    document.getElementById("resultsDiv").innerHTML = 
+      "<h4>No products in this category.</h4>";
+    return false;
+  }
   var xmlhttp = new XMLHttpRequest();
 	if (window.XMLHttpRequest) {
     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -156,7 +161,8 @@ function buildCarouselItems(prods) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var jsonArray = JSON.parse(xmlhttp.responseText);
       // var jsonArray = xmlhttp.responseText;
-      buildRelatedProducts(jsonArray);
+      return jsonArray;
+      buildCatProducts(jsonArray);
     }
   };
   xmlhttp.open('GET', '/source/controller/CategoryServices.php?catProds='
@@ -231,23 +237,13 @@ function getProdLink(pid) {
   return "onclick=\"location.href='./product.php?id=" + pid + "'\"";
 }
 
+
 /*
  * Build and write the html for the Category Products.
  * @param products array
  */ 
-function buildCatProducts(cateId) {
-  var emptyCount = 0;
-  var price = 0;
-  // If no cart exists
-  if(cateId == null || cateId == "") {
-    document.getElementById("resultsDiv").innerHTML = 
-      "<h4>No products in this category.</h4>";
-    return false;
-  }
-   
-  //document.getElementById("resultsDiv").innerHTML = getTableHTML();
-  //var product;
-  for(var i = 0; i < jsonCart.length; i++) {
+function buildCatProducts(jsonArray) {
+  for(var i = 0; i < jsonArray.length; i++) {
     var xmlhttp = new XMLHttpRequest();
     if (window.XMLHttpRequest) {
       // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -291,8 +287,7 @@ function buildCatProducts(cateId) {
      }
    
     };
-    xmlhttp.open('GET', '/source/controller/CategoryServices.php?catProds='
-      + cateId, true);
+    xmlhttp.open('GET', '../controller/ProductServices.php?id=' + jsonCart[i]['pid'], false);
     xmlhttp.send();
   }
   document.getElementById("loadingSpinner").style.visibility = "hidden";
