@@ -16,8 +16,8 @@ function addProdToCart(pid) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var cartCheck = updateCartProductQty(pid, xmlhttp.responseText);
       if(cartCheck != false) {
-        var cartBool = confirm("Product has been added to cart. Would you like to"
-          + " go to view the cart?");
+        var cartBool = confirm("Product is in your cart. Would you like to"
+          + " to view the cart?");
         if(cartBool) {
           var dir = location.href;
           dir = dir.substr(0, dir.lastIndexOf("/") + 1);
