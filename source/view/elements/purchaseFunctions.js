@@ -135,6 +135,9 @@ function sendPurchase(jsonInv) {
       if(response['status'] == "true") {
         //return response['deliveryDate'];
         window.location.replace(response["message"]);
+      } else {
+        alert("Unable to make purchase at this time, we appreciate your patience and"
+          + " support, please try again");
       }
       return "false";
     }
@@ -144,4 +147,12 @@ function sendPurchase(jsonInv) {
     + qty, false);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
+  
+  // Change document to inform customer
+  document.getElementById('resultsDiv').innerHTML = ' <br> ';
+  document.getElementById('buttonsDiv').innerHTML = ' <br> ';
+  document.getElementById("loadingSpinner").innerHTML = 
+    '<img src="./elements/img/spinner.gif" alt="">'
+    + '...Your order is being processed, thank you for your patience...';
+  document.getElementById("loadingSpinner").style.visibility = "visible";
 }

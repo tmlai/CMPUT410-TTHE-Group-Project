@@ -107,13 +107,14 @@ function buildCarouselItems(prods) {
   catHTML +=  '<div class="carousel-inner" id="carouselItemDiv">\n';
   for(var i = 0; i < prods.length; i++) {
     var product = prods[i];
+    catHTML += '<a href="./product.php?id=' + product['cid'] + '">\n'
     if(i == 0) {
       catHTML += '<div class="item active">\n';
     } else {
       catHTML += '<div class="item">\n';
     }
     catHTML += (
-      '<a href="./product.php?id=' + product['cid'] + '">\n'
+      
       + '<img src="/img/products/' + product['cid'] + '.jpg" alt="">\n'
       + '<div class="container">\n'
       + '  <div class="carousel-caption">\n'
@@ -124,8 +125,8 @@ function buildCarouselItems(prods) {
       + product['cid'] + '">See Product Details</a>\n'
       + '  </div>\n'
       + '</div>\n'
-      + '</a>\n'
       + '</div>\n'
+      + '</a>\n'
     );
   }
   catHTML += '</div>\n'
