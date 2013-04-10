@@ -28,7 +28,8 @@ try {
 		$first_token = strtok($reUri, '/');
 		$second_token = strtok('/');
 
-		$quantity = file_get_contents("php://input");
+		//$quantity = file_get_contents("php://input");
+		$quantity = $_POST['amount'];
 		echo $quantity;
 		$storeId = 1;
 		$cid = $second_token;
