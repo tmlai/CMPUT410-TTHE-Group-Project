@@ -14,8 +14,6 @@ include_once ('TransactionLayer');
 
 
 $priceTolerance = 1.10;
-$groupNumber = 4;
-$retUrl = "http://cs410.cs.ualberta.ca:41041/source/controller/CompleteTransaction.php";
 
 function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	$toOrderInfo = array();
@@ -75,6 +73,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 
 }
 
+
 function getCreateStoreId($store){
 	$dbLayer = new DbLayer();
 	$storeDb = $dbLayer->searchStore($store->getUrl());
@@ -94,13 +93,17 @@ function getCreateStoreId($store){
 	}
 }
 
+$groupNumber = 4;
+$retUrl = "http://cs410.cs.ualberta.ca:41041/source/controller/CompleteTransaction.php";
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+
 if ($requestMethod == "POST"){
 	$message = array("status" => "False",
 			"message" => "by default",
 			"deliveryDate" => ""
 	);
 	
-	echo "hahaha";
+// 	echo "hahaha";
 	$dbLayer = new DbLayer();
 	
 	$userName = $_SESSION["user"];
