@@ -66,7 +66,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 	}
 	else{
 		$orderResultJson = json_decode($orderResult, true);
-		return new OrderProduct(0, $productId, $choosenStore->getStoreId(), $toOrder, $orderResultJson["order_id"],
+		return new TransactionProduct(0, $productId, $choosenStore->getStoreId(), $toOrder, $orderResultJson["order_id"],
 				$orderResultJson["delivery_date"], $toOrder * $ourPrice);
 	}
 
