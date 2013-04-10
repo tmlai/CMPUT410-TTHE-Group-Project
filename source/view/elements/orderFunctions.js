@@ -52,9 +52,9 @@ function buildOrders(orders) {
       +  '</thead>\n'
       +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
-        var prodName = JSON.parse(getOneProduct(prod['pid']));
-        prodName = prodName['name'];
         var prod = order['order'][j];
+        var prodName = getOneProduct(prod['pid']);
+        prodName = prodName['name'];
         oHtml += '<tr>\n'
         +      '<td>' + prod['pid'] + '</td>'
         + '<td>' + prodName + '</td>'
