@@ -23,7 +23,7 @@ class TransactionLayer {
 		$temp = $stmt->fetchAll();
 		$traOrd = null;
 		foreach($temp as &$row){
-			$traOrd = new TransactionOrder($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+			$traOrd = new CustomerOrder($row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
 		}
 		
 		$statement = "SELECT * FROM TransactionsProducts WHERE orderId = ?";
@@ -34,7 +34,7 @@ class TransactionLayer {
 		
 		$listTraProd = array();
 		foreach($temp as &$each){
-			$oneTraProd = new TransactionProduct($each[0], $each[1], $each[2], $each[3], $each[4], $each[5], $each[6]);
+			$oneTraProd = new OrderProduct($each[0], $each[1], $each[2], $each[3], $each[4], $each[5], $each[6]);
 			$listTraProd[] = $oneTraProd;
 		}
 		
