@@ -8,6 +8,8 @@ include_once "CustomerOrder.php";
 include_once "OrderProduct.php";
 include_once "Olap.php";
 include_once "UserRatingProduct.php";
+include_once "TransactionOrder.php";
+include_once "TransactionProduct.php";
 
 interface DbInterface {
 
@@ -152,7 +154,7 @@ interface DbInterface {
 	 * NOTE: 		pass the pdo connection so that this database action can be rollbacked
 	 * 				since this action is a small step in a transaction.
 	 */
-	public function orderOneProduct(\PDO $pdo, OrderProduct $orderProduct);
+	public function orderOneProduct(\PDO $pdo, TransactionProduct $orderProduct);
 
 	// order section
 	/*
@@ -167,6 +169,8 @@ interface DbInterface {
 	public function addOrder(CustomerOrder $customerOrder,
 			array $orderProductsArray);
 	
+	public function addOrderEnhanced(TransactionOrder $customerOrder,
+			array $orderProductsArray);
 	/*
 	 * Get the CustomerOrder object given the $orderId. NULL is returned if
 	 * no matching orderId in the database;

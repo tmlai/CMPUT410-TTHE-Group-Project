@@ -516,7 +516,7 @@ class DbLayer implements DbInterface {
 	 * NOTE: 		pass the pdo connection so that this database action can be rollbacked
 	 * 				since this action is a small step in a transaction.
 	 */
-	public function orderOneProduct(\PDO $pdo, OrderProduct $orderProduct) {
+	public function orderOneProduct(\PDO $pdo, TransactionProduct $orderProduct) {
 		$statement = "INSERT INTO OrdersProducts values(?,?,?,?,?,?,?)";
 		$stmt = $pdo->prepare($statement);
 
@@ -634,11 +634,130 @@ class DbLayer implements DbInterface {
 				return false;
 			}
 		}
+		
 
 		$pdo->commit();
 		$pdo = null;
 		return $orderId;
 	}
+	
+	/*
+	 * 
+	 */
+	public function addOrderEnhanced(TransactionOrder $customerOrder,
+			array $orderProductsArray){
+		$pdo = self::getPdo();
+		$pdo->beginTransaction();
+	
+		$statement = "INSERT INTO CustomersOrders(description,orderDate,username,payment,deliveryDate)
+		values(?,?,?,?,?)";
+		$stmt = $pdo->prepare($statement);
+	
+		$date = new \DateTime();
+		$orderDate = $date->format('Y-m-d H:i:s');
+	
+		$date->add(new \DateInterval('P2D'));
+		$deliveryDate = $date->format('Y-m-d');
+	
+		$array = array($customerOrder->getDescription(), $orderDate,
+				$customerOrder->getUsername(), $customerOrder->getPayment(),
+				$deliveryDate);
+	
+		$value = $stmt->execute($array);
+		$value = ($value == true && $stmt->rowCount() > 0);
+		if ($value == false) {
+			$pdo->rollBack();
+			// TODO
+			echo "CustomersOrders insert";
+			$pdo = null;
+			return false;
+		}
+	
+		$orderId = $pdo->lastInsertId();
+	
+		/* @var $row OrderProduct */
+		$latestDate = $date;
+		$format = 'Y-m-d';
+		foreach ($orderProductsArray as &$row) {
+			$row->setOrderId($orderId);
+	
+			$deliveryDate = $row->getDeliveryDate();
+			$auxiliaryOrderId = $row->getAuxiliaryOrderId();
+	
+			if ($deliveryDate != '' && $auxiliaryOrderId != 0) {
+				$dateTemp = \DateTime::createFromFormat($format,
+						$row->getDeliveryDate());
+				if ($latestDate < $dateTemp) {
+					$latestDate = $dateTemp;
+				}
+			}
+		}
+	
+		// 		Insert each tuple into OrderProducts table.
+		$dbLayer = new DbLayer();
+		foreach ($orderProductsArray as &$op) {
+			$value = $dbLayer->orderOneProduct($pdo, $op);
+			if ($value == false) {
+				$pdo->rollBack();
+				// TODO
+				echo "OrderProduct insert";
+				$pdo = null;
+				return false;
+			}
+		}
+	
+		// 		Decrease the stock of each product
+		/* @var $sc OrderProduct */
+		foreach ($orderProductsArray as &$sc) {
+			// Assume our store has store id of 1.
+			if ($sc->getStoreId() == 1) {
+				$value = $dbLayer
+				->updateStock($pdo, $sc->getCid(), $sc->getQuantity());
+	
+				if ($value == false) {
+					$pdo->rollBack();
+					// TODO
+					echo "Update Stock";
+					$pdo = null;
+					return false;
+				}
+			}
+		}
+	
+		// 		Update the deliveryDate to be the latest delivery date from another
+		// 		store if the delivery date has been changed.
+		if ($latestDate != $date) {
+			$statement = "UPDATE CustomersOrders SET deliveryDate = ? WHERE orderId = ?";
+			$stmt = $pdo->prepare($statement);
+			$array = array($latestDate->format('Y-m-d'), $orderId);
+			$value = $stmt->execute($array);
+			$value = ($value == true && $stmt->rowCount() > 0);
+			if ($value == false) {
+				$pdo->rollBack();
+				// TODO
+				echo "Update CustomersOrders";
+				$pdo = null;
+				return false;
+			}
+		}
+		
+		$statement = "UPDATE TransactionsOrders SET validity = 0 WHERE orderId = ?";
+		$stmt = $pdo->prepare($statement);
+		$array = array($customerOrder->getOrderId());
+		$value = ($stmt->execute($array) == true && $stmt->rowCount() > 0);
+		if($value == false){
+			$pdo->rollBack();
+			// TODO
+			echo "Invalidate TransactionsOrders failed!";
+			$pdo = null;
+			return false;
+		}
+		
+		$pdo->commit();
+		$pdo = null;
+		return $orderId;
+	}
+	
 	
 	/*
 	 * Update external delivery date using web services

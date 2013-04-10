@@ -68,7 +68,7 @@ FOREIGN KEY(cid) REFERENCES Products(cid),
 FOREIGN KEY(storeId) REFERENCES Stores(storeId))ENGINE=INNODB;
 
 CREATE TABLE TransactionsOrders(orderId int not null AUTO_INCREMENT, description varchar(1000),
-orderDate DATETIME not null ,username varchar(20) not null, payment DECIMAL(15,2), deliveryDate DATE not null,
+orderDate DATETIME not null ,username varchar(20) not null, payment DECIMAL(15,2), deliveryDate DATE not null, validity int not null
 PRIMARY KEY(orderId),
 FOREIGN KEY(username) REFERENCES Customers(username))ENGINE=INNODB;
 
