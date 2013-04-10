@@ -99,6 +99,8 @@ if ($requestMethod == "POST"){
 			"message" => "by default",
 			"deliveryDate" => ""
 	);
+	
+	echo "hahaha";
 	$dbLayer = new DbLayer();
 	
 	$userName = $_SESSION["user"];
