@@ -14,7 +14,7 @@ $cateId = $_GET['cateId'];
       require($DOCUMENT_ROOT . "./elements/head_includes.php");
     ?>
   </head>
-  <body onLoad="getMenuCategories(); buildCatProducts('<?php echo $cateId;?>');">   
+  <body onLoad="getMenuCategories(); getCategoryProducts('<?php echo $cateId;?>');">   
     <?php
       // Navigation Bar
       if($_SESSION['user'] != "") {
