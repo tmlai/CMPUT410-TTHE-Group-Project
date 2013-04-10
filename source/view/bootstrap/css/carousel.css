@@ -25,8 +25,8 @@
 }
 .carousel img {
   position: absolute;
-  top: 25;
-  left: 45px;
+  top: 25px;
+  left: 60px;
   /*min-width: 100%;*/
   height: 350px;
   /*padding-bottom: 25px;*/
