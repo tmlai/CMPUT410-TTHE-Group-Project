@@ -38,6 +38,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
       }
 
     </style>
+
   </head>
   <body getMenuCategories();>   
     <?php
@@ -51,18 +52,18 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
       }
     ?>
     <div class="container">
-    <form name="loginform" class="form-horizontal" 
+    <form name="registerForm" class="form-horizontal" 
         enctype="application/json" action="../controller/UserRegistration.php" 
         onSubmit="return checkRegistration();" method="post">
         <h2 class="form-horizontal-heading text-center">Please Register</h2>
         <div id="user_div" class="control-group">
-            <label class="control-label" for="userField">Username</label>
+            <label class="control-label" for="userField">* Username</label>
             <div class="controls">
                 <input type="text" name="userField" id="userField" placeholder="Username">
             </div>
         </div>
         <div id="password_div" class="control-group">
-            <label class="control-label" for="passField">Password</label>
+            <label class="control-label" for="passField">* Password</label>
             <div class="controls">
                 <input type="password" name="passField" id="passField" placeholder="Password">
             </div>
@@ -86,7 +87,7 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
             </div>
         </div>
         <div id="email_div" class="control-group">
-            <label class="control-label" for="emailField">Email</label>
+            <label class="control-label" for="emailField">* Email</label>
             <div class="controls">
                 <input type="text" name="emailField" id="emailField" placeholder="Email">
             </div>
@@ -114,7 +115,9 @@ $_SESSION['prevPage'] = $_SESSION['prevPage'];
              <!-- <label class="checkbox">
                 <input type="checkbox"> Remember me
               </label>-->
-              <button type="submit" 
+			  * Required Fields 
+			  <br>
+              <button type="submit"
                 class="btn btn-success">Register</button>
             </div>
         </div>

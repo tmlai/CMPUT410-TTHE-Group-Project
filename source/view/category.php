@@ -30,8 +30,7 @@ $cateId = $_GET['cateId'];
             <h1>Category Name</h1>
             <p>This is a category description.</p>
         </div>
-        <div class="container" style="width:100%; height:300px; position:relative; 
-        bottom:0px; overflow:auto;" id="resultsDiv">
+        <div class="container" id="resultsDiv">
           <table class="table table-hover">
             <thead>
                 <tr>
@@ -50,6 +49,7 @@ $cateId = $_GET['cateId'];
         <hr>
         <div id="loadingSpinner" align="center" style="visibility:visible">
           <img src="./elements/img/spinner.gif" alt="...Loading...">
+          <p class="muted">...Retrieving Category Products...</p>
         </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>

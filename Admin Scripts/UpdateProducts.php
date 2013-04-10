@@ -12,7 +12,7 @@ $map = array('c000001' => 6, 'c000002' => 5, 'c000003' => 5, 'c000004' => 4,
 		'c000005' => 4, 'c000006' => 1, 'c000007' => 1, 'c000008' => 1,
 		'c000009' => 7, 'c000010' => 7, 'c000011' => 4, 'c000012' => 4,
 		'c000013' => 8, 'c000014' => 8, 'c000015' => 7, 'c000016' => 4,
-		'c000017' => 1, 'c000018' => 5, 'c000019' => 5, 'c000020' => 16);
+		'c000017' => 1, 'c000018' => 5, 'c000019' => 5, 'c000020' => 16, 'd000001' => 17, 'd000002' => 17);
 
 if ($_FILES["file"]["error"] > 0) {
 	echo "Error: " . $_FILES["file"]["error"] . "<br>";
@@ -48,7 +48,7 @@ if ($_FILES["file"]["error"] > 0) {
 function convertIntoProduct($productArray) {
 	$product = new \model\Product($productArray['cid'], $productArray['name'],
 			$productArray['desc'], $productArray['image'],
-			$productArray['price'], '', '', 20);
+			$productArray['price'], $productArray['weight'], $productArray['dimensions'], 1000);
 	return $product;
 }
 

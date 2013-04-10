@@ -6,7 +6,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TTHE Enterprise - Home</title>
+    <title>TTHE Enterprise - Orders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
         // Default Style links

@@ -6,7 +6,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TTHE Enterprise - Search Results</title>
+    <title>TTHE Enterprise - Confirm Order</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
@@ -31,9 +31,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <div class="container">
       <h3>Your Current Cart</h3>
       <!--<div class="container">-->
-      <form name="cartForm" onSubmit="updateCart();">
         <div id="resultsDiv">
-          <form name="cartForm" onSubmit="updateCart();">
             <table class="table"> 
             <thead>
                 <tr>
@@ -61,7 +59,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="right">
           <tr>
             <td align="left">
-              <button class="btn btn-info" onclick="location.href='./cart.php">
+              <button class="btn btn-info" onclick="location.href='./cart.php'">
                 Go Back to Cart</button>
             </td>
             <td id="priceCalc"></td>
@@ -74,9 +72,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
             </td>
           </tr>
         </table>
-        </div>
-      </form>
-        
+      </div>
     </div> <!-- /container -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>

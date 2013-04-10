@@ -14,15 +14,17 @@ function addProdToCart(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      updateCartProductQty(pid, xmlhttp.responseText);
-      var cartBool = confirm("Product has been added to cart. Would you like to"
-        + " go to view the cart?");
-      if(cartBool) {
-        var dir = location.href;
-        dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-        dir = dir + "cart.php";
-        window.location.href = dir;
-      } 
+      var cartCheck = updateCartProductQty(pid, xmlhttp.responseText);
+      if(cartCheck != false) {
+        var cartBool = confirm("Product is in your cart. Would you like to"
+          + " to view the cart?");
+        if(cartBool) {
+          var dir = location.href;
+          dir = dir.substr(0, dir.lastIndexOf("/") + 1);
+          dir = dir + "cart.php";
+          window.location.href = dir;
+        } 
+      }
     }
   };
   
@@ -41,28 +43,18 @@ function addProdToCart(pid) {
 function updateCartProductQty(pid, jsonArray, qty = 1) {
   var jsonArray = JSON.parse(jsonArray);
   var cartJson = JSON.parse(readCookie('cart'));
-  // For quantity used from other stores.
-  var qtyExternal = 0;
   
   // Check if cart cookie exists
   if(cartJson != null){
       if(jsonArray.quantity < qty) {
         
-        // Check external stores for remaining quantity
-        qtyExternal = checkExternalAvail(pid, qty - jsonArray.quantity);
-        var qtyAvail = qtyExternal + jsonArray.quantity;
-        if(qytAvail < qty) {
-          var qtyBool = confirm("Only " + qtyAvail + " of this product(" + pid 
-            + ") is available, " + (qty - qtyAvail) + " are on backorder, "
-            + "would you like to purchase the " + qtyAvail + " available at this"
-            + " time?");
-          if(qtyBool) {
-            qty = qtyAvail;
-          } else {
-            alert("Sorry we did not have the quantity you requested, please take"
-              + " a look at our Top Ranked Related Products for other options.");
-            return false;
-          }
+        var qtyBool = getExternalAvail(pid, qty - jsonArray.quantity);
+        if(qtyBool) {
+          qty = qtyAvail;
+        } else {
+          alert("Sorry we did not have the quantity you requested, please take"
+            + " a look at our Top Ranked Related Products for other options.");
+          return false;
         }
       }
       // Add pid entry with quantity to cart.
@@ -125,9 +117,9 @@ function getExternalAvail(pid, qty = 1) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-    var response = xmlhttp.responseText;
-    
-      if(xmlhttp.responseText == "true") {
+      var response = xmlhttp.responseText;
+      response = response.trim();
+      if(response == "True") {
         return true;
       }
       return false;
@@ -135,7 +127,7 @@ function getExternalAvail(pid, qty = 1) {
   };
   
   xmlhttp.open('GET', '../model/ProductExternalAvailability.php?cid=' + pid + '&quantity='
-    + qty, true);
+    + qty, false);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
 }
@@ -221,9 +213,9 @@ function buildCartProducts() {
           // Code of product
           + "<td " + getProdLink(product['id']) + ">" + product['id'] + "</td>\n"
           // Description of product
-          + "<td " + + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
-          + "<td " + + getProdLink(product['id']) + ">\n"
-          + " <button style=\"position:relative; right:0px;\"\n"
+          + "<td " + getProdLink(product['id']) + ">" + product['desc'].substring(0, 35) + "...</td>\n"
+          + "<td " + getProdLink(product['id']) + ">\n"
+          + " <button " + getProdLink(product['id']) + "style=\"position:relative; right:0px;\"\n"
           + "   class=\"btn pull-right\">\n"
           + "       View Product\n"
           + "   </button>\n"
@@ -240,7 +232,7 @@ function buildCartProducts() {
   document.getElementById("loadingSpinner").style.visibility = "hidden";
   document.getElementById("loadingSpinner").innerHTML = "<br>";
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
-    + price;
+    + price.toFixed(2);
   if(emptyCount == jsonCart.length)
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
 }

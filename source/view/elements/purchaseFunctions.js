@@ -101,7 +101,7 @@ function makePurchase(cart) {
     arr['quantity'] = cart[i]['quantity'];
     purchase.push(arr);
   }
-  sendPurchase(JSON.stringify(purchase));
+  sendPurchase('orderLists=' + JSON.stringify(purchase));
   /*
   var response = sendPurchase(JSON.stringify(purchase));
   if(response == "false") {
@@ -132,7 +132,7 @@ function sendPurchase(jsonInv) {
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var response = JSON.parse(xmlhttp.responseText);
-      if(response['status'] == "true") {
+      if(response['status'] == "True") {
         //return response['deliveryDate'];
         window.location.replace(response["message"]);
       } else {
@@ -143,10 +143,9 @@ function sendPurchase(jsonInv) {
     }
   };
   
-  xmlhttp.open('POST', '../controller/PaymentProcess.php?cid=' + pid + '&quantity='
-    + qty, false);
+  xmlhttp.open('POST', '../controller/PaymentProcess.php', true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xmlhttp.send();
+  xmlhttp.send(jsonInv);
   
   // Change document to inform customer
   document.getElementById('resultsDiv').innerHTML = ' <br> ';

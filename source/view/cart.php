@@ -6,7 +6,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TTHE Enterprise - Search Results</title>
+    <title>TTHE Enterprise - View Cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" language="JavaScript" 
       src="./elements/productFunctions.js"></script>
@@ -31,7 +31,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
     <div class="container">
       <h3>Your Current Cart</h3>
       <!--<div class="container">-->
-      <form name="cartForm" onSubmit="updateCart();">
         <div id="resultsDiv">
           <form name="cartForm" onSubmit="updateCart();">
             <table class="table table-hover"> 

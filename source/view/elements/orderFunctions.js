@@ -28,44 +28,45 @@
 }
 
 function buildOrders(orders) {
-  oHtml = '<div class="accordion" id="outstandingAccordion">\n';
+  var oHtml = '<h3>Your Orders:</h3>'
+    + '<div class="accordion" id="outstandingAccordion">\n';
   for(var i = 0; i < orders.length; i++) {
     var order = orders[i];
     oHtml += '<div class="accordion-group">\n'
       + '    <div class="accordion-heading">\n'
       + '      <a class="accordion-toggle" data-toggle="collapse" '
       + 'data-parent="#outstandingAccordion" href="#collapse' + order['orderId'] + '">\n'
-      + 'Order ID: ' + order['orderId'] + '\tDate: ' + order['delivery_date']
-      //+ '\tTotal Cost: ' + order['price_total']
+      + 'Order ID: ' + order['orderId'] + '    -    Date: ' + order['delivery_date']
+      + '    -    Total Cost: $' + String(order['price_total'])
       + '</a>\n</div>\n'
-      + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse in">\n'
-      + '      <div class="accordion-inner">\n';
-      
+      + '    <div id="collapse' + order['orderId'] + '" class="accordion-body collapse">\n'
+      + '      <div class="accordion-inner">\n'
+      + '<table class="table">\n'
+      +  '<thead>\n'
+      +  '  <tr>\n'
+      +  '    <th>Prodoct ID</th>\n'
+      +  '    <th>Quantity</th>\n'
+      +  '    <th>Product(s) Cost</th>\n'
+      +  '  </tr>\n'
+      +  '</thead>\n'
+      +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
-        oHTML += 
-        '<table class="table">\n'
-          '<thead>\n'
-          '  <tr>\n'
-          '    <th>Prodoct ID</th>\n'
-          '    <th>Quantity</th>\n'
-          '    <th>Product(s) Cost</th>\n'
-          '  </tr>\n'
-          '</thead>\n'
-          '<tbody>\n'
-            '<tr>\n'
-              '<td>' + prod['pid'] + '</td>'
-              '<td>' + prod['quantity'] + '</td>'
-              '<td>' + prod['amount'] + '</td>'
-            '</tr>\n'
-          '</tbody>\n'
-        '</table>\n';
+        oHtml += '<tr>\n'
+        +      '<td>' + prod['pid'] + '</td>'
+        +      '<td>' + prod['quantity'] + '</td>'
+        +      '<td>$' + String(prod['amount']) + '</td>'
+        +    '</tr>\n';
       }
-      oHtml +='</div>\n'
-        + '    </div>\n'
-        + '  </div>\n';   
+      oHtml += '</tbody>\n'
+        +  '</table>\n'
+        +  '</div>\n'
+        + '</div>\n'
+        + '</div>\n';   
   }
   oHtml += '</div>';
+  if(oHtml.indexOf('NaN') >= 0) 
+    console.log(oHtml);
   document.getElementById('ordersContainer').innerHTML = oHtml;
 
 }

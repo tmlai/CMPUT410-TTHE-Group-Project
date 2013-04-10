@@ -25,10 +25,6 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
         require("./elements/navbar_signin.php");
       }
     ?>
-	<script>
-		//debugging
-		alert('<?php echo $_SESSION['user'];?>');
-	</script>
     <div id="carouselElement">
     </div>
     <div id="categoryContainerDiv">
