@@ -7,7 +7,7 @@ include_once "./model/Olap.php";
 use controller\AdminHelper;
 use model\Olap;
 
-if(isset($_SESSION['admin']) || $_SESSION['admin'] == null) {
+if(!isset($_SESSION['admin']) || $_SESSION['admin'] == null) {
 	echo "You do not have permission to access this page."
 	echo "<a href='/source/view/index.php'>Back to main page</a>";
 	die();
