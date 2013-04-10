@@ -587,6 +587,14 @@ class TestDb {
 		echo "<br><br>";
 		var_dump($array[1]);
 	}
+	
+	/*
+	 * PASS
+	 */
+	public static function testGetOneCategory($cateId){
+		$dbLayer = new DbLayer();
+		var_dump($dbLayer->getOneCategory($cateId));
+	}
 }
 // \test\TestDb::testAddProduct();
 // \test\TestDb::testAddCustomer();
@@ -624,4 +632,5 @@ class TestDb {
 // \test\TestDb::testExtendClass();
 // \test\TestDb::testAddTransactionOrder();
 // \test\TestDb::testGetTransactionForOrder(4);
+// \test\TestDb::testGetOneCategory(1);
 ?>

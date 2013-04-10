@@ -96,7 +96,7 @@ function getCreateStoreId($store){
 $groupNumber = 4;
 $retUrl = "http://cs410.cs.ualberta.ca:41041/source/controller/CompleteTransaction.php";
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-
+$url = "http://cs410-ta.cs.ualberta.ca/registration/markets";
 if ($requestMethod == "POST"){
 	$message = array("status" => "False",
 			"message" => "by default",
