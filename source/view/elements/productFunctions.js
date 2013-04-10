@@ -42,7 +42,7 @@ function checkInStock(pid) {
   xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
   xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xmlhttp.send();
-  //orderBtn.style.visibility= "visible";
+  orderBtn.style.visibility= "hidden";
 }
 
 /*
