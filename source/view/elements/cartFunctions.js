@@ -47,9 +47,7 @@ function updateCartProductQty(pid, jsonArray, qty = 1) {
   // Check if cart cookie exists
   if(cartJson != null){
       if(jsonArray.quantity < qty) {
-        if(getExternalAvail(pid, qty - jsonArray.quantity) != false) {
-          return true;
-        } else {
+        if(getExternalAvail(pid, qty - jsonArray.quantity) == false) {
           alert("Sorry we did not have the quantity you requested, please take"
             + " a look at our Top Ranked Related Products for other options.");
           return false;
