@@ -29,8 +29,8 @@
   left: 45px;
   /*min-width: 100%;*/
   height: 350px;
-  margin-top: auto;
-  margin-bottom: auto;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 
 .carousel-bkg img {
@@ -50,9 +50,8 @@
   max-width: 550px;
   padding: 0 60px;
   margin-top: 60px;
-  /*margin-left: auto;
-  margin-right: 150px;*/
-  right: 50;
+ margin-left: auto;
+  margin-right: 75px;
 }
 .carousel-caption h1,
 .carousel-caption .lead {
