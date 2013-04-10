@@ -766,6 +766,9 @@ class DbLayer implements DbInterface {
 		$store = $this->lookUpStore($storeId);
 		$realUrl = $store->getUrl()."/orders/".$auxiliaryOrderId;
 		$deliveryDateJson = file_get_contents($realUrl);
+		if($deliveryDateJson === false){
+			return false;
+		}
 		$deliveryDateArray = json_decode($deliveryDateJson,true);
 		$deliveryDate = $deliveryDateArray['delivery_date'];
 		
@@ -872,7 +875,7 @@ class DbLayer implements DbInterface {
 	 */
 	public function getProductsInStock() {
 		$pdo = self::getPdo();
-		$statement = "SELECT cid FROM Products WHERE stock > 0";
+		$statement = "SELECT cid FROM Products WHERE stock > 0 ";
 		$stmt = $pdo->prepare($statement);
 		$stmt->execute();
 
@@ -934,7 +937,7 @@ class DbLayer implements DbInterface {
 			$prodJson['rating'] = $ratingList[0][0];
 		}
 		$pdo = null;
-		return json_encode($prodJson);
+		return json_encode($prodJson, JSON_PRETTY_PRINT);
 	}
 
 	/*
