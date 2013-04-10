@@ -937,7 +937,7 @@ class DbLayer implements DbInterface {
 			$prodJson['rating'] = $ratingList[0][0];
 		}
 		$pdo = null;
-		return json_encode($prodJson, JSON_PRETTY_PRINT);
+		return json_encode($prodJson);
 	}
 
 	/*

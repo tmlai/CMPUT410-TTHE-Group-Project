@@ -18,7 +18,7 @@ try {
 			echo $product;
 		} else {
 			$prodArray = $dbLayer->getProductsInStock();
-			echo \json_encode($prodArray, JSON_PRETTY_PRINT);
+			echo \json_encode($prodArray);
 		}
 		break;
 	case 'post':
