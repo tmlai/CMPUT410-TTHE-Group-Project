@@ -166,7 +166,7 @@
 				  "order":[{"pid":"product id", "quantity":"30", "amount":"..."}, 
 						{"pid":"product id", "quantity":"30", "amount":"..."}, 
 						{"pid":"product id", "quantity":"30", "amount":"..."}],
-				  "delivery_date":"somedate"}, 
+				  "delivery_date":"somedate", "price_total":".."}, 
 				  {}, 
 				  {} ]
  
