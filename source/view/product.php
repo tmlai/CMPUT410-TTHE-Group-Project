@@ -64,7 +64,7 @@ $img = trim($product['img']);
                 <hr>
                 <div class="row-fluid">
                   <div class="span12">
-                    <h3>Top Ranked Related Products:</h3>
+                    <h3>Top Ranked Products in this Category:</h3>
                     <table class="table table-hover">
                       <thead>
                           <tr>

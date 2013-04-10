@@ -27,8 +27,6 @@ function buildInvoice() {
     // Return if product is in stock
     xmlhttp.onreadystatechange=function() {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-        //console.log(JSON.parse(getOneProduct(jsonCart[i]['pid'])));
-        //console.log(getOneProduct(jsonCart[i]['pid']));
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
           "<tr>\n<td>\n"
@@ -90,9 +88,8 @@ function submitOrder(user) {
 }
 
 /*
- * 
+ * Send the purchase order in json format:
  * orderLists=[{"cid":"#","quantity":"#"},{"cid":"#","quantity":"#"}...]
- *
  */
 function makePurchase(cart) {
   var purchase = new Array();
@@ -103,19 +100,6 @@ function makePurchase(cart) {
     purchase.push(arr);
   }
   sendPurchase('orderLists=' + JSON.stringify(purchase));
-  /*
-  var response = sendPurchase(JSON.stringify(purchase));
-  if(response == "false") {
-    alert("Unable to make purchase at this time, we appreciate your patience and"
-    + " support, please try again");
-  } else {
-    alert("Thank you for your Purchase!\n"
-    + "The expected delivery date of your order is " + response);
-    var dir = location.href;
-    dir = dir.substr(0, dir.lastIndexOf("/") + 1);
-    dir = dir + "index.php";
-    window.location.href = dir;
-  }*/
 }
 
 function sendPurchase(jsonInv) {
