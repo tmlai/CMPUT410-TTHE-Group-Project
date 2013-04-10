@@ -59,7 +59,7 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="left">
           <col align="center">
           <col align="right">
-          <tr>
+          <tr id="cartButtonsRow">
             <td>
               <button class="btn btn-primary" type="submit" 
                 onclick="updateCart();">Update Cart</button>

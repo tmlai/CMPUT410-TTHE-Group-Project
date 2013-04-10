@@ -53,14 +53,31 @@ function buildOrders(orders) {
       +  '<tbody>\n';
       for(var j = 0; j < order['order'].length; j++) {
         var prod = order['order'][j];
-        var prodName = getOneProduct(prod['pid']);
-        prodName = prodName['name'];
-        oHtml += '<tr>\n'
-        +      '<td>' + prod['pid'] + '</td>'
-        + '<td>' + prodName + '</td>'
-        +      '<td>' + prod['quantity'] + '</td>'
-        +      '<td>$' + String(prod['amount']) + '</td>'
-        +    '</tr>\n';
+        var prodName = "";
+        
+        var xmlhttp = new XMLHttpRequest();
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp=new XMLHttpRequest();
+        }	else {
+          // code for IE6, IE5
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+          if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            prodName = JSON.parse(xmlhttp.responseText);
+            prodName = prodName['name'];
+            oHtml += '<tr>\n'
+            +      '<td>' + prod['pid'] + '</td>'
+            + '<td>' + prodName + '</td>'
+            +      '<td>' + prod['quantity'] + '</td>'
+            +      '<td>$' + String(prod['amount']) + '</td>'
+            +    '</tr>\n';
+          }
+        };
+        xmlhttp.open('GET', '../controller/ProductServices.php?id=' + prod['pid'], 
+          false);
+        xmlhttp.send();
       }
       oHtml += '</tbody>\n'
         +  '</table>\n'

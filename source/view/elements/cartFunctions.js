@@ -239,6 +239,7 @@ function buildCartProducts() {
   document.getElementById("priceCalc").innerHTML = "Total Price of Cart = $" 
     + parseFloat(price).toFixed(2);
   if(emptyCount == jsonCart.length) {
+    document.getElementById("");
     document.getElementById("resultsDiv").innerHTML = "<h4>Cart is empty.</h4>";
     document.getElementById("loadingSpinner").style.visibility = "hidden";
     document.getElementById("loadingSpinner").innerHTML = "<br>";
