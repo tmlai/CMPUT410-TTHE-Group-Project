@@ -117,6 +117,7 @@ function getExternalAvail(pid, qty = 1) {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
       var response = xmlhttp.responseText;
       response = response.trim();
+      alert("response = " + response);
       if(response == "True") {
         return true;
       }
