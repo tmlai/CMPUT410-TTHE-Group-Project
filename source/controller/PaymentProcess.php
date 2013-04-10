@@ -36,6 +36,7 @@ function processOneProduct($productId,$ourPrice,$toOrder,$markets){
 		}
 	}
 
+	//found no product with price constraint
 	if ($minPrice == -1.0){
 		return False;
 	}
@@ -131,7 +132,6 @@ if ($requestMethod == "POST"){
 			$orderProductsArray[] = $orderProduct;
 			$totalAmount += $orderProduct->getAmount();
 			$success = True;
-			$message["message"] .= "Get from our stock\n<br/>";
 		}
 		else {
 			if ($crrStock > 0){
@@ -144,7 +144,7 @@ if ($requestMethod == "POST"){
 			if (!isset($marketInfo) || trim($marketInfo) === ""){
 				//Have not enough product, cannot call the api, cancel processing
 				$failed = True;
-				$message["message"] =  "Have not enough product in store for product ".$productId;
+				$message["message"] =  "Sorry, we have not enough product in store for product ".$productId;
 				break;
 			}
 			else{
@@ -159,7 +159,7 @@ if ($requestMethod == "POST"){
 				else {
 					//Cannot order from another store, cancel processing
 					$failed = True;
-					$message["message"] = "Could get products from our peer for product ".$productId;
+					$message["message"] = "Sorry, we have not enough stocks for product ".$productId;
 					break;
 				}
 			}
@@ -171,7 +171,7 @@ if ($requestMethod == "POST"){
 		$transLayer = new TransactionLayer();
 		$transactionId = $transLayer->addTransaction($customerOrder,$orderProductsArray);
 		if ($transactionId == 0){
-			$message["message"] = "Transaction could not be stored into database";
+			$message["message"] = "Sorry, transaction could not be completed.";
 		}
 		else{
 			$message["status"] = "True";
