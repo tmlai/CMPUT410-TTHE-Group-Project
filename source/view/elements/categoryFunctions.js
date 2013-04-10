@@ -221,8 +221,7 @@ function buildCatProducts(jsonArray) {
       if (xmlhttp.readyState==4 && xmlhttp.status==200) {
         var product = JSON.parse(xmlhttp.responseText);
         document.getElementById("productsBody").innerHTML += (
-          "<tr" + getProdLink(product['id'] + ">\n<td>\n"
-          // Thumbnail of product
+          "<tr" + getProdLink(product['id'])
           + " <img src='/img/products/" + product['id'] + ".jpg\'" 
           + "\" alt=\"\" width=\"50\" height=\"50\">\n"
           + "</td>\n"
@@ -245,7 +244,7 @@ function buildCatProducts(jsonArray) {
           + "       View Product\n"
           + "   </button>\n"
           + " </td>\n"
-          + "</tr>\n";
+          + "</tr>\n"
         );     
      }
    
