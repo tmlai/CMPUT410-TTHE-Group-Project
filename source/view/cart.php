@@ -59,16 +59,18 @@ $_SESSION['prevPage'] = $_SERVER['REQUEST_URI'];
           <col align="left">
           <col align="center">
           <col align="right">
-          <tr id="cartButtonsRow">
+          <tr>
             <td>
-              <button class="btn btn-primary" type="submit" 
-                onclick="updateCart();">Update Cart</button>
+              <button id="updateButton" class="btn btn-primary" type="submit" 
+                onclick="updateCart();" style="visibility:visible">
+                Update Cart
+              </button>
             </td>
             <td id="priceCalc"></td>
             <td>
               <button class="btn btn-success" onclick="submitCart(<?php 
                 echo "'" . $_SESSION['user'] . "'";
-              ?>)">
+              ?>)" id="submitButton" style="visibility:visible">
               Checkout
               </button>
             </td>
