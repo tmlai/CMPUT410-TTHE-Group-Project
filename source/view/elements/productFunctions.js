@@ -24,6 +24,7 @@ function checkInStock(pid) {
   // Return if product is in stock
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+      try{
       var jsonArray = JSON.parse(xmlhttp.responseText);
       var orderBtn = document.getElementById("orderBtn");
       orderBtn.style.visibility= "visible";
@@ -32,6 +33,10 @@ function checkInStock(pid) {
         orderBtn.innerHTML ="Out of Stock";
       }
       document.getElementById("stockDiv").innerHTML = "";
+      } catch (err) {
+        orderBtn.className = "btn btn-danger";
+        orderBtn.innerHTML ="Out of Stock";
+      }
     }
   };
   xmlhttp.open('GET', '/source/controller/ProductServices.php?id=' + pid, true);
